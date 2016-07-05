@@ -97,7 +97,7 @@ p {
     position-right: absolute;
     border: 0px;
     margin-right: 50px;
-
+    margin-left:20px;
 }
 
 #navtext {
@@ -172,13 +172,12 @@ p {
     color: white;
 }
 .navbar li a:hover {
-    color: black;
+    color: #004FB6;
 }
 .navbar a {
     color: #D40000;
     text-decoration: underline;
     font-size: 15px;
-
 }
 
 
