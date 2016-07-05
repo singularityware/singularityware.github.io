@@ -13,7 +13,8 @@ product.
 <p>
 Below is an example bootstrap file to create a minimal Debian base image:
 
-<pre>
+<pre class="language-bash">
+<code>
 DistType "debian"
 MirrorURL "http://ftp.us.debian.org/debian/"
 OSVersion "jessie"
@@ -24,6 +25,7 @@ Bootstrap
 InstallPkgs vim
 
 Cleanup
+</code>
 </pre>
 </p>
 <p>
@@ -88,7 +90,8 @@ May be repeated to add multiple command lines.
 Once you have the bootstrap defined (or starting with a basic one), you can then
 use the 'bootstrap' Singularity command to install the operating system into the
 container image. The process for doing this can be seen with:
-<pre>
+<pre class="language-bash">
+<code>
 $ sudo singularity bootstrap container.img debian.def 
 W: Cannot check Release signature; keyring file not available /usr/share/keyrings/debian-archive-keyring.gpg
 I: Retrieving Release 
@@ -125,9 +128,11 @@ I: Retrieving base-passwd 3.5.37
 I: Validating base-passwd 3.5.37
 I: Retrieving bash 4.3-11+b1
 I: Validating bash 4.3-11+b1
+</code>
 </pre>
 snip....
-<pre>
+<pre class="language-bash">
+<code>
 Unpacking vim-runtime (2:7.4.488-7) ...
 Selecting previously unselected package vim.
 Preparing to unpack .../vim_2%3a7.4.488-7_amd64.deb ...
@@ -147,7 +152,8 @@ update-alternatives: using /usr/bin/vim.basic to provide /usr/bin/ex (ex) in aut
 Processing triggers for libc-bin (2.19-18+deb8u4) ...
 $ du -sh container.img 
 312M    container.img
-$ 
+$
+</code>
 </pre>
 The image "container.img" has now been bootstrapped with the operating system
 as we specified in our definition file.

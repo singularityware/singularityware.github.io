@@ -33,7 +33,7 @@ h1, h2, h3, h4 {
 
 h1 {
     font-size: 300%;
-    font-weight: 600;
+    font-weight: 500;
 }
 
 h2 {
@@ -52,18 +52,6 @@ h4 {
 
 .loud {
     color: #D40000;
-}
-
-code, pre {        
-    font-family: Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal;        
-    color: #DEDEDE;        
-    font-size: 12px;      
-    padding: 8px 15px;       
-    background: #2A2A2A;        
-    border-radius: 5px;        
-    border:1px solid #C9C9C9;     
-    overflow-x: auto;
-    text-shadow: none;
 }
 
 p {

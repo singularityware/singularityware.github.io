@@ -10,9 +10,11 @@ that is not available it will fail over to /bin/sh (which is the POSIX standard)
 </p>
 <p>
 The usage is as follows:
-<pre>
+<pre class="language-bash">
+<code>
 $ singularity shell
 USAGE: singularity (options) shell [container image] (options)
+</code>
 </pre>
 </p>
 <p>
@@ -21,12 +23,14 @@ name) will be passed to the called shell within the container.
 </p>
 
 <h2>Examples</h2>
-<pre>
+<pre class="language-bash">
+<code>
 $ singularity shell container.img 
 Singularity/container.img&gt; echo $SHELL
 /bin/bash
 Singularity/container.img&gt; exit
 $ 
+</code>
 </pre>
 <pre>
 $ singularity shell container.img --help
@@ -58,9 +62,11 @@ Use the `bashbug' command to report bugs.
 $ 
 </pre>
 And thus we should be able to do:
-<pre>
+<pre class="language-bash">
+<code>
 $ singularity shell container.img -c "echo hello world"
 hello world
 $ 
+</code>
 </pre>
 </p>

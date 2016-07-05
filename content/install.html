@@ -9,12 +9,14 @@ From Dave Love to the Singularity list:
 Packages for singularity (2.0 plus some patches) have now hit the Fedora
 -testing repositories for EPEL5 through to Fedora 24 beta. Use the
 following command for either <b>yum</b>:
-<pre>
+<pre class="language-bash">
+<code>
 $ sudo yum install epel-release
 $ sudo yum --enablerepo epel-testing install singularity
+</code>
 </pre>
 or <b>dnf</b> to install:
-<pre>
+<pre class="language-bash">
 $ sudo dnf --enablerepo \*-testing install singularity
 </pre>
 </p>
@@ -33,7 +35,7 @@ You can always download the latest tarball release from:
 </p>
 <p>
 Once downloaded do the following:
-<pre>
+<pre class="language-bash">
 $ tar xvf singularity-*.tar.gz
 $ cd singularity
 </pre>
@@ -43,9 +45,11 @@ $ cd singularity
 <p>
 To download the most recent development code, you should use Git and do
 the following:
-<pre>
+<pre class="language-bash">
+<code>
 $ git clone https://github.com/gmkurtzer/singularity.git
 $ cd singularity
+</code>
 </pre>
 </p>
 
@@ -54,7 +58,7 @@ $ cd singularity
 <p>
 From the base Singularity source directory
 do the following:
-<pre>
+<pre class="language-bash">
 $ ./autogen.sh
 $ ./configure --prefix=/usr/local
 $ make
@@ -70,7 +74,7 @@ launch Singularity as root due to permission limitations.
 Like the above, you can build an RPM of Singularity so it can be more easily
 managed, upgraded and removed. From the base Singularity source directory
 do the following:
-<pre>
+<pre class="language-bash">
 $ ./autogen.sh
 $ ./configure
 $ make dist
@@ -82,7 +86,7 @@ $ sudo yum install ~/rpmbuild/RPMS/*/singularity-[0-9]*.rpm
 Note: if you want to have the RPM install the files to an alternative location,
 you should define the environment variable 'PREFIX' to suit your needs, and use
 the following command to build:
-<pre>
+<pre class="language-bash">
 $ PREFIX=/opt/singularity
 $ rpmbuild -ta --define="_prefix $PREFIX" --define "_sysconfdir $PREFIX/etc" --define "_defaultdocdir $PREFIX/share" singularity-*.tar.gz
 </pre>

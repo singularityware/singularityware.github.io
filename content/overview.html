@@ -98,7 +98,8 @@ program (e.g. an HPC system's resource manager) naively.
 </p>
 <p>
 Some usage examples of Singularity can be seen as follows:
-<pre>
+<pre class="language-bash">
+<code>
 $ sudo singularity create /tmp/Demo.img
 $ sudo singularity bootstrap /tmp/Demo.img centos.def
 $ sudo singularity exec --writable /tmp/Demo.img yum install xterm
@@ -110,6 +111,7 @@ Singularity/Demo.img&gt; exit
 $ singularity exec /tmp/Demo.img xterm
 $ singularity exec /tmp/Demo.img python &lt; /path/to/python/script.py
 $ cat /path/to/python/script.py | singularity exec /tmp/Demo.img python
+</code>
 </pre>
 </p>
 <p>
@@ -119,8 +121,10 @@ works through a Singularity container:
 <img src="../img/singularity_mpi.png" border="0"/>
 <p>
 ... and considering the following command:
-<pre>
+<pre class="language-bash">
+<code>
 $ mpirun -np X singularity exec /path/to/container.img /usr/bin/mpi_program_inside_container
+</code>
 </pre>
 The work-flow is defined as follows:
 <ol>
