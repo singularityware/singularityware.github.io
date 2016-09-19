@@ -24,8 +24,7 @@ command example:
 </p>
 
 <p>
-<pre class="language-bash">
-<code>
+<pre class="padPre text-justify">
 $ sudo singularity create container.img
 Creating a sparse image with a maximum size of 1024MiB...
 Formatting image (/sbin/mkfs.ext4)
@@ -34,7 +33,6 @@ $ ls -l container.img
 -rwxr-xr-x. 1 root root 1073741856 Jun  1 08:27 container.img
 $ du -sh container.img 
 33M     container.img
-</code>
 </pre>
 </p>
 
@@ -61,8 +59,7 @@ the 'create' sub-command).
 <p>
 Once the image has been created, you can mount it with the following command:
 
-<pre class="language-bash">
-<code>
+<pre class="padPre text-justify">
 $ sudo singularity mount container.img /mnt
 
 Mounting image 'container.img' into '/mnt'
@@ -74,7 +71,6 @@ Filesystem      Size  Used Avail Use% Mounted on
 /dev/loop0      976M  2.6M  907M   1% /mnt
 container.img:/mnt&gt; exit
 $ 
-</code>
 </pre>
 
 When mounting the image in this manner, Singularity makes use of name-spaces such
@@ -89,8 +85,7 @@ You can increase the size of an image after it has been instantiated by using th
 'expand' Singularity sub-command as follows:
 </p>
 
-<pre class="language-bash">
-<code>
+<pre class="padPre text-justify">
 $ sudo singularity expand container.img 
 Expanding sparse image by 512MiB...
 Checking image (/sbin/mkfs.ext4)
@@ -100,7 +95,6 @@ resize2fs 1.42.9 (28-Dec-2013)
 Done. Image can be found at: container.img
 $ ls -l container.img 
 -rwxr-xr-x. 1 root root 1610612769 Jun  1 08:40 container.img
-</code>
 </pre>
 
 <p>
@@ -127,8 +121,7 @@ enables multiple processes to be able to use the image appropriately (as would
 be necessary with MPI). But if you want to make any changes to the image, you
 must have both write permission on the image file itself and use the 
 '--writable' flag. For example:
-<pre class="language-bash">
-<code>
+<pre class="padPre text-justify">
 $ sudo singularity shell container.img 
 Singularity/container.img&gt; whoami
 root
@@ -139,7 +132,6 @@ $ sudo singularity shell --writable container.img
 Singularity/container.img&gt; touch /foo
 Singularity/container.img&gt; exit
 $ 
-</code>
 </pre>
 Even though I was root in both cases, I could not touch /foo unless the
 shell sub-command was called with the '--writable' flag.

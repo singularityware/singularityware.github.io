@@ -11,11 +11,9 @@ exec'ed within the container.
 </p>
 <p>
 The usage is as follows:
-<pre class="language-bash">
-<code>
+<pre class="padPre text-justify">
 $ singularity exec
 USAGE: singularity (options) exec [container image] [command] (options)
-</code>
 </pre>
 The command that you want to exec will follow the container image along with
 any additional arguments will all be passed directly to the program being
@@ -25,8 +23,7 @@ executed within the container.
 <h2>Examples</h2>
 <p>
 Printing the OS release inside the container:
-<pre class="language-bash">
-<code>
+<pre class="padPre text-justify">
 $ singularity exec container.img cat /etc/os-release
 PRETTY_NAME="Debian GNU/Linux 8 (jessie)"
 NAME="Debian GNU/Linux"
@@ -36,27 +33,22 @@ ID=debian
 HOME_URL="http://www.debian.org/"
 SUPPORT_URL="http://www.debian.org/support"
 BUG_REPORT_URL="https://bugs.debian.org/"
-$
-</code>
+$ 
 </pre>
 And properly passing along special characters to the program within the
 container.
-<pre class="language-bash">
-<code>
+<pre class="padPre text-justify">
 $ singularity exec container.img echo -ne "hello\nworld\n\n"
 hello
 world
 
 $ 
-</code>
 </pre>
 And a demonstration using pipes:
-<pre class="language-bash">
-<code>
+<pre class="padPre text-justify">
 $ cat debian.def | singularity exec container.img grep 'MirrorURL'
 MirrorURL "http://ftp.us.debian.org/debian/"
 $ 
-</code>
 </pre>
 
 </p>

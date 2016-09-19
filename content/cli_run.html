@@ -11,11 +11,9 @@ binary) located within the container physically at '/singularity'.
 </p>
 <p>
 The usage is as follows:
-<pre class="language-bash">
-<code>
+<pre class="padPre text-justify">
 $ singularity run
 USAGE: singularity (options) run [container image] (options)
-</code>
 </pre>
 The command that you want to exec will follow the container image along with
 any additional arguments will all be passed directly to the program being
@@ -30,38 +28,30 @@ arguments.
 <h2>Examples</h2>
 <p>
 Here is a basic runscript
-<pre class="language-bash">
-<code>
+<pre class="padPre text-justify">
 $ cat singularity
 #!/bin/sh
 echo "$@"
 $ chmod +x singularity
-</code>
 </pre>
 
 Now to copy it into the container:
-<pre class="language-bash">
-<code>
+<pre class="padPre text-justify">
 $ sudo singularity copy container.img singularity /
 $ singularity exec container.img ls -l /singularity
 -rwxr-xr-x. 1 root root 20 Jun  1 18:14 /singularity
-</code>
 </pre>
 
 Now to run the container:
-<pre class="language-bash">
-<code>
+<pre class="padPre text-justify">
 $ singularity run container.img "hello world"
 hello world
-</code>
 </pre>
 
 And to execute the container directly:
-<pre class="language-bash">
-<code>
+<pre class="padPre text-justify">
 $ ./container.img "hello again"
 hello again
 $ 
-</code>
 </pre>
 </p>
