@@ -83,7 +83,7 @@ entries:
     output: web, pdf
 
     folderitems:
-    - title: Overview
+    - title: Docs Overview
       url: /docs-overview
       output: web, pdf
 

@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Docs Overview
 sidebar: docs_sidebar
 permalink: docs-overview
 folder: docs
