@@ -54,7 +54,7 @@ entries:
     output: web
 
     folderitems:
-    - title: Overview
+    - title: Docs Overview
       url: /docs-overview
       output: web, pdf
 
@@ -64,10 +64,6 @@ entries:
 
     - title: bootstrap
       url: /bootstrap-image
-      output: web, pdf
-
-    - title: Image Environment
-      url: /image-environment
       output: web, pdf
 
     - title: Singularity and Docker
@@ -83,6 +79,7 @@ entries:
     output: web, pdf
 
     folderitems:
+
     - title: Docs Overview
       url: /docs-overview
       output: web, pdf
@@ -139,6 +136,11 @@ entries:
     - title: The Singularity Config File
       url: /docs-config
       output: web, pdf
+
+    - title: Image Environment
+      url: /image-environment
+      output: web, pdf
+
 
   - title: Developer
     output: web, pdf
