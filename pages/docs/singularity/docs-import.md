@@ -1,0 +1,51 @@
+---
+title: Singularity Import
+sidebar: docs_sidebar
+permalink: docs-import
+toc: false
+folder: docs
+---
+
+## Usage
+
+```bash
+USAGE: singularity [...] import <container path> [import from URI]
+
+Import takes a URI and will populate a container with the contents of
+the URI. If no URI is given, import will expect an incoming tar pipe.
+
+The size of the container you need to create to import a complete system
+may be significantly larger than the size of the tar file/stream due to
+overheads of the container filesystem.
+
+note: This command must be executed as root if you intend to operate on
+      a Singularity image.
+
+SUPPORTED URIs:
+
+    http/https: Pull an image using curl over HTTPD
+    docker:     Pull an image from the Docker repository
+    file:       Use a local file (same as just passing local path)
+
+SUPPORTED FILE TYPES:
+
+    .tar, .tar.gz, .tgz, .tar.bz2
+
+EXAMPLES:
+
+    Once you have created the base image template:
+
+    $ sudo singularity create /tmp/Debian.img
+
+    You can then import:
+
+    $ gunzip -c debian.tar.gz | sudo singularity import /tmp/Debian
+    $ sudo singularity import /tmp/Debian.img debian.tar.gz
+    $ sudo singularity import /tmp/Debian.img file://debian.tar.gz
+    $ sudo singularity import /tmp/Debian.img http://foo.com/debian.tar.gz
+    $ sudo singularity import /tmp/Debian.img docker://ubuntu:latest
+
+```
+
+More details coming soon.
+

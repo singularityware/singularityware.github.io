@@ -1,0 +1,30 @@
+## Topnav single links
+## if you want to list an external url, use external_url instead of url. the theme will apply a different link base.
+topnav:
+- title: Topnav
+  items:
+    - title: News
+      url: /blog
+
+#Topnav dropdowns
+topnav_dropdowns:
+- title: Topnav dropdowns
+  folders:
+    - title: Quick Links
+      folderitems:
+        - title: Github Repo
+          external_url: https://github.com/singularityware/singularity
+        - title: Google Group
+          external_url: https://groups.google.com/a/lbl.gov/forum/#!forum/singularity
+        - title: Singularity on Stack Overflow
+          external_url: http://stackoverflow.com/questions/tagged/singularity
+        - title: Singularity Hub
+          external_url: https://github.com/singularityware/singularity-hub
+        - title: Slack
+          external_url: https://singularity-container.slack.com
+    - title: People
+      folderitems:
+        - title: LBNL
+          external_url: http://www.lbl.gov/ 
+        - title: Stanford
+          external_url: https://srcc.stanford.edu/
