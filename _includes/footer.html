@@ -1,0 +1,15 @@
+<footer>
+            <div class="row">
+
+               <!-- Social Media links, etc -->
+               <div class="col-lg-6 footer">
+               {% include social_media.html %}
+               </div>
+
+                <div class="col-lg-6 footer">
+               &copy; {{ site.time | date: "%Y"  }} {{site.company_name}}. All rights reserved. <br />
+{% if page.last_updated %}<span>Page last updated:</span> {{page.last_updated}}<br/>{% endif %} Site last generated: {{ site.time | date: "%b %-d, %Y"  }} <br />
+<p><img src="{{ "images/logo/logo.png" }}" alt="Company logo" style="width:70px;padding-top:10px"/></p>
+                </div>
+            </div>
+</footer>

@@ -1,0 +1,95 @@
+# Titles and Descriptions
+topnav_title: Singularity   # this appears on the top navigation bar next to the home button
+site_title: Singularity     # appears in the html browser tab for the site title (seen mostly by search engines)
+company_name: Singularity # this appears in the footer
+logo: "/images/logo/logo.svg" # path to logo for use in left sidebar
+description: "Singularity allows a non-privileged user to 'swap out' the operating system on the host for one they control. So if the host system is running RHEL6 but your application runs in Ubuntu, you can create an Ubuntu image, install your applications into that image, copy the image to another host, and run your application on that host in it's native Ubuntu environment! Singularity also allows you to leverage the resources of whatever host you are on. This includes HPC interconnects, resource managers, file systems, GPUs and/or accelerators, etc."
+# the description is used in the feed.xml file
+
+
+# Site Config
+host: 127.0.0.1  # the preview server used. Leave as is.
+port: 4005  # the port where the preview is rendered. 
+output: web                 # this property is useful for conditional filtering of content that is separate from the PDF.
+url: "http://singularityware.github.io"  # needed for sitemap.xml file only
+
+
+# Social Media, etc
+github_editme_path: singularityware/singularityware.github.io/blob/master/pages  # leave blank to disclude
+disqus_shortname: singularityware # if using disqus, addshortname here. if not, leave this value blank.
+google_analytics: "UA-84672381-1" # Google Analytics code
+twitter_username:     SingularityApp
+github_username:      singularityware
+repo: "https://github.com/singularityware/singularity" # The main repo, should not end with slash
+
+# Exclude
+# these are the files and directories that jekyll will exclude from the build
+exclude:
+  - .idea/
+  - .gitignore
+
+
+# Optional Feedback Link in Header (disabled)
+feedback_subject_line: Singularity Feedback
+feedback_email: vsochat@stanford.edu
+feedback_disable: true
+feedback_text: "Need help?"
+feedback_link: "http://www.github.com/singularityware/singularity/issues"
+
+# Formatting
+highlighter: rouge
+# library used for syntax highlighting
+
+markdown: kramdown
+kramdown:
+ input: GFM
+ auto_ids: true
+ hard_wrap: false
+ syntax_highlighter: rouge
+# filter used to process markdown. note that kramdown differs from github-flavored markdown in some subtle ways
+
+
+# Collections
+collections:
+  tooltips:
+    output: false
+# collections are declared here. this renders the content in _tooltips and processes it, but doesn't output it as actual files in the output unless you change output to true
+
+
+# Defaults
+defaults:
+  -
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+      comments: true
+      search: true
+      sidebar: home_sidebar
+  -
+    scope:
+      path: ""
+      type: "tooltips"
+    values:
+      layout: "page"
+      comments: true
+      search: true
+      tooltip: true
+
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      comments: true
+      search: true
+      sidebar: home_sidebar
+
+
+# these are defaults used for the frontmatter for these file types
+
+sidebars:
+- home_sidebar
+- docs_sidebar
