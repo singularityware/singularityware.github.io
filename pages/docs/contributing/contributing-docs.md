@@ -18,26 +18,20 @@ git clone git@github.com:vsoch/singularityware.github.io.git
 cd singularityware.github.io/
 ```
 
-### Install dependencies
-We will eventually provide a Dockerfile to get rid of this step, but for the time being you must first <a href="https://jekyllrb.com/docs/installation/" target="_blank">install Jekyll</a>. Jekyll is a static website generator that makes it easy to magically turn markdown files into site content.
-
-Once Jekyll is installed, you can then install the dependencies (called gems) using bundle:
+### Install a local Jekyll server
+This step is required if you want to render your work locally before committing your changes. For the purpose of simplicity, we will articulate how to install Jekyll and its dependencies on a Mac.
 
 ```bash
-cd singularityware.github.io/
+brew install ruby
+gem install jekyll
+gem install bundler
 bundle install
-```
-
-If you see an error about a missing gem, you can also install a gem individually:
-
-```bash
-gem install jekyll-github
 ```
 
 Now you can see the site locally by running the server with jekyll:
 
 ```bash
-jekyll serve
+bundle exec jekyll serve
 ```
 
 This will make the site viewable at `http://localhost:4005/` If you want a nice look into how this works, you will probably want to look into the <a href="" target="_blank">config</a> file, or post a question to one of the <a href="/support" target="_blank">support places</a>.
