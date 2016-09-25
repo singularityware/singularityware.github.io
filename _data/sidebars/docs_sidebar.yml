@@ -54,7 +54,7 @@ entries:
     output: web
 
     folderitems:
-    - title: Docs Overview
+    - title: Getting Started Overview
       url: /docs-overview
       output: web, pdf
 
@@ -140,7 +140,6 @@ entries:
     - title: Image Environment
       url: /image-environment
       output: web, pdf
-
 
   - title: Developer
     output: web, pdf
