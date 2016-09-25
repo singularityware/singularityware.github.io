@@ -1,5 +1,5 @@
 ---
-title: Singularity on HPC
+title: Create an Image
 sidebar: docs_sidebar
 permalink: create-image
 folder: docs

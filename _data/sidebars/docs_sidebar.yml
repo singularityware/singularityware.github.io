@@ -6,30 +6,35 @@ entries:
   levels: one
   folders:
 
-  - title: Getting Started
-    output: web
-
+  - title: Overview
+    output: web, pdf
     folderitems:
-    - title: Create an image
-      url: /create-image
+
+    - title: Quick Start
+      url: /start
+      output: web, pdf
+      type: homepage
+
+    - title: About
+      url: /about
       output: web, pdf
 
-    - title: bootstrap
-      url: /bootstrap-image
+    - title: FAQ
+      url: /faq
       output: web, pdf
 
-    - title: Singularity and Docker
-      url: /docker
-      output: web, pdf
-
-    - title: Recipes and Tutorials
-      url: /recipes
+    - title: Support
+      url: /support
       output: web, pdf
 
 
   - title: Installation
     output: web, pdf
     folderitems:
+
+    - title: All Releases
+      url: /all-releases
+      output: web, pdf
 
     - title: Install Singularity on Linux
       url: /install-linux
@@ -41,6 +46,36 @@ entries:
 
     - title: Install Singularity on Windows
       url: /install-windows
+      output: web, pdf
+
+
+
+  - title: Getting Started
+    output: web
+
+    folderitems:
+    - title: Overview
+      url: /docs-overview
+      output: web, pdf
+
+    - title: Create an image
+      url: /create-image
+      output: web, pdf
+
+    - title: bootstrap
+      url: /bootstrap-image
+      output: web, pdf
+
+    - title: Image Environment
+      url: /image-environment
+      output: web, pdf
+
+    - title: Singularity and Docker
+      url: /docker
+      output: web, pdf
+
+    - title: Recipes and Tutorials
+      url: /recipes
       output: web, pdf
 
 
@@ -71,21 +106,27 @@ entries:
     - title: Command Usage
       url: /docs-usage
       output: web, pdf
+
     - title: bootstrap
       url: /docs-bootstrap
       output: web, pdf
+
     - title: exec
       url: /docs-exec
       output: web, pdf
+
     - title: export
       url: /docs-export
       output: web, pdf
+
     - title: import
       url: /docs-import
       output: web, pdf
+
     - title: shell
       url: /docs-shell
       output: web, pdf
+
     - title: run
       url: /docs-run
       output: web, pdf

@@ -1,7 +1,7 @@
 ---
 title: Singularity
 keywords: containers,
-sidebar: home_sidebar
+sidebar: docs_sidebar
 permalink: index.html
 toc: false
 ---

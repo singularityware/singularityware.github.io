@@ -1,5 +1,5 @@
 ---
-title: Environment
+title: Image Environment
 sidebar: docs_sidebar
 permalink: image-environment
 folder: docs

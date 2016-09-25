@@ -1,5 +1,5 @@
 ---
-title: Singularity 2.2
+title: Singularity Bootstrap
 sidebar: docs_sidebar
 permalink: docs-bootstrap
 toc: false

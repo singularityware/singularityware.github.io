@@ -1,5 +1,5 @@
 ---
-title: Singularity on HPC
+title: Getting Started with Bootstrap
 sidebar: docs_sidebar
 permalink: bootstrap-image
 folder: docs
