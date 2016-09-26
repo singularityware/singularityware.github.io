@@ -1,6 +1,7 @@
 ---
 title:  "Singularity Featured on RCE Podcast"
 category: news
+permalink: 2016-singularity-featured-rce-podcast
 ---
 
 The RCE podcast does a special on <a href="http://www.rce-cast.com/Podcast/rce-106-singularity.html" target="_blank">Singularity</a>

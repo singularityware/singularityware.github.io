@@ -1,6 +1,7 @@
 ---
 title:  "Singularity Containers deployed on XSEDE"
 category: news
+permalink: 2016-singularity-containers-deployed-xsede
 ---
 
 The team at XSEDE has announced Singularity deployment on SDSC Comet and Gordon: <a href="https://www.xsede.org/news/-/news/item/7624" target="_blank">in this press release!</a>.

@@ -1,6 +1,7 @@
 ---
 title:  "HPC Wire Reader's Choice Awards"
 category: news
+tags: [news video]
 permalink: hpc-wire-readers-choice-awards-2016
 ---
 
