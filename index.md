@@ -23,7 +23,7 @@ Jump in and <a href="/start"><strong>get started</strong></a>.
 
 <div class="row">
   {% for post in site.categories.news limit:3 %}
-   <div class="col-md-3">
+   <div class="col-md-4">
       <h2><a class="post-link" href="{{ post.url | remove: "/" }}">{{ post.title }}</a></h2>
       <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
       <p>{{ post.content | truncatewords: 20 | strip_html }}</p>  

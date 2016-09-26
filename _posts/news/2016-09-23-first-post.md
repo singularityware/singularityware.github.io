@@ -1,7 +1,6 @@
 ---
 title:  "Welcome to Singularity"
 category: news
-permalink: first-post
 ---
 
 We are happy to announce that the new Singularity site is underway! We will be adding the following:

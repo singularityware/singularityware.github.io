@@ -14,7 +14,7 @@ Additionally, because Singularity is not emulating a full hardware level virtual
 We are in the process of developing <a href="https://github.com/singularityware/singularity-hub" target="_blank">Singularity Hub,</a> which will allow for generation of workflows using Singularity containers in an online interface, and easy deployment on standard research clusters (e.g., SLURM, SGE). Currently, the Singularity core software is installed on the following research clusters, meaning you can run Singularity containers as part of your jobs:
 
 - The <a href="http://sherlock.stanford.edu" target="_blank" class="no-after">Sherlock cluster</a> at <a href="https://srcc.stanford.edu/" class="no-after" target="_blank">Stanford University</a>
-
+- <a href="https://www.xsede.org/news/-/news/item/7624" target="_blank" class="no-after">SDSC Comet and Gordon</a> (XSEDE)
 
 ### Integration with MPI
 Another result of the Singularity architecture is the ability to properly integrate with the Message Passing Interface (MPI). Work has already been done for out of the box compatibility with Open MPI (both in Open MPI v2.x as well as part of Singularity). Here is a document that illustrates the Open MPI/Singularity workflow:

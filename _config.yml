@@ -86,6 +86,7 @@ defaults:
       comments: true
       search: true
       sidebar: home_sidebar
+      permalink: /:year-:title/
 
 
 # these are defaults used for the frontmatter for these file types
