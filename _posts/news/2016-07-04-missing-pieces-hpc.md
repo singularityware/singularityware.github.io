@@ -1,5 +1,5 @@
 ---
-title:  "HPC Wire Reader's Choice Awards"
+title:  "ISC Workshop Singularity Session"
 category: news
 tags: [news video]
 permalink: 2016-missing-pieces-hpc-workshop
