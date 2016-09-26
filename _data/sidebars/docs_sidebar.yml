@@ -54,9 +54,6 @@ entries:
     output: web
 
     folderitems:
-    - title: Getting Started Overview
-      url: /docs-overview
-      output: web, pdf
 
     - title: Create an image
       url: /create-image
