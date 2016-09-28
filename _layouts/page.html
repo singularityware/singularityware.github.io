@@ -36,8 +36,8 @@ layout: default
 
     <!-- Previous and next buttons-->
     <div class="row" style="padding-top:30px; margin-bottom:10px"><div class="col-md-12">
-        <a href="#"><button style="width:30%; float:left" class="btn btn-lg btn-default" id="previous-button">Previous</button></a>
-        <a href="#"><button style="width:30%; float:right" class="btn btn-lg btn-default" id="next-button">Next</button></a>
+        <a href="#"><button style="width:20%; height: 70px; float:left" class="previous-button btn btn-lg btn-default">Previous</button></a>
+        <a href="#"><button style="width:20%; height: 70px; float:right" class="next-button btn btn-lg btn-default">Next</button></a>
     </div></div>
 
     <script>
@@ -46,29 +46,26 @@ layout: default
         var next = $("li.active").next().last().find('a').attr('href');
         var previous = $("li.active").prev().last().find('a').attr('href');
 
-        console.log(next);
-        console.log(previous);
-
         // NEXT BUTTON
         if (typeof next == 'undefined'){
             console.log("disabling next button")
-            $("#next-button").addClass("hidden")
+            $(".next-button").addClass("hidden")
         } else if (next == "#") {
             next = $("li.active").next().find("li").first().find('a').attr('href');
-            $("#next-button").closest('a').attr('href', next)
+            $(".next-button").closest('a').attr('href', next)
         } else {
-            $("#next-button").closest('a').attr('href', next)
+            $(".next-button").closest('a').attr('href', next)
         }
 
         // PREVIOUS BUTTON
         if (typeof previous == 'undefined'){
             console.log("disabling previous button")
-            $("#previous-button").addClass('hidden')
+            $(".previous-button").addClass('hidden')
         } else if (previous == "#") {
             previous = $("li.active").prev().find("li").last().find('a').attr('href')
-            $("#previous-button").closest('a').attr('href', previous)
+            $(".previous-button").closest('a').attr('href', previous)
         } else {
-            $("#previous-button").closest('a').attr('href', previous)
+            $(".previous-button").closest('a').attr('href', previous)
         }
 
     })
@@ -79,6 +76,13 @@ layout: default
     {% endunless %}
 
   {{content}}
+
+    <!-- More navigation on the bottom -->
+    <div class="row" style="padding-top:30px; margin-bottom:10px"><div class="col-md-12">
+        <a href="#"><button style="width:20%; height: 70px; float:left" class="previous-button btn btn-lg btn-default">Previous</button></a>
+        <a href="#"><button style="width:20%; height: 70px; float:right" class="next-button btn btn-lg btn-default">Next</button></a>
+    </div></div>
+
 
     {% unless jekyll.environment == "production" %}
 
