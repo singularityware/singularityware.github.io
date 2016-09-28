@@ -52,7 +52,7 @@ Each of the above has slightly different arguments you will be interested in:
 - Token: If your registry is not Docker's public/default, does it require a token? For example, gcr.io (as of the update to these docs) does not require a token, and so "Token" would be set to "no" for the bootstrap to work properly.
 
 
-For <strong>examples</strong> we recommend that you look at the <a href="{{ site.repo}}/tree/master/examples" target="_blank">examples</a> folder for the most up-to-date examples.
+<br>For <strong>examples</strong> we recommend that you look at the <a href="{{ site.repo}}/tree/master/examples" target="_blank">examples</a> folder for the most up-to-date examples.
 
 ### Bootstrapping
 Once you have the bootstrap defined (or starting with a basic one), you can then use the `bootstrap` Singularity command to install the operating system into the container image. The process for doing this can be seen with:
