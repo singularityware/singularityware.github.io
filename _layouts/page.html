@@ -36,8 +36,8 @@ layout: default
 
     <!-- Previous and next buttons-->
     <div class="row" style="padding-top:30px; margin-bottom:10px"><div class="col-md-12">
-        <a href="#"><button style="width:20%; height: 70px; float:left" class="previous-button btn btn-lg btn-default">Previous</button></a>
-        <a href="#"><button style="width:20%; height: 70px; float:right" class="next-button btn btn-lg btn-default">Next</button></a>
+        <a href="#"><button style="width:20%; height: 70px; float:left" class="hidden previous-button btn btn-lg btn-default">Previous</button></a>
+        <a href="#"><button style="width:20%; height: 70px; float:right" class="hidden next-button btn btn-lg btn-default">Next</button></a>
     </div></div>
 
     <script>
@@ -53,19 +53,22 @@ layout: default
         } else if (next == "#") {
             next = $("li.active").next().find("li").first().find('a').attr('href');
             $(".next-button").closest('a').attr('href', next)
+            $(".next-button").removeClass('hidden')
         } else {
             $(".next-button").closest('a').attr('href', next)
+            $(".next-button").removeClass('hidden')
         }
 
         // PREVIOUS BUTTON
         if (typeof previous == 'undefined'){
             console.log("disabling previous button")
-            $(".previous-button").addClass('hidden')
         } else if (previous == "#") {
             previous = $("li.active").prev().find("li").last().find('a').attr('href')
             $(".previous-button").closest('a').attr('href', previous)
+            $(".previous-button").removeClass('hidden')
         } else {
             $(".previous-button").closest('a').attr('href', previous)
+            $(".previous-button").removeClass('hidden')
         }
 
     })
@@ -79,8 +82,8 @@ layout: default
 
     <!-- More navigation on the bottom -->
     <div class="row" style="padding-top:30px; margin-bottom:10px"><div class="col-md-12">
-        <a href="#"><button style="width:20%; height: 70px; float:left" class="previous-button btn btn-lg btn-default">Previous</button></a>
-        <a href="#"><button style="width:20%; height: 70px; float:right" class="next-button btn btn-lg btn-default">Next</button></a>
+        <a href="#"><button style="width:20%; height: 70px; float:left" class="hidden previous-button btn btn-lg btn-default">Previous</button></a>
+        <a href="#"><button style="width:20%; height: 70px; float:right" class="hidden next-button btn btn-lg btn-default">Next</button></a>
     </div></div>
 
 
