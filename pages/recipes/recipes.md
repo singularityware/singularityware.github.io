@@ -1,7 +1,7 @@
 ---
 title: Recipes
 sidebar: docs_sidebar
-permalink: recipes
+permalink: tutorials
 folder: recipes
 toc: false
 ---
