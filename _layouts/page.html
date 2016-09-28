@@ -34,6 +34,46 @@ layout: default
     <div class="summary">{{page.summary}}</div>
    {% endif %}
 
+    <!-- Previous and next buttons-->
+    <div class="row" style="padding-top:30px; margin-bottom:10px"><div class="col-md-12">
+        <a href="#"><button style="width:30%; float:left" class="btn btn-lg btn-default" id="previous-button">Previous</button></a>
+        <a href="#"><button style="width:30%; float:right" class="btn btn-lg btn-default" id="next-button">Next</button></a>
+    </div></div>
+
+    <script>
+    $(document).ready(function(){
+
+        var next = $("li.active").next().last().find('a').attr('href');
+        var previous = $("li.active").prev().last().find('a').attr('href');
+
+        console.log(next);
+        console.log(previous);
+
+        // NEXT BUTTON
+        if (typeof next == 'undefined'){
+            console.log("disabling next button")
+            $("#next-button").addClass("hidden")
+        } else if (next == "#") {
+            next = $("li.active").next().find("li").first().find('a').attr('href');
+            $("#next-button").closest('a').attr('href', next)
+        } else {
+            $("#next-button").closest('a').attr('href', next)
+        }
+
+        // PREVIOUS BUTTON
+        if (typeof previous == 'undefined'){
+            console.log("disabling previous button")
+            $("#previous-button").addClass('hidden')
+        } else if (previous == "#") {
+            previous = $("li.active").prev().find("li").last().find('a').attr('href')
+            $("#previous-button").closest('a').attr('href', previous)
+        } else {
+            $("#previous-button").closest('a').attr('href', previous)
+        }
+
+    })
+    </script>
+
     {% unless page.toc == false %}
     {% include toc.html %}
     {% endunless %}

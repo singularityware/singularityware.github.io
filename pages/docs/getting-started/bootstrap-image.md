@@ -98,4 +98,4 @@ $ du -sh container.img
 $ 
 ```
 
-The image "container.img" has now been bootstrapped with the operating system as we specified in our definition file. For more detailed documentation, including instructions for bootstrapping a Docker image, see our <a href="/bootstrap">bootstrap docs</a>.
+The image "container.img" has now been bootstrapped with the operating system as we specified in our definition file. For more detailed documentation, including instructions for bootstrapping a Docker image, see our <a href="/docs-bootstrap">bootstrap docs</a>.
