@@ -11,29 +11,48 @@ Singularity container images can be bootstrapped with a definition file which de
 Below is an example bootstrap file to create a minimal Debian base image:
 
 ```bash
-DistType "debian"
-MirrorURL "http://ftp.us.debian.org/debian/"
-OSVersion "jessie"
+BootStrap: debian
+OSVersion: trusty
+MirrorURL: http://us.archive.ubuntu.com/ubuntu/
 
-Setup
-Bootstrap
 
-InstallPkgs vim
+%runscript
+    echo "This is what happens when you run the container..."
 
-Cleanup
-The bootstrap file supports a mixture of shell and Singularity keywords and syntax. Here is a list of the supported Singularity keywords:
+
+%post
+    echo "Hello from inside the container"
+    sed -i 's/$/ universe/' /etc/apt/sources.list
+    apt-get -y install vim
 ```
 
-- DistType: This is necessary to tell Singularity which distribution module should be used to parse the commands. For example, are we using YUM, or Apt, and handle distribution specific configurations. At present three types are supported: "redhat", "debian" and "fedora". Note that "redhat" applies to all Red Hat compatible distributions (e.g. CentOS), and "debian" applies to all Debian based derivatives (e.g. Ubuntu).
+Broadly, the header tells Singularity what to use as a base, `%runscript` is one or more lines that will be executed when you run the container (akin to Docker's CMD), and `%post` are one or more lines that will be executed only once after bootstrap (this is where you would install packages, make directories, etc.) The bootstrap file supports a mixture of shell and Singularity keywords and syntax. There are two flavors of bootstrapping:
+
+1. Bootstrap another OS (start from scratch)
+2. Bootstrap another container (currently supported is Docker)
+
+Each of the above has slightly different arguments you will be interested in:
+
+### Arguments for Both
+
+- BootStrap: This is necessary to tell Singularity which distribution module should be used to parse the commands. Current supported bases are "redhat", "debian", "arch", "busybox", and "docker". Note that "redhat" applies to all Red Hat compatible distributions (e.g. CentOS), and "debian" applies to all Debian based derivatives (e.g. Ubuntu).
+- %runscript: one or more lines that will be executed when you run the container (akin to Docker's CMD)
+- %post: one or more lines that will be executed only once after bootstrap (install packages, make directories, etc.) 
+
+
+### Arguments for Bootstrapping another OS
 - MirrorURL: When bootstrapping, the packages necessary for the operating system build are downloaded on demand via the internet. In some cases (like CentOS vs. Scientific Linux) this is the only differentiating factor for what distribution gets installed.
 - Build: This is a Debian flavor specific keyword and it is passed directly to debootstrap.
-- Setup: Setup creates the necessary starting point, files, and components for an OS to be bootstrapped. While it is not necessary, it is highly recommended as it will create some of the base and mandatory files.
-- Bootstrap: The main driver for the bootstrap operation. This will call either YUM or Apt (or other distribution tool) to start installing the packages onto the image.
-- InstallPkgs: Install any additional packages post bootstrap. Note: if using DistType of "debian" it will install via the newly created bootstrap with 'apt' but if using "redhat", this will be installed from outside the bootstrapped system.
-- InstallFile: Install a file into the container. Note that relative paths work just fine, but care must be taken from the calling directory.
-- RunCmd: Run a command within the new container operating system during the bootstrap. May be repeated to run multiple commands.
-- RunScript: Add a command line to the "runscript" invoked by 'singularity run' or by executing the container directly. May be repeated to add multiple command lines.
-- Cleanup: Cleanup any temporary files like YUM/Apt caches.
+
+
+### Arguments for Docker
+
+- IncludeCmd: This argument should be added and set to "no" or "yes" if you want to have the Docker CMD specified in the Dockerfile used as the container's runscript (a file called "/singularity" that is executed when you use the container like an executable. Note that if you define %runscript, this second definition will overwrite the CMD found from the Docker image.
+- Registry: The default or public Docker registry is `registry-1.docker.io`, however many institutions host their own! You can specify a different registry via this argument, for example, Google Cloud would be `gcr.io`
+- Token: If your registry is not Docker's public/default, does it require a token? For example, gcr.io (as of the update to these docs) does not require a token, and so "Token" would be set to "no" for the bootstrap to work properly.
+
+
+For <strong>examples</strong> we recommend that you look at the <a href="{{ site.repo}}/tree/master/examples" target="_blank">examples</a> folder for the most up-to-date examples.
 
 ### Bootstrapping
 Once you have the bootstrap defined (or starting with a basic one), you can then use the `bootstrap` Singularity command to install the operating system into the container image. The process for doing this can be seen with:
