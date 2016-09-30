@@ -11,7 +11,7 @@ We (like almost all open source software providers) have a documentation dillemm
 ## Setting up Development
 
 ### Fork the repo
-To contribute to the web based documentation, you should obtain a GitHub account and fork the <a href="{{site.repo}}/singularityware.github.io" target="_blank">Singularityware site</a> repository. Once forked, you will want to clone the fork of the repo to your computer. Let's say my Github username is vsoch, and I am using ssh:
+To contribute to the web based documentation, you should obtain a GitHub account and fork the <a href="https://www.github.com/singularityware/singularityware.github.io" target="_blank">Singularityware site</a> repository. Once forked, you will want to clone the fork of the repo to your computer. Let's say my Github username is vsoch, and I am using ssh:
 
 ```bash
 git clone git@github.com:vsoch/singularityware.github.io.git
@@ -58,7 +58,7 @@ and then write your post after it in <a href="https://github.com/adam-p/markdown
 
 ## Contributing to a Page
 
-All of the pages are in the <a href="{{ site.repo }}/blob/master/pages" target="_blank">pages</a> folder, organized in a somewhat logical manner. If you want to edit content for a page, just edit the corresponding file. If you need to do something more advanced like edit a sidebar, you should look at the <a href="{{ site.repo }}/blob/master/_data/sidebar" target="_blank">sidebar data</a> yml documents, which render into the navigation.
+All of the pages are in the <a href="https://www.github.com/singuarityware/singularity/blob/master/pages" target="_blank">pages</a> folder, organized in a somewhat logical manner. If you want to edit content for a page, just edit the corresponding file. If you need to do something more advanced like edit a sidebar, you should look at the <a href="https://www.github.com/singuarityware/singularity/blob/master/_data/sidebar" target="_blank">sidebar data</a> yml documents, which render into the navigation.
 
 ## Adding a Release
 
