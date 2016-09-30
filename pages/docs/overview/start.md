@@ -8,7 +8,7 @@ folder: docs
 ## Installation Quick Start
 
 ```bash
-$ git clone {{ site.repo }}/singularity.git
+$ git clone {{ site.repo }}.git
 $ cd singularity
 $ ./autogen.sh
 $ ./configure --prefix=/usr/local
