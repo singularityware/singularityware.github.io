@@ -4,9 +4,10 @@ category: recipes
 permalink: building-singularity-debian
 ---
 
+This tutorial is generated courtsey of <a href="https://twitter.com/californiakarl" target="_blank">Karl Kornel</a> from Stanford Research Computing. The ascii art is amazing, if you don't care to build Singularity on Debian please scroll down to appreciate it in it's entirety. Thank you Karl!
+
 {% include toc.html %}
 
-This tutorial is generated courtsey of <a href="https://twitter.com/californiakarl" target="_blank">Karl Kornel</a> from Stanford Research Computing. The ascii art is amazing, if you don't care to build Singularity on Debian please scroll down to appreciate it in it's entirety. Thank you Karl!
 
 For the purposes of this tutorial, we will assume that the name of your remote is "stanford" and your username is "vsoch."
 
