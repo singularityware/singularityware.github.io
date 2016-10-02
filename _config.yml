@@ -93,3 +93,4 @@ defaults:
 sidebars:
 - home_sidebar
 - docs_sidebar
+- main_sidebar
