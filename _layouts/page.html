@@ -62,6 +62,7 @@ layout: default
         // PREVIOUS BUTTON
         if (typeof previous == 'undefined'){
             console.log("disabling previous button")
+            $(".previous-button").addClass("hidden")
         } else if (previous == "#") {
             previous = $("li.active").prev().find("li").last().find('a').attr('href')
             $(".previous-button").closest('a').attr('href', previous)
