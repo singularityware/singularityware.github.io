@@ -91,6 +91,4 @@ defaults:
 # these are defaults used for the frontmatter for these file types
 
 sidebars:
-- home_sidebar
-- docs_sidebar
 - main_sidebar

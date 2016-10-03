@@ -77,24 +77,20 @@ entries:
       output: web, pdf
 
 
-  - title: Join The Team
+  - title: Contributing
     output: web, pdf
     folderitems:
 
-    - title: IRC/Slack
-      url: /community-support
+    - title: User Support
+      url: /contributing-support
       output: web, pdf
 
     - title: Code Development
       url: /contributing-code
       output: web, pdf
 
-    - title: Documentation
+    - title: Docs, Recipes, News
       url: /contributing-docs
-      output: web, pdf
-
-    - title: Helping Others/Support
-      url: /contributing-help
       output: web, pdf
 
 

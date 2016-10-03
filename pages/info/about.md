@@ -1,15 +1,13 @@
 ---
-title: Introduction
+title: About Singularity
 sidebar: main_sidebar
 permalink: about
-folder: docs
+toc: false
 ---
 
 ## Overview
 
-Singularity is extreme mobility of compute. You can container-ize your application and run it anywhere, equivalent to an executable, without needing special priviledges.
-
-Singularity enables users to have full control of their environment. This means that a non-privileged user can "swap out" the operating system on the host for one they control. So if the host system is running RHEL6 but your application runs in Ubuntu, you can create an Ubuntu image, install your applications into that image, copy the image to another host, and run your application on that host in it's native Ubuntu environment!
+Designed around the notion of extreme mobility of compute and reproducible science, Singularity enables users to have full control of their operating system environment. This means that a non-privileged user can "swap out" the operating system on the host for one they control. So if the host system is running RHEL6 but your application runs in Ubuntu, you can create an Ubuntu image, install your applications into that image, copy the image to another host, and run your application on that host in it's native Ubuntu environment!
 
 Singularity also allows you to leverage the resources of whatever host you are on. This includes HPC interconnects, resource managers, file systems, GPUs and/or accelerators, etc.
 
@@ -38,8 +36,6 @@ Each Singularity image includes all of the application's necessary run-time libr
 Singularity is released under a BSD license with 2 modifications. One of the modifications being that you may not use the names of any project members or contributors (namely UC or the US Department of Energy) to endorse or promote products or services derived from or using this software. And the other is that if you share modified code publicly (or with Berkeley National Laboratory), you will grant similar license terms on your "Enhancements" (see <a href="{{ site.repo }}/blob/master/LICENSE" target="_blank">LICENSE</a> file for more details).
 
 ## Features
-
-Singularity does this by enabling several key facets:
 
 ### Encapsulation of the environment
 
