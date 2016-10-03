@@ -1,6 +1,6 @@
 ---
 title: Basic Command Usage
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: docs-usage
 folder: docs
 ---

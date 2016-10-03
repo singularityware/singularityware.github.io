@@ -1,6 +1,6 @@
 ---
 title: Introduction
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: about
 folder: docs
 ---

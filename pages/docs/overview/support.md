@@ -1,6 +1,6 @@
 ---
 title: Support
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: support
 folder: docs
 ---

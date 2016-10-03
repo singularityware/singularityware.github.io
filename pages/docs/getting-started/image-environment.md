@@ -1,6 +1,6 @@
 ---
 title: Image Environment
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: image-environment
 folder: docs
 ---

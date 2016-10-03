@@ -1,6 +1,6 @@
 ---
 title: Singularity Shell
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: docs-shell
 folder: docs
 ---

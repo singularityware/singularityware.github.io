@@ -43,30 +43,23 @@ layout: default
     <script>
     $(document).ready(function(){
 
-        var next = $("li.active").next().last().find('a').attr('href');
-        var previous = $("li.active").prev().last().find('a').attr('href');
+        var next = "{{ page.next }}";
+        var previous = "{{ page.previous }}";
 
         // NEXT BUTTON
-        if (typeof next == 'undefined'){
+        if (next == ''){
             console.log("disabling next button")
             $(".next-button").addClass("hidden")
-        } else if (next == "#") {
-            next = $("li.active").next().find("li").first().find('a').attr('href');
-            $(".next-button").closest('a').attr('href', next)
-            $(".next-button").removeClass('hidden')
         } else {
             $(".next-button").closest('a').attr('href', next)
+            //$(".next-button").attr('href', next);
             $(".next-button").removeClass('hidden')
         }
 
         // PREVIOUS BUTTON
-        if (typeof previous == 'undefined'){
+        if (previous == ''){
             console.log("disabling previous button")
             $(".previous-button").addClass("hidden")
-        } else if (previous == "#") {
-            previous = $("li.active").prev().find("li").last().find('a').attr('href')
-            $(".previous-button").closest('a').attr('href', previous)
-            $(".previous-button").removeClass('hidden')
         } else {
             $(".previous-button").closest('a').attr('href', previous)
             $(".previous-button").removeClass('hidden')

@@ -1,7 +1,8 @@
 ---
 title: Quick Start
 sidebar: home_sidebar
-permalink: start
+permalink: quickstart
+next: hello
 folder: docs
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Contributing to Documentation
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: contributing-docs
 folder: releases
 ---

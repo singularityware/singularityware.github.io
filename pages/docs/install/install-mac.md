@@ -1,6 +1,6 @@
 ---
 title: Running Singularity with Vagrant (Mac)
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: install-mac
 folder: docs
 ---

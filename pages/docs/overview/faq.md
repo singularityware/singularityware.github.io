@@ -1,6 +1,6 @@
 ---
 title: Frequently Asked Questions
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: faq
 folder: docs
 ---
