@@ -17,7 +17,7 @@ Singularity also allows you to leverage the resources of whatever host you are o
 
 ## Getting started
 
-Jump in and <a href="/start"><strong>get started</strong></a>.
+Jump in and <a href="/quickstart"><strong>get started</strong></a>.
 
 <hr style="margin-top:20px">
 
