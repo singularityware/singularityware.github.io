@@ -60,20 +60,16 @@ entries:
       url: /quickstart # was /start
       output: web, pdf
 
-    - title: User Guide
-      url: /docs/user/toc
-      output: web, pdf
-
-    - title: Admin Guide
-      url: /docs/admin/toc
-      output: web, pdf
-
     - title: Recipes and Tutorials
       url: /recipes
       output: web, pdf
 
-    - title: Singularity and Docker
-      url: /docker
+    - title: User Documentation
+      url: /user_guide
+      output: web, pdf
+
+    - title: Admin Documentation
+      url: /admin_guide
       output: web, pdf
 
 
@@ -89,7 +85,7 @@ entries:
       url: /contributing-code
       output: web, pdf
 
-    - title: Docs, Recipes, News
+    - title: Documentation
       url: /contributing-docs
       output: web, pdf
 
