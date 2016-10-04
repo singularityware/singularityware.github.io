@@ -22,8 +22,8 @@ entries:
       url: /presentations
       output: web, pdf
 
-    - title: Sites Running Singularity
-      url: /sites
+    - title: Singularity Registry
+      url: /registry
       output: web, pdf
 
     - title: Follow Singularty @

@@ -1,7 +1,7 @@
 ---
-title: Sites Running Singularity
+title: Singularity Registry
 sidebar: main_sidebar
-permalink: sites
+permalink: registry
 toc: false
 ---
 
