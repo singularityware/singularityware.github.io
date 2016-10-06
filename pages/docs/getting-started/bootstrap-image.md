@@ -1,6 +1,6 @@
 ---
 title: Getting Started with Bootstrap
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: bootstrap-image
 folder: docs
 ---

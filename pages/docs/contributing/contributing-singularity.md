@@ -1,6 +1,6 @@
 ---
 title: Contributing to Singularity
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: contributing-singularity
 folder: docs
 ---

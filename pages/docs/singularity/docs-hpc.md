@@ -1,6 +1,6 @@
 ---
 title: Singularity on HPC
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: docs-hpc
 folder: docs
 toc: false

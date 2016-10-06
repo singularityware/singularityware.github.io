@@ -1,6 +1,6 @@
 ---
 title: Recipes
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: tutorials
 folder: recipes
 toc: false

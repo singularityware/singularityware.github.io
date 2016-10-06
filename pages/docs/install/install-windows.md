@@ -1,6 +1,6 @@
 ---
 title: Running Singularity with Vagrant (Windows)
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: install-windows
 folder: docs
 ---

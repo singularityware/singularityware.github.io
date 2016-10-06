@@ -1,6 +1,6 @@
 ---
 title: Install on Linux
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: install-linux
 folder: docs
 ---

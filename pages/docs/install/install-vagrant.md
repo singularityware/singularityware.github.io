@@ -1,6 +1,6 @@
 ---
 title: Running Singularity with Vagrant
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: install-vagrant
 folder: docs
 ---

@@ -1,6 +1,6 @@
 ---
 title: Docs Overview
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: docs-overview
 folder: docs
 ---

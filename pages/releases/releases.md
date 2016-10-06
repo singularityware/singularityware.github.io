@@ -1,6 +1,6 @@
 ---
 title: Releases
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: all-releases
 keywords: news, blog, updates, release notes, announcements
 folder: releases

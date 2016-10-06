@@ -1,0 +1,113 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+
+entries:
+
+- title: Singularity
+  folders:
+
+
+  - title: Information
+    output: web, pdf
+    folderitems:
+
+    - title: News
+      url: /blog
+      output: web, pdf
+
+    - title: About Singularity
+      url: /about
+      output: web, pdf
+
+    - title: Presentations
+      url: /presentations
+      output: web, pdf
+
+    - title: Singularity Registry
+      url: /registry
+      output: web, pdf
+
+    - title: Follow Singularty @
+      url: /follow
+      output: web, pdf
+
+
+  - title: Download / Installation
+    output: web, pdf
+    folderitems:
+
+    - title: All Releases
+      url: /all-releases
+      output: web, pdf
+
+    - title: Install Singularity on Linux
+      url: /install-linux
+      output: web, pdf
+
+    - title: Install Singularity on Mac
+      url: /install-mac
+      output: web, pdf
+
+    - title: Install Singularity on Windows
+      url: /install-windows
+      output: web, pdf
+
+
+  - title: Documentation
+    output: web, pdf
+    folderitems:
+
+    - title: Quick Start
+      url: /quickstart # was /start
+      output: web, pdf
+
+    - title: Recipes and Tutorials
+      url: /recipes
+      output: web, pdf
+
+    - title: User Documentation
+      url: /user_guide
+      output: web, pdf
+
+    - title: Admin Documentation
+      url: /admin_guide
+      output: web, pdf
+
+
+  - title: Contributing
+    output: web, pdf
+    folderitems:
+
+    - title: User Support
+      url: /contributing-support
+      output: web, pdf
+
+    - title: Code Development
+      url: /contributing-code
+      output: web, pdf
+
+    - title: Documentation
+      url: /contributing-docs
+      output: web, pdf
+
+
+  - title: Getting Help
+    output: web, pdf
+    folderitems:
+
+    - title: FAQ
+      url: /faq
+      output: web, pdf
+
+    - title: Troubleshooting
+      url: /troubleshooting
+      output: web, pdf
+
+    - title: Community Support
+      url: /community-support
+      output: web, pdf
+
+    - title: Professional Support
+      url: /professional-support
+      output: web, pdf
+
+

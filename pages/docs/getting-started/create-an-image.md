@@ -1,6 +1,6 @@
 ---
 title: Create an Image
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: create-image
 folder: docs
 ---

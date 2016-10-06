@@ -1,25 +1,35 @@
 ---
 title: Contributing to Documentation
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: contributing-docs
 folder: releases
 ---
 
 We (like almost all open source software providers) have a documentation dillemma... We tend to focus on the code features and functionality before working on documentation. And there is very good reason for this, we want to share the love so nobody feels left out!
 
+The following documentation page assumes one is running on OS X, but if you are not, you should be able to easily transpose the necessary commands to your operating system of choice.
 
-## Setting up Development
 
-### Fork the repo
-To contribute to the web based documentation, you should obtain a GitHub account and fork the <a href="https://www.github.com/singularityware/singularityware.github.io" target="_blank">Singularityware site</a> repository. Once forked, you will want to clone the fork of the repo to your computer. Let's say my Github username is vsoch, and I am using ssh:
+## Setting Up Your Development Environment
+
+### Installing Dependencies
+Initially (on OS X), you will need to setup [Brew](http://brew.sh/) which is a package manager for OS X and [Git](https://git-scm.com/). To install Brew and Git, run the following commands:
 
 ```bash
-git clone git@github.com:vsoch/singularityware.github.io.git
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew install git
+```
+
+### Fork the repo
+To contribute to the web based documentation, you should obtain a GitHub account and *fork* the <a href="https://www.github.com/singularityware/singularityware.github.io" target="_blank">Singularity GitHub Pages</a> repository by clicking the *fork* button on the top right of the page. Once forked, you will want to clone the fork of the repo to your computer. Let's say my Github username is *user99*:
+
+```bash
+git clone https://github.com/user99/singularityware.github.io.git
 cd singularityware.github.io/
 ```
 
 ### Install a local Jekyll server
-This step is required if you want to render your work locally before committing your changes. For the purpose of simplicity, we will articulate how to install Jekyll and its dependencies on a Mac.
+This step is required if you want to render your work locally before committing the changes. This is highly recommended to ensure that your changes will render properly and will be accepted.
 
 ```bash
 brew install ruby
@@ -34,8 +44,7 @@ Now you can see the site locally by running the server with jekyll:
 bundle exec jekyll serve
 ```
 
-This will make the site viewable at `http://localhost:4005/` If you want a nice look into how this works, you will probably want to look into the <a href="" target="_blank">config</a> file, or post a question to one of the <a href="/support" target="_blank">support places</a>.
-
+This will make the site viewable at <a href="http://localhost:4005/" target="_blank">http://localhost:4005/</a>.
 
 ## Contributing a News Item
 

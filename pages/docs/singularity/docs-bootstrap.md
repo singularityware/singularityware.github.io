@@ -1,6 +1,6 @@
 ---
 title: Singularity Bootstrap
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: docs-bootstrap
 toc: false
 folder: docs

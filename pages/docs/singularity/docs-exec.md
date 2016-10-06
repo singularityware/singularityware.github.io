@@ -1,6 +1,6 @@
 ---
 title: Singularity Exec
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: docs-exec
 folder: docs
 toc: false
