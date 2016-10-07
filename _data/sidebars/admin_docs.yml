@@ -28,7 +28,7 @@ entries:
       output: web, pdf
 
     - title: Advanced Config
-      url: /advanced-config
+      url: /docs-config
       output: web, pdf
 
     - title: License
