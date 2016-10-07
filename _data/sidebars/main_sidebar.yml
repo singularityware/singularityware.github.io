@@ -26,10 +26,6 @@ entries:
       url: /registry
       output: web, pdf
 
-    - title: Follow Singularty @
-      url: /follow
-      output: web, pdf
-
 
   - title: Download / Installation
     output: web, pdf
