@@ -1,6 +1,6 @@
 ---
 title: Security
-sidebar: main_sidebar
+sidebar: admin_docs
 permalink: docs-security
 folder: docs
 ---

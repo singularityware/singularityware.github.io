@@ -53,7 +53,7 @@ entries:
     folderitems:
 
     - title: Quick Start
-      url: /quickstart # was /start
+      url: /quickstart
       output: web, pdf
 
     - title: Recipes and Tutorials
@@ -61,11 +61,11 @@ entries:
       output: web, pdf
 
     - title: User Documentation
-      url: /user_guide
+      url: /user-guide
       output: web, pdf
 
     - title: Admin Documentation
-      url: /admin_guide
+      url: /admin-guide
       output: web, pdf
 
 

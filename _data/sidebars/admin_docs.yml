@@ -1,0 +1,36 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+
+entries:
+
+- title: Documentation
+  levels: one
+  folders:
+
+  - title: Admin Guide
+    output: web, pdf
+
+    folderitems:
+
+    - title: Security
+      url: /docs-security
+      output: web, pdf
+
+    - title: Singularity on HPC
+      url: /docs-hpc
+      output: web, pdf
+
+    - title: The Singularity Config File
+      url: /docs-config
+      output: web, pdf
+
+    - title: Image Environment
+      url: /image-environment
+      output: web, pdf
+
+    - title: Advanced Config
+      url: /advanced-config
+      output: web, pdf
+
+    - title: License
+      url: /docs-license
+      output: web, pdf

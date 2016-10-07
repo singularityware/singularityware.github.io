@@ -1,6 +1,6 @@
 ---
 title: Singularity Export
-sidebar: main_sidebar
+sidebar: user_docs
 permalink: docs-export
 toc: false
 folder: docs

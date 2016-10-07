@@ -1,6 +1,6 @@
 ---
 title: The Singularity Configuration File
-sidebar: main_sidebar
+sidebar: admin_docs
 permalink: docs-config
 folder: docs
 ---

@@ -1,6 +1,6 @@
 ---
 title: Singularity Run
-sidebar: main_sidebar
+sidebar: user_docs
 permalink: docs-run
 folder: docs
 toc: false
