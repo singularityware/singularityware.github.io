@@ -95,15 +95,7 @@ entries:
       output: web, pdf
 
     - title: Troubleshooting
-      url: /troubleshooting
-      output: web, pdf
-
-    - title: Community Support
-      url: /community-support
-      output: web, pdf
-
-    - title: Professional Support
-      url: /professional-support
+      url: /support
       output: web, pdf
 
 
