@@ -57,7 +57,7 @@ entries:
       output: web, pdf
 
     - title: Recipes and Tutorials
-      url: /recipes
+      url: /tutorials
       output: web, pdf
 
     - title: User Documentation
