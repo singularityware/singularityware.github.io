@@ -6,29 +6,29 @@ entries:
   levels: one
   folders:
 
-  - title: Admin Guide
-    output: web, pdf
-
+  - title: Quick Start
+    output: web
     folderitems:
 
-    - title: Security
-      url: /docs-security
+    - title: Administation QuickStart
       output: web, pdf
-
-    - title: Singularity on HPC
-      url: /docs-hpc
-      output: web, pdf
+      url: /admin-guide
+      folderitems:
 
     - title: The Singularity Config File
       url: /docs-config
       output: web, pdf
 
-    - title: Image Environment
-      url: /image-environment
+  - title: Installation Environments
+    output: web
+    folderitems:
+
+    - title: Singularity on HPC
+      url: /docs-hpc
       output: web, pdf
 
-    - title: Advanced Config
-      url: /docs-config
+    - title: Image Environment
+      url: /image-environment
       output: web, pdf
 
     - title: License

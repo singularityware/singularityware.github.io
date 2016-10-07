@@ -1,15 +1,15 @@
-## Topnav single links
-## if you want to list an external url, use external_url instead of url. the theme will apply a different link base.
-topnav:
-- title: Topnav
-  items:
-    - title: News
-      url: /blog
-
 #Topnav dropdowns
 topnav_dropdowns:
 - title: Topnav dropdowns
   folders:
+    - title: Docs
+      folderitems:
+        - title: Admin Guide
+          url: /admin-guide
+        - title: User Guide
+          url: /user-guide
+        - title: Home
+          url: /
     - title: Quick Links
       folderitems:
         - title: Github Repo
@@ -28,3 +28,11 @@ topnav_dropdowns:
           external_url: http://www.lbl.gov/ 
         - title: Stanford
           external_url: https://srcc.stanford.edu/
+
+## Topnav single links
+## if you want to list an external url, use external_url instead of url. the theme will apply a different link base.
+topnav:
+- title: Topnav
+  items:
+    - title: News
+      url: /blog
