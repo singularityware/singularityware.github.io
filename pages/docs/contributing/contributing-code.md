@@ -1,7 +1,7 @@
 ---
 title: Contributing to Singularity
 sidebar: main_sidebar
-permalink: contributing-singularity
+permalink: contributing-code
 folder: docs
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Singularity Import
-sidebar: main_sidebar
+sidebar: user_docs
 permalink: docs-import
 toc: false
 folder: docs

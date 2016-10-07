@@ -1,6 +1,6 @@
 ---
 title: Singularity and Docker
-sidebar: main_sidebar
+sidebar: user_docs
 permalink: docker
 folder: docs
 ---

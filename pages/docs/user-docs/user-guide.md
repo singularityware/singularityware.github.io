@@ -1,7 +1,7 @@
 ---
-title: Docs Overview
-sidebar: main_sidebar
-permalink: docs-overview
+title: Singularity User Guide
+sidebar: user_docs
+permalink: user-guide
 folder: docs
 ---
 

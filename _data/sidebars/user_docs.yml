@@ -1,0 +1,57 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+
+entries:
+
+- title: Documentation
+  levels: one
+  folders:
+
+  - title: Getting Started
+    output: web
+
+    folderitems:
+
+    - title: Create an image
+      url: /create-image
+      output: web, pdf
+
+    - title: bootstrap
+      url: /bootstrap-image
+      output: web, pdf
+
+    - title: Singularity and Docker
+      url: /docker
+      output: web, pdf
+
+
+  - title: Commands
+    output: web, pdf
+
+    folderitems:
+    - title: Command Usage
+      url: /docs-usage
+      output: web, pdf
+
+    - title: bootstrap
+      url: /docs-bootstrap
+      output: web, pdf
+
+    - title: exec
+      url: /docs-exec
+      output: web, pdf
+
+    - title: export
+      url: /docs-export
+      output: web, pdf
+
+    - title: import
+      url: /docs-import
+      output: web, pdf
+
+    - title: shell
+      url: /docs-shell
+      output: web, pdf
+
+    - title: run
+      url: /docs-run
+      output: web, pdf

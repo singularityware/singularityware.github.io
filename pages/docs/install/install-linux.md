@@ -26,7 +26,7 @@ $ sudo dnf --enablerepo \*-testing install singularity
 You can try the following two options:
 
 ### Option 1: Download latest stable release
-You can always download the latest tarball release from <a href="{{ site.repo }}/singularity/releases" target="_blank">Github</a>
+You can always download the latest tarball release from <a href="{{ site.repo }}/releases" target="_blank">Github</a>
 
 Once downloaded do the following:
 
@@ -43,7 +43,7 @@ $ sudo make install
 To download the most recent development code, you should use Git and do the following:
 
 ```bash
-$ git clone {{ site.repo }}/singularity.git
+$ git clone {{ site.repo }}.git
 $ cd singularity
 $ ./autogen.sh
 $ ./configure --prefix=/usr/local
