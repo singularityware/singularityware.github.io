@@ -22,10 +22,6 @@ entries:
       url: /presentations
       output: web, pdf
 
-    - title: Singularity Registry
-      url: /registry
-      output: web, pdf
-
 
   - title: Download / Installation
     output: web, pdf
@@ -45,27 +41,6 @@ entries:
 
     - title: Install Singularity on Windows
       url: /install-windows
-      output: web, pdf
-
-
-  - title: Documentation
-    output: web, pdf
-    folderitems:
-
-    - title: Quick Start
-      url: /quickstart
-      output: web, pdf
-
-    - title: Recipes and Tutorials
-      url: /tutorials
-      output: web, pdf
-
-    - title: User Documentation
-      url: /user-guide
-      output: web, pdf
-
-    - title: Admin Documentation
-      url: /admin-guide
       output: web, pdf
 
 
@@ -94,8 +69,34 @@ entries:
       url: /faq
       output: web, pdf
 
+    - title: Citation and Cluster Registration
+      url: /citation-registration
+      output: web, pdf
+
     - title: Troubleshooting
       url: /support
+      output: web, pdf
+
+
+
+  - title: Documentation
+    output: web, pdf
+    folderitems:
+
+    - title: Quick Start
+      url: /quickstart
+      output: web, pdf
+
+    - title: Recipes and Tutorials
+      url: /tutorials
+      output: web, pdf
+
+    - title: User Documentation
+      url: /user-guide
+      output: web, pdf
+
+    - title: Admin Documentation
+      url: /admin-guide
       output: web, pdf
 
 
