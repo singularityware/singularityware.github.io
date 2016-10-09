@@ -3,6 +3,7 @@ title: Support
 sidebar: main_sidebar
 permalink: support
 folder: docs
+toc: false
 ---
 
 ## Getting Additional Help, Support, Information
@@ -14,17 +15,5 @@ folder: docs
 ### Want to Join the Team?!
 We want you! Your help! Your contributions! Your presence! Come and hop on our Slack channel by requesting an invite from `gmkurtzer@lbl.gov`!
 
+We encourage you to <a href="/citation-registration">cite us in your work and/or register your HPC cluster!</a>
 
-### Credits
-
-* Project lead: <a href="https://gmkurtzer.github.io/" target="_blank">Gregory M. Kurtzer</a>
-* Sponsored by: <a href="http://scs.lbl.gov/" target="_blank">HPC @ LBNL</a>
-* Thanks to <a href="{{ site.repo }}/blob/master/AUTHORS" target="_blank">contributors</a>
-
-### Citation
-
-<p>Are you using Singularity for science? If so please help by citing using the referenced DOI for the most recent release here: <br><br>
-<a target="_blank" href="http://dx.doi.org/10.5281/zenodo.60736"><img src="https://zenodo.org/badge/doi/10.5281/zenodo.60736.svg" alt="10.5281/zenodo.60736"></a>
-</p>
-
-{% include links.html %}
