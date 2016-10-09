@@ -19,33 +19,33 @@ You can also execute the container directly, and it will automatically pass the 
 ```
 
 ### Examples
-Here is a basic runscript
+
+As we have defined within the `%runscript` in [bootstrap](/bootstrap-image), we can execute a script, workflow, or a given command using the `run` Singularity container interface command. In the above examples, we specified the run script to `exec /usr/bin/python "%@"` which will call Python and pass along any arguments we have supply.
+
+For example:
 
 ```bash
-$ cat singularity
-#!/bin/sh
-echo "$@"
-$ chmod +x singularity
+$ singularity run /tmp/Centos7-ompi.img --version
+Python 2.7.5
+$ singularity run /tmp/Centos7-ompi.img hello.py 
+Hello World: The Python version is 2.7.5
+$ singularity run /tmp/Centos7-ompi.img 
+Python 2.7.5 (default, Nov 20 2015, 02:00:19) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-4)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
 ```
 
-Now to copy it into the container:
+
+## Executing a container directly
+Additionally, the `run` interface gets called when the container file is executed directly (yes, the container is set as executable!):
 
 ```bash
-$ sudo singularity copy container.img singularity /
-$ singularity exec container.img ls -l /singularity
--rwxr-xr-x. 1 root root 20 Jun  1 18:14 /singularity
+$ ls -l /tmp/Centos7-ompi.img 
+-rwxr-xr-x. 1 root root 2147483679 Oct  9 05:31 /tmp/Centos7-ompi.img
+$ /tmp/Centos7-ompi.img hello.py 
+Hello World: The Python version is 2.7.5
 ```
 
-Now to run the container:
+This means you could even rename this container to something related to the runscript (perhaps "*centos7-python.exe*") and have users call that directly instead of the system python program.
 
-```bash
-$ singularity run container.img "hello world"
-hello world
-```
-And to execute the container directly:
-
-```bash
-$ ./container.img "hello again"
-hello again
-$ 
-```

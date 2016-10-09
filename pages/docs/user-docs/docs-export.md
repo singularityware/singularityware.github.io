@@ -35,4 +35,3 @@ found at:
 
 More details coming soon.
 
-{% include links.html %}

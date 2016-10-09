@@ -5,12 +5,12 @@ permalink: create-image
 folder: docs
 ---
 
-## Singularity Images
 Singularity images are single files which physically contain the container. Singularity images are 'sparse' files in that they start off with a giant hole and thus it does not consume disk space until you fill the hole (e.g. a 1GiB image may start off only taking about 30MiB of physical disk space). As you fill the image by installing files, data, and programs into it you will find it increase in size.
 
 The effect of all files existing virtually within a single image greatly simplifies sharing, copying, branching, and other management tasks. It also means that standard file system ACLs apply to access and permission to the container (e.g. I can give read only access to a colleague, or block access completely with a simple chmod command).
 
-### Creating a new blank Singularity container image
+
+## Creating a new blank Singularity container image
 Singularity will create a default container image of 1GiB using the following command example:
 
 ```bash
@@ -40,7 +40,7 @@ Also, notice the permissions of the container image as it is executable. This is
 
 You can increase or change the default image size using the --size option to create (option ordering is very important with Singularity and it must follow the 'create' sub-command).
 
-### Mounting an image
+## Mounting an image
 Once the image has been created, you can mount it with the following command:
 
 ```bash
@@ -61,7 +61,7 @@ $
  
 When mounting the image in this manner, Singularity makes use of name-spaces such that the mount is only visible and accessible from within the current shell that Singularity will spawn. When you are finished, you can simply exit the shell and the file system will be automatically unmounted.
 
-### Increasing the size of an existing image
+## Increasing the size of an existing image
 You can increase the size of an image after it has been instantiated by using the 'expand' Singularity sub-command as follows:
 
 ```bash
@@ -78,12 +78,12 @@ $ ls -l container.img
 
 Similar to the create sub-command, you can override the default size (which is 512MiB) by using the --size option.
 
-### Copying, sharing, branching, and distributing your image
+## Copying, sharing, branching, and distributing your image
 Because Singularity images are single files, they are easily copied and managed. You can copy the image to create a branch, share the image and distribute the image as easily as copying any other file you control!
 
 The primary motivation of Singularity is mobility, the single file image format makes this a simple accomplishment.
 
-## Read Only Vs. Read Write
+### Read Only Vs. Read Write
 By default, all Singularity commands that operate within a container (e.g. 'exec', 'run', and 'shell') all enter the image by default as read only. This enables multiple processes to be able to use the image appropriately (as would be necessary with MPI). But if you want to make any changes to the image, you must have both write permission on the image file itself and use the '--writable' flag. For example:
 
 ```bash
@@ -100,3 +100,14 @@ $
 ```
 
 Even though I was root in both cases, I could not touch /foo unless the shell sub-command was called with the `--writable` flag.
+
+
+## Using Your Container Image
+Singularity offers several primary user interfaces to containers: `shell`, `exec`, `run` and `test`. Using these interfaces, you can include any application or workflow that exists inside of a container as easy as if they were on the host system. These interfaces are designed specifically such that you do not need to be root or have escalated privileges to execute them. Additionally, Singularity is designed to abstract out the container system as elegantly as possibly such that the container does not exist. All IO, pipes, sockets, and native process control is handed through the container and to the calling application and Singularity elegantly gets completely out of the way for the process to run.
+
+Generally the differences can be explained as follows
+
+- **shell**: The `shell` interface (or Singularity subcommand) will invoke an interactive shell within the container. By default the shell called is `/bin/sh`, but this can be overridden with the shell option `--shell /path/to/shell` or via the environment variable `SINGULARITY_SHELL`. Once the shell is exited, the namespaces all collapse, and all mounts, binds, and contained processes exit.
+- **exec**: As the name implies, the `exec` interface/subcommand offers the ability to execute a single command within a container environment. This is a simple way to run programs, scripts and workflows that exist within a container from the host system. You can run this command from within a script on the host system or from a batch scheduler or an `mpirun` command.
+- **run**: Running a container will execute a predefined script (defined in the Singularity bootstrap definition as `%runscript`). If not run script has been provided, the container will launch a shell instead.
+- **test**: If you specified a `%test` section within the Singularity bootstrap definition, you can run that test as yourself. This is a useful way to ensure that a container works properly not only when built, but when transferred to other hosts or infrastructures.

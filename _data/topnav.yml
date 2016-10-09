@@ -8,8 +8,6 @@ topnav_dropdowns:
           url: /admin-guide
         - title: User Guide
           url: /user-guide
-        - title: Home
-          url: /
     - title: Quick Links
       folderitems:
         - title: Github Repo

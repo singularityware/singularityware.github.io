@@ -48,27 +48,6 @@ entries:
       output: web, pdf
 
 
-  - title: Documentation
-    output: web, pdf
-    folderitems:
-
-    - title: Quick Start
-      url: /quickstart
-      output: web, pdf
-
-    - title: Recipes and Tutorials
-      url: /tutorials
-      output: web, pdf
-
-    - title: User Documentation
-      url: /user-guide
-      output: web, pdf
-
-    - title: Admin Documentation
-      url: /admin-guide
-      output: web, pdf
-
-
   - title: Contributing
     output: web, pdf
     folderitems:
@@ -96,6 +75,28 @@ entries:
 
     - title: Troubleshooting
       url: /support
+      output: web, pdf
+
+
+
+  - title: Documentation
+    output: web, pdf
+    folderitems:
+
+    - title: Quick Start
+      url: /quickstart
+      output: web, pdf
+
+    - title: Recipes and Tutorials
+      url: /tutorials
+      output: web, pdf
+
+    - title: User Documentation
+      url: /user-guide
+      output: web, pdf
+
+    - title: Admin Documentation
+      url: /admin-guide
       output: web, pdf
 
 

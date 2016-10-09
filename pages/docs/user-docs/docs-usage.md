@@ -72,5 +72,3 @@ EXAMPLES:
     $ sudo singularity create /tmp/Debian.img
     $ sudo singularity create -s 4096 /tmp/Debian.img
 ```
-
-{% include links.html %}

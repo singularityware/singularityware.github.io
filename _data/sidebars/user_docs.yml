@@ -2,7 +2,7 @@
 
 entries:
 
-- title: Documentation
+- title: User Guide
   levels: one
   folders:
 
@@ -11,16 +11,32 @@ entries:
 
     folderitems:
 
-    - title: Create an image
-      url: /create-image
+    - title: Introduction
+      url: /user-guide
       output: web, pdf
 
-    - title: bootstrap
+    - title: Quick Start Installation
+      url: /docs-quick-start-installation
+      output: web, pdf
+
+    - title: Bootstrap an Image
       url: /bootstrap-image
       output: web, pdf
 
+    - title: Create an Image
+      url: /create-image
+      output: web, pdf
+
+    - title: Bind Paths and Files
+      url: /docs-mount
+      output: web, pdf
+
+    - title: Change an Existing Container
+      url: /docs-changing-containers
+      output: web, pdf
+
     - title: Singularity and Docker
-      url: /docker
+      url: /docs-docker
       output: web, pdf
 
 

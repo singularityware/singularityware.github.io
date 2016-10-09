@@ -2,7 +2,7 @@
 
 entries:
 
-- title: Documentation
+- title: Admin Guide
   levels: one
   folders:
 
@@ -13,11 +13,19 @@ entries:
     - title: Administation QuickStart
       output: web, pdf
       url: /admin-guide
-      folderitems:
+
+    - title: Security
+      url: /docs-security
+      output: web, pdf
 
     - title: The Singularity Config File
       url: /docs-config
       output: web, pdf
+
+    - title: Troubleshooting
+      url: /docs-troubleshooting
+      output: web, pdf
+
 
   - title: Installation Environments
     output: web

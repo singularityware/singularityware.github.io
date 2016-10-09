@@ -5,23 +5,20 @@ permalink: docs-security
 folder: docs
 ---
 
-While all container systems have security concerns, Singularity approaches the container paradigm differently to make it even suitable for shared multi-tenant large environments.
+Once Singularity is installed in it's default configuration you may find that there is a SETUID component installed at `$PREFIX/libexec/singularity/sexec-suid`. The purpose of this is to do the require privilege escalation necessary for Singularity to operate properly. There are a few aspects of Singularity's functionality that require escalated privileges:
 
-## General container requirements
-When people speak about containers, they are generally talking about a few things, name-spaces and alternate root file systems. These underlying features are provided by most current Linux distributions but they require root privileges in order to work properly.
+1. Mounting (and looping) the Singularity container image
+2. Creation of the necessary namespaces in the kernel
+3. Binding host paths into the container
 
-Generally, if the desired requirement is "containers" featuring user provided operating systems, somewhere along the invocation pathway root privileges are necessary.
+In general, it is impossible to implement a container system that employs the features that Singularity offers without requiring extended privileges, but if this is a concern to you, the SUID components can be disabled via either the configuration file, changing the physical permissions on the sexec-suid file, or just removing that file. Depending on the kernel you are using and what Singularity features you employ this may (or may not) be an option for you. But first a warning...
 
-## How do container systems work as users
+Many people (ignorantly) claim that the 'user namespace' will solve all of the implementation problems with unprivileged containers. While it does solve some, it is currently feature limited. With time this may change, but even on kernels that have a reasonable feature list implemented, it is known to be very buggy and cause kernel panics. Additionally very few distribution vendors are shipping supported kernels that include this feature. For example, Red Hat considers this a "technology preview" and is only available via a system modification, while other kernels enable it and have been trying to keep up with the bugs it has caused. But, even in it's most stable form, the user namespace does not completely alleviate the necessity of privilege escalation unless you also give up the desire to support images (#1 above).
 
-Generally speaking a container system will do one of three things:
+### How do other container solutions do it?
+Docker and the like implement a root owned daemon to control the bring up, teardown, and functions of the containers. Users have the ability to control the daemon via a socket (either a UNIX domain socket or network socket). Allowing users to control a root owned daemon process which has the ability to assign network addresses, bind file systems, spawn other scripts and tools, is a large problem to solve and one of the reasons why Docker is not typically used on multi-tenant HPC resources.
 
-1. As mentioned above, the CLONE_NEWUSER name-space allows some container functionality, but not enough for what Singularity targets as the base use-cases.
-2. The container system will run a root owned daemon process. This daemon process will have a communication pathway that will allow non-root users to control it. Docker by default uses a local Unix domain socket so users can control the Docker daemon. In this case, the root owned daemon process must be carefully designed to support user ACLs, be privilege aware, and limit functionalists that could be used as an attack vector.
-3. Singularity accomplishes the privilege necessity by invoking a root SUID portion of the work-flow. This allows Singularity to carefully decide when to escalate privileges and when to drop them. It also allows Singularity to run daemon free which facilitates scheduling and resource management complexities as well as keeps the code easily audit-able.
-
-## What security mitigations does Singularity employ
-
+### Security mitigations
 SUID programs are common targets for attackers because they provide a direct mechanism to gain privileged command execution. These are some of the baseline security mitigations for Singularity:
 
 1. Keep the escalated bits within the code as simple and transparent so it can be easily audit-able
@@ -32,23 +29,29 @@ SUID programs are common targets for attackers because they provide a direct mec
 6. Put as much system administrator control into the configuration file as possible
 7. Drop permissions before running any non trusted code pathways
 8. Limit all user actions within the container to that single user (disable escalation of privileges within a container)
-9. All root owned files are encapsulated within a user owned image
+9. Even though the user owns the image, it utilizes a POSIX like file system inside so files inside the container owned by root can only be modified by root
 
-Additionally Singularity is being evaluated for inclusion into some large Linux distributions which will get more eyes on the code.
+Additionally Singularity offers a very comprehensive auditing mechanism within it's debugging output by printing UID, PID, and location of every call it is making. For example:
 
-## The Singularity work-flow
-Because users can not obtain root within the container environment, if they want to be root inside the container they must first be root outside the container. This drastically limits the exposure of what users can potentially do on an physical host. As a result of that, the lines can be blurred between container and host. It also defines the work-flow of a container. It must be developed and modified on a host where the owner has root level access and control or provided to them by a system administrator. To run or use the container the user does not need root or any other system privileges as they are the same user inside the container as they are outside the container. This is what makes Singularity very effective at running on shared multi-tenant resources.
+```
+$ singularity --debug shell /tmp/Centos7.img
+...
+DEBUG   [U=1000,P=33160]   privilege.c:152:singularity_priv_escalate(): Temporarily escalating privileges (U=1000)
+VERBOSE [U=0,P=33160]      tmp.c:79:singularity_mount_tmp()           : Mounting directory: /tmp
+DEBUG   [U=0,P=33160]      privilege.c:179:singularity_priv_drop()    : Dropping privileges to UID=1000, GID=1000
+DEBUG   [U=1000,P=33160]   privilege.c:191:singularity_priv_drop()    : Confirming we have correct UID/GID
+...
+```
 
-### If you think you found a security hole
-While we are not deluded enough to consider Singularity perfect, it does have our foremost attention. If you think you have found an escalation pathway, please email any of the primary authors directly so we can evaluate and determine the best path forward.
+In the above output you can see that we are starting as UID 1000 (U=1000) and PID 33160 and we are escalating privileges. Once privileges have been increased, Singularity can properly mount /tmp and then it immediately drops permissions back to the calling user.
 
-## But what about...
-We've heard a bunch of great ideas and some myths about containers, security and what is possible... Here are a few.
+For comparison, the below output is when being called with the user namespace. Notice that I am not able to use the Singularity image format, and instead I am referencing a raw directory which contains the contents of the Singularity image:
 
-### The 'user' name-space makes rootless containers possible
-There are some initiatives to build "rootless" container systems and while they are possible, they are limited to being able to only support virtualization of name-spaces and unfortunately create other complexities and problems for shared multi-tenant resources. For example, they work by leveraging the CLONE_NEWUSER name-space and then map virtualized user and groups to alternate physical user and groups. They also don't make it possible to properly support a user supplied file system because that still requires physical root on the system (non-root users can not write or manipulate root owned files which a file system is full of).
-
-### SUID is so Linux 2, setcap is the wave of the future
-This is on our radar already, but there are some negatives that require consideration for example, SUID binaries are much easier to find and thus can be easily audited, and Linux capabilities have limited network file system and distribution support. With that said, we are still considering this, and open to thoughts and perspectives!
-
-{% include links.html %}
+```
+$ singularity --debug shell -u /tmp/Centos7/
+...
+DEBUG   [U=1000,P=111121]  privilege.c:142:singularity_priv_escalate(): Not escalating privileges, user namespace enabled
+VERBOSE [U=1000,P=111121]  tmp.c:80:singularity_mount_tmp()           : Mounting directory: /tmp
+DEBUG   [U=1000,P=111121]  privilege.c:169:singularity_priv_drop()    : Not dropping privileges, user namespace enabled
+...
+```
