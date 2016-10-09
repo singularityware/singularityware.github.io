@@ -3,6 +3,7 @@ title: Quick Start
 sidebar: main_sidebar
 permalink: quickstart
 folder: docs
+toc: false
 ---
 
 ## Installation Quick Start

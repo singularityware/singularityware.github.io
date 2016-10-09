@@ -22,7 +22,7 @@ entries:
       url: /presentations
       output: web, pdf
 
-    - title: Citation and Cluster Registration
+    - title: "Registry: Citations and Installations"
       url: /citation-registration
       output: web, pdf
 
@@ -60,7 +60,7 @@ entries:
       url: /contributing-code
       output: web, pdf
 
-    - title: Documentation
+    - title: Writing Documentation
       url: /contributing-docs
       output: web, pdf
 
@@ -73,7 +73,7 @@ entries:
       url: /faq
       output: web, pdf
 
-    - title: Troubleshooting
+    - title: Support
       url: /support
       output: web, pdf
 

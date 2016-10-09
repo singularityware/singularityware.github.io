@@ -10,7 +10,7 @@ Singularity enables users to have full control of their environment. This means 
 
 
 <div style="float:right;">
-<a target="_blank" class="btn btn-primary navbar-btn cursorNorm" role="button" href="https://goo.gl/forms/D7ed1dfLeNvml6no1">Register your Cluster</a> <a target="_blank" href="https://goo.gl/forms/tGBKnKwplNyRZRSm2" class="no-after btn btn-primary navbar-btn cursorNorm" role="button">Add a Publication</a>.
+<a target="_blank" class="btn btn-primary navbar-btn cursorNorm" role="button" href="https://goo.gl/forms/D7ed1dfLeNvml6no1">Register your Cluster</a> <a target="_blank" href="https://goo.gl/forms/tGBKnKwplNyRZRSm2" class="btn btn-primary navbar-btn cursorNorm" role="button">Add a Publication</a>
 </div>
 <br>
 <br>
