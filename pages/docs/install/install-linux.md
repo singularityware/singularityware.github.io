@@ -3,6 +3,7 @@ title: Install on Linux
 sidebar: main_sidebar
 permalink: install-linux
 folder: docs
+toc: false
 ---
 
 ## Installation from Distribution
