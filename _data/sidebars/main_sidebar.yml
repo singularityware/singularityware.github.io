@@ -22,6 +22,10 @@ entries:
       url: /presentations
       output: web, pdf
 
+    - title: Citation and Cluster Registration
+      url: /citation-registration
+      output: web, pdf
+
 
   - title: Download / Installation
     output: web, pdf
@@ -67,10 +71,6 @@ entries:
 
     - title: FAQ
       url: /faq
-      output: web, pdf
-
-    - title: Citation and Cluster Registration
-      url: /citation-registration
       output: web, pdf
 
     - title: Troubleshooting
