@@ -7,7 +7,7 @@ folder: docs
 
 ### Citations
 
-Are you using Singularity for science? If so please help by citing using the referenced DOI for the most recent release: <a target="_blank" href="http://dx.doi.org/10.5281/zenodo.60736"><img src="https://zenodo.org/badge/doi/10.5281/zenodo.60736.svg" alt="10.5281/zenodo.60736"></a>, and please <a href="https://goo.gl/forms/tGBKnKwplNyRZRSm2" target="_blank">Register your Citations</a> so we can tell the world about your work! 
+Are you using Singularity for science? If so please help by citing using the referenced DOI for the most recent release: <a target="_blank" href="http://dx.doi.org/10.5281/zenodo.60736"><img src="https://zenodo.org/badge/doi/10.5281/zenodo.60736.svg" alt="10.5281/zenodo.60736"></a>, and please <a href="https://goo.gl/forms/tGBKnKwplNyRZRSm2" target="_blank">Register your Publication</a> so we can tell the world about your work! 
 
 
 ### Clusters
