@@ -218,6 +218,9 @@ Yes. Singularity containers contain their own library stack (including the Glibc
 So far we have not identified any appreciable regressions of performance (even in parallel applications running across nodes with InfiniBand). There is a small start-up cost to create and tear-down the container, which has been measured to be anywhere from 10 - 20 thousandths of a second.
 
 ## Misc
+
+The following are miscellaneous questions.
+
 ### Are there any special security concerns that Singularity introduces?
 
 No and yes.
