@@ -77,12 +77,12 @@ There are numerous benefits for using a single file image for the entire contain
 #### Other container formats supported
 In addition to the default Singularity container image, the following other formats are supported:
 
-- **directory**: Standard Unix directories containing a root container image
-- **tar.gz**: Zlib compressed tar archives
-- **tar.bz2**: Bzip2 compressed tar archives
-- **tar**: Uncompressed tar archives
-- **cpio.gz**: Zlib compressed CPIO archives
-- **cpio**: Uncompressed CPIO archives
+- **directory**: standard Unix directories containing a root container image
+- **tar.gz**: zlib compressed tar archives
+- **tar.bz2**: bzip2 compressed tar archives
+- **tar**: uncompressed tar archives
+- **cpio.gz**: zlib compressed CPIO archives
+- **cpio**: uncompressed CPIO archives
 
 *note: the suffix for the formats (except directory) are necessary as that is how Singularity identifies the image type.*
 
@@ -90,7 +90,7 @@ In addition to the default Singularity container image, the following other form
 Singularity also supports several different mechanisms for obtaining the images using a standard URI format
 
 - **http://** Singularity will use Curl to download the image locally, and then run from the local image
-- **https://** Same as above using encryption
+- **https://** same as above using encryption
 - **docker://** Singularity can pull Docker images from a Docker registry, and will run them non-persistently (e.g. changes are not persisted as they can not be saved upstream)
 
 
