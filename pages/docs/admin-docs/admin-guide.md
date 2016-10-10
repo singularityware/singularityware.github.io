@@ -76,5 +76,5 @@ $ PREFIX=/opt/singularity
 $ rpmbuild -ta --define="_prefix $PREFIX" --define "_sysconfdir $PREFIX/etc" --define "_defaultdocdir $PREFIX/share" singularity-*.tar.gz
 ```
 
-We recommend you look at our <a href="/docs-security"></a>security admin guide</a> to get further information about container priviledges and mounting.
+We recommend you look at our <a href="/docs-security">security admin guide</a> to get further information about container priviledges and mounting.
 
