@@ -225,7 +225,7 @@ While Singularity containers always run as the user launching them, there are so
 
 Additionally, there are precautions within the container context to mitigate any escalation of privileges. This limits a user's ability to gain root control once inside the container.
 
-You can read more about the Singularity <a href="/security">security overview here</a>.
+You can read more about the Singularity <a href="/docs-security">security overview here</a>.
 
 
 ## Troubleshooting
