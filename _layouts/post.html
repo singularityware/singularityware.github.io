@@ -28,6 +28,7 @@ layout: default
         {{ content }}
     </div>
 
+     <!--links to download are under archive before version 2.2-->
      {% if page.targz %}
      <span class="post-meta">
       <a class="no-after" href="{{ site.repo }}/archive/{{ page.targz }}" target="_blank">
@@ -35,6 +36,11 @@ layout: default
      </span>
      {% endif %}
 
+     <!--links to download changed at version 2.2-->
+     {% if page.version %}
+      <a class="no-after" href="{{ site.repo }}/releases/download/{{ page.version }}/singularity-{{ page.version }}.tar.gz" target="_blank">
+       <i class="fa fa-3x fa-download no-after"></i></a>
+     {% endif %}
 
 </article>
 
