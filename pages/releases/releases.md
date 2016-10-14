@@ -1,6 +1,6 @@
 ---
 title: Releases
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: all-releases
 keywords: news, blog, updates, release notes, announcements
 folder: releases
@@ -18,8 +18,13 @@ toc: false
 
     <h2><a class="post-link" href="{{ post.url | remove: "/" }}">{{ post.title }}</a></h2>
     <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }} 
+      {% if post.targz %}
       <a class="no-after" href="{{ site.repo }}/archive/{{ post.targz }}" target="_blank">
        <i class="fa fa-download no-after"></i></a>
+      {% else %}
+      <a class="no-after" href="{{ site.repo }}/releases/download/{{ post.version }}/singularity-{{ post.version }}.tar.gz" target="_blank">
+       <i class="fa fa-download no-after"></i></a>
+      {% endif %}
      </span>
     {% endfor %}
 

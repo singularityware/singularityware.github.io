@@ -1,6 +1,6 @@
 ---
 title: Basic Command Usage
-sidebar: docs_sidebar
+sidebar: user_docs
 permalink: docs-usage
 folder: docs
 ---
@@ -72,5 +72,3 @@ EXAMPLES:
     $ sudo singularity create /tmp/Debian.img
     $ sudo singularity create -s 4096 /tmp/Debian.img
 ```
-
-{% include links.html %}

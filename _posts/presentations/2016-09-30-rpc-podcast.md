@@ -1,6 +1,6 @@
 ---
 title:  "Singularity Featured on RCE Podcast"
-category: news
+category: presentations
 permalink: 2016-singularity-featured-rce-podcast
 ---
 

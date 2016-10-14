@@ -1,6 +1,6 @@
 ---
 title: Singularity Shell
-sidebar: docs_sidebar
+sidebar: user_docs
 permalink: docs-shell
 folder: docs
 ---
@@ -35,6 +35,24 @@ Singularity/container.img> echo $SHELL
 Singularity/container.img> exit
 $ 
 ```
+
+
+```bash
+$ echo world > hello
+$ singularity shell /tmp/Centos7-ompi.img 
+Singularity: Invoking an interactive shell within container...
+
+Singularity.Centos7-ompi.img> pwd
+/home/gmk/demo
+Singularity.Centos7-ompi.img> ls
+hello
+Singularity.Centos7-ompi.img> cat hello 
+world
+Singularity.Centos7-ompi.img> exit
+```
+You can see from the above example, we were able to have access to our current working directory. That is because one of the default bind paths that is included and enabled by default in Singularity is the binding of the user's home directory. In this example, you can see that we created a file called `hello` in the current directory and after we entered the Singularity container we landed in the same directory and thus `hello` is accessible to us here as we would expect.
+
+
 ## Help
 
 ```bash

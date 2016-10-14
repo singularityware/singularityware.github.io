@@ -1,6 +1,6 @@
 ---
 title: Frequently Asked Questions
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: faq
 folder: docs
 ---
@@ -140,17 +140,13 @@ $ sudo singularity create ubuntu-latest.img
 $ sudo singularity bootstrap ubuntu-latest.img ubuntu.def
 ```
 
-### Contained applications and work flows
+### Can a Singularity container be multi-threaded?
 
 Yes. Singularity imposes no limitations on forks, threads or processes in general.
 
-### Can a Singularity container be multi-threaded?
-
-Yes and maybe respectively. Any Singularity application can be suspended using standard Linux/Unix signals. Check-pointing requires some preloaded libraries to be automatically loaded with the application but because Singularity escapes the hosts library stack, the checkpoint libraries would not be loaded. If however you wanted to make a Singularity container that can be check-pointed, you would need to install the checkpoint libraries into the Singularity container via the specfile.
-
 ### Can a Singularity container be suspended or check-pointed?
 
-Yes and maybe respectively. Any Singularity application can be suspended using standard Linux/Unix signals. Check-pointing requires some preloaded libraries to be automatically loaded with the application but because Singularity escapes the hosts library stack, the checkpoint libraries would not be loaded. If however you wanted to make a Singularity container that can be check-pointed, you would need to install the checkpoint libraries into the Singularity container via the specfile.
+Yes and maybe respectively. Any Singularity application can be suspended using standard Linux/Unix signals. Check-pointing requires some preloaded libraries to be automatically loaded with the application but because Singularity escapes the hosts library stack, the checkpoint libraries would not be loaded. If however you wanted to make a Singularity container that can be check-pointed, you would need to install the checkpoint libraries into the Singularity container via the specfile
 
 ### Are there any special requirements to use Singularity through a job scheduler?
 
@@ -218,6 +214,9 @@ Yes. Singularity containers contain their own library stack (including the Glibc
 So far we have not identified any appreciable regressions of performance (even in parallel applications running across nodes with InfiniBand). There is a small start-up cost to create and tear-down the container, which has been measured to be anywhere from 10 - 20 thousandths of a second.
 
 ## Misc
+
+The following are miscellaneous questions.
+
 ### Are there any special security concerns that Singularity introduces?
 
 No and yes.
@@ -226,11 +225,14 @@ While Singularity containers always run as the user launching them, there are so
 
 Additionally, there are precautions within the container context to mitigate any escalation of privileges. This limits a user's ability to gain root control once inside the container.
 
-You can read more about the Singularity <a href="/security">security overview here</a>.
+You can read more about the Singularity <a href="/docs-security">security overview here</a>.
 
-### What is the average air speed velocity of an unladen swallow?
 
 ## Troubleshooting
+
+
+A little bit of help.
+
 
 ### How to use Singularity with GRSecurity enabled kernels
 

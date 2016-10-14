@@ -1,6 +1,6 @@
 ---
 title: Contributing to Documentation
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: contributing-docs
 folder: releases
 ---
@@ -21,7 +21,7 @@ brew install git
 ```
 
 ### Fork the repo
-To contribute to the web based documentation, you should obtain a GitHub account and *fork* the <a href="https://www.github.com/singularityware/singularityware.github.io" target="_blank">Singularity GitHub Pages</a> repository by clicking the *fork* button on the top right of the page. Once forked, you will want to clone the fork of the repo to your computer. Let's say my Github username is *user99*:
+To contribute to the web based documentation, you should obtain a GitHub account and *fork* the <a href="https://github.com/singularityware/singularityware.github.io/" target="_blank">Singularity GitHub Pages</a> repository by clicking the *fork* button on the top right of the page. Once forked, you will want to clone the fork of the repo to your computer. Let's say my Github username is *user99*:
 
 ```bash
 git clone https://github.com/user99/singularityware.github.io.git
@@ -67,7 +67,7 @@ and then write your post after it in <a href="https://github.com/adam-p/markdown
 
 ## Contributing to a Page
 
-All of the pages are in the <a href="https://www.github.com/singuarityware/singularity/blob/master/pages" target="_blank">pages</a> folder, organized in a somewhat logical manner. If you want to edit content for a page, just edit the corresponding file. If you need to do something more advanced like edit a sidebar, you should look at the <a href="https://www.github.com/singuarityware/singularity/blob/master/_data/sidebar" target="_blank">sidebar data</a> yml documents, which render into the navigation.
+All of the pages are in the <a href="https://github.com/singularityware/singularityware.github.io/blob/master/pages" target="_blank">pages</a> folder, organized in a somewhat logical manner. If you want to edit content for a page, just edit the corresponding file. If you need to do something more advanced like edit a sidebar, you should look at the <a href="https://github.com/singularityware/singularityware.github.io/blob/master/_data/sidebars" target="_blank">sidebar data</a> yml documents, which render into the navigation.
 
 ## Adding a Release
 

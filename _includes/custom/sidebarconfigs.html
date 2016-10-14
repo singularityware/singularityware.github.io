@@ -1,10 +1,17 @@
-{% if page.sidebar == "docs_sidebar" %}
-  {% assign sidebar = site.data.sidebars.docs_sidebar.entries %}
-  {% assign sidebar_pdf = site.data.sidebars.docs_sidebar.entries %}
-{% else if page.sidebar == "home_sidebar" %}
-  {% assign sidebar = site.data.sidebars.home_sidebar.entries %}
-  {% assign sidebar_pdf = site.data.sidebars.home_sidebar.entries %}
+{% if page.sidebar == "main_sidebar" %}
+  {% assign sidebar = site.data.sidebars.main_sidebar.entries %}
+  {% assign sidebar_pdf = site.data.sidebars.main_sidebar.entries %}
 {% else %}
-  {% assign sidebar = site.data.sidebars.home_sidebar.entries %}
-  {% assign sidebar_pdf = site.data.sidebars.home_sidebar.entries %}
+  {% assign sidebar = site.data.sidebars.main_sidebar.entries %}
+  {% assign sidebar_pdf = site.data.sidebars.main_sidebar.entries %}
+{% endif %}
+
+{% if page.sidebar == "user_docs" %}
+  {% assign sidebar = site.data.sidebars.user_docs.entries %}
+  {% assign sidebar_pdf = site.data.sidebars.user_docs.entries %}
+{% endif %}
+
+{% if page.sidebar == "admin_docs" %}
+  {% assign sidebar = site.data.sidebars.admin_docs.entries %}
+  {% assign sidebar_pdf = site.data.sidebars.admin_docs.entries %}
 {% endif %}

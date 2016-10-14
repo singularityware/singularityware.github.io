@@ -3916,7 +3916,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   color: #999;
 }
 .navbar-inverse .navbar-nav > li > a {
-  color: #999;
+  color: #000;
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
@@ -3943,7 +3943,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   background-color: #333333;
 }
 .navbar-inverse .navbar-toggle .icon-bar {
-  background-color: #ffffff;
+  background-color: #999;
 }
 .navbar-inverse .navbar-collapse,
 .navbar-inverse .navbar-form {

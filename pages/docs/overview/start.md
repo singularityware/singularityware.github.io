@@ -1,8 +1,9 @@
 ---
 title: Quick Start
-sidebar: home_sidebar
-permalink: start
+sidebar: main_sidebar
+permalink: quickstart
 folder: docs
+toc: false
 ---
 
 ## Installation Quick Start

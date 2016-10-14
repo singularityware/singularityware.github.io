@@ -1,32 +1,17 @@
 ---
 title: Install on Linux
-sidebar: docs_sidebar
+sidebar: main_sidebar
 permalink: install-linux
 folder: docs
+toc: false
 ---
-
-## Installation from Distribution
-
-### RHEL, Centos, Scientific Linux, and Fedora
-<p><small>From Dave Love to the Singularity list:</small> 
-Packages for singularity (2.0 plus some patches) have now hit the Fedora -testing repositories for EPEL5 through to Fedora 24 beta. Use the following command for either yum:
-</p>
-```bash
-sudo yum install epel-release
-$ sudo yum --enablerepo epel-testing install singularity
-```
-or dnf to install:
-
-```bash
-$ sudo dnf --enablerepo \*-testing install singularity
-```
 
 ## Installation from Source
 
 You can try the following two options:
 
 ### Option 1: Download latest stable release
-You can always download the latest tarball release from <a href="{{ site.repo }}/singularity/releases" target="_blank">Github</a>
+You can always download the latest tarball release from <a href="{{ site.repo }}/releases" target="_blank">Github</a>
 
 Once downloaded do the following:
 
@@ -43,7 +28,7 @@ $ sudo make install
 To download the most recent development code, you should use Git and do the following:
 
 ```bash
-$ git clone {{ site.repo }}/singularity.git
+$ git clone {{ site.repo }}.git
 $ cd singularity
 $ ./autogen.sh
 $ ./configure --prefix=/usr/local

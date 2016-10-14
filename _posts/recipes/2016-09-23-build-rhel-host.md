@@ -4,7 +4,11 @@ category: recipes
 permalink: building-ubuntu-rhel-host
 ---
 
-This recipe describes how to build an Ubuntu image using Singularity on a RHEL compatible host. In order to do this, you will need to first install the 'debootstrap' package onto your host. Then, you will create a definition file that will describe how to build your Ubuntu image. Finally, you will build the image using the Singularity commands 'create' and `bootstrap`.
+This recipe describes how to build an Ubuntu image using Singularity on a RHEL compatible host. 
+
+**NOTE: this tutorial is intended for [Singularity release 2.1.2](http://singularity.lbl.gov/release-2-1-2), and reflects standards for that version.**
+
+In order to do this, you will need to first install the 'debootstrap' package onto your host. Then, you will create a definition file that will describe how to build your Ubuntu image. Finally, you will build the image using the Singularity commands 'create' and `bootstrap`.
 
 ## Preparation
 This recipe assumes that you have already installed Singularity on your computer. If you have not, follow the instructions here to install. After Singularity is installed on your computer, you will need to install the 'debootstrap' package. The 'debootstrap' package is a tool that will allow you to create Debian-based distributions such as Ubuntu. In order to install 'debootstrap', you will also need to install 'epel-release'. You will need to download the appropriate RPM from the EPEL website. Make sure you download the correct version of the RPM for your release.

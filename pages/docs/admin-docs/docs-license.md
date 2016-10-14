@@ -1,6 +1,6 @@
 ---
 title: License
-sidebar: docs_sidebar
+sidebar: admin_docs
 permalink: docs-license
 folder: docs
 toc: false
