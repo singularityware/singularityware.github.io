@@ -6,22 +6,6 @@ folder: docs
 toc: false
 ---
 
-## Installation from Distribution
-
-### RHEL, Centos, Scientific Linux, and Fedora
-<p><small>From Dave Love to the Singularity list:</small> 
-Packages for singularity (2.0 plus some patches) have now hit the Fedora -testing repositories for EPEL5 through to Fedora 24 beta. Use the following command for either yum:
-</p>
-```bash
-sudo yum install epel-release
-$ sudo yum --enablerepo epel-testing install singularity
-```
-or dnf to install:
-
-```bash
-$ sudo dnf --enablerepo \*-testing install singularity
-```
-
 ## Installation from Source
 
 You can try the following two options:
