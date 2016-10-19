@@ -26,11 +26,30 @@ Jump in and <a href="/quickstart"><strong>get started</strong></a>.
 <hr style="margin-top:20px">
 
 <div class="row">
-  {% for post in site.categories.news limit:3 %}
+  {% assign loopcount = 1 %}
+  {% for post in site.posts %}
+
+   {% if loopcount < 4 %}
+
+   <!-- Parse news-->
+   {% if post.category == "news" %}
+   {% assign loopcount = loopcount | plus: 1 %}
    <div class="col-md-4">
       <h2><a class="post-link" href="{{ post.url | remove: "/" }}">{{ post.title }}</a></h2>
       <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
       <p>{{ post.content | truncatewords: 20 | strip_html }}</p>  
    </div>
+   {% endif %}
+
+   {% if post.category == "releases" %}
+   {% assign loopcount = loopcount | plus: 1 %}
+   <div class="col-md-4">
+      <h2><a class="post-link" href="{{ post.url | remove: "/" }}">{{ post.title }}</a></h2>
+      <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+      <p>{{ post.content | truncatewords: 20 | strip_html }}</p>  
+   </div>
+   {% endif %}
+   {% endif %}
+
   {% endfor %}
 </div>

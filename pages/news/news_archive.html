@@ -14,7 +14,7 @@ folder: news
 
     <section id="archive">
         <h3>This year's posts</h3>
-        {%for post in site.categories.news %}
+        {% for post in site.categories.news %}
         {% unless post.next %}
         <ul class="this">
             {% else %}
