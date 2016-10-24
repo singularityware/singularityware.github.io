@@ -20,7 +20,7 @@ This is for people who know what's going on, and just want help remembering the 
 
 
     git init .
-    git remote add lbl git@github.com:gmkurtzer/singularity.git
+    git remote add lbl git@github.com:singularityware/singularity.git
     git remote add stanford git@github.com:vsoch/singularity.git
     git fetch lbl
 
@@ -179,7 +179,7 @@ Singuarity has their repository in Github, so cloning the repository is just a m
 First, create a blank repository, add the upstream Github as a source, and fetch:
 
       git init .
-      git remote add lbl git@github.com:gmkurtzer/singularity.git
+      git remote add lbl git@github.com:singularityware/singularity.git
       git fetch lbl
 
 Next, add a new remote representing your upstream repository:
@@ -207,7 +207,7 @@ From time to time, you should pull in upstream changes, so that your repository 
 First, create a blank repository, and add both your remote and the upstream remote. Then, fetch from both:
 
       git init .
-      git remote add lbl git@github.com:gmkurtzer/singularity.git
+      git remote add lbl git@github.com:singularityware/singularity.git
       git remote add stanford git@github.com:vsoch/singularity.git
       git fetch --all
 

@@ -30,7 +30,7 @@ EXAMPLES:
 For additional help, please visit our public documentation pages which are
 found at:
 
-    http://gmkurtzer.github.io/singularity
+    http://singularityware.github.io/singularity
 ```
 
 More details coming soon.

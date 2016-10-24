@@ -23,7 +23,7 @@ You can download the source code either from the latest stable tarball release o
 ```bash
 $ mkdir ~/git
 $ cd ~/git
-$ git clone https://github.com/gmkurtzer/singularity.git
+$ git clone https://github.com/singularityware/singularity.git
 $ cd singularity
 $ ./autogen.sh
 ```

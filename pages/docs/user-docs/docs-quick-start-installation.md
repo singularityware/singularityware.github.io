@@ -18,30 +18,6 @@ $ make
 $ sudo make install
 ```
 
-If you get an error that you have packages missing, for example on Ubuntu 16.04:
-
-
-```bash
- ./autogen.sh
-+libtoolize -c
-./autogen.sh: 13: ./autogen.sh: libtoolize: not found
-+aclocal
-./autogen.sh: 14: ./autogen.sh: aclocal: not found
-+autoheader
-./autogen.sh: 15: ./autogen.sh: autoheader: not found
-+autoconf
-./autogen.sh: 16: ./autogen.sh: autoconf: not found
-+automake -ca -Wno-portability
-./autogen.sh: 17: ./autogen.sh: automake: not found
-```
-
-then you need to install dependencies:
-
-
-```bash
-sudo apt-get install -y build-essential libtool autotools-dev automake autoconf
-```
-
 You should note that the installation prefix is `/usr/local` but the configuration directory is `/etc`. This is done such that the configuration file is in the traditionally found location. If you omit that configure parameter, the configuration file will be found within `/usr/local/etc`.
 
 
