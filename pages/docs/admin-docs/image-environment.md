@@ -45,7 +45,9 @@ $
 ```
 
 But notice how even though the directory location is not resolvable, the directory contents are available.
-Standard IO and pipes
+
+
+## Standard IO and pipes
 
 Singularity automatically sends and receives all standard IO from the host to the applications within the container to facilitate expected behavior from the interaction between the host and the container. For example:
 
