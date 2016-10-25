@@ -25,7 +25,7 @@ While the PID namespace is a *neat* feature, it does not have much practical usa
 Even if the PID namespace is enabled by the system administrator here, it is not implemented by default when running containers. The user will have to specify they wish to implement un-sharing of the PID namespace as it must fork a child process.
 
 
-### ENABLE OVERLAY (boolean, default='yes')
+### ENABLE OVERLAY (boolean, default='no')
 The overlay file system creates a writable substrate to create bind points if necessary. This feature is very useful when implementing bind points within containers where the bind point may not already exist so it helps with portability of containers. Enabling this option has been known to cause some kernels to panic as this feature maybe present within a kernel, but has not proved to be stable as of the time of this writing (e.g. the Red Hat 7.2 kernel).
 
 ### CONFIG PASSWD,GROUP,RESOLV_CONF (boolean, default='yes')
