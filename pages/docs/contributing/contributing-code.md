@@ -15,7 +15,7 @@ To contribute to the development of Singularity, you must:
 - Have a GitHub account (this just makes it easier on me)
 
 ### Step 1. Fork the repo
-To contribute to the web based documentation, you should obtain a GitHub account and fork the <a href="{{site.repo}}/singularity" target="_blank">Singularity</a> repository. Once forked, you will want to clone the fork of the repo to your computer. Let's say my Github username is vsoch, and I am using ssh:
+To contribute to the web based documentation, you should obtain a GitHub account and fork the <a href="{{site.repo}}" target="_blank">Singularity</a> repository. Once forked, you will want to clone the fork of the repo to your computer. Let's say my Github username is vsoch, and I am using ssh:
 
 ```bash
 git clone git@github.com:vsoch/singularity.git
