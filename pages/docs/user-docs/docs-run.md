@@ -20,7 +20,7 @@ You can also execute the container directly, and it will automatically pass the 
 
 ### Examples
 
-As we have defined within the `%runscript` in [bootstrap](/bootstrap-image), we can execute a script, workflow, or a given command using the `run` Singularity container interface command. In the above examples, we specified the run script to `exec /usr/bin/python "%@"` which will call Python and pass along any arguments we have supply.
+As we have defined within the `%runscript` in [bootstrap](/bootstrap-image), we can execute a script, workflow, or a given command using the `run` Singularity container interface command. In the above examples, we specified the run script to `exec /usr/bin/python "$@"` which will call Python and pass along any arguments we have supply.
 
 For example:
 
