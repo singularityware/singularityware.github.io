@@ -29,7 +29,7 @@ vagrant up --provider virtualbox
 vagrant ssh -c /bin/sh <<EOF
     sudo apt-get update
     sudo apt-get -y install build-essential curl git sudo man vim autoconf libtool
-    git clone {{ site.repo }}/singularity.git
+    git clone {{ site.repo }}.git
     cd singularity
     ./autogen.sh
     ./configure --prefix=/usr/local
