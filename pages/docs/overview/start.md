@@ -11,7 +11,6 @@ toc: false
 ```bash
 $ git clone {{ site.repo }}.git
 $ cd singularity
-$ ./autogen.sh
 $ ./configure --prefix=/usr/local
 $ make
 $ sudo make install
