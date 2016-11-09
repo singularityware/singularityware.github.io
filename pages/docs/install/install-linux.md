@@ -13,7 +13,7 @@ You can try the following two options:
 ### Option 1: Download latest stable release
 You can always download the latest tarball release from <a href="{{ site.repo }}/releases" target="_blank">Github</a>
 
-Once downloaded do the following:
+For example, here is how to download version `2.2` and install:
 
 ```bash
 $ VERSION=2.2
