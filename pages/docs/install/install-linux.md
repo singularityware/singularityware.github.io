@@ -16,24 +16,24 @@ You can always download the latest tarball release from <a href="{{ site.repo }}
 For example, here is how to download version `2.2` and install:
 
 ```bash
-$ VERSION=2.2
-$ wget https://github.com/singularityware/singularity/releases/download/$VERSION/singularity-$VERSION.tar.gz
-$ tar xvf singularity-$VERSION.tar.gz
-$ cd singularity-$VERSION
-$ ./configure --prefix=/usr/local
-$ make
-$ sudo make install
+VERSION=2.2
+wget https://github.com/singularityware/singularity/releases/download/$VERSION/singularity-$VERSION.tar.gz
+tar xvf singularity-$VERSION.tar.gz
+cd singularity-$VERSION
+./configure --prefix=/usr/local
+make
+sudo make install
 ```
 
 ### Option 2: Download the latest development code
 To download the most recent development code, you should use Git and do the following:
 
 ```bash
-$ git clone {{ site.repo }}.git
-$ cd singularity
-$ ./configure --prefix=/usr/local
-$ make
-$ sudo make install
+git clone {{ site.repo }}.git
+cd singularity
+./configure --prefix=/usr/local
+make
+sudo make install
 ```
 
 note: The 'make install' is required to be run as root to get a properly installed Singularity implementation. If you do not run it as root, you will only be able to launch Singularity as root due to permission limitations.
@@ -52,18 +52,18 @@ And then install using one of the methods above.
 Like the above, you can build an RPM of Singularity so it can be more easily managed, upgraded and removed. From the base Singularity source directory do the following:
 
 ```bash
-$ ./autogen.sh
-$ ./configure
-$ make dist
-$ rpmbuild -ta singularity-*.tar.gz
-$ sudo yum install ~/rpmbuild/RPMS/*/singularity-[0-9]*.rpm
+./autogen.sh
+./configure
+make dist
+rpmbuild -ta singularity-*.tar.gz
+sudo yum install ~/rpmbuild/RPMS/*/singularity-[0-9]*.rpm
 ```
 
 Note: if you want to have the RPM install the files to an alternative location, you should define the environment variable 'PREFIX' to suit your needs, and use the following command to build:
 
 ```bash
-$ PREFIX=/opt/singularity
-$ rpmbuild -ta --define="_prefix $PREFIX" --define "_sysconfdir $PREFIX/etc" --define "_defaultdocdir $PREFIX/share" singularity-*.tar.gz
+PREFIX=/opt/singularity
+rpmbuild -ta --define="_prefix $PREFIX" --define "_sysconfdir $PREFIX/etc" --define "_defaultdocdir $PREFIX/share" singularity-*.tar.gz
 ```
 
 When using `autogen.sh` If you get an error that you have packages missing, for example on Ubuntu 16.04:
