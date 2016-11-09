@@ -16,9 +16,10 @@ You can always download the latest tarball release from <a href="{{ site.repo }}
 Once downloaded do the following:
 
 ```bash
-$ tar xvf singularity-*.tar.gz
-$ cd singularity
-$ ./autogen.sh
+$ VERSION=2.2
+$ wget https://github.com/singularityware/singularity/releases/download/$VERSION/singularity-$VERSION.tar.gz
+$ tar xvf singularity-$VERSION.tar.gz
+$ cd singularity-$VERSION
 $ ./configure --prefix=/usr/local
 $ make
 $ sudo make install
@@ -53,7 +54,6 @@ To download the most recent development code, you should use Git and do the foll
 ```bash
 $ git clone {{ site.repo }}.git
 $ cd singularity
-$ ./autogen.sh
 $ ./configure --prefix=/usr/local
 $ make
 $ sudo make install
@@ -68,16 +68,8 @@ To update your Singularity version, you might want to first delete the executabl
 ```bash
 sudo rm -rf /usr/local/libexec/singularity
 ```
-Then clone the repo fresh, or go into your Singularity repo folder, and pull the latest from master:
+And then install using one of the methods above.
 
-```bash
-$ cd /path/to/singularity
-$ ./autogen.sh
-$ ./configure --prefix=/usr/local
-$ make clean
-$ make
-$ sudo make install
-```
 
 ## Build an RPM from source
 Like the above, you can build an RPM of Singularity so it can be more easily managed, upgraded and removed. From the base Singularity source directory do the following:
