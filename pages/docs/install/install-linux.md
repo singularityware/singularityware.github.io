@@ -25,29 +25,6 @@ $ make
 $ sudo make install
 ```
 
-If you get an error that you have packages missing, for example on Ubuntu 16.04:
-
-```bash
- ./autogen.sh
-+libtoolize -c
-./autogen.sh: 13: ./autogen.sh: libtoolize: not found
-+aclocal
-./autogen.sh: 14: ./autogen.sh: aclocal: not found
-+autoheader
-./autogen.sh: 15: ./autogen.sh: autoheader: not found
-+autoconf
-./autogen.sh: 16: ./autogen.sh: autoconf: not found
-+automake -ca -Wno-portability
-./autogen.sh: 17: ./autogen.sh: automake: not found
-```
-
-then you need to install dependencies:
-
-
-```bash
-sudo apt-get install -y build-essential libtool autotools-dev automake autoconf
-```
-
 ### Option 2: Download the latest development code
 To download the most recent development code, you should use Git and do the following:
 
@@ -87,6 +64,29 @@ Note: if you want to have the RPM install the files to an alternative location, 
 ```bash
 $ PREFIX=/opt/singularity
 $ rpmbuild -ta --define="_prefix $PREFIX" --define "_sysconfdir $PREFIX/etc" --define "_defaultdocdir $PREFIX/share" singularity-*.tar.gz
+```
+
+When using `autogen.sh` If you get an error that you have packages missing, for example on Ubuntu 16.04:
+
+```bash
+ ./autogen.sh
++libtoolize -c
+./autogen.sh: 13: ./autogen.sh: libtoolize: not found
++aclocal
+./autogen.sh: 14: ./autogen.sh: aclocal: not found
++autoheader
+./autogen.sh: 15: ./autogen.sh: autoheader: not found
++autoconf
+./autogen.sh: 16: ./autogen.sh: autoconf: not found
++automake -ca -Wno-portability
+./autogen.sh: 17: ./autogen.sh: automake: not found
+```
+
+then you need to install dependencies:
+
+
+```bash
+sudo apt-get install -y build-essential libtool autotools-dev automake autoconf
 ```
 
 {% include links.html %}
