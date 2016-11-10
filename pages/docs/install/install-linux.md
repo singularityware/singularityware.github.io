@@ -31,6 +31,7 @@ To download the most recent development code, you should use Git and do the foll
 ```bash
 git clone {{ site.repo }}.git
 cd singularity
+./autogen.sh
 ./configure --prefix=/usr/local
 make
 sudo make install
