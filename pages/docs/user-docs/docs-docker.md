@@ -17,7 +17,7 @@ The core of a Docker image is basically a compressed set of files, a set of `.ta
 The Docker engine communicates with the Docker Hub via the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api/" target="_blank">Docker Remote API</a>, and guess what, we can too! The easiest thing to do is create an image, and then pipe a Docker image directly into it from the Docker Registry. This first method does not require having Docker installed on your machine. Let's say that I want to bootstrap tensorflow from Docker. First I should create the tensorflow image:
 
 ```bash
-sudo singularity create --size=4000 tensorflow.img
+sudo singularity create --size 4000 tensorflow.img
 sudo singularity import tensorflow.img docker://tensorflow/tensorflow:latest
 tensorflow/tensorflow:latest
 Downloading layer: sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
