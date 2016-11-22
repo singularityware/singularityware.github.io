@@ -19,32 +19,33 @@ The Docker engine communicates with the Docker Hub via the <a href="https://docs
 ```bash
 sudo singularity create --size 4000 tensorflow.img
 sudo singularity import tensorflow.img docker://tensorflow/tensorflow:latest
-tensorflow/tensorflow:latest
-Downloading layer: sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
-Downloading layer: sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
-Downloading layer: sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
-Downloading layer: sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
-Downloading layer: sha256:b4c3589c6b3abaeb9d70269ad62f6fc522a00670ec7064b1ca42fa74f4b6f588
-Downloading layer: sha256:d63463802d368b6cb92c18e92ea3e5a5e3fd4a18c283ec19c0d56eef224748b5
-Downloading layer: sha256:709fc41158c625a33847d53e95ffe051fa80adbb9607ce8554f493c024cef300
-Downloading layer: sha256:528276ea4b2d54c35820437985d7ad944a2fcafb4bda4d98fa60976c657470e1
-Downloading layer: sha256:46d4527e85d3385ae7ac24f4dd442268b82d5e5e2de6c22a1eecf02ec8b79d42
-Downloading layer: sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
-Downloading layer: sha256:da76ab5d6dffb48a4a7358699b84f0b7390640cc2c71a5421bfd9d73821ecb56
-Downloading layer: sha256:70d51ddf7c958a8df097423a32ec9ab9c02aff5c2e18758e51cf636a115a856c
-Downloading layer: sha256:ff4090f99abc02fe3e4604da28b87a8b770492158e20954b87e40e1b599b20f5
-Downloading layer: sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
-Downloading layer: sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4
-Downloading layer: sha256:c8144262002cd241e607d7d3ecda450ce4ae8edf7dac8dbf46897d498ac667d8
-Downloading layer: sha256:cee0974db2b868f0408f7e3eaba93c11fce3a38f612674477653b04c10369da0
-Downloading layer: sha256:390957b2f4f0cd72b8577795cd8076cdc21d45c7823bbb5c895a494ae6038267
-Downloading layer: sha256:064f9af025390d8da3dfab763fac261dd67f8807343613239d66304cda8f5d16
+Cache folder set to /home/vanessa/.singularity/docker
+Extracting /home/vanessa/.singularity/docker/sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4.tar.gz
+Extracting /home/vanessa/.singularity/docker/sha256:182b64c1f020de1cb4b2783b3a13fbeb07ec4087bc911352d0f5ef40c8eec8cf.tar.gz
+Extracting /home/vanessa/.singularity/docker/sha256:bfc1d5e3de1cf70353afb2b81fbbeab16bad961352b86f60901bc1da1396f2b4.tar.gz
+Extracting /home/vanessa/.singularity/docker/sha256:d819f1ec59a06c001b37e66dd1639c591e606029ea7584fac704ff741cda249b.tar.gz
+Extracting /home/vanessa/.singularity/docker/sha256:f5d83de9c6786bff4160679ed4bde332970367225ede609944bbe686edb1c25b.tar.gz
+Extracting /home/vanessa/.singularity/docker/sha256:c1f8f4c880d49d70a8280860e3bc5ee559a95d4e1dc44f9128b638eb2240324c.tar.gz
+Extracting /home/vanessa/.singularity/docker/sha256:9528c5352798ec3a134be13b66bc4dc71e7cdd029e268ae3cdfeb0719a4c8b8b.tar.gz
+Extracting /home/vanessa/.singularity/docker/sha256:c145c1f339f57690f80bd64e86caa3b00e0635a6a383bc8be7726a3baf22a0d2.tar.gz
+Extracting /home/vanessa/.singularity/docker/sha256:ebb77ce6e1c6769c1849194c1319dc6978e19575c76fd1fa942a623b6f2996a4.tar.gz
+Extracting /home/vanessa/.singularity/docker/sha256:51900bc9e720db035e12f6c425dd9c06928a9d1eb565c86572b3aab93d24cfca.tar.gz
+Extracting /home/vanessa/.singularity/docker/sha256:f8419ea7c1b5d667cf26c2c5ec0bfb3502872e5afc6aa85caf2b8c7650bdc8d9.tar.gz
+Extracting /home/vanessa/.singularity/docker/sha256:3eed5ff20a90a40b0cb7909e79128740f1320d29bec2ae9e025a1d375555db15.tar.gz
+Extracting /home/vanessa/.singularity/docker/sha256:6c953ac5d795ea26fd59dc5bdf4d335625c69f8bcfbdd8307d6009c2e61779c9.tar.gz
 Adding Docker CMD as Singularity runscript...
+/run_jupyter.sh
 Bootstrap initialization
 No bootstrap definition passed, updating container
 Executing Prebootstrap module
 Executing Postbootstrap module
 Done.
+```
+
+Note that if you want (much) more detailed output for debugging to the console, you need to enable `--verbose` mode:
+
+```bash
+sudo singularity --verbose import tensorflow.img docker://tensorflow/tensorflow:latest
 ```
 
 Now I can shell into it, and import tensorflow:
@@ -62,13 +63,29 @@ Type "help", "copyright", "credits" or "license" for more information.
 >>> 
 ```
 
+### How does the runscript work?
+Docker has two commands in the `DOCKERFILE` that have something to do with execution, `CMD` and `ENTRYPOINT`. The differences are subtle, but the best description I've found is the following:
+
+>> A `CMD` is to provide defaults for an executing container.
+
+and
+
+>> An `ENTRYPOINT` helps you to configure a container that you can run as an executable.
+
+Given the definition, the `ENTRYPOINT` is most appropriate for the Singularity `%runscript`, and so using the default bootstrap (whether from a `docker://` endpoint or a `Singularity` spec file) will set the `ENTRYPOINT` variable as the runscript. You can change this behavior by specifying `IncludeCmd: yes` in the Spec file (see below). If you provide any sort of `%runscript` in your Spec file, this overrides anything provided in Docker. In summary, the order of operations is as follows:
+
+1. If a `%runscript` is specified in the `Singularity` spec file, this takes prevalence over all
+2. If no `%runscript` is specified, or if the `import` command is used as in the example above, the `ENTRYPOINT` is used as runscript.
+3. If no `%runscript` is specified, but the user has a `Singularity` spec with `IncludeCmd`, then the Docker `CMD` is used.
+
+
 ### Use a Spec File
 Do a barrel role! Use a spec file! Many times, you want to bootstrap an image, and then either change the `%runscript` or add additional software or commands in the `%post` section. To achieve this, you can create a specification file. Currently, these are distributed with the naming format `[myfile].def`, however (soon) we will use a standard name, `Singularity` so all specification files can be automatically found. Here is what the spec file would look like for tensorflow:
+
 
 ```bash
 Bootstrap: docker
 From: tensorflow/tensorflow:latest
-IncludeCmd: yes
 
 %runscript
  
@@ -79,7 +96,36 @@ IncludeCmd: yes
     echo "Post install stuffs!"
 ```
 
-The solution above would be ideal for saving the specification of an image to build at some runtime. 
+In the example above, I am overriding any Dockerfile `ENTRYPOINT` because I have defined a `%runscript`. If I want the Dockerfile `ENTRYPOINT` to take preference, I would remove the `%runscript` section:
+
+```bash
+Bootstrap: docker
+From: tensorflow/tensorflow:latest
+
+%post
+
+    echo "Post install stuffs!"
+```
+
+Note that the spec file above would be (almost) equivalent to the command:
+
+```bash
+sudo singularity import tensorflow.img docker://tensorflow/tensorflow:latest
+```
+
+minus the useless echo at the end. If I want the `CMD` to take preference, I would add `IncludeCmd`:
+
+```bash
+Bootstrap: docker
+From: tensorflow/tensorflow:latest
+IncludeCmd: yes
+
+%post
+
+    echo "Post install stuffs!"
+```
+
+The solutions above would be ideal for saving a custom specification of an image to build at some runtime. 
 
 
 ### Run a Singularity Shell from a Docker image
