@@ -127,6 +127,41 @@ IncludeCmd: yes
 
 The solutions above would be ideal for saving a custom specification of an image to build at some runtime. 
 
+### Custom Authentication
+For both import and bootstrap using a build spec file, by default we use the Docker Registry `index.docker.io`. Singularity first tries the call without a token, and then asks for one with pull permissions if the request is defined. However, it may be the case that you want to provide a custom token for a private registry. You have two options. You can either provide a `Username` and `Password` in the build specification file (if stored locally and there is no need to share), or (in the case of doing an import or needing to secure the credentials) you can export these variables to environmental variables. We provide instructions for each of these cases:
+
+
+#### Authentication in the Spec File
+You can simply specify your additional authentication parameters in the header with the labels `Username` and `Password`:
+
+```bash
+Username: vanessa
+Password: [password]
+```
+
+Again, this can be in addition to specification of a custom registry with the `Registry` parameter.
+
+#### Authentication in the Environment
+You can export the registry, and authentication token in environmental variables as follows. First, you should obtain your token using the command line. Here we do that and put it into an environmental variable, `CREDENTIAL`:
+
+```bash
+CREDENTIAL=$(echo -n vanessa:[password] | base64)
+TOKEN=$(http 'https://auth.docker.io/token?service=registry.docker.io&scope=repository:vanessa/code-samples:pull' Authorization:"Basic $CREDENTIAL" | jq -r '.token')
+```
+
+This should place the token in the environmental variable `TOKEN`. To test that your token is valid, you can do the following
+
+```bash
+http https://index.docker.io/v2/vanessa/code-samples/tags/list Authorization:"Bearer $TOKEN"
+```
+
+Once you have confirmed, then you can export the variables for Singularity as follows:
+
+```bash
+export SINGULARITY_DOCKER_REGISTRY='--registry myrepo'
+export SINGULARITY_DOCKER_AUTH='--username vanessa --password [password]'
+```
+
 
 ### Run a Singularity Shell from a Docker image
 
