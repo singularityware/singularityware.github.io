@@ -142,7 +142,8 @@ Password: [password]
 Again, this can be in addition to specification of a custom registry with the `Registry` parameter.
 
 #### Authentication in the Environment
-You can export the registry, and authentication token in environmental variables as follows. First, you should obtain your token using the command line. Here we do that and put it into an environmental variable, `CREDENTIAL`:
+You can export the registry, and authentication token in environmental variables as follows. (Optionally) first, if you want to test your token, you can obtain it using the command line (skip this step if you don't need or want to test). Here we do that and put it into an environmental variable, `CREDENTIAL`:
+
 
 ```bash
 CREDENTIAL=$(echo -n vanessa:[password] | base64)
