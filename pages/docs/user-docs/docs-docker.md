@@ -142,7 +142,15 @@ Password: [password]
 Again, this can be in addition to specification of a custom registry with the `Registry` parameter.
 
 #### Authentication in the Environment
-You can export the registry, and authentication token in environmental variables as follows. (Optionally) first, if you want to test your token, you can obtain it using the command line (skip this step if you don't need or want to test). Here we do that and put it into an environmental variable, `CREDENTIAL`:
+You can export your registry, username, and password for Singularity as follows:
+
+```bash
+export SINGULARITY_DOCKER_REGISTRY='--registry myrepo'
+export SINGULARITY_DOCKER_AUTH='--username vanessa --password [password]'
+```
+
+##### Testing Authentication
+If you are having trouble, you can test your token by obtaining it on the command line and putting it into an environmental variable, `CREDENTIAL`:
 
 
 ```bash
@@ -156,12 +164,7 @@ This should place the token in the environmental variable `TOKEN`. To test that 
 http https://index.docker.io/v2/vanessa/code-samples/tags/list Authorization:"Bearer $TOKEN"
 ```
 
-Once you have confirmed, then you can export the variables for Singularity as follows:
-
-```bash
-export SINGULARITY_DOCKER_REGISTRY='--registry myrepo'
-export SINGULARITY_DOCKER_AUTH='--username vanessa --password [password]'
-```
+The above call should return the tags list as expected.
 
 
 ### Run a Singularity Shell from a Docker image
