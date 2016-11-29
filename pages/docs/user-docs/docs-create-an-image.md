@@ -5,7 +5,7 @@ permalink: create-image
 folder: docs
 ---
 
-Singularity images are single files which physically contain the container. Singularity images are 'sparse' files in that they start off with a giant hole and thus it does not consume disk space until you fill the hole (e.g. a 1GiB image may start off only taking about 30MiB of physical disk space). As you fill the image by installing files, data, and programs into it you will find it increase in size.
+Singularity images are single files which physically contain the container.
 
 The effect of all files existing virtually within a single image greatly simplifies sharing, copying, branching, and other management tasks. It also means that standard file system ACLs apply to access and permission to the container (e.g. I can give read only access to a colleague, or block access completely with a simple chmod command).
 
@@ -15,26 +15,27 @@ Singularity will create a default container image of 1GiB using the following co
 
 ```bash
 $ sudo singularity create container.img
-Creating a sparse image with a maximum size of 1024MiB...
-Formatting image (/sbin/mkfs.ext4)
-Done. Image can be found at: container.img
+Creating a new image with a maximum size of 768MiB...
+Executing image create helper
+Formatting image with ext3 file system
+Done.
 ```
 
 We can now use the command `ls` to look at the files and permissions of the container:
 
 ```bash
 $ ls -l container.img 
--rwxr-xr-x. 1 root root 1073741856 Jun  1 08:27 container.img
+-rwxr-xr-x. 1 root root 805306399 Jun  1 08:27 container.img
 ```
 
 How big is it?
 
 ```bash
 $ du -sh container.img 
-33M     container.img
+769M     container.img
 ```
 
-Here we created a new container image called `container.img` in the current directory. You can see the the `ls` command reports it is 1GiB in size, but when checking the actual disk usage, it reports only 33MiB. As we add files to the image, its actual disk usage will increase.
+Here we created a new container image called `container.img` in the current directory.
 
 Also, notice the permissions of the container image as it is executable. This is important in that Singularity images can be executed directly (as long as Singularity is installed on the host system).
 
