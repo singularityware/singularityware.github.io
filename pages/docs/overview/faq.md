@@ -140,8 +140,6 @@ $ sudo singularity create ubuntu-latest.img
 $ sudo singularity bootstrap ubuntu-latest.img ubuntu.def
 ```
 
-Make sure you are running Singularity >2.2 to make full use of this feature.
-
 ### Can a Singularity container be multi-threaded?
 
 Yes. Singularity imposes no limitations on forks, threads or processes in general.
@@ -229,15 +227,6 @@ Additionally, there are precautions within the container context to mitigate any
 
 You can read more about the Singularity <a href="/docs-security">security overview here</a>.
 
-### When I try mounting my container with the ```-B``` or ```--bind``` option I receive an <i>unknown option</i> or <i>Invalid argument</i> error.
-
-Make sure that you are using the most recent Singularity release to mount your container to the host system, and that the ```--bind``` argument is placed after the execution command (e.g. ```run```, ```exec```, ```shell```).  An example might look like this:
-
-```bash
-$ singularity run -B $PWD:/data my_container.img
-```
-
-Also, make sure you are using an up-to-date Singularity to bootstrap your container.  Some features (such as ```--bind```) will not work in earlier versions.
 
 ## Troubleshooting
 
