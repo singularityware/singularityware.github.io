@@ -231,7 +231,13 @@ You can read more about the Singularity <a href="/docs-security">security overvi
 
 ### When I try mounting my container with the ```-B``` or ```--bind``` option I receive an <i>unknown option</i> or <i>Invalid argument</i> error.
 
-Make sure that you are using the most recent Singularity release to mount your container to the host system.  Also, make sure you are using an up-to-date Singularity to bootstrap your container.  Some features (such as ```--bind```) will not work in earlier versions.
+Make sure that you are using the most recent Singularity release to mount your container to the host system, and that the ```--bind``` argument is placed after the execution command (e.g. ```run```, ```exec```, ```shell```).  An example might look like this:
+
+```bash
+$ singularity run -B $PWD:/data my_container.img
+```
+
+Also, make sure you are using an up-to-date Singularity to bootstrap your container.  Some features (such as ```--bind```) will not work in earlier versions.
 
 ## Troubleshooting
 
