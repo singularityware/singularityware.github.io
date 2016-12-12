@@ -1,10 +1,11 @@
 machine:
-  environment:
-    JEKYLL_ENV: production
+  ruby:
+    version: 2.3.1
 
 dependencies:
   pre:
     - gem install jekyll
+    - gem install bundler
 
 general:
   artifacts:
@@ -12,4 +13,5 @@ general:
 
 test:
   override:
+    - bundle install
     - bundle exec jekyll build
