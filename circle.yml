@@ -1,0 +1,19 @@
+machine:
+  ruby:
+    version: rbx-2.2.6
+
+dependencies:
+  pre:
+    - gem install jekyll
+
+general:
+  artifacts:
+    - "./_site"
+
+test:
+  override:
+    - BASEURL=https://circle-artifacts.com/gh/$CIRCLE_USERNAME/singularityware.github.io/$CIRCLE_PREVIOUS_BUILD_NUM/artifacts/0/home/ubuntu/singularityware.github.io/_site/
+    - echo $BASEURL
+    - sed -i "s,/singularityware.github.io/,$BASEURL,g" "_config.yml"
+    - sed -i "s,/page:num/,$BASEURLpage:num/,g" "_config.yml"
+    - jekyll build
