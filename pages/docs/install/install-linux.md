@@ -90,4 +90,21 @@ then you need to install dependencies:
 sudo apt-get install -y build-essential libtool autotools-dev automake autoconf
 ```
 
+## Build a DEB from source
+
+To build a deb package for Debian/Ubuntu/LinuxMint invoke the following commands:
+
+```bash
+$ fakeroot dpkg-buildpackage -b -us -uc # sudo will ask for a password to run the tests
+$ sudo dpkg -i ../singularity-container_2.2-1_amd64.deb
+```
+ 
+Note that the tests will fail if singularity is not already installed on your system. This is the case when you run this procedure for the first time.
+In that case run the following sequence:
+
+```bash
+$ echo "echo SKIPPING TESTS THEYRE BROKEN" > ./test.sh
+$ fakeroot dpkg-buildpackage -nc -b -us -uc # this will continue the previous build without an initial 'make clean'
+```
+
 {% include links.html %}
