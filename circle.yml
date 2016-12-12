@@ -12,4 +12,4 @@ test:
     - echo $BASEURL
     - sed -i "s,/singularityware.github.io/,$BASEURL,g" "_config.yml"
     - sed -i "s,/page:num/,$BASEURLpage:num/,g" "_config.yml"
-    - jekyll build
+    - bundle exec jekyll build
