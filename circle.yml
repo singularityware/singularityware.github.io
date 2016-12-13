@@ -4,6 +4,7 @@ machine:
 
 dependencies:
   pre:
+    - rvm use ruby-2.2.4
     - gem install jekyll
     - gem install bundler
 
