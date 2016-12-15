@@ -1,18 +1,16 @@
 machine:
   ruby:
-    version: 2.3.1
+    version: 2.2.3
 
 dependencies:
   pre:
-    - rvm use ruby-2.2.4
-    - gem install jekyll
-    - gem install bundler
+    - bundle exec jekyll build
 
 general:
   artifacts:
     - "./_site"
 
 test:
-  override:
-    - bundle install
+  post:
     - bundle exec jekyll build
+    - bundle exec htmlproof ./_site --only-4xx --href-ignore "#"
