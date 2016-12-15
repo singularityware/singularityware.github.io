@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+- 2.3.1
+addons:
+  artifacts: true
+install:
+- bundle install
+- bundle exec jekyll build
+script:
+- bundle exec jekyll build --trace
+env:
+  global:
+  - NOKOGIRI_USE_SYSTEM_LIBRARIES=true

@@ -28,6 +28,7 @@ exclude:
   - .idea/
   - .gitignore
   - README.md
+  - vendor/
 
 # Optional Feedback Link in Header (disabled)
 feedback_subject_line: Singularity Feedback
