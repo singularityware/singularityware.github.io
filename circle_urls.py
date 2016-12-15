@@ -20,5 +20,5 @@ for html_file in files:
         content = filey.read()
     for search_name in search_names:
         content = content.replace('/%s"' %(search_name),'/%s.html"' %(search_name))
-    with open(html_file,'w' as filey:
+    with open(html_file,'w') as filey:
         filey.write(content)
