@@ -47,9 +47,9 @@
                 {% if site.feedback_disable == null or site.feedback_disable == false %}
 			{% include feedback.html %}
 		{% endif %}
-                <!--comment out this block if you want to hide search-->
+                <li><a href="{{ site.baseurl }}/search"><i class="fa fa-search"></i></li>
+                <!-- jekyll search hidden in favor of google
                 <li>
-                    <!--start search-->
                     <div id="search-demo-container">
                         <input type="text" id="search-input" placeholder="{{site.data.strings.search_placeholder_text}}">
                         <ul id="results-container"></ul>
@@ -66,7 +66,7 @@
                             fuzzy: true,
                     })
                     </script>
-                    <!--end search-->
+                    end search-->
                 </li>
             </ul>
         </div>
