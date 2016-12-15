@@ -14,4 +14,5 @@ general:
 
 test:
   post:
+    - rm -rf vendor/bundle/ruby/2.2.0/gems/jekyll-3.3.1/lib/site_template/
     - bundle exec jekyll build
