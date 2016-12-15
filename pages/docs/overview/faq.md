@@ -263,8 +263,9 @@ This fix solves the following error when Singularity is installed into the defau
 ```bash
 $ sudo singularity create /tmp/centos.img
 sudo: singularity: command not found
-The cause of the problem is that `sudo` sanitizes the PATH environment variable and does not include /usr/local/bin in the default search path. Considering this program path is by default owned by root, it is reasonable to extend the default sudo PATH to include this directory.
 ```
+
+The cause of the problem is that `sudo` sanitizes the PATH environment variable and does not include /usr/local/bin in the default search path. Considering this program path is by default owned by root, it is reasonable to extend the default sudo PATH to include this directory.
 
 To add /usr/local/bin to the default sudo search path, run the program visudo which will edit the sudoers file, and search for the string 'secure_path'. Once found, append :/usr/local/bin to that line so it looks like this:
 
