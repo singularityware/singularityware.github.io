@@ -3,7 +3,6 @@ rvm:
 - 2.3.1
 install:
 - bundle install
-- bundle install jekyll
 - bundle exec jekyll build
 script:
 - bundle exec jekyll build --trace

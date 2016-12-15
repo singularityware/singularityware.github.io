@@ -4,6 +4,7 @@ machine:
 
 dependencies:
   pre:
+    - bundle install
     - bundle exec jekyll build
 
 general:
