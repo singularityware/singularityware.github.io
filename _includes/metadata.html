@@ -1,5 +1,7 @@
 <meta name="description" content="{{ content | strip_html | strip_newlines }}">
+{% if page.category %}
 <meta name="keywords" content="{{ page.category }}">
+{% endif %}
 {% if page.title %}
 <meta name="name" content="{{ page.title }}">
 {% endif %}
