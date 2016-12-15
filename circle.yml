@@ -1,9 +1,10 @@
 machine:
   ruby:
-    version: 2.2.3
+    version: 2.3.1
 
 dependencies:
   pre:
+    - rvm --ruby-version use 2.3.1
     - bundle install
     - bundle exec jekyll build
 
@@ -14,4 +15,3 @@ general:
 test:
   post:
     - bundle exec jekyll build
-    - bundle exec htmlproof ./_site --only-4xx --href-ignore "#"
