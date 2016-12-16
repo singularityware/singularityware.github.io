@@ -11,7 +11,7 @@ One of the architecturally defined features in Singularity is that it can execut
 Additionally, because Singularity is not emulating a full hardware level virtualization paradigm, there is no need to separate out any sandboxed networks or file systems because there is no concept of user-escalation within a container. Users can run Singularity containers just as they run any other program on the HPC resource.
 
 ### Workflows
-We are in the process of developing <a href="https://github.com/singularityware/singularity-hub" target="_blank">Singularity Hub,</a> which will allow for generation of workflows using Singularity containers in an online interface, and easy deployment on standard research clusters (e.g., SLURM, SGE). Currently, the Singularity core software is installed on the following research clusters, meaning you can run Singularity containers as part of your jobs:
+We are in the process of developing Singularity Hub, which will allow for generation of workflows using Singularity containers in an online interface, and easy deployment on standard research clusters (e.g., SLURM, SGE). Currently, the Singularity core software is installed on the following research clusters, meaning you can run Singularity containers as part of your jobs:
 
 - The <a href="http://sherlock.stanford.edu" target="_blank" class="no-after">Sherlock cluster</a> at <a href="https://srcc.stanford.edu/" class="no-after" target="_blank">Stanford University</a>
 - <a href="https://www.xsede.org/news/-/news/item/7624" target="_blank" class="no-after">SDSC Comet and Gordon</a> (XSEDE)
