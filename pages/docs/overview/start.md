@@ -6,6 +6,10 @@ folder: docs
 toc: false
 ---
 
+## Demo
+
+<asciinema-player src="assets/asciicast/demo.js" cols="114" rows="31" speed="2.5" poster="data:text/plain,dave@google-cloud:~$" theme="solarized-dark" title="Singularity installation and usage demo" author="davidgodlove@gmail.com"></asciinema-player>
+
 ## Installation Quick Start
 
 ```bash
