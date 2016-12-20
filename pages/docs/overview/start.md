@@ -6,10 +6,6 @@ folder: docs
 toc: false
 ---
 
-## Demo
-
-{% include asciicast.html source='assets/asciicast/demo.js' title='demo' author='davidgodlove@gmail.com' %}
-
 ## Installation Quick Start
 
 ```bash

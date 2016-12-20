@@ -3,7 +3,7 @@
     "SHELL": "/bin/bash",
     "TERM": "xterm"
   },
-  "width": 114,
+  "width": 115,
   "command": null,
   "duration": 1446.675662,
   "version": 1,
@@ -83510,5 +83510,5 @@
       "\r\nexit\r\n"
     ]
   ],
-  "height": 31
+  "height": 25
 }
