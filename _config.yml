@@ -92,3 +92,13 @@ defaults:
 
 sidebars:
 - main_sidebar
+
+# asciinema defaults
+asciicast:
+    cols: "115"
+    rows: "25"
+    speed: "2.0"
+    theme: "solarized-dark"
+
+
+
