@@ -27,7 +27,8 @@ repo: "https://github.com/singularityware/singularity" # The main repo, should n
 exclude:
   - .idea/
   - .gitignore
-
+  - README.md
+  - vendor/
 
 # Optional Feedback Link in Header (disabled)
 feedback_subject_line: Singularity Feedback

@@ -1,0 +1,14 @@
+<meta name="description" content="{{ content | strip_html | strip_newlines }}">
+{% if page.category %}
+<meta name="keywords" content="{{ page.category }}">
+{% endif %}
+{% if page.title %}
+<meta name="name" content="{{ page.title }}">
+{% endif %}
+<meta name="thumbnail" content="http://singularity.lbl.gov/images/logo/logo.svg">
+{% if page.targz %}
+<meta name="file" content="{{ site.repo }}/archive/{{ page.targz }}">
+{% endif %}
+{% if page.version %}
+<meta name="file" content="{{ site.repo }}/releases/download/{{ page.version }}/singularity-{{ page.version }}.tar.gz">
+{% endif %}

@@ -140,6 +140,8 @@ $ sudo singularity create ubuntu-latest.img
 $ sudo singularity bootstrap ubuntu-latest.img ubuntu.def
 ```
 
+Make sure you are running Singularity >2.2 to make full use of this feature.
+
 ### Can a Singularity container be multi-threaded?
 
 Yes. Singularity imposes no limitations on forks, threads or processes in general.
@@ -227,6 +229,15 @@ Additionally, there are precautions within the container context to mitigate any
 
 You can read more about the Singularity <a href="/docs-security">security overview here</a>.
 
+### When I try mounting my container with the ```-B``` or ```--bind``` option I receive an <i>unknown option</i> or <i>Invalid argument</i> error.
+
+Make sure that you are using the most recent Singularity release to mount your container to the host system, and that the ```--bind``` argument is placed after the execution command (e.g. ```run```, ```exec```, ```shell```).  An example might look like this:
+
+```bash
+$ singularity run -B $PWD:/data my_container.img
+```
+
+Also, make sure you are using an up-to-date Singularity to bootstrap your container.  Some features (such as ```--bind```) will not work in earlier versions.
 
 ## Troubleshooting
 
@@ -252,8 +263,9 @@ This fix solves the following error when Singularity is installed into the defau
 ```bash
 $ sudo singularity create /tmp/centos.img
 sudo: singularity: command not found
-The cause of the problem is that `sudo` sanitizes the PATH environment variable and does not include /usr/local/bin in the default search path. Considering this program path is by default owned by root, it is reasonable to extend the default sudo PATH to include this directory.
 ```
+
+The cause of the problem is that `sudo` sanitizes the PATH environment variable and does not include /usr/local/bin in the default search path. Considering this program path is by default owned by root, it is reasonable to extend the default sudo PATH to include this directory.
 
 To add /usr/local/bin to the default sudo search path, run the program visudo which will edit the sudoers file, and search for the string 'secure_path'. Once found, append :/usr/local/bin to that line so it looks like this:
 
