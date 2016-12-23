@@ -69,6 +69,30 @@ and then write your post after it in <a href="https://github.com/adam-p/markdown
 
 All of the pages are in the <a href="https://github.com/singularityware/singularityware.github.io/blob/master/pages" target="_blank">pages</a> folder, organized in a somewhat logical manner. If you want to edit content for a page, just edit the corresponding file. If you need to do something more advanced like edit a sidebar, you should look at the <a href="https://github.com/singularityware/singularityware.github.io/blob/master/_data/sidebars" target="_blank">sidebar data</a> yml documents, which render into the navigation.
 
+### Recording demos
+
+If you think something could be better explained with a demo, record and embed one! Here's how:
+
+{% include asciicast.html source='demo-asciicast.js' title='How to make demos' author='davidgodlove@gmail.com' %}
+
+```bash
+# To Install
+pip install asciinema
+
+# To record
+asciinema rec -w 1 demo-asciicast.js
+# type exit when done
+
+# To play
+asciinema play demo-asciicast.js
+```
+
+Once you've generated an asciicast, you should drop the file (e.g., some `demo-asciicast.js`) into the `assets/asciicast` folder, and then include the following in the page or post:
+
+```bash
+{{ "{% include asciicast.html source='demo-asciicast.js' title='How to make demos' author='email@domain.com'" }}%}
+```
+
 ## Adding a Release
 
 The releases, akin to the news, are done via a feed. The only difference is that they are rendered on the site in the  <a href="/releases" target="_blank">releases section</a>. It is also done very simply - you just add a new markdown file to the folder `_posts/releases`. The same naming convention follows, however the title of the post should correspond to the release, e.g.:
