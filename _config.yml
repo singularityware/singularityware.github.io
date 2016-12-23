@@ -99,5 +99,10 @@ asciicast:
     cols: "115"
     rows: "25"
     speed: "2.0"
-    theme: "solarized-dark"
+    theme: "asciinema"
 
+# asciinema
+# tango
+# solarized-dark
+# solarized-light
+# monokai

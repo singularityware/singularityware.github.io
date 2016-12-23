@@ -72,7 +72,8 @@ All of the pages are in the <a href="https://github.com/singularityware/singular
 ### Recording demos
 
 If you think something could be better explained with a demo, record and embed one! Here's how:
-{% include asciicast.html source='asciicast/demo-asciicast.js' title='How to make demos' author='davidgodlove@gmail.com' %}
+
+{% include asciicast.html source='assets/asciicast/demo-asciicast.js' title='How to make demos' author='davidgodlove@gmail.com' %}
 
 ## Adding a Release
 
