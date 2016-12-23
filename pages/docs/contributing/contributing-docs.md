@@ -73,7 +73,25 @@ All of the pages are in the <a href="https://github.com/singularityware/singular
 
 If you think something could be better explained with a demo, record and embed one! Here's how:
 
-{% include asciicast.html source='assets/asciicast/demo-asciicast.js' title='How to make demos' author='davidgodlove@gmail.com' %}
+{% include asciicast.html source='demo-asciicast.js' title='How to make demos' author='davidgodlove@gmail.com' %}
+
+```bash
+# To Install
+pip install asciinema
+
+# To record
+asciinema rec -w 1 demo-asciicast.js
+# type exit when done
+
+# To play
+asciinema play demo-asciicast.js
+```
+
+Once you've generated an asciicast, you should drop the file (e.g., some `demo-asciicast.js`) into the `assets/asciicast` folder, and then include the following in the page or post:
+
+```bash
+{{ "{% include asciicast.html source='demo-asciicast.js' title='How to make demos' author='email@domain.com'" }}%}
+```
 
 ## Adding a Release
 
