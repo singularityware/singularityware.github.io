@@ -1,7 +1,7 @@
 ---
 title:  "Building CentOS image (especially on a Ubuntu host)"
 category: recipes
-permalink: building-centos-ubuntu-host
+permalink: building-centos-image
 ---
 
 This recipe describes how to build an CentOS image using Singularity, with special emphasis for Ubuntu compatible host. 
