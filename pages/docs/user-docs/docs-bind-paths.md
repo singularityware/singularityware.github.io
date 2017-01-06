@@ -38,12 +38,16 @@ The system administrator has the ability to define what bind points will be incl
 
 
 #### User defined bind points
-If the system administrator has enabled user control of binds (via `user bind control = yes` in `/etc/singularity/singularity.conf`), you will be able to request your own bind points within your container processes. The most typical example of this is the `--bind` option and here is an example binding `/tmp` to `/scratch` (which again does not exist within the container):
+If the system administrator has enabled user control of binds (via `user bind control = yes` in `/etc/singularity/singularity.conf`), you will be able to request your own bind points within your container. 
+
+Further, if the administrator has enabled the use of file system overlay (via `enable overlay = yes` in `/etc/singularity/singularity.conf`), you can bind host system directories to directories that do not exist within the container.  Singularity will dynamically create the necessary bind points in your container on demand.  This feature may not be supported on older host systems.
+
+Here's an example of using the `--bind` option and binding `/tmp` to `/scratch` (which may not already exist within the container if file system overlay is enabled):
 
 ```bash
 $ singularity shell -B /tmp:/scratch /tmp/Centos7-ompi.img 
-WARNING: Skipping user bind, non existant bind point (directory) in container: '/scratch'
 Singularity: Invoking an interactive shell within container...
 
-Singularity.Centos7-ompi.img> 
+Singularity.Centos7-ompi.img> ls /scratch
+ssh-7vywtVeOez  systemd-private-cd84c81dda754fe4a7a593647d5a5765-ntpd.service-12nMO4
 ```

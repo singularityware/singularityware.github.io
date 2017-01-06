@@ -46,7 +46,7 @@ The syntax for this consists of a bind path source and an optional bind path des
 ### USER BIND CONTROL (boolean, default='yes')
 In addition to the system bind points as specified within this configuration file, you may also allow users to define their own bind points inside the container. This feature is used via multiple command line arguments (e.g. `--bind`, `--scratch`, and `--home`) so disabling user bind control will also disable those command line options.
 
-Singularity will automatically disable this feature if the host does not support the prctl option `PR_SET_NO_NEW_PRIVS`.
+Singularity will automatically disable this feature if the host does not support the prctl option `PR_SET_NO_NEW_PRIVS`. In addition, `enable overlay` must be set to `yes` and the host system must support overlayFS (generally kernel versions 3.18 and later) for users to bind host directories to bind points that do not already exist in the container. 
 
 
 ## Logging
