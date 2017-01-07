@@ -100,7 +100,7 @@ Consolidating a work-flow into a Singularity container simplifies distribution a
 
 ## Getting started
 
-Jump in and <a href="/start"><strong>get started</strong></a>, or find ways to <a href="/support">get help</a>.
+Jump in and <a href="/quickstart"><strong>get started</strong></a>, or find ways to <a href="/support">get help</a>.
 
 * Project lead: <a href="https://gmkurtzer.github.io/" target="_blank">Gregory M. Kurtzer</a>
 * Sponsored by: <a href="http://scs.lbl.gov/" target="_blank">HPC @ LBNL</a>
