@@ -1,0 +1,14 @@
+<button style='color:white;margin-top:5px' class="btn btn-primary btn-lg asciinema-button" id="{{ include.title | replace:' ','-' }}">Show Video Tutorial</button>
+<div class="hidden" id="asciinema-{{ include.title | replace:' ','-' }}">
+    <asciinema-player 
+        src="assets/asciicast/{{include.source}}" 
+        poster="data:text/plain,{{include.title}}" 
+        title="{{include.title}}" 
+        author="{{include.author}}" 
+        cols="{{include.cols}}"
+        rows="{{include.rows}}" 
+        speed="{{site.asciicast.speed}}" 
+        theme="{{site.asciicast.theme}}">
+    </asciinema-player>
+</div>
+
