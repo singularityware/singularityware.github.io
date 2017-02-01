@@ -37,6 +37,9 @@ CONTAINER USAGE COMMANDS:
     shell         Run a Bourne shell within container
     test          Execute any test code defined within container
 
+CONTAINER USAGE OPTIONS:
+    -H  --home    Specify $HOME to mount 
+
 CONTAINER MANAGEMENT COMMANDS (requires root):
     bootstrap     Bootstrap a new Singularity image from scratch
     copy          Copy files from your host into the container
@@ -45,6 +48,10 @@ CONTAINER MANAGEMENT COMMANDS (requires root):
     export        Export the contents of a container via a tar pipe
     import        Import/add container contents via a tar pipe
     mount         Mount a Singularity container image
+
+CONTAINER REGISTRY COMMANDS:
+    pull          pull a Singularity Hub container to $PWD
+
 
 For any additional help or support visit the Singularity
 website: http://singularity.lbl.gov/

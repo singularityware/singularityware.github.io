@@ -256,6 +256,36 @@ $ sudo sysctl -w kernel.grsecurity.chroot_deny_chmod=0
 $ sudo sysctl -w kernel.grsecurity.chroot_deny_fchdir=0
 ```
 
+### The container isn't working on a different host!
+Singularity by default mounts your home directory. While this is great for seamless communication between your host and the container, it can introduce issues if you have software modules installed at `$HOME`. For example, we had a user <a href="https://github.com/singularityware/singularity/issues/476" target="_blank">run into this issue</a>. 
+
+
+#### Solution 1: Specify the home to mount
+A first thing to try is to point to some "sanitized home," which is the purpose of the `-H` or `--home` option. For example, here we are creating a home directory under `/tmp/homie`, and then telling the container to mount it as home:
+
+```bash
+rm -fr /tmp/homie 
+mkdir -p /tmp/homie
+singularity exec -H /tmp/homie analysis.img /bin/bash
+```
+
+#### Solution 2: Specify the executable to use
+It may be the issue that there is an executable in your host environment (eg, python) that is being called in preference to the containers. To avoid this, in your runscript (the `%runscript` section of the bootstrap file) you should specify the path to the executable exactly. This means:
+
+
+```bash
+%runscript
+
+# This specifies the python in the container
+exec /usr/bin/python "$@"
+
+# This may pick up a different one
+exec /usr/bin/python "$@"
+```
+
+This same idea would be useful if you are issuing the command to the container using `exec`. Thanks to <a href="https://github.com/yarikoptic" target="_blank">yarikoptic</a> for the suggestions on this issue.
+
+
 ### Error running Singularity with sudo
 
 This fix solves the following error when Singularity is installed into the default compiled prefix of /usr/local:
