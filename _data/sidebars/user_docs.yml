@@ -39,6 +39,9 @@ entries:
       url: /docs-docker
       output: web, pdf
 
+    - title: Troubleshooting
+      url: /faq#troubleshooting
+      output: web, pdf
 
   - title: Commands
     output: web, pdf

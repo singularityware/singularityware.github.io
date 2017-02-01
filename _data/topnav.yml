@@ -20,6 +20,8 @@ topnav_dropdowns:
           external_url: https://www.singularity-hub.org/faq
         - title: Slack
           external_url: https://singularity-container.slack.com
+        - title: Troubleshooting
+          url: /faq#troubleshooting
     - title: People
       folderitems:
         - title: LBNL
