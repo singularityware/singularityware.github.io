@@ -280,7 +280,7 @@ It may be the issue that there is an executable in your host environment (eg, py
 exec /usr/bin/python "$@"
 
 # This may pick up a different one
-exec /usr/bin/python "$@"
+exec python "$@"
 ```
 
 This same idea would be useful if you are issuing the command to the container using `exec`. Thanks to <a href="https://github.com/yarikoptic" target="_blank">yarikoptic</a> for the suggestions on this issue.
