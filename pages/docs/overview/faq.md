@@ -264,8 +264,7 @@ Singularity by default mounts your home directory. While this is great for seaml
 A first thing to try is to point to some "sanitized home," which is the purpose of the `-H` or `--home` option. For example, here we are creating a home directory under `/tmp/homie`, and then telling the container to mount it as home:
 
 ```bash
-rm -rf /tmp/homie 
-mkdir -p /tmp/homie
+rm -rf /tmp/homie && mkdir -p /tmp/homie && \
 singularity exec -H /tmp/homie analysis.img /bin/bash
 ```
 
