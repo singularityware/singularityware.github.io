@@ -23,7 +23,7 @@ sudo make install
 
 It's easiest to build an image on a "compatible" host.  Here's a quick
 recipe to build a CentOS 7 image on a CentOS host.  See
-the [bootstrapping section][bootstrapping-readme] of the README for
+the [bootstrapping section][readme-bootstrapping] of the README for
 the backstory and the [tutorials] for deeper advice.
 
 1. Create a file named `centos.def` that contains the following lines.
