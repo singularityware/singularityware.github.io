@@ -9,12 +9,12 @@ toc: false
 ## Installation Quick Start
 
 ```bash
-git clone {{ site.repo }}.git
-cd singularity
-./autogen.sh
-./configure --prefix=/usr/local
-make
-sudo make install
+$ git clone {{ site.repo }}.git
+$ cd singularity
+$ ./autogen.sh
+$ ./configure --prefix=/usr/local
+$ make
+$ sudo make install
 ```
 
 ## Command Quick Start
