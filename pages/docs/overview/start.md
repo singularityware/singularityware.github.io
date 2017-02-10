@@ -19,6 +19,29 @@ sudo make install
 
 ## Command Quick Start
 
+### Create a Centos7 image from a CentOS host
+
+It's easiest to build an image on a "compatible" host.  Here's a quick
+recipe to build a CentOS 7 image on a CentOS host.  See
+the [bootstrapping section][bootstrapping-readme] of the README for
+the backstory and the [tutorials] for deeper advice.
+
+1. Create a file named `centos.def` that contains the following lines.
+
+   ```
+   BootStrap: yum
+   OSVersion: 7
+   MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
+   Include: yum
+   ```
+
+2. Create and bootstrap the image:
+
+   ```bash
+   $ sudo singularity create /tmp/Centos-7.img
+   $ sudo singularity bootstrap /tmp/Centos-7.img centos.def
+   ```
+
 ### Shell into container
 ```bash
 singularity shell --contain /tmp/Centos7.img 
@@ -64,3 +87,5 @@ DISTRIB_DESCRIPTION="Ubuntu 14.04 LTS"
 ````
 
 {% include links.html %}
+
+[readme-bootstrapping]: https://github.com/singularityware/singularity/blob/master/README.md#bootstrapping-new-images
