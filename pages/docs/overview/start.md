@@ -38,8 +38,8 @@ the backstory and the [tutorials] for deeper advice.
 2. Create and bootstrap the image:
 
    ```bash
-   $ sudo singularity create /tmp/Centos-7.img
-   $ sudo singularity bootstrap /tmp/Centos-7.img centos.def
+   $ sudo singularity create /tmp/Centos7.img
+   $ sudo singularity bootstrap /tmp/Centos7.img centos.def
    ```
 
 ### Shell into container
