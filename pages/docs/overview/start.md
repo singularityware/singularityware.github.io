@@ -19,28 +19,41 @@ $ sudo make install
 
 ## Command Quick Start
 
-### Create a Centos7 image from a CentOS host
+### Import a Centos7 image from Docker Hub
 
-It's easiest to build an image on a "compatible" host.  Here's a quick
-recipe to build a CentOS 7 image on a CentOS host.  See
-the [bootstrapping section][readme-bootstrapping] of the README for
-the full story and the [tutorials] for deeper advice.
+The quickest way to get an image is to import it from Docker Hub.
+Here's an example that creates an empty image, imports the current
+CentOS 7 Docker image and proves that we got what we wanted.
 
-1. Create a file named `centos.def` that contains the following lines.
+```terminal
+$ singularity create /tmp/Centos7.img
+Creating a new image with a maximum size of 768MiB...
+Executing image create helper
+Formatting image with ext3 file system
+Done.
+$ singularity import /tmp/Centos7.img docker://centos:7
+Cache folder set to /root/.singularity/docker
+Extracting /root/.singularity/docker/sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4.tar.gz
+Extracting /root/.singularity/docker/sha256:45a2e645736c4c66ef34acce2407ded21f7a9b231199d3b92d6c9776df264729.tar.gz
+Bootstrap initialization
+No bootstrap definition passed, updating container
+Executing Prebootstrap module
+Executing Postbootstrap module
+Done.
+$ singularity shell --contain /tmp/Centos7.img
+Singularity: Invoking an interactive shell within container...
 
-   ```
-   BootStrap: yum
-   OSVersion: 7
-   MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
-   Include: yum
-   ```
+Singularity.Centos7.img> cat /etc/redhat-release
+CentOS Linux release 7.3.1611 (Core)
+Singularity.Centos7.img> exit
+exit
+$
+```
 
-2. Create and bootstrap the image:
-
-   ```bash
-   $ sudo singularity create /tmp/Centos7.img
-   $ sudo singularity bootstrap /tmp/Centos7.img centos.def
-   ```
+This approach works with Docker's basic Alpine Linux
+(`docker://alpine`), Debian (`docker://debian`), Ubuntu
+(`docker://ubuntu`) and more.  You'll find the details on
+the [Singularity and Docker][docs-docker] page.
 
 ### Shell into container
 ```bash
@@ -88,4 +101,5 @@ DISTRIB_DESCRIPTION="Ubuntu 14.04 LTS"
 
 {% include links.html %}
 
+[docs-docker]: /docs-docker
 [readme-bootstrapping]: https://github.com/singularityware/singularity/blob/master/README.md#bootstrapping-new-images
