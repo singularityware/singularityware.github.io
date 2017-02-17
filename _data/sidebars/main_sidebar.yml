@@ -94,6 +94,10 @@ entries:
       url: /tutorials
       output: web, pdf
 
+    - title: Contributed Content Links
+      url: /links
+      output: web, pdf
+
     - title: User Documentation
       url: /user-guide
       output: web, pdf

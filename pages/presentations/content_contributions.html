@@ -1,0 +1,32 @@
+---
+title: Singularity Extra Contributed Content
+sidebar: main_sidebar
+keywords: presentations
+permalink: links
+toc: false
+folder: presentations
+---
+
+{% assign content = site.data.slides.user_contributions %}
+        
+<div class="home">
+
+    <h2>Presentation Contributions</h2>
+    <div class="post-list">
+        
+        {% for entry in content %}
+        {% for folder in entry.folders %}        
+        <h3>{{ folder.title }}</h3>
+        <ul>
+            {% for item in folder.folderitems %}
+            {% if item.external_url %}
+            <li><a href="{{ item.external_url }}" target="_blank">{{ item.title }}</a><small style="color:#666"> {{ item.date }}</small></li>
+            {% else %}
+            <li><a href="{{ item.url | remove: "/"}}">{{ item.title }}</a></li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+        {% endfor %}
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,16 @@
+user_contributions:
+- title: User Contributions
+  folders:
+    - title: User Contributions
+      folderitems:
+        - title: Singularity on OpenMind (MIT)
+          date: 2/2017
+          external_url: http://satra.cogitatum.org/om-images/
+        - title: Singularity on SCG4 (Stanford)
+          date: 2/2017
+          external_url: https://docs.google.com/presentation/d/1qAh0vXmmFW0MtV5qKZhruxQNknNQnGItQ25Q0A1GX8Q/pub?start=false&loop=false&delayms=3000
+    - title: Content Contributions
+      folderitems:
+        - title: Vagrant Virtualbox OSX Code Snippet
+          external_url: https://gist.github.com/truatpasteurdotfr/c160ffaa4b46a47ad196220194e715f0
+          date: 2/2017
