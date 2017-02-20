@@ -13,10 +13,10 @@ You can try the following two options:
 ### Option 1: Download latest stable release
 You can always download the latest tarball release from <a href="{{ site.repo }}/releases" target="_blank">Github</a>
 
-For example, here is how to download version `2.2` and install:
+For example, here is how to download version `2.2.1` and install:
 
 ```bash
-VERSION=2.2
+VERSION=2.2.1
 wget https://github.com/singularityware/singularity/releases/download/$VERSION/singularity-$VERSION.tar.gz
 tar xvf singularity-$VERSION.tar.gz
 cd singularity-$VERSION
@@ -99,7 +99,7 @@ To build a deb package for Debian/Ubuntu/LinuxMint invoke the following commands
 
 ```bash
 $ fakeroot dpkg-buildpackage -b -us -uc # sudo will ask for a password to run the tests
-$ sudo dpkg -i ../singularity-container_2.2-1_amd64.deb
+$ sudo dpkg -i ../singularity-container_2.2.1-1_amd64.deb
 ```
  
 Note that the tests will fail if singularity is not already installed on your system. This is the case when you run this procedure for the first time.

@@ -5,7 +5,7 @@ permalink: docs-quick-start-installation
 folder: docs
 ---
 
-If you already have Singularity installed, or if you are using Singularity from your distribution provider and the version they have included version 2.2 or newer, you may skip this section. Otherwise, it is recommended that you install or upgrade the version of Singularity you have on your system. The following commands will get you going, and install Singularity to `/usr/local`. If you have an earlier version of Singularity installed, you should first remove it before continuing with the following installation commands.
+If you already have Singularity installed, or if you are using Singularity from your distribution provider and the version they have included version 2.2.1 or newer, you may skip this section. Otherwise, it is recommended that you install or upgrade the version of Singularity you have on your system. The following commands will get you going, and install Singularity to `/usr/local`. If you have an earlier version of Singularity installed, you should first remove it before continuing with the following installation commands.
 
 ```bash
 $ mkdir ~/git
@@ -148,7 +148,7 @@ Formatting image with ext3 file system
 Done.
 ```
 
-Think of this as an empty bucket of a given size, and you can fill that bucket up to the specified size. By default the size in Singularity v2.2 is 768MiB (but this has changed from 512 - 1024 in different versions). You can override the default size by specifying the `--size` option in MiB as follows:
+Think of this as an empty bucket of a given size, and you can fill that bucket up to the specified size. By default the size in Singularity v2.2.1 is 768MiB (but this has changed from 512 - 1024 in different versions). You can override the default size by specifying the `--size` option in MiB as follows:
 
 ```bash
 $ sudo singularity create --size 2048 /tmp/container.img
