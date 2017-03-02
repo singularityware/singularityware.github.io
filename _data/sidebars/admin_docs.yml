@@ -10,7 +10,7 @@ entries:
     output: web
     folderitems:
 
-    - title: Administation QuickStart
+    - title: Administration QuickStart
       output: web, pdf
       url: /admin-guide
 
