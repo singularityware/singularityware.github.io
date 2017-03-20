@@ -54,7 +54,7 @@ Once you are in your Virtual Machine, or have Singularity up and running? Well, 
 
 
 ### A little about Singularity Hub
-<a href="https://www.singularity-hub.org" target="_blank">Singularity Hub</a> is an online registry for images. This means that you can connect a Github repo containing a build specification file to this website, and the image is going to build for you automatically, and be available programatically! We can talk more about how that happens later. If you want some quick details, you should check out the <a href="https://www.singularity-hub.org/faq" target="_blank">Usage Docs</a> on Singularity Hub.
+<a href="https://singularity-hub.org" target="_blank">Singularity Hub</a> is an online registry for images. This means that you can connect a Github repo containing a build specification file to this website, and the image is going to build for you automatically, and be available programatically! We can talk more about how that happens later. If you want some quick details, you should check out the <a href="https://www.singularity-hub.org/faq" target="_blank">Usage Docs</a> on Singularity Hub.
 
 
 ## Make and run containers
