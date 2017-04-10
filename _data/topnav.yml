@@ -26,8 +26,8 @@ topnav_dropdowns:
           url: /faq#troubleshooting
     - title: People
       folderitems:
-        - title: LBNL
-          external_url: http://www.lbl.gov/ 
+        - title: Greg Kurtzer
+          external_url: http://gmkurtzer.github.io/ 
         - title: Stanford
           external_url: https://srcc.stanford.edu/
 

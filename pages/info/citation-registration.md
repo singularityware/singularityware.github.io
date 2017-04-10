@@ -21,5 +21,4 @@ It is appreciated to add your site to the Singularity registry. Let us (and the 
 ### Credits
 
 * Project lead: <a href="https://gmkurtzer.github.io/" target="_blank">Gregory M. Kurtzer</a>
-* Sponsored by: <a href="http://scs.lbl.gov/" target="_blank">HPC @ LBNL</a>
 * Thanks to <a href="{{ site.repo }}/blob/master/AUTHORS" target="_blank">contributors</a>
