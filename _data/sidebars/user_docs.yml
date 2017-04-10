@@ -31,6 +31,10 @@ entries:
       url: /docs-mount
       output: web, pdf
 
+    - title: Environment and Metadata
+      url: /docs-environment-metadata
+      output: web, pdf
+
     - title: Change an Existing Container
       url: /docs-changing-containers
       output: web, pdf

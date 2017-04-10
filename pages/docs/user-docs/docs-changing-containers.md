@@ -5,8 +5,13 @@ permalink: docs-changing-containers
 folder: docs
 ---
 
-## Making Changes to an Existing Container
-It is possible that you may need to make changes to a container after it has been bootstrapped. For that, let's repeat the Singularity mantra "*A user inside a Singularity container is the same user as outside the container*". This means if you want to make changes to your container, you must be root inside your container, which means you must first become root outside your container. Additionally you will need to tell Singularity that you wish to mount the container as `--writable` so you can change the contents. Let's examine the following example:
+
+# Making Changes to an Existing Container
+It is possible that you may need to make changes to a container after it has been bootstrapped. For that, let's repeat the Singularity mantra "*A user inside a Singularity container is the same user as outside the container*". If you want to make changes to your container, you must mount the container as `--writable` so you can change the contents. Note that standard Linux ownership and permission rules pertain to files within the container, so the `--writable` option does not guarantee you can do things like install new software. This might be a bit confusing if you copy a container from one computer to another. If your pids are different on the two computers you will lose the ability to edit files you previous had write access to. In these instances, it might be best to modify your container as root and so you would first need to become root outside of the container. Let's examine the following example:
+
+## Installing Additional Software
+We strongly recommend that you add additional software installation to your bootstrap, and re-create the image. However if you must, you can use `shell` and `exec` with `--writable` to issue additional commands.
+
 
 ```bash
 $ singularity shell /tmp/Centos7-ompi.img 
@@ -76,7 +81,7 @@ Resolving Dependencies
 --> Running transaction check
 ---> Package vim-minimal.x86_64 2:7.4.160-1.el7 will be installed
 --> Finished Dependency Resolution
-
+u
 Dependencies Resolved
 
 ====================================================================================================
@@ -108,3 +113,26 @@ Complete!
 Singularity.Centos7-ompi.img> exit
 ```
 
+## Resizing Images
+
+You can expand your container to make it bigger after it's been created! You don't need sudo. You can specify a `--size` to expand by, or use the default of 768MiB:
+
+```bash
+ singularity expand ubuntu.img 
+Initializing Singularity image subsystem
+Opening image file: ubuntu.img
+Expanding image by 768MiB
+Binding image to loop
+Checking file system
+e2fsck 1.42.13 (17-May-2015)
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking group summary information
+/dev/loop0: 11/49152 files (0.0% non-contiguous), 7387/196608 blocks
+Resizing file system
+resize2fs 1.42.13 (17-May-2015)
+Resizing the filesystem on /dev/loop0 to 393216 (4k) blocks.
+The filesystem on /dev/loop0 is now 393216 (4k) blocks long.
+```

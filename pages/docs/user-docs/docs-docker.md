@@ -5,82 +5,104 @@ permalink: docs-docker
 folder: docs
 ---
 
+Singularity is good friends with Docker. The reason is because the developers use and really like using Docker, and scientists have already put much resources into creating Docker images. Thus, one of our early goals was to support Docker. What can you do?
+
+- You don't need Docker installed
+- You can shell into a Singularity-ized Docker image
+- You can run a Docker image instantly as a Singularity image
+- You can import Docker images, including environment, guts, and labels, into your Singularity image (without sudo!)
+
+
+# TLDR (Too Long Didn't Read)
+
+You can shell, import, run, and exec.
+
+```bash
+singularity shell docker://ubuntu:latest
+singularity run docker://ubuntu:latest
+singularity exec docker://ubuntu:latest echo "Hello Dinosaur!"
+
+singularity create ubuntu.img
+singularity import ubuntu.img docker://ubuntu:latest
+
+printf "Bootstrap:docker\nFrom:ubuntu:latest" > Singularity
+singularity create ubuntu.img
+sudo singularity bootstrap ubuntu.img Singularity
+```
 
 # Import a Docker image into a Singularity Image
 
-The core of a Docker image is basically a compressed set of files, a set of `.tar.gz` that (if you look in your <a href="http://stackoverflow.com/questions/19234831/where-are-docker-images-stored-on-the-host-machine" target="_blank">Docker image folder</a> on your host machine, you will see. We are going to use this local repository for this first set of methods.
+The core of a Docker image is basically a compressed set of files, a set of `.tar.gz` that (if you look in your <a href="http://stackoverflow.com/questions/19234831/where-are-docker-images-stored-on-the-host-machine" target="_blank">Docker image folder</a> on your host machine, you will see. The Docker Registry, which you probably interact with via <a href="https://hub.docker.com" target="_blank">Docker Hub</a>, serves these layers. These are the layers that you see downloading when you interact with the docker daemon. We are going to use these same layers for Singularity!
 
 
-## Quick Start: Use the Docker Remote API
-
-### Import Docker to Singularity
-The Docker engine communicates with the Docker Hub via the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api/" target="_blank">Docker Remote API</a>, and guess what, we can too! The easiest thing to do is create an image, and then pipe a Docker image directly into it from the Docker Registry. This first method does not require having Docker installed on your machine. Let's say that I want to bootstrap tensorflow from Docker. First I should create the tensorflow image:
+## Quick Start: The Docker Registry
+The Docker engine communicates with the Docker Hub via the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api/" target="_blank">Docker Remote API</a>, and guess what, we can too! The easiest thing to do is create an image, and then pipe a Docker image directly into it from the Docker Registry. You don't need Docker installed on your machine, but you will need a working internet connection. Let's create an ubuntu operating system, from Docker:
 
 ```bash
-sudo singularity create --size 4000 tensorflow.img
-sudo singularity import tensorflow.img docker://tensorflow/tensorflow:latest
+singularity create ubuntu.img
+Initializing Singularity image subsystem
+Opening image file: ubuntu.img
+Creating 768MiB image
+Binding image to loop
+Creating file system within image
+Image is done: ubuntu.img
+```
+
+Note that the default size is 768MB, you can modify this by adding the `--size` or `-s` argument like:
+
+```bash
+singularity create --size 2000 ubuntu.img
+```
+
+If you aren't sure about the size? Try <a href="https://asciinema.org/a/103492?speed=3" target="_blank">building into a folder first</a>.
+
+```bash
+mkdir fatty
+singularity import fatty docker://ubuntu:latest
+du -sh fatty/
+```
+
+Next, let's import a Docker image into it! 
+
+```bash
+singularity import ubuntu.img docker://ubuntu
 Cache folder set to /home/vanessa/.singularity/docker
-Extracting /home/vanessa/.singularity/docker/sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c22955b46d4.tar.gz
-Extracting /home/vanessa/.singularity/docker/sha256:182b64c1f020de1cb4b2783b3a13fbeb07ec4087bc911352d0f5ef40c8eec8cf.tar.gz
-Extracting /home/vanessa/.singularity/docker/sha256:bfc1d5e3de1cf70353afb2b81fbbeab16bad961352b86f60901bc1da1396f2b4.tar.gz
-Extracting /home/vanessa/.singularity/docker/sha256:d819f1ec59a06c001b37e66dd1639c591e606029ea7584fac704ff741cda249b.tar.gz
-Extracting /home/vanessa/.singularity/docker/sha256:f5d83de9c6786bff4160679ed4bde332970367225ede609944bbe686edb1c25b.tar.gz
-Extracting /home/vanessa/.singularity/docker/sha256:c1f8f4c880d49d70a8280860e3bc5ee559a95d4e1dc44f9128b638eb2240324c.tar.gz
-Extracting /home/vanessa/.singularity/docker/sha256:9528c5352798ec3a134be13b66bc4dc71e7cdd029e268ae3cdfeb0719a4c8b8b.tar.gz
-Extracting /home/vanessa/.singularity/docker/sha256:c145c1f339f57690f80bd64e86caa3b00e0635a6a383bc8be7726a3baf22a0d2.tar.gz
-Extracting /home/vanessa/.singularity/docker/sha256:ebb77ce6e1c6769c1849194c1319dc6978e19575c76fd1fa942a623b6f2996a4.tar.gz
-Extracting /home/vanessa/.singularity/docker/sha256:51900bc9e720db035e12f6c425dd9c06928a9d1eb565c86572b3aab93d24cfca.tar.gz
-Extracting /home/vanessa/.singularity/docker/sha256:f8419ea7c1b5d667cf26c2c5ec0bfb3502872e5afc6aa85caf2b8c7650bdc8d9.tar.gz
-Extracting /home/vanessa/.singularity/docker/sha256:3eed5ff20a90a40b0cb7909e79128740f1320d29bec2ae9e025a1d375555db15.tar.gz
-Extracting /home/vanessa/.singularity/docker/sha256:6c953ac5d795ea26fd59dc5bdf4d335625c69f8bcfbdd8307d6009c2e61779c9.tar.gz
-Adding Docker CMD as Singularity runscript...
-/run_jupyter.sh
-Bootstrap initialization
-No bootstrap definition passed, updating container
-Executing Prebootstrap module
-Executing Postbootstrap module
-Done.
-```
-
-Note that if you want (much) more detailed output for debugging to the console, you need to enable `--verbose` mode:
-
-```bash
-sudo singularity --verbose import tensorflow.img docker://tensorflow/tensorflow:latest
-```
-
-Now I can shell into it, and import tensorflow:
-
-```bash
-$ singularity shell tensorflow.img 
+Importing: base Singularity environment
+Importing: /home/vanessa/.singularity/docker/sha256:6d9ef359eaaa311860550b478790123c4b22a2eaede8f8f46691b0b4433c08cf.tar.gz
+Importing: /home/vanessa/.singularity/docker/sha256:9654c40e9079e3d5b271ec71f6d83f8ce80cfa6f09d9737fc6bfd4d2456fed3f.tar.gz
+Importing: /home/vanessa/.singularity/docker/sha256:e8db7bf7c39fab6fec91b1b61e3914f21e60233c9823dd57c60bc360191aaf0d.tar.gz
+Importing: /home/vanessa/.singularity/docker/sha256:f8b845f45a87dc7c095b15f3d9661e640ebc86f42cd8e8ab36674846472027f7.tar.gz
+Importing: /home/vanessa/.singularity/docker/sha256:d54efb8db41d4ac23d29469940ec92da94c9a6c2d9e26ec060bebad1d1b0e48d.tar.gz
+Importing: /home/vanessa/.singularity/docker/sha256:fe44851d529f465f9aa107b32351c8a0a722fc0619a2a7c22b058084fac068a4.tar.gz
+singularity shell ubuntu.img 
 Singularity: Invoking an interactive shell within container...
 
-Singularity.tensorflow.img> ls
-Singularity.tensorflow.img> python
-Python 2.7.6 (default, Jun 22 2015, 17:58:13) 
-[GCC 4.8.2] on linux2
-Type "help", "copyright", "credits" or "license" for more information.
->>> import tensorflow
->>> 
+Singularity ubuntu.img>
 ```
 
-### How does the runscript work?
-Docker has two commands in the `DOCKERFILE` that have something to do with execution, `CMD` and `ENTRYPOINT`. The differences are subtle, but the best description I've found is the following:
+## The Build Specification file, Singularity
+Just like Docker has the Dockerfile, Singularity has a file called Singularity that (currently) applications like Singularity Hub know to sniff for. For reproducibility of your containers, our strong recommendation is that you build from these files. Any command that you issue to change a container with `--writable` is by default not recorded, and your container loses its reproducibility. So let's talk about how to make these files! First, let's look at the absolute minimum requirement:
 
->> A `CMD` is to provide defaults for an executing container.
+```bash
+Bootstrap: docker
+From: tensorflow/tensorflow:latest
+```
 
-and
+We would save this content to a file called `Singularity` and then issue the following commands to bootstrap the image from the file
 
->> An `ENTRYPOINT` helps you to configure a container that you can run as an executable.
+```bash
+singularity create --size 4000 tensorflow.img
+sudo singularity bootstrap tensorflow.img Singularity
+```
 
-Given the definition, the `ENTRYPOINT` is most appropriate for the Singularity `%runscript`, and so using the default bootstrap (whether from a `docker://` endpoint or a `Singularity` spec file) will set the `ENTRYPOINT` variable as the runscript. You can change this behavior by specifying `IncludeCmd: yes` in the Spec file (see below). If you provide any sort of `%runscript` in your Spec file, this overrides anything provided in Docker. In summary, the order of operations is as follows:
+but just those two lines and doing bootstrap is silly, because we would achieve the same thing by doing:
 
-1. If a `%runscript` is specified in the `Singularity` spec file, this takes prevalence over all
-2. If no `%runscript` is specified, or if the `import` command is used as in the example above, the `ENTRYPOINT` is used as runscript.
-3. If no `%runscript` is specified, but the user has a `Singularity` spec with `IncludeCmd`, then the Docker `CMD` is used.
+```bash
+singularity create --size 4000 tensorflow.img
+singularity import tensorflow.img docker://tensorflow/tensorflow:latest
+```
 
-
-### Use a Spec File
-Do a barrel role! Use a spec file! Many times, you want to bootstrap an image, and then either change the `%runscript` or add additional software or commands in the `%post` section. To achieve this, you can create a specification file. Currently, these are distributed with the naming format `[myfile].def`, however (soon) we will use a standard name, `Singularity` so all specification files can be automatically found. Here is what the spec file would look like for tensorflow:
+The power of bootstrap comes with the other stuff that you can do! This means running specific install commands, specifying your containers runscript (what it does when you execute it), adding files, labels, and customizing the environment. Here is a full Singularity file:
 
 
 ```bash
@@ -94,26 +116,24 @@ From: tensorflow/tensorflow:latest
 %post
 
     echo "Post install stuffs!"
+
+%files
+
+/home/vanessa/Desktop/analysis.py /tmp/analysis.py
+relative_path.py /tmp/analysis2.py
+
+%environment
+
+TOPSECRET pancakes
+HELLO WORLD
+
+%labels
+
+AUTHOR Vanessasaur
 ```
 
-In the example above, I am overriding any Dockerfile `ENTRYPOINT` because I have defined a `%runscript`. If I want the Dockerfile `ENTRYPOINT` to take preference, I would remove the `%runscript` section:
+In the example above, I am overriding any Dockerfile `ENTRYPOINT` or `CMD` because I have defined a `%runscript`. If I want the Dockerfile `ENTRYPOINT` to take preference, I would remove the `%runscript` section. If I want to use `CMD` instead of `ENTRYPOINT`, I would again remove the runscript, and add IncludeCmd to the header:
 
-```bash
-Bootstrap: docker
-From: tensorflow/tensorflow:latest
-
-%post
-
-    echo "Post install stuffs!"
-```
-
-Note that the spec file above would be (almost) equivalent to the command:
-
-```bash
-sudo singularity import tensorflow.img docker://tensorflow/tensorflow:latest
-```
-
-minus the useless echo at the end. If I want the `CMD` to take preference, I would add `IncludeCmd`:
 
 ```bash
 Bootstrap: docker
@@ -125,13 +145,65 @@ IncludeCmd: yes
     echo "Post install stuffs!"
 ```
 
-The solutions above would be ideal for saving a custom specification of an image to build at some runtime. 
+Did you know that you can commit this Singularity file to a Github repo and it will automatically build for you when you push to <a href="https://singularity-hub.org" target="_blank">Singularity Hub?</a>. This will ensure maximum reproducibility of your work.
 
-### Custom Authentication
+
+## How does the runscript work?
+Docker has two commands in the `Dockerfile` that have something to do with execution, `CMD` and `ENTRYPOINT`. The differences are subtle, but the best description I've found is the following:
+
+>> A `CMD` is to provide defaults for an executing container.
+
+and
+
+>> An `ENTRYPOINT` helps you to configure a container that you can run as an executable.
+
+Given the definition, the `ENTRYPOINT` is most appropriate for the Singularity `%runscript`, and so using the default bootstrap (whether from a `docker://` endpoint or a `Singularity` spec file) will set the `ENTRYPOINT` variable as the runscript. You can change this behavior by specifying `IncludeCmd: yes` in the Spec file (see below). If you provide any sort of `%runscript` in your Spec file, this overrides anything provided in Docker. In summary, the order of operations is as follows:
+
+1. If a `%runscript` is specified in the `Singularity` spec file, this takes prevalence over all
+2. If no `%runscript` is specified, or if the `import` command is used as in the example above, the `ENTRYPOINT` is used as runscript.
+3. If no `%runscript` is specified, but the user has a `Singularity` spec with `IncludeCmd`, then the Docker `CMD` is used.
+4. If no `%runscript` is specified, and there is no `CMD` or `ENTRYPOINT`, the image's default execution action is to run the bash shell.
+
+
+
+# How do I specify my Docker image?
+
+In the example above, you probably saw that we referened the docker image first with the uri `docker://` and that is important to tell Singularity that it will be pulling Docker layers. To ask for ubuntu, we asked for `docker://ubuntu`. This uri that we give to Singularity is going to be very important to choose the following Docker metadata items:
+
+- registry   (e.g., "index.docker.io")
+- namespace  (e.g., "library")
+- repository (e.g., "ubuntu")
+- tag (e.g., "latest") OR version (e.g., "@sha256:1234...)
+
+When we put those things together, it looks like this:
+
+```bash
+docker://<registry>/<namespace>/<repo_name>:<repo_tag>
+```
+
+By default, the minimum requirement is that you specify a repository name (eg, ubuntu) and it will default to the following:
+
+```bash
+docker://index.docker.io/library/ubuntu:latest
+```
+
+If you provide a version instead of a tag, that will be used instead:
+
+```bash
+docker://index.docker.io/library/ubuntu@sha256:1235...
+```
+
+You can have one or the other, both are considered a "digest" in Docker speak.
+
+If you want to change any of those fields, then just specify what you want in the URI.
+
+
+
+# Custom Authentication
 For both import and bootstrap using a build spec file, by default we use the Docker Registry `index.docker.io`. Singularity first tries the call without a token, and then asks for one with pull permissions if the request is defined. However, it may be the case that you want to provide a custom token for a private registry. You have two options. You can either provide a `Username` and `Password` in the build specification file (if stored locally and there is no need to share), or (in the case of doing an import or needing to secure the credentials) you can export these variables to environmental variables. We provide instructions for each of these cases:
 
 
-#### Authentication in the Spec File
+#### Authentication in the Singularity Build File
 You can simply specify your additional authentication parameters in the header with the labels `Username` and `Password`:
 
 ```bash
@@ -142,11 +214,11 @@ Password: [password]
 Again, this can be in addition to specification of a custom registry with the `Registry` parameter.
 
 #### Authentication in the Environment
-You can export your registry, username, and password for Singularity as follows:
+You can export your username, and password for Singularity as follows:
 
 ```bash
-export SINGULARITY_DOCKER_REGISTRY='--registry myrepo'
-export SINGULARITY_DOCKER_AUTH='--username vanessa --password [password]'
+export SINGULARITY_DOCKER_USERNAME=vanessasaur
+export SINGULARITY_DOCKER_PASSWORD=rawwwwwr
 ```
 
 ##### Testing Authentication
@@ -164,87 +236,7 @@ This should place the token in the environmental variable `TOKEN`. To test that 
 http https://index.docker.io/v2/vanessa/code-samples/tags/list Authorization:"Bearer $TOKEN"
 ```
 
-The above call should return the tags list as expected.
-
-
-### Run a Singularity Shell from a Docker image
-
-Finally, we can achieve a "shell" experience, meaning shelling into Docker image imported into Singularity. We do this by storing the entire image in a temporary location, and then running the same function. You would do something like this:
-
-```bash
-sudo singularity shell docker://ubuntu:latest
-```
-
-
-## Detailed Start: Bootstrapping a Docker image
-A common use case is to want to start with a Docker image, possibly add custom commands, and have a Singularity image when you finish. You can read a bit about <a href="/bootstrap-image" target="_blank">bootstrapping here</a> to get a sense of adding the custom commands and software. To specify "Docker" as the build source, you simply need this header:
-
-```bash
-Bootstrap: docker
-From: ubuntu:latest
-IncludeCmd: yes
-```
-
-- Boostrap: docker specifies that you want to import from Docker. This is required for Docker bootstrapping!
-- IncludeCmd: will add the Dockerfile CMD as the runscript (`/singularity`) if one is found. If you define a different one later in the spec file, your specification will overwrite this one.
-- From: works the same way <a href="https://docs.docker.com/engine/reference/builder/" target="_blank">as it does</a> for Docker. You can specify, maximally, a library/imagename:tag. For example, all of the following are valid:
-  - library/ubuntu:latest
-  - library/ubuntu
-  - ubuntu:latest
-  - ubuntu
-
-
-In the case of omitting the tag (latest) it is assumed that you want the latest image. In the case of omitting the namespace (library) it is assumed that you want the common namespace, library.  If you have a reason to use the Docker Engine, we also have a method to do this. The benefit of this method would be that you could use an image built locally (in your local cache) that isn't on Docker Hub.
-
-
-### Using Docker Engine
-
-Here we will access Docker images via the `Docker` command line tool, meaning using the Docker engine. As is the Docker standard, the image is first looked for in your local cache, and if not found, is pulled from Docker Hub.
-
-
-#### docker2singularity.sh: Dockerized
-
-We wrapped this entire process into a Docker container itself, which means that you can use a Docker container in a Docker container to export a Docker container into Singularity! Nuts. Full instructions <a href="https://github.com/singularityware/docker2singularity" target="_blank"> are provided, however here is the gist:
-
-```bash
- docker run \        
- -v /var/run/docker.sock:/var/run/docker.sock \
- -v D:\host\path\where\to\ouptut\singularity\image:/output \
- --privileged -t --rm \
- singularityware/docker2singularity \            
- ubuntu:14.04
-```
-
-##### How does docker2singularity.sh work?
-
-How did this come to be? It so happens that Docker has an "export" command to pipe this data out, and Singularity has an "import" command to take them in. Thus, you can do a simple import of a Docker image into a Singularity command by doing:
-
-```bash
-# Here is the name of the Singularity image I will create
-image=ubuntu.img
-
-# Now I am creating it
-sudo singularity create $image
-
-# Now I am exporting a running Docker container into it via a pipe (|)
-docker export $container_id | singularity import $image
-```
-
-Where `$container_id` is the id of a running container obtained with `docker ps`. However, there are subtle details like the environment and permissions that this method will miss. It's also the case that most Docker images don't run (and stay running) easily unless you do something like:
-
-```bash
-docker run -d $image tail -f /dev/null
-```
-
-Early on we created a <a href="https://github.com/singularityware/docker2singularity/blob/master/docker2singularity.sh" target="_blank">docker2singularity.sh</a>, a script that you can download and run as follows:
-
-```bash
-wget https://raw.githubusercontent.com/singularityware/docker2singularity/master/docker2singularity.sh
-chmod u+x docker2singularity.sh
-./docker2singularity.sh ubuntu:latest
-```
-
-To produce a Singularity image of "ubuntu:latest" in the present working directory.
+The above call should return the tags list as expected. And of course you should change the repo name to be one that actually exists that you have credentials for.
 
 
 ## Troubleshooting

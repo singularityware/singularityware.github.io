@@ -92,6 +92,7 @@ Singularity also supports several different mechanisms for obtaining the images 
 - **http://** Singularity will use Curl to download the image locally, and then run from the local image
 - **https://** same as above using encryption
 - **docker://** Singularity can pull Docker images from a Docker registry, and will run them non-persistently (e.g. changes are not persisted as they can not be saved upstream)
+- **shub://** Singularity Hub is our own registry for Singularity containers. If you want to publish a container, or give easy access to others from their command line, or enable automatic builds, you should build it on <a href="https://singularity-hub.org" target="_blank">Singularity Hub</a>.
 
 
 ### Name-spaces and isolation
@@ -112,10 +113,10 @@ Singularity does its best to abstract the complications of running an applicatio
 Some usage examples of Singularity can be seen as follows:
 
 ```bash
-$ singularity exec /tmp/Demo.img xterm
-$ singularity exec /tmp/Demo.img python script.py
-$ singularity exec /tmp/Demo.img python < /path/to/python/script.py
-$ cat /path/to/python/script.py | singularity exec /tmp/Demo.img python
+$ singularity exec dummpy.img xterm
+$ singularity exec dummy.img python script.py
+$ singularity exec dummy.img python < /path/to/python/script.py
+$ cat /path/to/python/script.py | singularity exec dummy.img python
 ```
 
 You can even run MPI executables within the container as simply as:
