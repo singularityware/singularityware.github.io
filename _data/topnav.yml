@@ -27,9 +27,16 @@ topnav_dropdowns:
     - title: People
       folderitems:
         - title: Greg Kurtzer
-          external_url: http://gmkurtzer.github.io/ 
-        - title: Stanford
-          external_url: https://srcc.stanford.edu/
+          external_url: https://github.com/gmkurtzer
+        - title: Vanessa Sochat
+          external_url: https://github.com/vsoch
+        - title: Michael Bauer
+          external_url: https://github.com/bauerm97
+        - title: Brian Bockelman
+          external_url: https://github.com/bbockelm
+        - title: Complete Authors List
+          external_url: https://github.com/singularityware/singularity/blob/master/AUTHORS
+
 
 ## Topnav single links
 ## if you want to list an external url, use external_url instead of url. the theme will apply a different link base.
