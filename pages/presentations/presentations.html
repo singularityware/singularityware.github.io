@@ -20,7 +20,7 @@ folder: presentations
                 <a href="{{ "tag_" | append: tag | append: ".html"}}">{{tag}}{{tag}}</a>{% unless forloop.last %}, {% endunless%}
 
                 {% endfor %}</span>
-        <p>{% if page.summary %} {{ page.summary | strip_html | strip_newlines | truncate: 160 }} {% else %} {{ post.content | truncatewords: 50 | strip_html }} {% endif %}</p>
+        <p class="post-entry">{% if page.summary %} {{ page.summary | strip_html | strip_newlines | truncate: 160 }} {% else %} {{ post.content | truncatewords: 50 | strip_html }} {% endif %}</p>
 
         {% endfor %}
 
