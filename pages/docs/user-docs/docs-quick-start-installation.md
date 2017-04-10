@@ -195,7 +195,7 @@ The `runscript` is linked to the file `/singularity`. Within `env` we have diffe
 
 ```bash
 ls /.singularity.d/env
-01-base.sh  10-docker.sh  99-environment.sh
+01-base.sh  10-docker.sh
 ```
 
 `labels.json` is metadata about the container, both from the bootstrap or creation, and docker (if relevant). We are showing these files so you understand how we are storing metadata. We advise you to not edit these files manually but rather to add variables to your [bootstrap specification](/docs-bootstrap) file that will automatically generate these files.
