@@ -19,12 +19,12 @@ entries:
       url: /docs-quick-start-installation
       output: web, pdf
 
-    - title: Bootstrap an Image
-      url: /bootstrap-image
-      output: web, pdf
-
     - title: Create an Image
       url: /create-image
+      output: web, pdf
+
+    - title: Bootstrap an Image
+      url: /bootstrap-image
       output: web, pdf
 
     - title: Bind Paths and Files
