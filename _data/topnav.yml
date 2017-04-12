@@ -26,7 +26,7 @@ topnav_dropdowns:
           url: /faq#troubleshooting
     - title: People
       folderitems:
-        - title: Greg Kurtzer
+        - title: Gregory M. Kurtzer
           external_url: https://github.com/gmkurtzer
         - title: Vanessa Sochat
           external_url: https://github.com/vsoch
