@@ -24,9 +24,10 @@ $ sudo apt-get update && \
 **Centos**
 
 ```
-$ sudo yum groupinstall 'Development Tools'
+$ sudo yum update && \
+    sudo yum groupinstall 'Development Tools'
 ```
-
+{% include asciicast.html source='install_dependencies.js' title='How to install dependencies' author='davidgodlove@gmail.com'%}
 
 ## Install the master branch
 The following commands will install the latest version of the [GitHub repo](https://github.com/singularityware/singularity)  master branch to `/usr/local`. 
@@ -43,6 +44,8 @@ $ sudo make install
 Note that the installation prefix is `/usr/local` but the configuration directory is `/etc`. This ensures that the configuration file `singularity.conf` is placed in the standard location. 
 
 If you omit the `--sysconfdir` option , the configuration file will be installed in `/usr/local/etc`.  If you omit the `--prefix` option, Singularity will be installed in the `/usr/local` directory hierarchy by default.  And if you specify a custom directory with the `--prefix` option, all of Singularity's binaries and the configuration file will be installed within that directory.  This last option can be useful if you want to install multiple versions of Singularity, install Singularity on a shared system, or if you want to remove Singularity easily after installing it.  
+
+{% include asciicast.html source='install_master.js' title='How to install the master branch' author='davidgodlove@gmail.com'%}
 
 
 ## Install a specific release
@@ -231,6 +234,8 @@ In this example, you started on your (insert OS here) host operating system, ran
 
 You may select other images that are currently hosted on the main Docker Hub Library.
 
+{% include asciicast.html source='shell_from_docker.js' title='How to shell into container from Docker' author='davidgodlove@gmail.com'%}
+
 
 ## Container Guts
 Where do we keep metadata and things? The metadata folder is located within the image under the root directory at `/.singularity.d`
@@ -248,6 +253,8 @@ ls /.singularity.d/env
 ```
 
 `labels.json` is metadata about the container, both from the bootstrap or creation, and from Docker (if relevant). These files should not be edited manually.  Instead, add variables to your [bootstrap specification](/docs-bootstrap) file that will automatically generate these files.
+
+{% include asciicast.html source='container_guts.js' title='Viewing container meta-data' author='davidgodlove@gmail.com'%}
 
 
 ## Creating a New Singularity Image
@@ -284,6 +291,9 @@ $ ls -l container.img
 
 Note the permissions of the resulting file. While the `umask` is adhered to, you should find that the file is executable. At this point there is nothing to execute within that image. But once this image contains a proper operating system, you can define what it will do when it is executed directly. 
 
+{% include asciicast.html source='create_new_image.js' title='How to create an image' author='davidgodlove@gmail.com'%}
+
+
 ## Bootstrapping a Singularity Image
 The final step in creating a fully functional Singularity container is to execute the `bootstrap` command.  This installs an operating system, apps, and creates an environment within the image. 
 
@@ -294,6 +304,8 @@ $ sudo singularity bootstrap container.img singularity/examples/ubuntu/Singulari
 ```
 
 You will see a lot of standard output as Singularity downloads and installs all the pieces for Ubuntu into your image.  After it completes, you will have a fully functional container!
+
+{% include asciicast.html source='bootstrap_new_image.js' title='How to bootstrap an image' author='davidgodlove@gmail.com'%}
 
 
 What should you do next? How about learning how to interact with your container via the [shell](/docs-shell), [exec](/docs-exec), or [run](/docs-run) commands.  Or click **next** below to continue the tutorial.  
