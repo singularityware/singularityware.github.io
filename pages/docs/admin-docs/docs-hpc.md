@@ -47,7 +47,7 @@ $ singularity exec /tmp/Centos-7.img ./configure --prefix=/usr/local
 $ singularity exec /tmp/Centos-7.img make
 $
 $ # Install OpenMPI into the container (notice now running as root and container is writeable)
-$ sudo singularity exec -w /tmp/Centos-7.img make install
+$ sudo singularity exec -w -B /home /tmp/Centos-7.img make install
 $
 $ # Build the OpenMPI ring example and place the binary in this directory
 $ singularity exec /tmp/Centos-7.img mpicc examples/ring_c.c -o ring
