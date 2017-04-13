@@ -27,6 +27,10 @@ entries:
       url: /bootstrap-image
       output: web, pdf
 
+    - title: Adding Content
+      url: /docs-content
+      output: web, pdf
+
     - title: Bind Paths and Files
       url: /docs-mount
       output: web, pdf
