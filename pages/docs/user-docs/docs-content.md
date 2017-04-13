@@ -27,8 +27,6 @@ Singularity has a `copy` command that is basically a wrapper around the system's
 
 ```
 man cp
-
-
 ```
 
 Notably, you might run into the issue of copying a file to your container, and then you can't execute it. This is because you need to use `-p` to preserve permissions:
