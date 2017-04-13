@@ -88,8 +88,8 @@ $ ls -l container.img
 Similar to the create sub-command, you can override the default size (which is 512MiB) by using the --size option.
 
 ## Copying, sharing, branching, and distributing your image
-Because Singularity images are single files, they are easily copied and managed. You can copy the image to create a branch, share the image and distribute the image as easily as copying any other file you control!
-
+Because Singularity images are single files, they are easily copied and managed. You can copy the image to create a branch, share the image and distribute the image as easily as copying any other file you control! If you want an automated builder for your image, you can use our container registry <a href="https://singularity-hub.org" target="_blank">Singularity Hub</a> that will build your "Singularity" bootstrap specification files from a Github repository each time that you push.
+ 
 The primary motivation of Singularity is mobility, the single file image format makes this a simple accomplishment.
 
 

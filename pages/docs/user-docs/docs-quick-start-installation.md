@@ -1,5 +1,5 @@
 ---
-title: Quick Start Installation
+title: Quick Start
 sidebar: user_docs
 permalink: docs-quick-start-installation
 folder: docs
