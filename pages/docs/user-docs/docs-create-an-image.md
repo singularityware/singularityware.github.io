@@ -5,15 +5,16 @@ permalink: create-image
 folder: docs
 ---
 
-Singularity images are single files which physically contain the container. Unlike Docker that puts images together from layers, abstractly shown on your computer with `docker -ps`, a Singularity image is just a file that can be sitting on your Desktop, in a folder on your cluster, or elsewhere.
+A Singularity image, which can be referred to as a "container," is a single file that contains a virtual file system. After creating an image you can install an operating system, applications, and save meta-data with it.
 
-The effect of all files existing virtually within a single image greatly simplifies sharing, copying, branching, and other management tasks. It also means that standard file system ACLs apply to access and permission to the container (e.g. I can give read only access to a colleague, or block access completely with a simple chmod command).
+Whereas Docker assembles images from layers that are stored on your computer (viewed with the docker -ps command), a Singularity image is just one file that can sit on your Desktop, in a folder on your cluster, or anywhere.
 
+Having Singularity containers housed within a single image file greatly simplifies management tasks such as sharing, copying, and branching your containers. It also means that standard Linux file system concepts like permissions, ownership, and ACLs apply to the container (e.g. I can give read only access to a colleague, or block access completely with a simple chmod command).
 
 ## Creating a new blank Singularity container image
-Singularity will create a default container image of 768MiB using the following command example:
+Singularity will create a default container image of 768MiB using the following command:
 
-```bash
+```
 $ singularity create container.img
 Initializing Singularity image subsystem
 Opening image file: container.img
@@ -22,105 +23,136 @@ Binding image to loop
 Creating file system within image
 Image is done: container.img
 ```
-
-Let's import an operating system into it.
-
-```bash
-singularity import container.img docker://ubuntu:latest
-```
-
-We can now use the command `ls` to look at the files and permissions of the container:
-
-```bash
-$ ls -l container.img 
--rwxr-xr-x 1 vanessa vanessa 805306400 Apr  6 19:24 container.img
-```
-
 How big is it?
 
-```bash
+```
 $ du -sh container.img 
-172M     container.img
+29M     container.img
 ```
 
-Here we created a new container image called `container.img` in the current directory.
+We can now use `ls` to list details about the image.
 
-Also, notice the permissions of the container image as it is executable. This is important in that Singularity images can be executed directly (as long as Singularity is installed on the host system).
-
-You can increase or change the default image size using the --size option to create (option ordering is very important with Singularity and it must follow the 'create' sub-command).
-
-
-## Mounting an image
-Once the image has been created, you can mount it with the following command:
-
-```bash
-$singularity mount container.img /mnt
-
-Mounting image 'container.img' into '/mnt'
+```
+$ ls -l container.img 
+-rwxr-xr-x 1 user group 805306400 Apr 15 11:11 container.img
 ```
 
-To unmount, simply exit this new shell.
+Note the permissions of the image make it executable. Singularity images [can be executed directly](/docs-run).
 
-```bash
-Singularity: \w> df -h /mnt
-Filesystem      Size  Used Avail Use% Mounted on
-/dev/loop1      740M  143M  559M  21% /mnt
+### Creating an image of a different size
+
+You can change the maximum size of an image you create using the `--size` option. Note that `--size` is not a global option.  It is an option to the `create` sub-command and must therefore follow it:
+
 ```
- 
-When mounting the image in this manner, Singularity makes use of name-spaces such that the mount is only visible and accessible from within the current shell that Singularity will spawn. When you are finished, you can simply exit the shell and the file system will be automatically unmounted.
+$ singularity create --size 2048 container2.img
+Initializing Singularity image subsystem
+Opening image file: container2.img
+Creating 2048MiB image
+Binding image to loop
+Creating file system within image
+Image is done: container2.img
 
+$ ls -lh container*.img 
+-rwxr-xr-x 1 user group 2.1G Apr 15 11:34 container2.img
+-rwxr-xr-x 1 user group 769M Apr 15 11:11 container.img
+```
+
+### Overwriting an image with a new one
+
+If you have already created an image and wish to overwrite it, you can do so with the `--force` option.  This option must also follow the `create` sub-command.
+
+```
+$ singularity create --size 512 --force container2.img
+Initializing Singularity image subsystem
+Opening image file: container2.img
+Creating 512MiB image
+Binding image to loop
+Creating file system within image
+Image is done: container2.img
+
+$ ls -lh container*.img 
+-rwxr-xr-x 1 user group 513M Apr 15 11:39 container2.img
+-rwxr-xr-x 1 user group 769M Apr 15 11:11 container.img
+```
+
+{% include asciicast.html source='docs-create-create.js' title='How to create images' author='davidgodlove@gmail.com'%}
 
 ## Increasing the size of an existing image
-You can increase the size of an image after it has been instantiated by using the 'expand' Singularity sub-command as follows:
+You can increase the size of an image after it has been instantiated by using the `expand` Singularity sub-command as follows:
 
-```bash
-$ sudo singularity expand container.img 
-Expanding sparse image by 512MiB...
-Checking image (/sbin/mkfs.ext4)
-e2fsck 1.42.9 (28-Dec-2013)
-Growing file system
-resize2fs 1.42.9 (28-Dec-2013)
-Done. Image can be found at: container.img
-$ ls -l container.img 
--rwxr-xr-x. 1 root root 1610612769 Jun  1 08:40 container.img
+```
+$ ls -lh container.img 
+-rwxr-xr-x 1 user group 769M Apr 15 11:11 container.img
+
+$ singularity expand container.img 
+Initializing Singularity image subsystem
+Opening image file: container.img
+Expanding image by 768MiB
+Binding image to loop
+Checking file system
+e2fsck 1.42.13 (17-May-2015)
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking group summary information
+/dev/loop0: 11/49152 files (0.0% non-contiguous), 7387/196608 blocks
+Resizing file system
+resize2fs 1.42.13 (17-May-2015)
+Resizing the filesystem on /dev/loop0 to 393216 (4k) blocks.
+The filesystem on /dev/loop0 is now 393216 (4k) blocks long.
+
+Image is done: container.img
+
+$ ls -lh container.img 
+-rwxr-xr-x 1 user group 1.6G Apr 15 12:21 container.img
 ```
 
-Similar to the create sub-command, you can override the default size (which is 512MiB) by using the --size option.
+Similar to the create sub-command, you can override the default size increase (which is 768MiB) by using the `--size` option.
+
+{% include asciicast.html source='docs-create-expand.js' title='How to expand images' author='davidgodlove@gmail.com'%}
+
+## Mounting an image
+Once an image has been created and an OS has been added with the [`import`](/docs-import) or [`bootstrap`](/docs-bootstrap) commands, you can use the [`shell`](/docs-shell) command to start an interactive shell within the container. But this is not possible when an image does not yet contain a functional OS or shell. For debugging, development, or simply inspecting an image that lacks a functional shell you can use the `mount` command like so:
+
+```
+$ mkdir /tmp/container
+
+$ singularity mount container.img /tmp/container/
+container.img is mounted at: /tmp/container/
+
+Spawning a new shell in this namespace, to unmount, exit shell
+
+Singularity: \w> df
+Filesystem     1K-blocks      Used Available Use% Mounted on
+/dev/loop0       1531760      1172   1451948   1% /tmp/container
+
+Singularity: \w> cd /tmp/container
+
+Singularity: \w> ls -a
+.  ..  lost+found
+```
+
+{% include asciicast.html source='docs-create-mount.js' title='How to mount an image' author='davidgodlove@gmail.com'%}
+
+At this point the image just contains a bare file system because we haven't used something like the [`bootstrap`](docs-bootstrap) or [`import`](docs-import) commands to install an OS. 
+ 
+Singularity mounts images in private name-spaces so that the mount is only visible and accessible from within the freshly spawned shell. When you are finished, you can simply exit the shell and the file system will be automatically unmounted.
+
+Files can be copied from the image to the host when it is mounted in this way, but they cannot be copied from the host into the image.  This is because the image is mounted in read-only mode by default and the mount point is owned by the root user.  To copy files into a mounted image, first become root and then mount the image with the `--writable` option to the `mount` sub-command.
+
+```
+$ sudo -i
+
+# singularity mount --writable /home/user/container.img /tmp/container
+```
+
+{% include asciicast.html source='docs-create-rootmount.js' title='How to mount an image and copy files to it' author='davidgodlove@gmail.com'%}
 
 ## Copying, sharing, branching, and distributing your image
-Because Singularity images are single files, they are easily copied and managed. You can copy the image to create a branch, share the image and distribute the image as easily as copying any other file you control! If you want an automated builder for your image, you can use our container registry <a href="https://singularity-hub.org" target="_blank">Singularity Hub</a> that will build your "Singularity" bootstrap specification files from a Github repository each time that you push.
- 
-The primary motivation of Singularity is mobility, the single file image format makes this a simple accomplishment.
+A primary goal of Singularity is mobility. The single file image format makes mobility easy.
 
+Because Singularity images are single files, they are easily copied and managed. You can copy the image to create a branch, share the image and distribute the image as easily as copying any other file you control! 
 
-### Read Only Vs. Read Write
-By default, all Singularity commands that operate within a container (e.g. 'exec', 'run', and 'shell') all enter the image by default as read only. This enables multiple processes to be able to use the image appropriately (as would be necessary with MPI). But if you want to make any changes to the image, you must have both write permission on the image file itself and use the '--writable' flag. For example:
+If you want an automated solution for building and hosting your image, you can use our container registry <a href="https://singularity-hub.org" target="_blank">Singularity Hub</a>. Singulairty Hub can automatically build [bootstrap specification files](/bootstrap-image#the-bootstrap-definition-file) from a Github repository each time that you push. It provides a simple cloud solution for storing and sharing your image.  
 
-
-```bash
-$ sudo singularity shell container.img 
-Singularity/container.img> whoami
-root
-Singularity/container.img> touch /foo
-touch: cannot touch '/foo': Read-only file system
-Singularity/container.img> exit
-
-$ sudo singularity shell --writable container.img 
-Singularity/container.img> touch /foo
-Singularity/container.img> exit
-$ 
-```
-
-Even though I was root in both cases, I could not touch /foo unless the shell sub-command was called with the `--writable` flag.
-
-
-## Using Your Container Image
-Singularity offers several primary user interfaces to containers: `shell`, `exec`, `run` and `test`. Using these interfaces, you can include any application or workflow that exists inside of a container as easy as if they were on the host system. These interfaces are designed specifically such that you do not need to be root or have escalated privileges to execute them. Additionally, Singularity is designed to abstract out the container system as elegantly as possibly such that the container does not exist. All IO, pipes, sockets, and native process control is handed through the container and to the calling application and Singularity elegantly gets completely out of the way for the process to run.
-
-
-Generally the differences can be explained as follows
-
-- **shell**: The `shell` interface (or Singularity subcommand) will invoke an interactive shell within the container. By default the shell called is `/bin/sh`, but this can be overridden with the shell option `--shell /path/to/shell` or via the environment variable `SINGULARITY_SHELL`. Once the shell is exited, the namespaces all collapse, and all mounts, binds, and contained processes exit.
-- **exec**: As the name implies, the `exec` interface/subcommand offers the ability to execute a single command within a container environment. This is a simple way to run programs, scripts and workflows that exist within a container from the host system. You can run this command from within a script on the host system or from a batch scheduler or an `mpirun` command.
-- **run**: Running a container will execute a predefined script (defined in the Singularity bootstrap definition as `%runscript`). If not run script has been provided, the container will launch a shell instead.
-- **test**: If you specified a `%test` section within the Singularity bootstrap definition, you can run that test as yourself. This is a useful way to ensure that a container works properly not only when built, but when transferred to other hosts or infrastructures.
