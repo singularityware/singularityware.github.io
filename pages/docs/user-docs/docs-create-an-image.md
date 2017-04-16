@@ -5,9 +5,9 @@ permalink: create-image
 folder: docs
 ---
 
-A Singularity image is a single file that contains a virtual file system. It is the basis for a Singularity container. After creating an image, you can install an operating system, applications, and save meta-data into it.   
+A Singularity image, which can be referred to as a "container," is a single file that contains a virtual file system. After creating an image you can install an operating system, applications, and save meta-data with it.
 
-Whereas Docker assembles images from layers (which are stored on your computer in a hidden directory and can be viewed with the `docker -ps` command), a Singularity image is just one file that can sit on your Desktop, in a folder on your cluster, or anywhere.
+Whereas Docker assembles images from layers that are stored in on your computer (viewed with the docker -ps command), a Singularity image is just one file that can sit on your Desktop, in a folder on your cluster, or anywhere.
 
 Having Singularity containers housed within a single image file greatly simplifies management tasks such as sharing, copying, and branching your containers. It also means that standard Linux file system concepts like permissions, ownership, and ACLs apply to the container (e.g. I can give read only access to a colleague, or block access completely with a simple chmod command).
 
@@ -78,7 +78,7 @@ $ ls -lh container*.img
 {% include asciicast.html source='docs-create-create.js' title='How to create images' author='davidgodlove@gmail.com'%}
 
 ## Increasing the size of an existing image
-You can increase the size of an image after it has been instantiated by using the 'expand' Singularity sub-command as follows:
+You can increase the size of an image after it has been instantiated by using the `expand` Singularity sub-command as follows:
 
 ```
 $ ls -lh container.img 
@@ -113,7 +113,7 @@ Similar to the create sub-command, you can override the default size increase (w
 {% include asciicast.html source='docs-create-expand.js' title='How to expand images' author='davidgodlove@gmail.com'%}
 
 ## Mounting an image
-Once the image has been created, you can mount it to an existing directory like so:
+Once an image has been created and an OS has been added with the [`import`](/docs-import) or [`bootstrap`](/docs-bootstrap) commands, you can use the [`shell`](/docs-shell) command to start an interactive shell within the container. But this is not possible when an image does not yet contain a functional OS or shell. For debugging, development, or simply inspecting an image that lacks a functional shell you can use the `mount` command like so:
 
 ```
 $ mkdir /tmp/container
@@ -135,7 +135,7 @@ Singularity: \w> ls -a
 
 {% include asciicast.html source='docs-create-mount.js' title='How to mount an image' author='davidgodlove@gmail.com'%}
 
-At this point the image just contains a bare file system because we haven't used something like the [bootstrap](docs-bootstrap) or [import](docs-import) commands to install an OS. 
+At this point the image just contains a bare file system because we haven't used something like the [`bootstrap`](docs-bootstrap) or [`import`](docs-import) commands to install an OS. 
  
 Singularity mounts images in private name-spaces so that the mount is only visible and accessible from within the freshly spawned shell. When you are finished, you can simply exit the shell and the file system will be automatically unmounted.
 
