@@ -1,5 +1,5 @@
 ---
-title: Running Singularity with Vagrant (Mac)
+title: Running Singularity with Vagrant or Docker (Mac)
 sidebar: main_sidebar
 permalink: install-mac
 folder: docs
@@ -44,3 +44,21 @@ vagrant ssh
 ```
 
 Remember that the VM is running in the background because we started it via the command `vagrant up`. You can shut the VM down using the command 'vagrant halt' when you no longer need it.
+
+---
+
+It is also possible to run Singularity on your Mac via Docker. Use the command `docker pull kaczmarj/singularity` to pull the latest, pre-built Docker image containing Singularity. You can also build a Docker image from scratch using the [Dockerfile](/Dockerfile) in this repository. The Singularity Docker image must be run in [prileged mode](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities).
+
+Example:
+
+```shellsession
+host-machine:/ me$ docker run --rm -it --privileged kaczmarj/singularity
+root@2e7fe1bd3e27:/home# singularity run shub://singularityhub/scientific-linux:master
+Cache folder set to /root/.singularity/shub
+Found image singularityhub/scientific-linux:master
+Downloading image... f5be5daaf80b208c2dd1af7da9cc83e742043606.img.gz
+('Decompressing', u'/root/.singularity/shub/f5be5daaf80b208c2dd1af7da9cc83e742043606.img.gz')
+This is what happens when you run the container...
+root@2e7fe1bd3e27:/home# exit
+host-machine:/ me$
+```
