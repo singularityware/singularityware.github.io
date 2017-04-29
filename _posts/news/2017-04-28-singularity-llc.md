@@ -6,7 +6,7 @@ permalink: 2017-singularity-llc
 
 ### Notice to all Singularity users, contributors, and collaborators
 
-This is an important announcement from Greg Kurzer, founder and lead developer of Singularity.
+This is an important announcement from Greg Kurtzer, founder and lead developer of Singularity.
 
 Singularity continues to gain popularity and traction very quickly. This growth has been extremely demanding on my time and is outpacing my ability to sustain the broad amount of use cases for the rapidly expanding community with me working on it only part time. In order to meet this rapidly expanding growth, I have created a new organization, SingularityWare, LLC, which is dedicated to further developing Singularity, supporting the associated open source community and growing the project. To facilitate this, I have partnered with a company, RStor, Inc.
 
