@@ -19,6 +19,7 @@ When bootstrapping a container, it is best to consider the following:
 4. Ensure that the container's `/etc/passwd`, `/etc/group`, `/etc/shadow`, and no other sensitive files have anything but the bare essentials within them.
 5. Do all of your bootstrapping via a definition file instead of manipulating the containers by hand (with the `--writable` options), this ensures greatest possibility of reproducibility and mitigates the *black box effect*.
 
+
 ## The Bootstrap Definition File
 There are multiple sections of the Singularity bootstrap definition file:
 
@@ -133,5 +134,12 @@ You may choose to add a `%test` section to your definition file. This section wi
 
 This is a simple Open MPI test to ensure that the MPI is build properly and communicates between processes as it should.
 
+If you want to bootstrap without running tests, you can do so with the `--notest` argument:
+
+```
+sudo singularity bootstrap --notest container.img Singularity
+```
+
+This argument might be useful in cases where you might need hardware that is available during runtime, but is not available on the host that is building the image.
 
 For further examples, we recommend you take a closer look at the [bootstrap command](/docs-bootstrap)
