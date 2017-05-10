@@ -38,10 +38,13 @@ $ # singularity as root and the container is writeable)
 $ sudo singularity exec -w /tmp/Centos-7.img yum groupinstall "Development Tools"
 $
 $ # Clone the OpenMPI GitHub master branch in current directory (on host)
-$ git clone https://github.com/open-mpi/ompi.git
-$ cd ompi
+$ wget https://www.open-mpi.org/software/ompi/v2.1/downloads/openmpi-2.1.0.tar.bz2
+$ tar jtf openmpi-2.1.0.tar.bz2
+$ cd openmpi-2.1.0
 $
 $ # Build OpenMPI in the working directory, using the tool chain within the container
+$ # This step is unusual in a stable release but there is a bug in the configure script
+$ # affecting some interfaces
 $ singularity exec /tmp/Centos-7.img ./autogen.pl
 $ singularity exec /tmp/Centos-7.img ./configure --prefix=/usr/local
 $ singularity exec /tmp/Centos-7.img make
@@ -94,4 +97,7 @@ Process 19 exiting
 ```
 
 ### Notes
-Supported Open MPI Version(s): To achieve proper container'ized Open MPI support, you must use Open MPI version 2.1 which at the time of this writing has not been released yet. The above example builds from the current master development branch of Open MPI.
+Supported Open MPI Version(s): To achieve proper container'ized Open MPI support, you must use Open MPI version 2.1.
+
+Open MPI version 2.1.0 includes a bug in its configure script affecting some interfaces (at least Mellanox cards operating in RoCE mode useing libmxm)
+The example should work fine on most hardware but if you have an issue, try running from master (it has been patched upstream)
