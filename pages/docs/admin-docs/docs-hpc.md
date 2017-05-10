@@ -30,8 +30,8 @@ From the above image you can follow the invocation pathway:
 8. At this point the processes within the container run as they would normally directly on the host at full bandwidth! This entire process happens behind the scenes, and from the user's perspective running via MPI is as simple as just calling mpirun on the host as they would normally.
 
 #### Code
-Below is an example snippet of building and installing OpenMPI into a container and then running an example MPI program through Singularity. 
- 
+Below is an example snippet of building and installing OpenMPI into a container and then running an example MPI program through Singularity.
+
 ```bash
 $ # Include the appropriate development tools into the container (notice we are calling
 $ # singularity as root and the container is writeable)
@@ -99,5 +99,5 @@ Process 19 exiting
 ### Notes
 Supported Open MPI Version(s): To achieve proper container'ized Open MPI support, you must use Open MPI version 2.1.
 
-Open MPI version 2.1.0 includes a bug in its configure script affecting some interfaces (at least Mellanox cards operating in RoCE mode useing libmxm)
+Open MPI version 2.1.0 includes a bug in its configure script affecting some interfaces (at least Mellanox cards operating in RoCE mode using libmxm)
 The example should work fine on most hardware but if you have an issue, try running from master (it has been patched upstream)
