@@ -8,7 +8,17 @@ toc: false
 
 ### Citations
 
-Are you using Singularity for science? If so please help by citing using the referenced DOI for the most recent release: <a target="_blank" href="http://dx.doi.org/10.5281/zenodo.60736"><img src="https://zenodo.org/badge/doi/10.5281/zenodo.60736.svg" alt="10.5281/zenodo.60736"></a>, and please <a href="https://goo.gl/forms/tGBKnKwplNyRZRSm2" target="_blank">Register your Publication</a> so we can tell the world about your work! 
+Are you using Singularity for science? If so please help by citing using <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0177459" target="_blank">our publication</a>.
+
+```
+Kurtzer GM, Sochat V, Bauer MW (2017) 
+Singularity: Scientific containers for mobility of compute. 
+PLoS ONE 12(5): e0177459. https://doi.org/10.1371/journal.pone.0177459
+```
+
+And we have a Zenodo DOI for the most recent release: <a target="_blank" href="http://dx.doi.org/10.5281/zenodo.60736"><img src="https://zenodo.org/badge/doi/10.5281/zenodo.60736.svg" alt="10.5281/zenodo.60736"></a><br>
+
+Please <a href="https://goo.gl/forms/tGBKnKwplNyRZRSm2" target="_blank">Register your Publication</a> so we can tell the world about your work! 
 
 
 ### Clusters
