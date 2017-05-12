@@ -16,9 +16,10 @@ We are in the process of developing Singularity Hub, which will allow for genera
 
 - The <a href="http://sherlock.stanford.edu" target="_blank" class="no-after">Sherlock cluster</a> at <a href="https://srcc.stanford.edu/" class="no-after" target="_blank">Stanford University</a>
 - <a href="https://www.xsede.org/news/-/news/item/7624" target="_blank" class="no-after">SDSC Comet and Gordon</a> (XSEDE)
+- <a href="http://docs.massive.org.au/index.html" target="_blank" class="no-after">MASSIVE M1 M2 and M3</a> (Monash University and Australian National Merit Allocation Scheme)
 
 ### Integration with MPI
-Another result of the Singularity architecture is the ability to properly integrate with the Message Passing Interface (MPI). Work has already been done for out of the box compatibility with Open MPI (both in Open MPI v2.x as well as part of Singularity). The Open MPI/Singularity workflow works as follows:
+Another result of the Singularity architecture is the ability to properly integrate with the Message Passing Interface (MPI). Work has already been done for out of the box compatibility with Open MPI (both in Open MPI v2.1.x as well as part of Singularity). The Open MPI/Singularity workflow works as follows:
 
  1. mpirun is called by the resource manager or the user directly from a shell
  2. Open MPI then calls the process management daemon (ORTED)
@@ -27,7 +28,9 @@ Another result of the Singularity architecture is the ability to properly integr
  5. Singularity then launches the MPI application within the container
  6. The MPI application launches and loads the Open MPI libraries
  7. The Open MPI libraries connect back to the ORTED process via the Process Management Interface (PMI)
- 8. At this point the processes within the container run as they would normally directly on the host at full bandwidth! This entire process happens behind the scenes, and from the user's perspective running via MPI is as simple as just calling mpirun on the host as they would normally.
+ 8. At this point the processes within the container run as they would normally directly on the host.
+
+This entire process happens behind the scenes, and from the user's perspective running via MPI is as simple as just calling mpirun on the host as they would normally.
 
 Below are example snippets of building and installing OpenMPI into a container and then running an example MPI program through Singularity.
 
@@ -38,8 +41,14 @@ Below are example snippets of building and installing OpenMPI into a container a
 
 #### MPI Development Example
 
-**What are supported Open MPI Version(s)?** 
-To achieve proper container'ized Open MPI support, you must use Open MPI version 2.1. Open MPI version 2.1.0 includes a bug in its configure script affecting some interfaces (at least Mellanox cards operating in RoCE mode using libmxm). For this reason, we show the example first. 
+**What are supported Open MPI Version(s)?**
+To achieve proper container'ized Open MPI support, you should use Open MPI version 2.1. There are however three caveats:
+  1. Open MPI 1.10.x *may* work but we expect you will need exactly matching version of PMI and Open MPI on both host and container (the 2.1 series should relax this requirement)
+  2. Open MPI 2.1.0 has a bug affecting compilation of libraries for some interfaces (particularly Mellanox interfaces using libmxm are known to fail). If your in this situation you should use
+     the master branch of Open MPI rather than the release.
+  3. Using Open MPI 2.1 does not magically allow your container to connect to networking fabric libraries in the host. If your cluster has, for example, an infiniband network you still need to install OFED libraries into the container. Alternatively you could bind mount both Open MPI and networking libraries into the container, but this could run afoul of glib compatibility issues (its generally OK if the container glibc is more recent than the host, but not the other way around)
+
+#### Code Example using Open MPI 2.1.0 Stable
 
 ```bash
 $ # Include the appropriate development tools into the container (notice we are calling
@@ -51,10 +60,6 @@ $ wget https://www.open-mpi.org/software/ompi/v2.1/downloads/openmpi-2.1.0.tar.b
 $ tar jtf openmpi-2.1.0.tar.bz2
 $ cd openmpi-2.1.0
 $
-$ # Build OpenMPI in the working directory, using the tool chain within the container
-$ # This step is unusual in a stable release but there is a bug in the configure script
-$ # affecting some interfaces
-$ singularity exec /tmp/Centos-7.img ./autogen.pl
 $ singularity exec /tmp/Centos-7.img ./configure --prefix=/usr/local
 $ singularity exec /tmp/Centos-7.img make
 $
@@ -72,9 +77,9 @@ $ mpirun -np 20 singularity exec /tmp/Centos-7.img /usr/bin/ring
 
 ```
 
-#### Code Example
+#### Code Example using Open MPI git master
 
-The following example (using their master) should work fine on most hardware but if you have an issue, try running this example below:
+The previous example (using the Open MPI 2.1.0 stable release) should work fine on most hardware but if you have an issue, try running the example below (using the Open MPI Master branch):
 
 ```bash
 $ # Include the appropriate development tools into the container (notice we are calling
