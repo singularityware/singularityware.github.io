@@ -10,6 +10,7 @@ One of the architecturally defined features in Singularity is that it can execut
 
 Additionally, because Singularity is not emulating a full hardware level virtualization paradigm, there is no need to separate out any sandboxed networks or file systems because there is no concept of user-escalation within a container. Users can run Singularity containers just as they run any other program on the HPC resource.
 
+
 ## Workflows
 We are in the process of developing Singularity Hub, which will allow for generation of workflows using Singularity containers in an online interface, and easy deployment on standard research clusters (e.g., SLURM, SGE). Currently, the Singularity core software is installed on the following research clusters, meaning you can run Singularity containers as part of your jobs:
 
@@ -29,6 +30,10 @@ Another result of the Singularity architecture is the ability to properly integr
  8. At this point the processes within the container run as they would normally directly on the host at full bandwidth! This entire process happens behind the scenes, and from the user's perspective running via MPI is as simple as just calling mpirun on the host as they would normally.
 
 Below are example snippets of building and installing OpenMPI into a container and then running an example MPI program through Singularity.
+
+#### Tutorials
+
+ - <a href="/tutorial-gpu-drivers-open-mpi-mtls">Using Host libraries: GPU drivers and OpenMPI BTLs</a>
 
 
 #### MPI Development Example
