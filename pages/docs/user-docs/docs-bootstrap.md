@@ -1,34 +1,18 @@
 ---
 title: The Bootstrap Definition
 sidebar: user_docs
-permalink: bootstrap-image
+permalink: docs-bootstrap
 toc: false
 folder: docs
 ---
 
 {% include toc.html %}
 
-The process of *bootstrapping* a Singularity container is equivalent to describing a recipe for the container creation. There are several recipe formats that Singularity supports, but only the primary format of version 2.2 will be documented here.
+The process of *bootstrapping* a Singularity container is equivalent to describing a recipe for the container creation. There are several recipe formats that Singularity supports, but only the primary format of version 2.3 will be documented here. If you want a general overview with examples, see <a href="/bootstrap-image">Bootstrapping an Image</a>. The detailed options for each of the header and sections are provided here.
 
-## Best Practices for Bootstrapping
-When bootstrapping a container, it is best to consider the following:
+## The header fields:
 
-1. Install packages, programs, data, and files into operating system locations (e.g. not `/home`, `/tmp`, or any other directories that might get commonly binded on).
-2. If you require any special environment variables to be defined, add them the `/environment` file inside the container.
-3. Files should never be owned by actual users, they should always be owned by a system account (UID < 500).
-4. Ensure that the container's `/etc/passwd`, `/etc/group`, `/etc/shadow`, and no other sensitive files have anything but the bare essentials within them.
-5. Do all of your bootstrapping via a definition file instead of manipulating the containers by hand (with the `--writable` options), this ensures greatest possibility of reproducibility and mitigates the *black box effect*.
-
-
-## The Bootstrap Definition File
-There are multiple sections of the Singularity bootstrap definition file:
-
-1. **Header**: The Header describes the core operating system to bootstrap within the container. Here you will configure the base operating system features that you need within your container. Examples of this include, what distribution of Linux, what version, what packages must be part of a core install.
-2. **Sections**: The reset of the definition is comprised of sections or blobs of data. Each section is defined by a `%` character followed by the name of the particular section. All sections are optional.
-
-### The header fields:
-
-#### Bootstrap:
+### Bootstrap:
 The `Bootstrap: ` keyword identifies the Singularity module that will be used for building the core components of the operating system. There are several supported modules at the time of this writing:
 
 ##### **yum**
@@ -60,8 +44,9 @@ The Docker bootstrap module will create a core operating system image based on a
  - **Token**: Sometimes the Docker API (depending on version?) requires an authorization token which is generated on the fly. Toggle this with a `yes` or `no` here.
 
 
-### Bootstrap sections:
-Once the `Bootstrap` module has completed, the sections are identified and utilized if present. The following sections are supported in the bootstrap definition, and integrated during the bootstrap process in the following order:
+## Bootstrap sections:
+Once the `Bootstrap` module has completed, the sections are identified and utilized if present. The following sections are supported in the bootstrap definition, and integrated during the bootstrap process:
+
 
 #### %setup
 This section blob is a Bourne shell scriptlet which will be executed on the host outside the container during bootstrap. The path to the container is accessible from within the running scriptlet environment via the variable `$SINGULARITY_ROOTFS`. For example, consider the following scriptlet:
@@ -76,7 +61,7 @@ This section blob is a Bourne shell scriptlet which will be executed on the host
     exit 0
 ```
 
-As we investigate this example scriptlet, you will first see this is the `%outside` scriptlet as would be defined within our bootstrap. The following line simply echos a message and prints the variable `$SINGULARITY_ROOTFS` which is defined within the shell context that this scriptlet runs in. Then we check to see if `/bin/sh` is executable, and if it is not, we print an error message. Notice the `exit 1`. The exit value of the scriptlets communicates if the scriptlet ran successfully or not. As with any shell return value, an exit of 0 (zero) means success, and any other exit value is a failure.
+As we investigate this example scriptlet, you will first see this is the outside scriptlet as would be defined within our bootstrap. The following line simply echos a message and prints the variable `$SINGULARITY_ROOTFS` which is defined within the shell context that this scriptlet runs in. Then we check to see if `/bin/sh` is executable, and if it is not, we print an error message. Notice the `exit 1`. The exit value of the scriptlets communicates if the scriptlet ran successfully or not. As with any shell return value, an exit of 0 (zero) means success, and any other exit value is a failure.
 
 *note: Any uncaught command errors that occur within the scriptlet will cause the entire build process to halt!*
 
