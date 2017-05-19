@@ -18,7 +18,7 @@ Bootstrap:docker
 From: ubuntu:latest
 
 %environment
-VARIABLE_NAME VARIABLE_VALUE
+VARIABLE_NAME=VARIABLE_VALUE
 ```
 
 Forget something, or need a variable defined at runtime? You can set any variable you want inside the container by prefixing it with "SINGULARITYENV_". It will be transposed automatically and the prefix will be stripped. For example, let's say we want to set the variable `HELLO` to have value `WORLD`. We can do that as follows:
@@ -62,7 +62,12 @@ Your container stores metadata about it's build, along with Docker labels. You c
 
 ```bash
 singularity exec centos7.img cat /.singularity.d/labels.json
-{"name": "CentOS Base Image", "build-date": "20170315", "vendor": "CentOS", "license": "GPLv2"}
+{ "name": 
+      "CentOS Base Image", 
+       "build-date": "20170315", 
+       "vendor": "CentOS", 
+       "license": "GPLv2"
+}
 ```
 
 You can add custom labels to your container in a bootstrap file:
