@@ -75,10 +75,14 @@ entries:
       url: /docs-import
       output: web, pdf
 
-    - title: shell
-      url: /docs-shell
+    - title: pull
+      url: /docs-pull
       output: web, pdf
 
     - title: run
       url: /docs-run
+      output: web, pdf
+
+    - title: shell
+      url: /docs-shell
       output: web, pdf
