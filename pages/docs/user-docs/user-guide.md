@@ -140,7 +140,7 @@ When executing container commands, the Singularity process flow can be generaliz
 11. Bind mount points are setup
 12. The namespace `CLONE_FS` is used to virtualize a new root file system
 13. Singularity calls `execvp()` and Singularity process itself is replaced by the process inside the container
-14. When the process inside the container exists, all namespaces collapse with that process, leaving a clean system
+14. When the process inside the container exits, all namespaces collapse with that process, leaving a clean system
 
 All of the above steps take approximately 15-25 thousandths of a second to run, which is fast enough to seem instantaneous. 
 
