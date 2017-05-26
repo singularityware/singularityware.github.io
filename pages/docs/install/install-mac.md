@@ -17,10 +17,10 @@ brew cask install vagrant
 brew cask install vagrant-manager
 
 # Create a working directory for the Vagrant configuration and
-# generate a template Vagrantfile for "ubuntu/trusty64"
+# generate a template Vagrantfile for "ubuntu/xenial64"
 mkdir singularity-vm
 cd singularity-vm
-vagrant init ubuntu/trusty64
+vagrant init ubuntu/xenial64
 
 # Build and start the Vagrant hosted VM
 vagrant up --provider virtualbox
