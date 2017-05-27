@@ -20,7 +20,7 @@ brew cask install vagrant-manager
 # generate a template Vagrantfile for "bento/ubuntu-16.04"
 mkdir singularity-vm
 cd singularity-vm
-vagrant init ubuntu/xenial64
+vagrant init bento/ubuntu-16.04
 
 # Build and start the Vagrant hosted VM
 vagrant up --provider virtualbox
