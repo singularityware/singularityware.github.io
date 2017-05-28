@@ -6,15 +6,66 @@ folder: docs
 toc: false
 ---
 
+The `exec` Singularity sub-command allows you to spawn an arbitrary command within your container image as if it were running directly on the host system. All standard IO, pipes, and file systems are accessible via the command being exec'ed within the container. Note that this exec is different from the Docker exec, as it does not require a container to be "running" before using it.
+
 ## Usage
-The `exec` Singularity sub-command allows you to spawn an arbitrary command within your container image as if it were running directly on the host system. All standard IO, pipes, and file systems are accessible via the command being exec'ed within the container.
 
 The usage is as follows:
 
 ```bash
-$ singularity exec
-USAGE: singularity (options) exec [container image] [command] (options)
-The command that you want to exec will follow the container image along with any additional arguments will all be passed directly to the program being executed within the container.
+USAGE: singularity [...] exec [exec options...] <container path> <command>
+
+This command will allow you to execute any program within the given
+container image.
+
+EXEC OPTIONS:
+    -B/--bind <spec>    A user-bind path specification.  spec has the format
+                        src[:dest[:opts]], where src and dest are outside and
+                        inside paths.  If dest is not given, it is set equal
+                        to src.  Mount options ('opts') may be specified as
+                        'ro' (read-only) or 'rw' (read/write, which is the 
+                        default). This option can be called multiple times.
+    -c/--contain        This option disables the automatic sharing of writable
+                        filesystems on your host (e.g. $HOME and /tmp).
+    -C/--containall     Contain not only file systems, but also PID and IPC 
+    -e/--cleanenv       Clean environment before running container
+    -H/--home <spec>    A home directory specification.  spec can either be a
+                        src path or src:dest pair.  src is the source path
+                        of the home directory outside the container and dest
+                        overrides the home directory within the container
+    -i/--ipc            Run container in a new IPC namespace
+    -p/--pid            Run container in a new PID namespace
+    --pwd               Initial working directory for payload process inside 
+                        the container
+    -S/--scratch <path> Include a scratch directory within the container that 
+                        is linked to a temporary dir (use -W to force location)
+    -u/--user           Try to run completely unprivileged (only works on very
+                        new kernels/distros)
+    -W/--workdir        Working directory to be used for /tmp, /var/tmp and
+                        $HOME (if -c/--contain was also used)
+    -w/--writable       By default all Singularity containers are available as
+                        read only. This option makes the file system accessible
+                        as read/write.
+
+
+CONTAINER FORMATS SUPPORTED:
+    *.img               This is the native Singularity image format for all
+                        Singularity versions 2.x.
+    *.sqsh              SquashFS format, note the suffix is required!
+    *.tar*              Tar archives are exploded to a temporary directory and
+                        run within that directory (and cleaned up after). 
+                        Compression suffixes as '.gz' and 'bz2' are supported.
+    directory/          Container directories that contain a valid root file
+                        system.
+
+
+EXAMPLES:
+    
+    $ singularity exec /tmp/Debian.img cat /etc/debian_version
+    $ singularity exec /tmp/Debian.img python ./hello_world.py
+    $ cat hello_world.py | singularity exec /tmp/Debian.img python
+    $ sudo singularity exec --writable /tmp/Debian.img apt-get update
+
 ```
 
 ### Examples
@@ -98,4 +149,3 @@ Downloading layer: sha256:a3ed95caeb02ffe68cdd9fd84406680ae93d633cb16422d00e8a7c
 Downloading layer: sha256:6a5a5368e0c2d3e5909184fa28ddfd56072e7ff3ee9a945876f7eee5896ef5bb
 Hello World: The Python version is 3.5.2
 ```
-

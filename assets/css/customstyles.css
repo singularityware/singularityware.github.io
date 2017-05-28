@@ -93,6 +93,10 @@ body h1 {margin-top:40px;}
     max-height: 100%;
 }
 
+.post-entry {
+  padding-bottom:50px;
+}
+
 .post-content ol li, .post-content ul li {
     margin: 10px 0px;
 }
@@ -1042,6 +1046,10 @@ div.results {
     font-size: 22px;
 }
 
+.post-list {
+   margin-top:80px;
+}
+
 .post-list p {
     margin: 10px 0px;
 }
@@ -1220,4 +1228,15 @@ div.box.box1 {
 h4.panel-title {
     padding-top: 0px;
     margin-top: 0px;
+}
+
+
+.btn-circle {
+  height:50px;
+  width:50px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 55px;
 }
