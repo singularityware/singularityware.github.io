@@ -20,6 +20,13 @@ Initially (on OS X), you will need to setup [Brew](http://brew.sh/) which is a p
 brew install git
 ```
 
+If you are on Debian/Ubuntu, then you can easily install git with `apt-get`
+
+```bash
+apt-get update && apt-get install -y git
+```
+
+
 ### Fork the repo
 To contribute to the web based documentation, you should obtain a GitHub account and *fork* the <a href="https://github.com/singularityware/singularityware.github.io/" target="_blank">Singularity GitHub Pages</a> repository by clicking the *fork* button on the top right of the page. Once forked, you will want to clone the fork of the repo to your computer. Let's say my Github username is *user99*:
 
