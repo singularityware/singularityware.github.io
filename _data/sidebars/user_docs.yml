@@ -75,6 +75,10 @@ entries:
       url: /docs-import
       output: web, pdf
 
+    - title: inspect
+      url: /docs-inspect
+      output: web, pdf
+
     - title: pull
       url: /docs-pull
       output: web, pdf
