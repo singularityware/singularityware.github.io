@@ -17,6 +17,9 @@ user_contributions:
           external_url: https://docs.google.com/presentation/d/1qAh0vXmmFW0MtV5qKZhruxQNknNQnGItQ25Q0A1GX8Q/pub?start=false&loop=false&delayms=3000
     - title: Code and Tutorials
       folderitems:
+        - title: Singularity @ POD (Penguin Computing)
+          external_url: https://pod.penguincomputing.com/documentation/Singularity
+          date: 5/2017
         - title: Singularity @ NIH Documentation
           external_url: https://hpc.nih.gov/apps/singularity.html
           date: 3/2017

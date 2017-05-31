@@ -11,7 +11,6 @@ Kurtzer GM, Sochat V, Bauer MW (2017)
 Singularity: Scientific containers for mobility of compute. 
 PLoS ONE 12(5): e0177459. https://doi.org/10.1371/journal.pone.0177459
 ```
-
 Woohoo!
 
 {% include links.html %}
