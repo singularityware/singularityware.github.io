@@ -30,7 +30,8 @@ We are maintaining a set of Vagrant Boxes via <a href="https://atlas.hashicorp.c
 ```bash
 mkdir singularity-vm
 cd singularity-vm
-vagrant init singularityware/singularity-2.2.99
+vagrant init singularityware/singularity-2.3
+vagrant up --provider virtualbox
 vagrant ssh
 ```
 
