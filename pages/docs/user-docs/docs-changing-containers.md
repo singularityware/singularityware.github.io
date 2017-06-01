@@ -32,7 +32,7 @@ Loading mirror speeds from cached hostfile
  * updates: linux.mirrors.es.net
 Resolving Dependencies
 --> Running transaction check
----> Package which.x86_64 0:2.20-7.el7 will be installed
+---> Package which.x86_64 0:2.30-7.el7 will be installed
 --> Finished Dependency Resolution
 
 Dependencies Resolved
@@ -41,7 +41,7 @@ Dependencies Resolved
  Package               Arch                   Version                    Repository            Size
 ====================================================================================================
 Installing:
- which                 x86_64                 2.20-7.el7                 base                  41 k
+ which                 x86_64                 2.30-7.el7                 base                  41 k
 
 Transaction Summary
 ====================================================================================================
@@ -51,16 +51,16 @@ Total download size: 41 k
 Installed size: 75 k
 Is this ok [y/d/N]: y
 Downloading packages:
-which-2.20-7.el7.x86_64.rpm                                                  |  41 kB  00:00:00     
+which-2.30-7.el7.x86_64.rpm                                                  |  41 kB  00:00:00     
 Running transaction check
 Running transaction test
 Transaction test succeeded
 Running transaction
-  Installing : which-2.20-7.el7.x86_64                                                          1/1 
-  Verifying  : which-2.20-7.el7.x86_64                                                          1/1 
+  Installing : which-2.30-7.el7.x86_64                                                          1/1 
+  Verifying  : which-2.30-7.el7.x86_64                                                          1/1 
 
 Installed:
-  which.x86_64 0:2.20-7.el7                                                                         
+  which.x86_64 0:2.30-7.el7                                                                         
 
 Complete!
 ```

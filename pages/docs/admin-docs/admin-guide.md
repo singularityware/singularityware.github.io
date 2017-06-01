@@ -56,17 +56,17 @@ Near the bottom of the build output you will see several lines like:
 
 ```
 ...
-Wrote: /home/gmk/rpmbuild/SRPMS/singularity-2.2-0.1.el7.centos.src.rpm
-Wrote: /home/gmk/rpmbuild/RPMS/x86_64/singularity-2.2-0.1.el7.centos.x86_64.rpm
-Wrote: /home/gmk/rpmbuild/RPMS/x86_64/singularity-devel-2.2-0.1.el7.centos.x86_64.rpm
-Wrote: /home/gmk/rpmbuild/RPMS/x86_64/singularity-debuginfo-2.2-0.1.el7.centos.x86_64.rpm
+Wrote: /home/gmk/rpmbuild/SRPMS/singularity-2.3.el7.centos.src.rpm
+Wrote: /home/gmk/rpmbuild/RPMS/x86_64/singularity-2.3.el7.centos.x86_64.rpm
+Wrote: /home/gmk/rpmbuild/RPMS/x86_64/singularity-devel-2.3.el7.centos.x86_64.rpm
+Wrote: /home/gmk/rpmbuild/RPMS/x86_64/singularity-debuginfo-2.3.el7.centos.x86_64.rpm
 ...
 ```
 
-You will want to identify the appropriate path to the binary RPM that you wish to install, in the above example the package we want to install is `singularity-2.2-0.1.el7.centos.x86_64.rpm`, and you should install it with the following command:
+You will want to identify the appropriate path to the binary RPM that you wish to install, in the above example the package we want to install is `singularity-2.3.el7.centos.x86_64.rpm`, and you should install it with the following command:
 
 ```bash
-$ sudo yum install /home/gmk/rpmbuild/RPMS/x86_64/singularity-2.2-0.1.el7.centos.x86_64.rpm
+$ sudo yum install /home/gmk/rpmbuild/RPMS/x86_64/singularity-2.3.el7.centos.x86_64.rpm
 ```
 
 *Note: If you want to have the binary RPM install the files to an alternative location, you should define the environment variable 'PREFIX' (below) to suit your needs, and use the following command to build:*
