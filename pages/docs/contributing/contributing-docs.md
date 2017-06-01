@@ -20,6 +20,13 @@ Initially (on OS X), you will need to setup [Brew](http://brew.sh/) which is a p
 brew install git
 ```
 
+If you are on Debian/Ubuntu, then you can easily install git with `apt-get`
+
+```bash
+apt-get update && apt-get install -y git
+```
+
+
 ### Fork the repo
 To contribute to the web based documentation, you should obtain a GitHub account and *fork* the <a href="https://github.com/singularityware/singularityware.github.io/" target="_blank">Singularity GitHub Pages</a> repository by clicking the *fork* button on the top right of the page. Once forked, you will want to clone the fork of the repo to your computer. Let's say my Github username is *user99*:
 
@@ -66,8 +73,28 @@ Jekyll has this thing they call <a href="https://jekyllrb.com/docs/frontmatter/"
 and then write your post after it in <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown Syntax</a>. All and any HTML tags are fair game as well! Once you add the post, if you have set the category correctly to "news" it should show up in the site feed. It's that easy!
 
 ## Contributing to a Page
-
 All of the pages are in the <a href="https://github.com/singularityware/singularityware.github.io/blob/master/pages" target="_blank">pages</a> folder, organized in a somewhat logical manner. If you want to edit content for a page, just edit the corresponding file. If you need to do something more advanced like edit a sidebar, you should look at the <a href="https://github.com/singularityware/singularityware.github.io/blob/master/_data/sidebars" target="_blank">sidebar data</a> yml documents, which render into the navigation.
+
+
+### Adding gists
+You can embed a <a href="https://gist.github.com">Github Gist</a> directly in the page, and we encourage you to keep it under your username to maintain credit for the work. To reduce the additional gem dependencies, instead of using the official `gist include` we have our own wrapper for it that will turn this:
+ 
+```bash
+{{ "{% include gist.html username='l1ll1' id='89b3f067d5b790ace6e6767be5ea2851' file='hostlibs.def'" }}%}
+```
+
+into this:
+
+{% include gist.html username='vsoch' id='49709c8ed549155d0a15bde48e893588' file='Singularity' %}
+
+We start with a url that looks like `https://gist.github.com/vsoch/49709c8ed549155d0a15bde48e893588`, under which there is a file called `Singularity`, and the variables are mapped as follows:
+
+- username: `vsoch`
+- id: `49709c8ed549155d0a15bde48e893588`
+- file: `Singularity`
+
+You can put this single line anywhere on the site, and it will render the gist automatically.
+
 
 ### Recording demos
 

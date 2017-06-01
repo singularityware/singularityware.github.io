@@ -30,6 +30,8 @@ GLOBAL OPTIONS:
 
 GENERAL COMMANDS:
     help          Show additional help for a command
+    selftest      Run some self tests to make sure Singularity is
+                    installed and operating properly
 
 CONTAINER USAGE COMMANDS:
     exec          Execute a command within container
@@ -38,7 +40,7 @@ CONTAINER USAGE COMMANDS:
     test          Execute any test code defined within container
 
 CONTAINER USAGE OPTIONS:
-    -H  --home    Specify $HOME to mount 
+    see singularity <command> help
 
 CONTAINER MANAGEMENT COMMANDS (requires root):
     bootstrap     Bootstrap a new Singularity image from scratch
@@ -62,20 +64,24 @@ Because of the nature of how Singularity cascades commands and sub-commands, arg
 
 To further clarify this example, the `exec` Singularity subcommand will execute a program within the container and pass the arguments passed to the program. So to mitigate any argument clashes, Singularity must not interpret or interfere with any of the command arguments or options that are not relevant for that particular function.
 
+
 ### Singularity Help
 Singularity comes with some internal documentation by using the `help` subcommand followed by the subcommand you want more information about. For example:
 
 ```bash
 $ singularity help create
-USAGE: singularity (options) create [command] (options)
-
-Create a new Singularity formatted blank image.
-
-OPTIONS:
-    -s/--size   Specify a size for an operation (default 1GB)
+CREATE OPTIONS:
+    -s/--size   Specify a size for an operation in MiB, i.e. 1024*1024B
+                (default 768MiB)
+    -F/--force  Overwrite an image file if it exists
 
 EXAMPLES:
 
-    $ sudo singularity create /tmp/Debian.img
-    $ sudo singularity create -s 4096 /tmp/Debian.img
+    $ singularity create /tmp/Debian.img
+    $ singularity create -s 4096 /tmp/Debian.img
+
+For additional help, please visit our public documentation pages which are
+found at:
+
+    http://singularity.lbl.gov/
 ```
