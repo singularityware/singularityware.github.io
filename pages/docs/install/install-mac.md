@@ -25,7 +25,7 @@ brew cask install vagrant-manager
 
 ## Option 1: Singularityware Vagrant Box
 
-We are maintaining a set of Vagrant Boxes via <a href="https://atlas.hashicorp.com/" target="_blank">Atlas</a>, one of <a href="https://www.hashicorp.com/#open-source-tools" target="_blank">Hashicorp</a> many tools that likely you've used and haven't known it. The <a href="https://atlas.hashicorp.com/singularityware/boxes/singularity-2.2.99" target="_blank">Singularity Box</a> is for version 2.2.99, and will be updated appropriately with the release of 2.3. To use this box, you can simply create a folder, and then do the following:
+We are maintaining a set of Vagrant Boxes via <a href="https://atlas.hashicorp.com/" target="_blank">Atlas</a>, one of <a href="https://www.hashicorp.com/#open-source-tools" target="_blank">Hashicorp</a> many tools that likely you've used and haven't known it. The <a href="https://atlas.hashicorp.com/singularityware/boxes/singularity-2.3" target="_blank">Singularity Box</a> is for version 2.3. To use this box, you can simply create a folder, and then do the following:
 
 ```bash
 mkdir singularity-vm
