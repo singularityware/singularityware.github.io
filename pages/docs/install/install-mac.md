@@ -25,14 +25,42 @@ brew cask install vagrant-manager
 
 ## Option 1: Singularityware Vagrant Box
 
-We are maintaining a set of Vagrant Boxes via <a href="https://atlas.hashicorp.com/" target="_blank">Atlas</a>, one of <a href="https://www.hashicorp.com/#open-source-tools" target="_blank">Hashicorp</a> many tools that likely you've used and haven't known it. The <a href="https://atlas.hashicorp.com/singularityware/boxes/singularity-2.2.99" target="_blank">Singularity Box</a> is for version 2.2.99, and will be updated appropriately with the release of 2.3. To use this box, you can simply create a folder, and then do the following:
+We are maintaining a set of Vagrant Boxes via <a href="https://atlas.hashicorp.com/" target="_blank">Atlas</a>, one of <a href="https://www.hashicorp.com/#open-source-tools" target="_blank">Hashicorp</a> many tools that likely you've used and haven't known it. We currently have boxes for the following versions of Singularity:
+
+ - [singularityware/singularity-2.2.99](https://atlas.hashicorp.com/singularityware/boxes/singularity-2.2.99)
+ - [singularityware/singularity-2.3](https://atlas.hashicorp.com/singularityware/boxes/singularity-2.3)
 
 ```bash
 mkdir singularity-vm
 cd singularity-vm
-vagrant init singularityware/singularity-2.2.99
+vagrant init singularityware/singularity-2.3
+vagrant up
 vagrant ssh
 ```
+
+You are then ready to go with Singularity 2.3!
+
+```
+vagrant@vagrant:~$ which singularity
+/usr/local/bin/singularity
+vagrant@vagrant:~$ singularity --version
+2.3-master.gadf5259
+vagrant@vagrant:~$ singularity create test.img
+Initializing Singularity image subsystem
+Opening image file: test.img
+Creating 768MiB image
+Binding image to loop
+Creating file system within image
+Image is done: test.img
+```
+
+Note that when you do `vagrant up` you can also select the provider, if you use vagrant for multiple providers. For example:
+
+```
+vagrant up --provider virtualbox
+```
+
+although this isn't entirely necessary if you only have it configured for virtualbox.
 
 ## Option 2: Vagrant Box from Scratch
 
