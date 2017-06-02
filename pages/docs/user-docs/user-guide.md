@@ -161,10 +161,15 @@ One the left side, you have your laptop, workstation, or a server that you contr
 ### Examples
 How do the commands work? We recommend you look at examples for each:
 
-- [shell](/docs-shell)
-- [exec](/docs-exec)
-- [run](/docs-run)
-- [bootstrap](/docs-bootstrap)
+- [bootstrap](/docs-bootstrap): Bootstrap a Singularity build specification to build an image
+- [exec](/docs-exec): Execute a command to your container
+- [inspect](/docs-inspect): See labels, run and test scripts, and environment variables
+- [import](/docs-import): import layers or other file content to your image
+- [pull](/docs-pull): pull an image from Docker or Singularity Hub
+- [run](/docs-run): Run your image as an executable
+- [shell](/docs-shell): Shell into your image
+- [user control](/docs-control): The environment commands you can set to control the workflow 
+
 
 
 ## Support

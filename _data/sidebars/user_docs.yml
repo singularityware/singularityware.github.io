@@ -31,7 +31,11 @@ entries:
       url: /docs-content
       output: web, pdf
 
-    - title: Bind Paths and Files
+    - title: User Control
+      url: /docs-control
+      output: web, pdf
+
+    - title: Bind Paths and Mounts
       url: /docs-mount
       output: web, pdf
 
