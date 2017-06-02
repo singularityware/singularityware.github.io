@@ -4,8 +4,6 @@ category: recipes
 permalink: dolmades-windows-containers
 ---
 
-{% include toc.html %}
-
 ## Introduction
 Recently I've found several reasons why Windows containers fit in nicely in our Linux-dominated environments:
 
@@ -14,17 +12,17 @@ Recently I've found several reasons why Windows containers fit in nicely in our 
 - Do you own Windows games you always wanted to play under Linux?
 - Your tax reporting software runs under Windows only?
 
-That's why I initiated a project called <a href="http://dolmades.org">dolmades</a> which should bring portable and sustainable windows applications to linux users.
+That's why I initiated a project called <a href="http://dolmades.org" target="_blank">dolmades</a> which should bring portable and sustainable windows applications to linux users.
 Its goal is to provide stable recipes for people who are interested in regularily using one or only a few particular windows application. 
 For that purpose VMs and dual-booting bear a huge overhead in both performance and ressources.
-Another approach is to use <a href="https://winehq.org">wine</a>, a wrapper that redirects Windows system calls into native Linux system calls and allows execution of native Windows binaries under supported platforms (Unix with X, just recently Android).
+Another approach is to use <a href="https://winehq.org" target="_blank">wine</a>, a wrapper that redirects Windows system calls into native Linux system calls and allows execution of native Windows binaries under supported platforms (Unix with X, just recently Android).
 
 So, why don't we formulate the following equation: wine + singularity = dolmades ?
 
 
 ## About
 This document describes how to get a dolmade running in which one or several windows apps can be installed temporarily or permanently. 
-Both a shub and a dockerhub image template is readily available and supports plenty of win apps already without further modification needed.
+Both a Singularity Hub and a Docker Hub image template is readily available and supports plenty of win apps already without further modification needed.
 
 ## Requirements
 This tutorial uses singularity 2.3 which is all what you will need to have installed. 
@@ -79,15 +77,12 @@ Often, some registry entries need to be tweaked or some builtin DLLs substituted
 
 That can be often done using the tool `winetricks`. Some more settings can be tweaked using the tool ```winecfg```.
 
-## Ressources
-
-This is the ```singularity``` run script used in the images:
-{% include gist.html username='katakombi' id='6a53d7b911eecabd60c2d342a5f3eeee' file='singularity' %}
+## Resources
 
 This is the ```Dockerfile``` to build the dolmades docker image
 {% include gist.html username='katakombi' id='6ce5690804beefaeb83abe2f3c946b08' file='Dockerfile' %}
 
-This is the <a href="https://github.com/katakombi/dolmades/blob/master/Singularity">link</a> to the shub dolmades build file.
+This is the <a href="https://raw.githubusercontent.com/katakombi/dolmades/master/Singularity" target="_blank">link</a> to the singularity hub dolmades build spec file which also contains the run script.
 
 Dolmades are still in the early stages and there are many challenges to tackle before we seize the potential over using wine on Linux systems directly.
 If this speaks to you then send me your feedback or questions, and check my <a href="http://dolmades.org">project page</a> for screen shots of further examples.
