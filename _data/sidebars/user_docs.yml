@@ -32,7 +32,7 @@ entries:
       output: web, pdf
 
     - title: User Control
-      url: /docs-control
+      url: /user-control
       output: web, pdf
 
     - title: Bind Paths and Mounts
