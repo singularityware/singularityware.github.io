@@ -104,7 +104,7 @@ party_dinosaur.gif
 For a reproducible container, the recommended practice is to build by way of a bootstrap file. This also makes it easy to add files, environment variables, and install custom software, and still start from your bootstrap of source (e.g., Docker). Here is what a basic bootstrap file looks like for Singularity 2.3:
 
 ```bash
-Bootstrap: Docker
+Bootstrap: docker
 From: ubuntu:latest
 
 %runscript
@@ -128,6 +128,12 @@ AUTHOR vsochat@stanford.edu
 apt-get update && apt-get install python3 git wget
 mkdir /data
 echo "The post section is where you can install, and configure your container."
+```
+
+The above bootstrap definition can then be run with singularity. Assuming that the definition was saved as `ubuntu.def` and an image file `ubuntu.img` exists, the following will build the container.
+
+```bash
+singularity bootstrap ubuntu.img ubuntu.def
 ```
 
 {% include links.html %}
