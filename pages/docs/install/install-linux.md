@@ -3,7 +3,7 @@ title: Install on Linux
 sidebar: main_sidebar
 permalink: install-linux
 folder: docs
-toc: false
+toc: true
 ---
 
 ## Installation from Source
@@ -50,6 +50,7 @@ To update your Singularity version, you might want to first delete the executabl
 sudo rm -rf /usr/local/libexec/singularity
 ```
 And then install using one of the methods above.
+
 
 
 ## Debian/Ubuntu Flavor Install
