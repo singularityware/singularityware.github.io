@@ -54,7 +54,7 @@ And then install using one of the methods above.
 
 
 ## Debian/Ubuntu Package
-Singularity is available on Debian (and Ubuntu) systems starting with Debian stretch and the Ubuntu 16.10 yakkety releases. The package is called `singularity-container`.  For recent releases of singularity and backports for older Debian and Ubuntu releases, we recommend that you use the <a href="http://neuro.debian.net" target="_blank">NeuroDebian repository</a>.
+Singularity is available on Debian (and Ubuntu) systems starting with Debian stretch and the Ubuntu 16.10 yakkety releases. The package is called `singularity-container`.  For recent releases of singularity and backports for older Debian and Ubuntu releases, we recommend that you use the <a href="http://neuro.debian.net/pkgs/singularity-container.html" target="_blank">NeuroDebian repository</a>.
 
 ### Testing first with Docker
 If you want a quick preview of the NeuroDebian mirror, you can do this most easily with the NeuroDebian Docker image (and if you don't, skip to the next section). Obviously you should have <a href="https://docs.docker.com/engine/installation/linux/ubuntu/" target="_blank">Docker installed</a> before you do this.
