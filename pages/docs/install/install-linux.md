@@ -52,6 +52,17 @@ sudo rm -rf /usr/local/libexec/singularity
 And then install using one of the methods above.
 
 
+## Debian/Ubuntu Flavor Install
+Singularity is available on Debian (and Ubuntu) systems starting with Debian stretch and the Ubuntu 16.10 yakkety releases. The package is called `singularity-container` and can be installed as follows:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y singularity-container
+```
+
+The current version provided is 2.2.1, and the package maintainers will release the updated 2.3 soon. If you need a backport build of the recent release of Singularity on those or older releases of Debian and Ubuntu, please enable the NeuroDebian repository following instructions on the <a href="http://neuro.debian.net" target="_blank">NeuroDebian</a> site.
+
+
 ## Build an RPM from source
 Like the above, you can build an RPM of Singularity so it can be more easily managed, upgraded and removed. From the base Singularity source directory do the following:
 
