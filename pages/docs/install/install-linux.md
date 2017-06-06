@@ -78,7 +78,7 @@ singularity-container:
         500 http://neuro.debian.net/debian/ jessie/main amd64 Packages
 ```
 
-You can continue worker in Docker, or go back to your host and install Singularity.
+You can continue working in Docker, or go back to your host and install Singularity.
 
 ### Adding the Mirror and Installing
 You should first enable the NeuroDebian repository following instructions on the <a href="http://neuro.debian.net" target="_blank">NeuroDebian</a> site. This means using the dropdown menus to find the correct mirror for your operating system and location. For example, after selecting Ubuntu 16.04 and selecting a mirror in CA, I am instructed to add these lists:
