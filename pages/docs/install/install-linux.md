@@ -53,8 +53,36 @@ And then install using one of the methods above.
 
 
 
-## Debian/Ubuntu Flavor Install
-Singularity is available on Debian (and Ubuntu) systems starting with Debian stretch and the Ubuntu 16.10 yakkety releases. The package is called `singularity-container`. You should first enable the NeuroDebian repository following instructions on the <a href="http://neuro.debian.net" target="_blank">NeuroDebian</a> site. This means using the dropdown menus to find the correct mirror for your operating system and location. For example, after selecting Ubuntu 16.04 and selecting a mirror in CA, I am instructed to add these lists:
+## Debian/Ubuntu Package
+Singularity is available on Debian (and Ubuntu) systems starting with Debian stretch and the Ubuntu 16.10 yakkety releases. The package is called `singularity-container`. 
+
+
+### Testing first with Docker
+If you want a quick preview of the NeuroDebian mirror, you can do this most easily with the NeuroDebian Docker image (and if you don't, skip to the next section). Obviously you should have <a href="https://docs.docker.com/engine/installation/linux/ubuntu/" target="_blank">Docker installed</a> before you do this.
+
+First we run the `neurodebian` Docker image:
+
+```
+$ docker run -it --rm neurodebian
+```
+
+Then we update the cache (very quietly), and look at the `singularity-container` policy provided:
+
+```
+$ apt-get update -qqq
+$ apt-cache policy singularity-container
+singularity-container:
+  Installed: (none)
+  Candidate: 2.3-1~nd80+1
+  Version table:
+     2.3-1~nd80+1 0
+        500 http://neuro.debian.net/debian/ jessie/main amd64 Packages
+```
+
+You can continue worker in Docker, or go back to your host and install Singularity.
+
+### Adding the Mirror and Installing
+You should first enable the NeuroDebian repository following instructions on the <a href="http://neuro.debian.net" target="_blank">NeuroDebian</a> site. This means using the dropdown menus to find the correct mirror for your operating system and location. For example, after selecting Ubuntu 16.04 and selecting a mirror in CA, I am instructed to add these lists:
 
 ```
 sudo wget -O- http://neuro.debian.net/lists/xenial.us-ca.full | sudo tee /etc/apt/sources.list.d/neurodebian.sources.list
