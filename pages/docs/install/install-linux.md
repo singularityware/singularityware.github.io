@@ -99,7 +99,7 @@ Configuration file '/etc/singularity/singularity.conf'
 *** singularity.conf (Y/I/N/O/D/Z) [default=N] ? Y
 ```
 
-And for a user, it's probably well suited to use the defaults. For a cluster admin, we recommend that you read the <a href="/admin-docs">admin docs</a> to get a better understanding of the configuration file options available to you. Remember that you can always tweak the files at `/etc/singularity/singularity.conf` and `/etc/singularity/init` if you want to make changes.
+And for a user, it's probably well suited to use the defaults. For a cluster admin, we recommend that you read the <a href="/docs-config">admin docs</a> to get a better understanding of the configuration file options available to you. Remember that you can always tweak the files at `/etc/singularity/singularity.conf` and `/etc/singularity/init` if you want to make changes.
 
 After this install, you should confirm that `2.3-dist` is the version installed:
 
