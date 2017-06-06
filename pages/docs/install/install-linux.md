@@ -54,14 +54,61 @@ And then install using one of the methods above.
 
 
 ## Debian/Ubuntu Flavor Install
-Singularity is available on Debian (and Ubuntu) systems starting with Debian stretch and the Ubuntu 16.10 yakkety releases. The package is called `singularity-container` and can be installed as follows:
+Singularity is available on Debian (and Ubuntu) systems starting with Debian stretch and the Ubuntu 16.10 yakkety releases. The package is called `singularity-container`. You should first enable the NeuroDebian repository following instructions on the <a href="http://neuro.debian.net" target="_blank">NeuroDebian</a> site. This means using the dropdown menus to find the correct mirror for your operating system and location. For example, after selecting Ubuntu 16.04 and selecting a mirror in CA, I am instructed to add these lists:
+
+```
+sudo wget -O- http://neuro.debian.net/lists/xenial.us-ca.full | sudo tee /etc/apt/sources.list.d/neurodebian.sources.list
+sudo apt-key adv --recv-keys --keyserver hkp://pool.sks-keyservers.net:80 0xA5D32F012649A5A9
+```
+
+and then update
+
+```
+sudo apt-get update
+```
+
+then singularity can be installed as follows:
 
 ```bash
-sudo apt-get update
 sudo apt-get install -y singularity-container
 ```
 
-The current version provided is 2.2.1, and the package maintainers will release the updated 2.3 soon. If you need a backport build of the recent release of Singularity on those or older releases of Debian and Ubuntu, please enable the NeuroDebian repository following instructions on the <a href="http://neuro.debian.net" target="_blank">NeuroDebian</a> site.
+During the above, if you have a previously installed configuration, you might be asked if you want to define a custom configuration/init, or just use the default provided by the package, eg:
+
+```
+Configuration file '/etc/singularity/init'
+ ==> File on system created by you or by a script.
+ ==> File also in package provided by package maintainer.
+   What would you like to do about it ?  Your options are:
+    Y or I  : install the package maintainer's version
+    N or O  : keep your currently-installed version
+      D     : show the differences between the versions
+      Z     : start a shell to examine the situation
+ The default action is to keep your current version.
+*** init (Y/I/N/O/D/Z) [default=N] ? Y
+
+Configuration file '/etc/singularity/singularity.conf'
+ ==> File on system created by you or by a script.
+ ==> File also in package provided by package maintainer.
+   What would you like to do about it ?  Your options are:
+    Y or I  : install the package maintainer's version
+    N or O  : keep your currently-installed version
+      D     : show the differences between the versions
+      Z     : start a shell to examine the situation
+ The default action is to keep your current version.
+*** singularity.conf (Y/I/N/O/D/Z) [default=N] ? Y
+```
+
+And for a user, it's probably well suited to use the defaults. For a cluster admin, we recommend that you read the </a href="/admin-docs">admin docs</a> to get a better understanding of the configuration file options available to you. Remember that you can always tweak the files at `/etc/singularity/singularity.conf` and `etc/singularity/init` if you want to make changes.
+
+After this install, you should confirm that `2.3-dist` is the version installed:
+
+```bash
+$ singularity --version
+  2.3-dist
+```
+
+Note that if you don't add the NeuroDebian lists, the version provided will be old (e.g., 2.2.1). If you need a backport build of the recent release of Singularity on those or older releases of Debian and Ubuntu, you can <a href="http://neuro.debian.net/pkgs/singularity-container.html" target="_blank">see all the various builds and other information here</a>.
 
 
 ## Build an RPM from source
