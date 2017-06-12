@@ -125,11 +125,27 @@ party_dinosaur.gif
 ````
 
 ## Commands needing root
-The next set of actions, namely anything with `--writable` or bootstrap, do require you to use sudo. If you have been working on your shared resource, you will need to move to your personal laptop (and install Singularity if you haven't yet) before trying these out.
+The next set of actions, namely anything with `--writable` or bootstrap, do require you to use sudo, at least for most things. We can actually shell into a container, with `--writable`, and write to (some) locations for which we have permission to do so. Thus, this is possible to do, and will work depending on the permissions set in the container. For example, here let's shell in and try to write a root `/data` folder:
+
+```bash
+singularity shell --writable centos7.img
+Singularity: Invoking an interactive shell within container...
+
+Singularity centos7.img:~/Desktop> mkdir /data
+mkdir: cannot create directory '/data': Permission denied
+```
+
+Oups. How about a folder in the present working directory?
+
+```
+Singularity centos7.img:~/Desktop> touch file.txt
+```
+
+This we are allowed to do, so it's not totally impossible to write some files in a container without sudo. However, for most things, you will need to use sudo with writable, discussed next. At this point, if you have been working on your shared resource, you will need to move to your personal laptop (and install Singularity if you haven't yet) before trying these out.
 
 
 ### Writing in the container
-By default, containers run in read only. While we discourage making tweaks on the fly to containers (you should properly define all edits to the container in a boostrap specification file, shown later) you can add `--writable` to any command to write inside the container. Assuming we have our `centos7.img` on our local resource with sudo, let's make a directory. 
+While we discourage making tweaks on the fly to containers (you should properly define all edits to the container in a boostrap specification file, shown later) you can add `--writable` to any command to write inside the container. Assuming we have our `centos7.img` on our local resource with sudo, let's try again to make that `/data` directory: 
 
 
 ```bash
@@ -139,7 +155,7 @@ Singularity centos7.img:/root> touch /data/noodles.txt
 exit
 ```
 
-Did we make noodles? Is the file still there?
+We made the data! And the noodles! But after we exit, is the file still there?
 
 ```bash
 singularity exec centos7.img ls /data
