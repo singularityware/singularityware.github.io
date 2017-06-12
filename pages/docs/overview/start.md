@@ -125,7 +125,7 @@ party_dinosaur.gif
 ````
 
 ## Commands needing root
-The next set of actions, namely anything with `--writable` or bootstrap, do require you to use sudo, at least for most things. We can actually shell into a container, with `--writable`, and write to (some) locations for which we have permission to do so. Thus, this is possible to do, and will work depending on the permissions set in the container. For example, here let's shell in and try to write a root `/data` folder:
+The next set of actions, namely anything with `--writable` or bootstrap, do require you to use sudo. Well, they require sudo for **most** things. We can shell into a container, with `--writable` without sudo and write to locations for which we have permission to do so. For example, let's shell in to our container using `--writable` without sudo and try to write a `/data` folder at the root of the image:
 
 ```bash
 singularity shell --writable centos7.img
@@ -135,13 +135,13 @@ Singularity centos7.img:~/Desktop> mkdir /data
 mkdir: cannot create directory '/data': Permission denied
 ```
 
-Oups. How about a folder in the present working directory?
+In the above, we see that while it's possible to shell in with `--writable` sans sudo, the content that you can write depends on the permissions set in the container. Let's now try creating a file in the present working directory:
 
 ```
 Singularity centos7.img:~/Desktop> touch file.txt
 ```
 
-This we are allowed to do, so it's not totally impossible to write some files in a container without sudo. However, for most things, you will need to use sudo with writable, discussed next. At this point, if you have been working on your shared resource, you will need to move to your personal laptop (and install Singularity if you haven't yet) before trying these out.
+This we are allowed to do, however for most things you will likely need to use sudo with writable, discussed next. At this point, if you have been working on your shared resource, you will need to move to your personal laptop (and install Singularity if you haven't yet).
 
 
 ### Writing in the container
