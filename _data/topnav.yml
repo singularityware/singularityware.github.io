@@ -35,7 +35,7 @@ topnav_dropdowns:
         - title: Brian Bockelman
           external_url: https://github.com/bbockelm
         - title: Complete Authors List
-          external_url: https://github.com/singularityware/singularity/blob/master/AUTHORS
+          external_url: https://github.com/singularityware/singularity/blob/master/AUTHORS.md
 
 
 ## Topnav single links
