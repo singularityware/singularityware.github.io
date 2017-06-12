@@ -146,7 +146,7 @@ singularity exec centos7.img ls /data
 noodles.txt
 ```
 
-We(ideally) would have done this action with bootstrap, discussed next.
+We (ideally) would have done this action with bootstrap, discussed next.
 
 ### Bootstrap Recipes
 For a reproducible container, the recommended practice is to build by way of a bootstrap file. This also makes it easy to add files, environment variables, and install custom software, and still start from your bootstrap of source (e.g., Docker). Here is what a basic bootstrap file looks like for Singularity 2.3:
