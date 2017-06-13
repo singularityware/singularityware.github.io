@@ -190,7 +190,7 @@ AUTHOR vsochat@stanford.edu
 
 %post
 
-apt-get update && apt-get install python3 git wget
+apt-get update && apt-get -y install python3 git wget
 mkdir /data
 echo "The post section is where you can install, and configure your container."
 ```
