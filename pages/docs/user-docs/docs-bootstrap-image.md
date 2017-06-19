@@ -82,10 +82,11 @@ Importing: /home/vanessa/.singularity/metadata/sha256:fe44851d529f465f9aa107b323
 When bootstrapping a container, it is best to consider the following:
 
 1. Install packages, programs, data, and files into operating system locations (e.g. not `/home`, `/tmp`, or any other directories that might get commonly binded on).
-2. If you require any special environment variables to be defined, add them the `/environment` file inside the container.
-3. Files should never be owned by actual users, they should always be owned by a system account (UID < 500).
-4. Ensure that the container's `/etc/passwd`, `/etc/group`, `/etc/shadow`, and no other sensitive files have anything but the bare essentials within them.
-5. Do all of your bootstrapping via a definition file instead of manipulating the containers by hand (with the `--writable` options), this ensures greatest possibility of reproducibility and mitigates the *black box effect*.
+2. Make your container speak for itself. A good runscript will spit out usage, variables, and tell the user how to interact with the container.
+3. If you require any special environment variables to be defined, add them the `%environment` section of the bootstrap recipe.
+4. Files should never be owned by actual users, they should always be owned by a system account (UID < 500).
+5. Ensure that the container's `/etc/passwd`, `/etc/group`, `/etc/shadow`, and no other sensitive files have anything but the bare essentials within them.
+6. Do all of your bootstrapping via a definition file instead of manipulating the containers by hand (with the `--writable` options), this ensures greatest possibility of reproducibility and mitigates the *black box effect*.
 
 
 
