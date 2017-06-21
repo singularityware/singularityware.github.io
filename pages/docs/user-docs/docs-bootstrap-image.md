@@ -123,14 +123,14 @@ For complete details about header fields that are allowed, please see the <a hre
 The main content of the bootstrap file is broken into sections.
 
 #### %setup
-Setup is where you might perform actions on the host before we move into the container. For versions earlier than 2.3, you would copy files from your host to `$SINGULARITY_ROOTFS` to move them into the container. For 2.3 and later, we recommend you use `%files`. We can see the difference between `%setup` and `%post` in the following asciicast:
+Setup is where you might perform actions on the host before we move into the container. For versions earlier than 2.3, or if you need files during `%post`, you should copy files from your host to `$SINGULARITY_ROOTFS` to move them into the container. For 2.3 and cases when you don't need the files until after `%post`, we recommend you use `%files`. We can see the difference between `%setup` and `%post` in the following asciicast:
 
 {% include asciicast.html source='docs-bootstrap-setup-vs-post.json' title='How does the container see setup vs post?' author='vsochat@stanford.edu'%}
 
 In the above, we see that copying something to `$SINGULARITY_ROOTFS` during `%setup` was successful to move the file into the container, but copying during `%post` was not.
 
 #### %files
-Speaking of files, if you want to copy content into the container, you should do so using the `%files` section, where each is a pair of `<source>` and `<destination>`, where the file or expression to be copied is a path on your host, and the destination is a path in the container. Here we are using the traditional `cp` command, so the <a href="https://linux.die.net/man/1/cp" target="_blank">same conventions apply</a>.
+Speaking of files, if you want to copy content into the container, you should do so using the `%files` section, where each is a pair of `<source>` and `<destination>`, where the file or expression to be copied is a path on your host, and the destination is a path in the container. Here we are using the traditional `cp` command, so the <a href="https://linux.die.net/man/1/cp" target="_blank">same conventions apply</a>. Note that the `%files` section is executed **after** `%post`, so if you need files before that, the current workaround is to copy your files from the host to `$SINGULARITY_ROOTFS` in the `%setup` section. We plan to change this to make different sections for pre and post files in Singularity 2.4, and please comment <a href="https://github.com/singularityware/singularity/issues/674" target="_blank">here</a> if you have thoughts or suggestions.
 
 #### %labels
 To store metadata with your container, you can add them to the `%labels` section. They will be stored in a file `/.singularity.d/labels.json` as metadata with your container. The general format is a `LABELNAME` followed by a `LABELVALUE`. Labels from Docker bootstraps will be carried forward here. As an example:

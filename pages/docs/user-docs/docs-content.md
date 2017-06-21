@@ -14,7 +14,7 @@ We recommend strongly that you add content during an image <a href="/docs-bootst
  - by cloning a Github (or other) repository in the `%post` section
  - using wget, curl, or any other method to download in `%post` or `%setup`
  - Adding pairs of `path/on/host` `/path/in/container` to the `%files` section
-
+ - For files added before post, copy them from a host path to `$SINGULARITY_ROOTFS` in `%setup`
 
 ## After Bootstrap
 While we don't recommend these methods (this is not reproducible practice) there are ways to add content after image creation.
