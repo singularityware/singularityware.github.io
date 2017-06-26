@@ -13,10 +13,10 @@ You can try the following two options:
 ### Option 1: Download latest stable release
 You can always download the latest tarball release from <a href="{{ site.repo }}/releases" target="_blank">Github</a>
 
-For example, here is how to download version `2.3` and install:
+For example, here is how to download version `2.3.1` and install:
 
 ```bash
-VERSION=2.3
+VERSION=2.3.1
 wget https://github.com/singularityware/singularity/releases/download/$VERSION/singularity-$VERSION.tar.gz
 tar xvf singularity-$VERSION.tar.gz
 cd singularity-$VERSION
