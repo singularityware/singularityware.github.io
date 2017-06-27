@@ -29,6 +29,7 @@ We are maintaining a set of Vagrant Boxes via <a href="https://atlas.hashicorp.c
 
  - [singularityware/singularity-2.2.99](https://atlas.hashicorp.com/singularityware/boxes/singularity-2.2.99)
  - [singularityware/singularity-2.3](https://atlas.hashicorp.com/singularityware/boxes/singularity-2.3)
+ - [singularityware/singularity-2.3.1](https://atlas.hashicorp.com/singularityware/boxes/singularity-2.3.1)
 
 ```bash
 mkdir singularity-vm
