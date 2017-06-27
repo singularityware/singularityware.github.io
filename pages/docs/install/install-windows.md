@@ -6,7 +6,7 @@ folder: docs
 ---
 
 
-This recipe demonstrates how to run Singularity on your Mac via Vagrant and Ubuntu. The recipe requires access to `brew` which is a package installation subsystem for OS X. This recipe may take anywhere from 5-20 minutes to complete.
+This recipe demonstrates how to run Singularity on your Windows computer via Vagrant and Ubuntu. This recipe may take anywhere from 5-20 minutes to complete.
 
 ## Setup
 
