@@ -15,6 +15,14 @@ user_contributions:
         - title: Singularity on SCG4 (Stanford)
           date: 2/2017
           external_url: https://docs.google.com/presentation/d/1qAh0vXmmFW0MtV5qKZhruxQNknNQnGItQ25Q0A1GX8Q/pub?start=false&loop=false&delayms=3000
+    - title: Publications and Written Work
+      folderitems:
+        - title: Cloud Computing for Science and Engineering (MIT Press)
+          external_url: https://www.linkedin.com/pulse/containers-hpc-look-singularity-dennis-gannon
+          date: 6/2017
+        - title: Singularity Publication (PLOS One)
+          external_url: http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0177459
+          date: 5/2017
     - title: Code and Tutorials
       folderitems:
         - title: Singularity @ POD (Penguin Computing)
