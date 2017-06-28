@@ -44,7 +44,7 @@ You are then ready to go with Singularity 2.3.1!
 vagrant@vagrant:~$ which singularity
 /usr/local/bin/singularity
 vagrant@vagrant:~$ singularity --version
-2.3.1-master.dist
+2.3.1-dist
 vagrant@vagrant:~$ singularity create test.img
 Initializing Singularity image subsystem
 Opening image file: test.img
