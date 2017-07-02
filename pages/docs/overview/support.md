@@ -13,7 +13,7 @@ toc: false
 * Post <a href="https://www.github.com/singularityware/singularity/issues" target="_blank">an issue on GitHub</a> if you think you found a bug
 
 ### Want to Join the Team?!
-We want you! Your help! Your contributions! Your presence! Come and hop on our <a href="https://singularity-container.slack.com" target="_blank">Slack channel</a> by requesting an invite from <a href='mailto:gmk@lbl.gov'>gmk@lbl.gov</a>!
+We want you! Your help! Your contributions! Your presence! Come and hop on our <a href="https://singularity-container.slack.com" target="_blank">Slack channel</a> by requesting an invite from <a href='mailto:gmkurtzer@gmail.com'>gmkurtzer@gmail.com</a>!
 
 We encourage you to <a href="/citation-registration">cite us in your work and/or register your HPC cluster!</a>
 
