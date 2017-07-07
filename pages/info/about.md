@@ -33,7 +33,7 @@ Within the container, there could be an entire distribution of Linux or a very l
 Each Singularity image includes all of the application's necessary run-time libraries and can even include the required data and files for a particular application to run. This encapsulation of the entire user-space environment facilitates not only portability but also reproducibility.
 
 ### License
-Singularity is released under a special 3 clause BSD license. Please see our <a href="{{ site.repo }}/blob/master/LICENSE.md" target="_blank">LICENSE</a> file for more details).
+Singularity is released under a standard 3 clause BSD license. Please see our <a href="{{ site.repo }}/blob/master/LICENSE.md" target="_blank">LICENSE</a> file for more details).
 
 ## Features
 
