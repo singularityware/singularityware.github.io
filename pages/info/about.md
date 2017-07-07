@@ -7,7 +7,7 @@ toc: false
 
 ## Overview
 
-Designed around the notion of extreme mobility of compute and reproducible science, Singularity enables users to have full control of their operating system environment. This means that a non-privileged user can "swap out" the operating system on the host for one they control. So if the host system is running RHEL6 but your application runs in Ubuntu, you can create an Ubuntu image, install your applications into that image, copy the image to another host, and run your application on that host in it's native Ubuntu environment!
+Designed around the notion of extreme mobility of compute and reproducible science, Singularity enables users to have full control of their operating system environment. This means that a non-privileged user can "swap out" the operating system on the host for one they control. If the host system is running RHEL6 but your application runs in Ubuntu, you can create an Ubuntu image, install your applications into that image, copy the image to another host, and run your application on that host in it's native Ubuntu environment.
 
 Singularity also allows you to leverage the resources of whatever host you are on. This includes HPC interconnects, resource managers, file systems, GPUs and/or accelerators, etc.
 
@@ -22,7 +22,7 @@ The drawbacks are numerous, but tend to focus on several major areas: container 
 ### The Singularity Solution
 Singularity containers are purpose built and can include a simple binary and library stack or a complicated work flow that includes both network and file system access (or anything in between). The Singularity container images are then completely portable to any binary compatible version of Linux with the only dependency being Singularity running on the target system.
 
-Singularity blocks privilege escalation within the container so if you want to be root inside the container, you first must be root outside the container. This usage paradigm mitigates many of the security concerns that exists with containers on multi-tenant shared resources. You can directly call programs inside the container from outside the container fully incorporating pipes, standard IO, file system access, X11, and MPI makes it easy to incorporate into your environment.
+Singularity blocks privilege escalation within the container. If you want to be root inside the container, you first must be root outside the container. This usage paradigm mitigates many of the security concerns that exists with containers on multi-tenant shared resources. You can directly call programs inside the container from outside the container fully incorporating pipes, standard IO, file system access, X11, and MPI. Singularity images can be seamlessly incorporated into your environment.
 
 ### Portability
 Singularity containers are designed to be as portable as possible, spanning many flavors and vintages of Linux. The only known i86 limitation is the version of Linux running on the host. Singularity has been ported to distributions going as far back as RHEL 5 (and compatibles) and works on all flavors of Debian, Gentoo and Slackware. Within the container, there are almost no limitations aside from basic binary compatibility.
@@ -33,7 +33,7 @@ Within the container, there could be an entire distribution of Linux or a very l
 Each Singularity image includes all of the application's necessary run-time libraries and can even include the required data and files for a particular application to run. This encapsulation of the entire user-space environment facilitates not only portability but also reproducibility.
 
 ### License
-Singularity is released under a BSD license with 2 modifications. One of the modifications being that you may not use the names of any project members or contributors (namely UC or the US Department of Energy) to endorse or promote products or services derived from or using this software. And the other is that if you share modified code publicly (or with Berkeley National Laboratory), you will grant similar license terms on your "Enhancements" (see <a href="{{ site.repo }}/blob/master/LICENSE" target="_blank">LICENSE</a> file for more details).
+Singularity is released under a special 3 clause BSD license. Please see our <a href="{{ site.repo }}/blob/master/LICENSE.md" target="_blank">LICENSE</a> file for more details).
 
 ## Features
 
