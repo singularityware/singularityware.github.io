@@ -253,6 +253,11 @@ The command [ldconfig](https://codeyarns.com/2014/01/14/how-to-add-library-direc
 
  >> Update the library cache at the end of your Dockerfile with a call to ldconfig.
 
+### 3. Don't install to $HOME or $TMP
+We can assume that the most common Singularity use case has the $USER home being automatically mounted to `$HOME`, and `$TMP` also mounted. Thus, given the potential for some kind of conflict or missing files, for best practice #3 we suggest the following:
+
+  >> Don't put container valuables in `$TMP` or `$HOME`
+
 
 Have any more best practices? Please <a href="https://www.github.com/singularityware/singularityware.github.io/issues" target="_blank">let us know</a>!
 
