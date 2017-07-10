@@ -5,6 +5,8 @@ permalink: docs-docker
 folder: docs
 ---
 
+{% include toc.html %}
+
 Singularity is good friends with Docker. The reason is because the developers use and really like using Docker, and scientists have already put much resources into creating Docker images. Thus, one of our early goals was to support Docker. What can you do?
 
 - You don't need Docker installed
@@ -166,7 +168,7 @@ Given the definition, the `ENTRYPOINT` is most appropriate for the Singularity `
 
 
 
-# How do I specify my Docker image?
+## How do I specify my Docker image?
 
 In the example above, you probably saw that we referened the docker image first with the uri `docker://` and that is important to tell Singularity that it will be pulling Docker layers. To ask for ubuntu, we asked for `docker://ubuntu`. This uri that we give to Singularity is going to be very important to choose the following Docker metadata items:
 
@@ -199,11 +201,11 @@ If you want to change any of those fields, then just specify what you want in th
 
 
 
-# Custom Authentication
+## Custom Authentication
 For both import and bootstrap using a build spec file, by default we use the Docker Registry `index.docker.io`. Singularity first tries the call without a token, and then asks for one with pull permissions if the request is defined. However, it may be the case that you want to provide a custom token for a private registry. You have two options. You can either provide a `Username` and `Password` in the build specification file (if stored locally and there is no need to share), or (in the case of doing an import or needing to secure the credentials) you can export these variables to environmental variables. We provide instructions for each of these cases:
 
 
-#### Authentication in the Singularity Build File
+### Authentication in the Singularity Build File
 You can simply specify your additional authentication parameters in the header with the labels `Username` and `Password`:
 
 ```bash
@@ -213,7 +215,7 @@ Password: [password]
 
 Again, this can be in addition to specification of a custom registry with the `Registry` parameter.
 
-#### Authentication in the Environment
+### Authentication in the Environment
 You can export your username, and password for Singularity as follows:
 
 ```bash
@@ -221,7 +223,7 @@ export SINGULARITY_DOCKER_USERNAME=vanessasaur
 export SINGULARITY_DOCKER_PASSWORD=rawwwwwr
 ```
 
-##### Testing Authentication
+### Testing Authentication
 If you are having trouble, you can test your token by obtaining it on the command line and putting it into an environmental variable, `CREDENTIAL`:
 
 
@@ -237,6 +239,22 @@ http https://index.docker.io/v2/vanessa/code-samples/tags/list Authorization:"Be
 ```
 
 The above call should return the tags list as expected. And of course you should change the repo name to be one that actually exists that you have credentials for.
+
+## Best Practices
+While most docker images can import and run without a hitch, there are some special cases for which things can go wrong. Here is a general list of suggested practices, and if you discover a new one in your building ventures please <a href="https://www.github.com/singularityware/singularityware.github.io/issues" target="_blank">let us know</a>.
+
+### 1. Installation to Root
+When using Docker, you typically run as root, meaning that root's home at `/root` is where things will install given a specification of home. This is fine when you stay in Docker, or if the content at `/root` doesn't need any kind of write access, but generally can lead to a lot of bugs because it is, after all, root's home. This leads us to best practice #1.
+
+ >> Don't install anything to root's home, `/root`.
+
+### 2. Library Configurations
+The command [ldconfig](https://codeyarns.com/2014/01/14/how-to-add-library-directory-to-ldconfig-cache/) is used to update the shared library cache. If you have software that requires symbolic linking of libraries and you do the installation without updating the cache, then the Singularity image (in read only) will likely give you an error that the library is not found. If you look in the image, the library will exist but the symbolic link will not. This leads us to best practice #2:
+
+ >> Update the library cache at the end of your Dockerfile with a call to ldconfig.
+
+
+Have any more best practices? Please <a href="https://www.github.com/singularityware/singularityware.github.io/issues" target="_blank">let us know</a>!
 
 
 ## Troubleshooting
