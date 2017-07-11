@@ -3,6 +3,9 @@ user_contributions:
   folders:
     - title: Presentations
       folderitems:
+        - title: Reproducibility and Containers, the Perfect Sandwich (Vanessa Sochat, Stanford Research Computing)
+          date: 7/11/2017
+          external_url: https://docs.google.com/presentation/d/14-iKKUpGJC_1qpVFVUyUaitc8xFSw9Rp3v_UE9IGgjM/edit?usp=sharing
         - title: Singularity @ Open Science Grid (Talk by Greg)
           date: 3/17/2017
           external_url: https://support.opensciencegrid.org/support/solutions/articles/12000024676-singularity-containers
