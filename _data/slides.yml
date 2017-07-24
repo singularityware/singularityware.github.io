@@ -3,6 +3,9 @@ user_contributions:
   folders:
     - title: Presentations
       folderitems:
+        - title: ACCRE Pizza and Programming Seminar, Singularity
+          date: 7/20/2017
+          external_url: https://youtu.be/sFS_lkVU5ck?t=5m17s
         - title: Reproducibility and Containers, the Perfect Sandwich (Vanessa Sochat, Stanford Research Computing)
           date: 7/11/2017
           external_url: https://docs.google.com/presentation/d/14-iKKUpGJC_1qpVFVUyUaitc8xFSw9Rp3v_UE9IGgjM/pub?start=false&loop=false&delayms=3000
