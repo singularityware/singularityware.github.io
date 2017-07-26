@@ -22,6 +22,10 @@ entries:
       url: /docs-config
       output: web, pdf
 
+    - title: Container Checks
+      url: /docs-admin-checks
+      output: web, pdf
+
     - title: Troubleshooting
       url: /docs-troubleshooting
       output: web, pdf

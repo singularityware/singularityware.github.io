@@ -31,12 +31,20 @@ entries:
       url: /image-content
       output: web, pdf
 
+    - title: Container Checks
+      url: /docs-user-checks
+      output: web, pdf
+
     - title: User Control
       url: /user-control
       output: web, pdf
 
     - title: Bind Paths and Mounts
       url: /docs-mount
+      output: web, pdf
+
+    - title: Running Services
+      url: /docs-instances
       output: web, pdf
 
     - title: Environment and Metadata
