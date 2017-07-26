@@ -32,11 +32,42 @@ With version 2.4, you can do this in a more realistic way. First, let's put the 
 service nginx start
 ```
 
-and we will pretend that we are running with sudo, and we don't specify it above. Now let's say we have a container called `nginx.img` and we want to run it! What do we do?
+and an instruction to stop it too:
+
+
+```
+%startscript
+
+service nginx stop
+```
+
+You might even have some special (longer set) of commands in your startscript, if warranted:
+
+```
+#!/bin/sh
+
+if [ -z "$OMGTACOSGUNICORN" ]; then
+    /bin/bash /code/helpers/ctrl/gunicorn.screen
+    echo "server started, status code $?"
+else
+    echo "server is already running. Use restart or stop."
+fi
+
+if [ -z "$OMGTACOSCELERY" ]; then
+    /bin/bash /code/helpers/ctrl/celery.screen
+    echo "worker started, status code $?"
+else
+    echo "worker is already running. Use restart or stop."
+fi
+```
+
+In the above example, there are two services in my container, and based on environment varibles, there is some custom functionality that happens based on how the user sets them upon starting the container instance.
+
+Now let's say we have a container called `nginx.img` and we want to run a service in it. What do we do? Well, first we clone it to make an instance:
 
 ```
             [action]  [image]    [name of instance]
-singularity clone     nginx.img  service
+singularity clone     nginx.img  instance
 ```
 
 When I do that, I still have my file `nginx.img` sitting on my Desktop, but now you can think about having actually an instance of it running, which I can now control! Heck, I could do that multiple times, if it made sense for my service:
