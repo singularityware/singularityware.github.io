@@ -8,6 +8,8 @@ topnav_dropdowns:
           url: /admin-guide
         - title: User Guide
           url: /user-guide
+        - title: Archive
+          url: /archive
         - title: Contributed Content
           url: /links
     - title: Quick Links
