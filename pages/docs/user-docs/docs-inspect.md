@@ -6,7 +6,7 @@ toc: false
 folder: docs
 ---
 
-How can you sniff an image? We have provided the inspect command for you to easily see the runscript, test script, environment, and metadata labels. 
+How can you sniff an image? We have provided the inspect command for you to easily see the runscript, test script, environment, help, and metadata labels. 
 
 {% include toc.html %}
 
@@ -27,6 +27,7 @@ INSPECT OPTIONS:
     -t/--test        Show the test script for this image
     -e/--environment Show the environment settings for this container
     -j/--json        Print structured json instead of sections
+    -hf/--helpfile   Inspect the runscript helpfile, if exists
 
 EXAMPLES:
     
@@ -91,11 +92,12 @@ $ singularity inspect ubuntu.img
 and as outlined in the usage, you can specify to see any combination of `--labels`, `--environment`, `--runscript`, `--test`, and `--deffile`. The quick command to see everything, in json format, would be:
 
 ```
-$ singularity inspect -l -r -d -t -e -j ubuntu.img
+$ singularity inspect -l -r -d -t -e -j -hf ubuntu.img
 {
     "data": {
         "attributes": {
             "test": null,
+            "help": "This is how you run the image!\n",
             "environment": "# Custom environment shell code should follow\n\n",
             "labels": {
                 "SINGULARITY_DEFFILE_BOOTSTRAP": "docker",
@@ -157,6 +159,38 @@ $ singularity inspect -r ubuntu.img
 #!/bin/sh
 
 exec /bin/bash "$@"
+```
+
+### Help
+The commands `--helpfile` or `-hf` will show you the runscript helpfile, if it exists. With `--json` you can also see it as such:
+
+```
+singularity inspect -hf -j dino.img
+{
+    "data": {
+        "attributes": {
+            "help": "\n\n\nHi there! This is my image help section.\n\nUsage:\n\nboobeep doo doo\n\n --arg/a arrrrg I'm a pirate!\n --boo/b eeeeeuzzz where is the honey?\n\n\n"
+        },
+        "type": "container"
+    }
+}
+```
+
+or in a human friendly, readable print to the screen, don't use `-j` or `--json`:
+
+```
+$ singularity inspect -hf dino.img
+
+
+Hi there! This is my image help section.
+
+Usage:
+
+boobeep doo doo
+
+ --arg/a arrrrg I'm a pirate!
+ --boo/b eeeeeuzzz where is the honey?
+
 ```
 
 

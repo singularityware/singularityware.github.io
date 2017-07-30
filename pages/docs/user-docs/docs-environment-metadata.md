@@ -9,6 +9,7 @@ folder: docs
 
 Singularity containers have two level of metadata - environment variables, and labels from the user and bootstrap process.
 
+
 ### Environment
 
 If you are importing a Docker container, the environment will be imported as well. If you want to define custom environment variables in your bootstrap recipe file `Singularity` you can do that like this
@@ -58,7 +59,26 @@ export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
 ### Labels
-Your container stores metadata about it's build, along with Docker labels. You can see the data as follows:
+Your container stores metadata about it's build, along with Docker labels, and your custom labels that you define in a bootstrap `%labels` section. For containers that are generated with Singularity version 2.4 and later, labels are represented using the <a href="http://label-schema.org/rc1/">rc1 Label Schema</a>. For example:
+
+```
+singularity inspect dino.img
+{
+    "org.label-schema.usage.singularity.deffile.bootstrap": "docker",
+    "MAINTAINER": "Vanessasaurus",
+    "org.label-schema.usage.singularity.deffile": "Singularity.help",
+    "org.label-schema.usage": "/.singularity.d/runscript.help",
+    "org.label-schema.schema-version": "1.0",
+    "org.label-schema.usage.singularity.deffile.from": "ubuntu:latest",
+    "org.label-schema.build-date": "2017-07-28T22:59:17-04:00",
+    "org.label-schema.usage.singularity.runscript.help": "/.singularity.d/runscript.help",
+    "org.label-schema.usage.singularity.version": "2.3.1-add/label-schema.g00f040f",
+    "org.label-schema.build-size": "715MB"
+}
+```
+
+You will notice that the one label doesn't belong to the label schema, `MAINTAINER`. This was a user provided label during bootstrap. For versions earlier than 2.4, containers did not use the label schema:
+
 
 ```bash
 singularity exec centos7.img cat /.singularity.d/labels.json
