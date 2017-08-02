@@ -113,7 +113,7 @@ Singularity does its best to abstract the complications of running an applicatio
 Some usage examples of Singularity can be seen as follows:
 
 ```bash
-$ singularity exec dummpy.img xterm
+$ singularity exec dummy.img xterm
 $ singularity exec dummy.img python script.py
 $ singularity exec dummy.img python < /path/to/python/script.py
 $ cat /path/to/python/script.py | singularity exec dummy.img python
