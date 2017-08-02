@@ -256,6 +256,35 @@ You can read more about the Singularity <a href="/docs-security">security overvi
 
 A little bit of help.
 
+@gmkurtzer I'll get us started here, and if you want to edit / adjust I can add to our troubleshooting docs. Here is a first go not following this issue closely:
+
+### Segfault on Bootstrap of Centos Image
+If you are bootstrapping a centos 6 docker image from a debian host, you might hit a segfault:
+
+```
+$ singularity shell docker://centos:6 
+Docker image path: index.docker.io/library/centos:6
+Cache folder set to /home/jbdenis/.singularity/docker
+Creating container runtime...
+Singularity: Invoking an interactive shell within container...
+
+Segmentation fault
+```
+
+The fix is on your host, you need to pass the variable `vsyscall=emulate` to the kernel, meaning in the file `/etc/default/grub` (note, this file is debian specific), add the following:
+
+```
+GRUB_CMDLINE_LINUX_DEFAULT="vsyscall=emulate"
+```
+
+and then update grub and reboot:
+
+```
+update-grub && reboot
+```
+
+For more information, see the <a href="https://github.com/singularityware/singularity/issues/845" target="_blank">original issue</a>.
+
 
 ### How to use Singularity with GRSecurity enabled kernels
 
