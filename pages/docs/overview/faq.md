@@ -283,7 +283,7 @@ and then update grub and reboot:
 update-grub && reboot
 ```
 
-For more information, see the <a href="https://github.com/singularityware/singularity/issues/845" target="_blank">original issue</a>.
+Please note that this change might have <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/admin-guide/kernel-parameters.txt?h=v4.13-rc3#n4387" target="_blank">security implications</a> that you should be aware of. For more information, see the <a href="https://github.com/singularityware/singularity/issues/845" target="_blank">original issue</a>.
 
 
 ### How to use Singularity with GRSecurity enabled kernels
