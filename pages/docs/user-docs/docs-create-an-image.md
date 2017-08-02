@@ -7,7 +7,7 @@ folder: docs
 
 A Singularity image, which can be referred to as a "container," is a single file that contains a virtual file system. After creating an image you can install an operating system, applications, and save meta-data with it.
 
-Whereas Docker assembles images from layers that are stored on your computer (viewed with the docker -ps command), a Singularity image is just one file that can sit on your Desktop, in a folder on your cluster, or anywhere.
+Whereas Docker assembles images from layers that are stored on your computer (viewed with the `docker history` command), a Singularity image is just one file that can sit on your Desktop, in a folder on your cluster, or anywhere.
 
 Having Singularity containers housed within a single image file greatly simplifies management tasks such as sharing, copying, and branching your containers. It also means that standard Linux file system concepts like permissions, ownership, and ACLs apply to the container (e.g. I can give read only access to a colleague, or block access completely with a simple chmod command).
 
