@@ -155,7 +155,7 @@ This workflow can be described visually as follows:
 
 ![Singularity Workflow](/images/docs/overview/workflow-overview.png)
 
-One the left side, you have your laptop, workstation, or a server that you control. Here you will create your containers, modify and update your containers as you need. Once you have the container with the necessary applications, libraries and data inside it can be easily shared to other hosts and executed without have root access. But if you need to make changes again to your container, you must go back to an endpoint or system that you have root on, make the necessary changes, and then re-upload the container to the computation resource you wish to execute it on.
+On the left side, you have your laptop, workstation, or a server that you control. Here you will create your containers and  modify/update them as you need. Once you have the container with the necessary applications, libraries and data inside it can be easily shared to other hosts and executed without requiring root access. But if you need to make changes again to your container, you must go back to an endpoint or system that you have root on, make the necessary changes, and then re-upload the container to the computation resource you wish to execute it on.
 
 
 ### Examples
