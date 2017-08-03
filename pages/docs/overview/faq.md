@@ -256,8 +256,6 @@ You can read more about the Singularity <a href="/docs-security">security overvi
 
 A little bit of help.
 
-@gmkurtzer I'll get us started here, and if you want to edit / adjust I can add to our troubleshooting docs. Here is a first go not following this issue closely:
-
 ### Segfault on Bootstrap of Centos Image
 If you are bootstrapping a centos 6 docker image from a debian host, you might hit a segfault:
 
