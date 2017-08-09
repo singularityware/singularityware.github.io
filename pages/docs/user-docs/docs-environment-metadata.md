@@ -19,6 +19,7 @@ From: ubuntu:latest
 
 %environment
 VARIABLE_NAME=VARIABLE_VALUE
+export VARIABLE_NAME
 ```
 
 Forget something, or need a variable defined at runtime? You can set any variable you want inside the container by prefixing it with "SINGULARITYENV_". It will be transposed automatically and the prefix will be stripped. For example, let's say we want to set the variable `HELLO` to have value `WORLD`. We can do that as follows:

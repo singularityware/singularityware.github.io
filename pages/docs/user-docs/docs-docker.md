@@ -98,7 +98,7 @@ sudo singularity bootstrap tensorflow.img Singularity
 ```
 
 but just those two lines and doing bootstrap is silly, because we would achieve the same thing by doing:
-
+environment
 ```bash
 singularity create --size 4000 tensorflow.img
 singularity import tensorflow.img docker://tensorflow/tensorflow:latest
@@ -125,9 +125,9 @@ From: tensorflow/tensorflow:latest
 relative_path.py /tmp/analysis2.py
 
 %environment
-
-TOPSECRET pancakes
-HELLO WORLD
+TOPSECRET=pancakes
+HELLO=WORLD
+export HELLO TOPSECRET
 
 %labels
 
