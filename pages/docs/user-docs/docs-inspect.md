@@ -35,7 +35,7 @@ EXAMPLES:
 
     exec /bin/bash "$@"
 
-    $ singuarity inspect --labels ubuntu.img
+    $ singularity inspect --labels ubuntu.img
     {
         "SINGULARITY_DEFFILE_BOOTSTRAP": "docker",
         "SINGULARITY_DEFFILE": "Singularity",
