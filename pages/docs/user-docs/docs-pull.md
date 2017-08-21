@@ -10,39 +10,6 @@ Singularity `pull` is the command that you would want to use to communicate with
 
 {% include toc.html %}
 
-## Usage
-
-```
-USAGE: singularity [...] pull shub:// [unique id]
-
-pull takes a Singularity Hub (shub) URI and will pull a container
-to PWD. If you want the image to go to SINGULARITY_CACHEDIR, you
-should use one of run, exec, or shell.
-
-SUPPORTED URIs:
-
-    shub: Pull an image using python from Singularity Hub to $PWD
-    docker: Pull a docker image using python to $PWD
-
-PULL OPTIONS:
-    -n/--name   Specify a custom container name (first priority)
-    -C/--commit Name container based on Github commit (second priority)
-    -H/--hash   Name container based on file hash (second priority)
-    
-
-EXAMPLES:
-
-    $ singularity pull docker://ubuntu:latest
-
-    $ singularity pull shub://vsoch/singularity-images
-      Found image vsoch/singularity-images:mongo
-      Downloading image... vsoch-singularity-images-mongo.img
-
-    $ singularity pull --name "meatballs.img" shub://vsoch/singularity-images
-    $ singularity pull --commit shub://vsoch/singularity-images
-    $ singularity pull --hash shub://vsoch/singularity-images
-```
-
 ## Singularity Hub
 Singularity differs from Docker in that we serve entire images, as opposed to layers. This means that pulling a Singularity Hub means downloading the entire (compressed) container file, and then having it extract on your local machine. The basic command is the following:
 

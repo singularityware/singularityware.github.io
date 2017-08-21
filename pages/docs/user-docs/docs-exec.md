@@ -10,78 +10,9 @@ The `exec` Singularity sub-command allows you to spawn an arbitrary command with
 
 {% include toc.html %}
 
-## Usage
+## Examples
 
-The usage is as follows:
-
-```
-USAGE: singularity [...] exec [exec options...] <container path> <command>
-
-This command will allow you to execute any program within the given
-container image.
-
-EXEC OPTIONS:
-    -B/--bind <spec>    A user-bind path specification.  spec has the format
-                        src[:dest[:opts]], where src and dest are outside and
-                        inside paths.  If dest is not given, it is set equal
-                        to src.  Mount options ('opts') may be specified as
-                        'ro' (read-only) or 'rw' (read/write, which is the 
-                        default). This option can be called multiple times.
-    -c/--contain        This option disables the sharing of filesystems on 
-                        your host (e.g. /dev, $HOME and /tmp).
-    -C/--containall     Contain not only file systems, but also PID and IPC 
-    -e/--cleanenv       Clean environment before running container
-    -H/--home <spec>    A home directory specification.  spec can either be a
-                        src path or src:dest pair.  src is the source path
-                        of the home directory outside the container and dest
-                        overrides the home directory within the container
-    -i/--ipc            Run container in a new IPC namespace
-    -n/--nv             Enable experimental Nvidia support
-    -p/--pid            Run container in a new PID namespace
-    --pwd               Initial working directory for payload process inside 
-                        the container
-    -S/--scratch <path> Include a scratch directory within the container that 
-                        is linked to a temporary dir (use -W to force location)
-    -u/--user           Run container in a new user namespace (this allows
-                        Singularity to run completely unprivileged on recent
-                        kernels and doesn't support all features)
-    -W/--workdir        Working directory to be used for /tmp, /var/tmp and
-                        $HOME (if -c/--contain was also used)
-    -w/--writable       By default all Singularity containers are available as
-                        read only. This option makes the file system accessible
-                        as read/write.
-
-
-CONTAINER FORMATS SUPPORTED:
-    *.img               This is the native Singularity image format for all
-                        Singularity versions 2.x.
-    *.sqsh              SquashFS format, note the suffix is required!
-    *.tar*              Tar archives are exploded to a temporary directory and
-                        run within that directory (and cleaned up after). The
-                        contents of the archive is a root file system with root
-                        being in the current directory. Compression suffixes as
-                        '.gz' and '.bz2' are supported.
-    directory/          Container directories that contain a valid root file
-                        system.
-
-
-EXAMPLES:
-    
-    $ singularity exec /tmp/Debian.img cat /etc/debian_version
-    $ singularity exec /tmp/Debian.img python ./hello_world.py
-    $ cat hello_world.py | singularity exec /tmp/Debian.img python
-    $ sudo singularity exec --writable /tmp/Debian.img apt-get update
-
-For additional help, please visit our public documentation pages which are
-found at:
-
-    http://singularity.lbl.gov/
-
-```
-
-### Examples
-
-#### Printing the OS release inside the container:
+### Printing the OS release inside the container:
 
 ```bash
 $ singularity exec container.img cat /etc/os-release
@@ -96,7 +27,7 @@ BUG_REPORT_URL="https://bugs.debian.org/"
 $ 
 ```
 
-#### Special Characters
+### Special Characters
 And properly passing along special characters to the program within the container.
 
 ```bash
@@ -115,7 +46,7 @@ $
 ```
 
 
-#### A Python example
+### A Python example
 Starting with the file `hello.py` in the current directory with the contents of:
 
 ```python
@@ -161,7 +92,7 @@ Downloading layer: sha256:6a5a5368e0c2d3e5909184fa28ddfd56072e7ff3ee9a945876f7ee
 Hello World: The Python version is 3.5.2
 ```
 
-#### A GPU example
+### A GPU example
 If you're host system has an NVIDIA GPU card and a driver installed you can
 leverage the card with the `--nv` option.  (This example requires a fairly 
 recent version of the NVIDIA driver on the host system to run the latest 
