@@ -151,15 +151,6 @@ You can add environment variables to be sourced when the container is used in th
     export SOLO=someguy
 ```
 
-You can also add environment variables to your container in the `%post` section (see below) using the following syntax:
-
-```
-%post
-    echo 'export JAWA_SEZ=wutini' >>$SINGULARITY_ENVIRONMENT
-```
-
-Variables added to your container using the `$SINGULARITY_ENVIRONMENT` syntax take precedence over those added in the `%environment` section. 
-
 See <a href="/docs-environment-metadata">Environment and Metadata</a> for more information about the `%labels` and `%environment` sections.
 
 
