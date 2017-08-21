@@ -3,9 +3,9 @@ title: Getting Started with Bootstrap
 sidebar: user_docs
 permalink: bootstrap-image
 folder: docs
+toc: false
 ---
 
-## Bootstrapping a Container
 Bootstrapping is the process where we install an operating system and then configure it appropriately for a specified need. To do this we use a bootstrap definition file (a text file called `Singularity`) which is a recipe of how to specifically build the container. Here we will overview the sections, best practices, and a quick example.
 
 {% include toc.html %}
@@ -142,7 +142,25 @@ Version 2.0
 ```
 
 #### %environment
-Akin to labels, you can add pairs of `VARIABLE` and `VALUE` under environment to be sourced when the container is used as variables in the environment. The entire section is written to a file that gets sourced, so you should generally use the same conventions that you might use in a `bashrc` or `profile`. See <a href="/docs-environment-metadata">Environment and Metadata</a> for more information about these two sections.
+You can add environment variables to be sourced when the container is used in the `%environment` section. The entire section is written to a file that gets sourced, so you should generally use the same conventions that you might use in a `bashrc` or `profile`. 
+
+```
+%environment
+    export VADER=badguy
+    export LUKE=goodguy
+    export SOLO=someguy
+```
+
+You can also add environment variables to your container in the `%post` section (see below) using the following syntax:
+
+```
+%post
+    echo 'export JAWA_SEZ=wutini' >>$SINGULARITY_ENVIRONMENT
+```
+
+Variables added to your container using the `$SINGULARITY_ENVIRONMENT` syntax take precedence over those added in the `%environment` section. 
+
+See <a href="/docs-environment-metadata">Environment and Metadata</a> for more information about the `%labels` and `%environment` sections.
 
 
 #### %post

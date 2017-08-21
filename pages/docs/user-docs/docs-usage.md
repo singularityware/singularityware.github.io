@@ -17,13 +17,14 @@ $ singularity (opts1) [subcommand] (opts2) ...
 If you type `singularity` without any arguments, you will see a high level help for all arguments:
 
 
-```bash
+```
 USAGE: singularity [global options...] <command> [command options...] ...
 
 GLOBAL OPTIONS:
     -d --debug    Print debugging information
     -h --help     Display usage summary
-    -q --quiet    Only print errors
+    -s --silent   Only print errors
+    -q --quiet    Suppress all normal output
        --version  Show application version
     -v --verbose  Increase verbosity +1
     -x --sh-debug Print shell wrapper debugging information
@@ -40,23 +41,20 @@ CONTAINER USAGE COMMANDS:
     test          Execute any test code defined within container
 
 CONTAINER USAGE OPTIONS:
-    see singularity <command> help
+    see singularity help <command>
 
-CONTAINER MANAGEMENT COMMANDS (requires root):
-    bootstrap     Bootstrap a new Singularity image from scratch
+CONTAINER MANAGEMENT COMMANDS:
+    bootstrap     Bootstrap a new Singularity image from scratch [root]
     copy          Copy files from your host into the container
     create        Create a new container image
     expand        Grow the container image
     export        Export the contents of a container via a tar pipe
+    inspect       Display a container's metadata
     import        Import/add container contents via a tar pipe
     mount         Mount a Singularity container image
 
 CONTAINER REGISTRY COMMANDS:
-    pull          pull a Singularity Hub container to $PWD
-
-
-For any additional help or support visit the Singularity
-website: http://singularity.lbl.gov/
+    pull          pull a Singularity/Docker container to $PWD
 ```
 
 ### Options and argument processing
@@ -68,7 +66,7 @@ To further clarify this example, the `exec` Singularity subcommand will execute 
 ### Singularity Help
 Singularity comes with some internal documentation by using the `help` subcommand followed by the subcommand you want more information about. For example:
 
-```bash
+```
 $ singularity help create
 CREATE OPTIONS:
     -s/--size   Specify a size for an operation in MiB, i.e. 1024*1024B

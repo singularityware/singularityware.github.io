@@ -125,9 +125,9 @@ From: tensorflow/tensorflow:latest
 relative_path.py /tmp/analysis2.py
 
 %environment
-
-TOPSECRET pancakes
-HELLO WORLD
+TOPSECRET=pancakes
+HELLO=WORLD
+export HELLO TOPSECRET
 
 %labels
 

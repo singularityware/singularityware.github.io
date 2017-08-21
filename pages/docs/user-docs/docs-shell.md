@@ -3,12 +3,12 @@ title: Singularity Shell
 sidebar: user_docs
 permalink: docs-shell
 folder: docs
+toc: false
 ---
 
-## Usage
-The `shell` Singularity sub-command will automatically spawn a shell within a container. The default and the only requirement of any Singularity container is that `/bin/sh` must be present, and thus `/bin/sh` is also used as the default shell.
+The `shell` Singularity sub-command will automatically spawn a shell within a container. As of v2.3 the default shell that is spawned via the `shell` command is `/bin/bash`.
 
-The usage is as follows:
+{% include toc.html %}
 
 ```bash
 $ singularity shell
@@ -17,17 +17,18 @@ USAGE: singularity (options) shell [container image] (options)
 
 Here we can see the default shell:
 
-```bash
-singularity shell centos7.img 
+```
+$ singularity shell centos7.img
 Singularity: Invoking an interactive shell within container...
-Singularity centos7.img:~/Desktop> echo $SHELL
-/bin/sh
+
+Singularity centos7.img:~> echo $SHELL
+/bin/bash
 ```
 
 Additionally any arguments passed to the Singularity command (after the container name) will be passed to the called shell within the container.
 
 ## Change your shell
-The shell sub-command allows you to set or change the default shell which is used by using the `--shell` argument. As of Singularity version 2.2, you can also use the environment variable `SINGULARITY_SHELL` which will use that as your shell entry point into the container.
+The `shell` sub-command allows you to set or change the default shell using the `--shell` argument. As of Singularity version 2.2, you can also use the environment variable `SINGULARITY_SHELL` which will use that as your shell entry point into the container.
 
 ### Bash
 
