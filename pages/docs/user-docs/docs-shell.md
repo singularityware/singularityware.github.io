@@ -3,12 +3,83 @@ title: Singularity Shell
 sidebar: user_docs
 permalink: docs-shell
 folder: docs
+toc: false
 ---
 
-## Usage
-The `shell` Singularity sub-command will automatically spawn a shell within a container. The default and the only requirement of any Singularity container is that `/bin/sh` must be present, and thus `/bin/sh` is also used as the default shell.
+The `shell` Singularity sub-command will automatically spawn a shell within a container. As of v2.3 the default shell that is spawned via the `shell` command is `/bin/bash`.
 
-The usage is as follows:
+{% include toc.html %}
+
+## Usage
+```
+USAGE: singularity [...] shell [shell options...] <container path>
+
+Obtain an interactive shell (/bin/sh) within the container image.
+
+
+SHELL OPTIONS:
+    -B/--bind <spec>    A user-bind path specification.  spec has the format
+                        src[:dest[:opts]], where src and dest are outside and
+                        inside paths.  If dest is not given, it is set equal
+                        to src.  Mount options ('opts') may be specified as
+                        'ro' (read-only) or 'rw' (read/write, which is the
+                        default). This option can be called multiple times.
+    -c/--contain        This option disables the sharing of filesystems on 
+                        your host (e.g. /dev, $HOME and /tmp).
+    -C/--containall     Contain not only file systems, but also PID and IPC
+    -e/--cleanenv       Clean environment before running container
+    -H/--home <spec>    A home directory specification.  spec can either be a
+                        src path or src:dest pair.  src is the source path
+                        of the home directory outside the container and dest
+                        overrides the home directory within the container
+    -i/--ipc            Run container in a new IPC namespace
+    -n/--nv             Enable experimental Nvidia support
+    -p/--pid            Run container in a new PID namespace (creates child)
+    --pwd               Initial working directory for payload process inside
+                        the container
+    -S/--scratch <path> Include a scratch directory within the container that
+                        is linked to a temporary dir (use -W to force location)
+    -s/--shell <shell>  Path to program to use for interactive shell
+    -u/--user           Run container in a new user namespace (this allows
+                        Singularity to run completely unprivileged on recent
+                        kernels and doesn't support all features)
+    -W/--workdir        Working directory to be used for /tmp, /var/tmp and
+                        $HOME (if -c/--contain was also used)
+    -w/--writable       By default all Singularity containers are available as
+                        read only. This option makes the file system accessible
+                        as read/write.
+
+
+CONTAINER FORMATS SUPPORTED:
+    *.img               This is the native Singularity image format for all
+                        Singularity versions 2.x.
+    *.sqsh              SquashFS format, note the suffix is required!
+    *.tar*              Tar archives are exploded to a temporary directory and
+                        run within that directory (and cleaned up after). The
+                        contents of the archive is a root file system with root
+                        being in the current directory. Compression suffixes as
+                        '.gz' and '.bz2' are supported.
+    directory/          Container directories that contain a valid root file
+                        system.
+
+
+EXAMPLES:
+
+    $ singularity shell /tmp/Debian.img
+    Singularity/Debian.img> pwd
+    /home/gmk/test
+    Singularity/Debian.img> exit
+
+    $ singularity shell -C /tmp/Debian.img
+    Singularity/Debian.img> pwd
+    /home/gmk
+    Singularity/Debian.img> ls -l
+    total 0
+    Singularity/Debian.img> exit
+
+    $ sudo singularity shell -w /tmp/Debian.img
+    $ sudo singularity shell --writable /tmp/Debian.img
+```
 
 ```bash
 $ singularity shell
@@ -17,17 +88,18 @@ USAGE: singularity (options) shell [container image] (options)
 
 Here we can see the default shell:
 
-```bash
-singularity shell centos7.img 
+```
+$ singularity shell centos7.img
 Singularity: Invoking an interactive shell within container...
-Singularity centos7.img:~/Desktop> echo $SHELL
-/bin/sh
+
+Singularity centos7.img:~> echo $SHELL
+/bin/bash
 ```
 
 Additionally any arguments passed to the Singularity command (after the container name) will be passed to the called shell within the container.
 
 ## Change your shell
-The shell sub-command allows you to set or change the default shell which is used by using the `--shell` argument. As of Singularity version 2.2, you can also use the environment variable `SINGULARITY_SHELL` which will use that as your shell entry point into the container.
+The `shell` sub-command allows you to set or change the default shell using the `--shell` argument. As of Singularity version 2.2, you can also use the environment variable `SINGULARITY_SHELL` which will use that as your shell entry point into the container.
 
 ### Bash
 

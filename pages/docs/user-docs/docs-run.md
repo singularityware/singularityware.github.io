@@ -6,18 +6,94 @@ folder: docs
 toc: false
 ---
 
+It's common to want your container to "do a thing." Singularity `run` allows you to define a custom action to be taken when a container is either `run` or executed directly by file name. Specifically, you might want it to execute a command, or run an executable that gives access to many different functions for the user. 
+
+{% include toc.html %}
+
 ## Usage
-It's common to want your container to "do a thing." Singularity `run` allows you to define a custom action to be taken when a container is either `run` or executed directly by file name. Specifically, you might want it to execute a command, or run an executable that gives access to many different functions for the user. First, how do we run a container? We can do that in one of two ways - the commands below are identical:
+
+```
+USAGE: singularity [...] run [run options...] <container path> [...]
+
+This command will launch a Singularity container and execute a runscript
+if one is defined for that container. The runscript is a file at
+'/singularity'. If this file is present (and executable) then this
+command will execute that file within the container automatically. All
+arguments following the container name will be passed directly to the
+runscript.
+
+
+RUN OPTIONS:
+    -B/--bind <spec>    A user-bind path specification.  spec has the format
+                        src[:dest[:opts]], where src and dest are outside and
+                        inside paths.  If dest is not given, it is set equal
+                        to src.  Mount options ('opts') may be specified as
+                        'ro' (read-only) or 'rw' (read/write, which is the 
+                        default). This option can be called multiple times.
+    -c/--contain        This option disables the sharing of filesystems on 
+                        your host (e.g. /dev, $HOME and /tmp).
+    -C/--containall     Contain not only file systems, but also PID and IPC
+    -e/--cleanenv       Clean environment before running container
+    -H/--home <spec>    A home directory specification.  spec can either be a
+                        src path or src:dest pair.  src is the source path
+                        of the home directory outside the container and dest
+                        overrides the home directory within the container
+    -i/--ipc            Run container in a new IPC namespace
+    -n/--nv             Enable experimental Nvidia support
+    -p/--pid            Run container in a new PID namespace
+    --pwd               Initial working directory for payload process inside
+                        the container
+    -S/--scratch <path> Include a scratch directory within the container that 
+                        is linked to a temporary dir (use -W to force location)
+    -u/--user           Run container in a new user namespace (this allows
+                        Singularity to run completely unprivileged on recent
+                        kernels and doesn't support all features)
+    -W/--workdir        Working directory to be used for /tmp, /var/tmp and
+                        $HOME (if -c/--contain was also used)
+    -w/--writable       By default all Singularity containers are available as
+                        read only. This option makes the file system accessible
+                        as read/write.
+
+CONTAINER FORMATS SUPPORTED:
+    *.img               This is the native Singularity image format for all
+                        Singularity versions 2.x.
+    *.sqsh              SquashFS format, note the suffix is required!
+    *.tar*              Tar archives are exploded to a temporary directory and
+                        run within that directory (and cleaned up after). The
+                        contents of the archive is a root file system with root
+                        being in the current directory. Compression suffixes as
+                        '.gz' and '.bz2' are supported.
+    directory/          Container directories that contain a valid root file
+                        system.
+
+
+EXAMPLES:
+
+    # Here we see that the runscript prints "Hello world: $@"
+    $ singularity exec /tmp/Debian.img cat /singularity
+    #!/bin/sh
+    echo "Hello world: $@"
+
+    # It runs with our inputs when we run the image
+    $ singularity run /tmp/Debian.img one two three
+    Hello world: one two three
+
+    # Note that this does the same thing
+    $ ./tmp/Debian.img one two three
+```
+
+## Overview
+First, how do we run a container? We can do that in one of two ways - the commands below are identical:
 
 ```bash
-singularity run centos7.img
-./centos7.img
+$ singularity run centos7.img
+$ ./centos7.img
 ```
 
 In both cases, we are executing the container's "runscript," which is the executable `/singularity` at the root of the image, which is either an actual file (version 2.2 and earlier) or a link to one (2.3 and later). For example, looking at a 2.3 image, I can see the runscript via the path to the link:
 
-```bash
-singularity exec centos7.img cat /singularity
+```
+$ singularity exec centos7.img cat /singularity
 #!/bin/sh
 
 exec /bin/bash "$@"
@@ -25,29 +101,29 @@ exec /bin/bash "$@"
 
 or to the actual file in the container's metadata folder, `/.singularity.d`
 
-```bash
-singularity exec centos7.img cat /.singularity.d/runscript
+```
+$ singularity exec centos7.img cat /.singularity.d/runscript
 #!/bin/sh
 
 exec /bin/bash "$@"
 ```
 
-The usage is as follows:
-
-```bash
-$ singularity run
-USAGE: singularity (options) run [container image] (options)
-
 Notice how the runscript has bash followed by `$@`? This is good practice to include in a runscript, as any arguments passed by the user will be given to the container. Thus, I could send a command to the container for bash to run:
 
-```bash
-echo "echo motorobot" >> /home/vanessa/Desktop/runme.sh
-singularity run centos7.img runme.sh
+## Examples
+In this example the container has a very simple runscript defined.
+```
+$ singularity exec centos7.img cat /singularity
+#!/bin/sh
+
+echo motorbot
+
+$ singularity run centos7.img
 motorbot
 ```
 
 ### Defining the Runscript
-When using the "run" command, the order of operations for runscripts works as follows:
+When you first create a contianer, the runscript is defined using the followinge order of operations:
 
  1. A user defined runscript in the `%runscript` section of a bootstrap takes preference over all
  2. If the user has not defined a runscript and is importing a Docker container, the Docker `ENTRYPOINT` is used.
@@ -62,10 +138,10 @@ Bootstrap: docker
 From: ubuntu:latest
 
 %runscript
-exec /usr/bin/python "$@"`
+exec /usr/bin/python "$@"
 ```
 
-and of course python should be installed as /usr/bin/python. The addition of `$@` ensures that arguments are passed along from the user. If you want your container to run absolutely any command given to it, and you want to use run instead of exec, you could also just do:
+and of course python should be installed as /usr/bin/python. The addition of `"$@"` ensures that arguments are passed along from the user. If you want your container to run absolutely any command given to it, and you want to use run instead of exec, you could also just do:
 
 ```bash
 Bootstrap: docker

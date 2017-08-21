@@ -1,15 +1,16 @@
 ---
-title: Changing Existing Containers
+title: Environment and Metadata
 sidebar: user_docs
 permalink: docs-environment-metadata
 folder: docs
+toc: false
 ---
 
-## Container Metadata
+Singularity containers support environment variables and labels that can be added by user during the bootstrap process.
 
-Singularity containers have two level of metadata - environment variables, and labels from the user and bootstrap process.
+{% include toc.html %}
 
-### Environment
+## Environment
 
 If you are importing a Docker container, the environment will be imported as well. If you want to define custom environment variables in your bootstrap recipe file `Singularity` you can do that like this
 
@@ -18,9 +19,18 @@ Bootstrap:docker
 From: ubuntu:latest
 
 %environment
-VARIABLE_NAME=VARIABLE_VALUE
-export VARIABLE_NAME
+    VARIABLE_NAME=VARIABLE_VALUE
+    export VARIABLE_NAME
 ```
+
+If you need to add an environment variable to your container during the `%post` section, you can do so using the `$SINGULARITY_ENVIRONMENT` variable with the following syntax:
+
+```
+%post
+    echo 'export VARIABLE_NAME=VARIABLE_VALUE' >>$SINGULARITY_ENVIRONMENT
+```
+
+Text in the `%environment` section will be appended to the file `/.singularity.d/env/90-environment.sh` while text redirected to `$SINGULARITY_ENVIRONMENT` will end up in the file `/.singularity.d/env/91-environment.sh`.  Because files in `/.singularity.d/env` are sourced in alpha-numerical order, this means that variables added using `$SINGULARITY_ENVIRONMENT` take precedence over those added via the `%environment` section.
 
 Forget something, or need a variable defined at runtime? You can set any variable you want inside the container by prefixing it with "SINGULARITYENV_". It will be transposed automatically and the prefix will be stripped. For example, let's say we want to set the variable `HELLO` to have value `WORLD`. We can do that as follows:
 
@@ -58,7 +68,7 @@ singularity exec centos7.img cat /.singularity.d/env/10-docker.sh
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
-### Labels
+## Labels
 Your container stores metadata about it's build, along with Docker labels. You can see the data as follows:
 
 ```bash
