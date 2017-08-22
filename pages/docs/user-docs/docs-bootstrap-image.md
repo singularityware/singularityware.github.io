@@ -146,9 +146,10 @@ You can add environment variables to be sourced when the container is used in th
 
 ```
 %environment
-    export VADER=badguy
-    export LUKE=goodguy
-    export SOLO=someguy
+    VADER=badguy
+    LUKE=goodguy
+    SOLO=someguy
+    export VADER LUKE SOLO
 ```
 
 See <a href="/docs-environment-metadata">Environment and Metadata</a> for more information about the `%labels` and `%environment` sections.
