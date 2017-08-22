@@ -101,6 +101,17 @@ Beginning with Singularity v2.3 you can set up your environment using the `%envi
     export PATH=/opt/good/stuff:$PATH
 ```
 
+In older versions of Singularity you could set up your container's environment by adding text to a file called `/environment`.  This method is now deprecated.  If you need to add environment variables to your container during the `%post` section (perhaps because you will not know the values of some variables until some installation steps have completed).  You can do so with the following syntax:
+
+```
+%post
+    echo 'export PATH=/opt/good/stuff:$PATH' >>$SINGULARITY_ENVIRONMENT
+```
+
+Text in the `%environment` section will be appended to a file called `/.singularity.d/env/90-environment.sh`.  Text redirected to the `$SINGULARITY_ENVIRONMENT` variable will added to a file called `/.singularity.d/env/91-environment.sh`.  At runtime, scripts in `/.singularity/env` are sourced in order.
+
+This means that variables in `$SINGULARITY_ENVIRONMENT` take precedence over those added via `%environment
+
 ### %runscript
 The `%runscript` is another scriptlet, but it does not get executed during bootstrapping. Instead it gets persisted within the container to a file called `/singularity` which is the execution driver when the container image is ***run*** (either via the `singularity run` command or via executing the container directly).
 
