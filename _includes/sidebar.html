@@ -1,10 +1,11 @@
 {% include custom/sidebarconfigs.html %}
 
-{% if site.logo %}
-<div class="shiny"><a href="\"><figure><img src="{{ site.logo }}" class="sidebar-logo"/></figure></a></div>
-{% endif %}
-
 <ul id="mysidebar" class="nav">
+
+    {% if site.logo %}
+    <div class="shiny"><a href="\"><figure><img src="{{ site.logo }}" class="sidebar-logo"/></figure></a></div>
+    {% endif %}
+
     <li class="sidebarTitle">{{sidebar[0].title}}</li>
     {% for entry in sidebar %}
     {% for folder in entry.folders %}

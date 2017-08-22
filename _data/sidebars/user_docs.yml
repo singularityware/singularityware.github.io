@@ -59,6 +59,10 @@ entries:
       url: /docs-docker
       output: web, pdf
 
+    - title: Reproducible SCI-F Apps
+      url: /docs-scif-apps
+      output: web, pdf
+
     - title: Troubleshooting
       url: /faq#troubleshooting
       output: web, pdf
