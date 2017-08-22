@@ -10,50 +10,7 @@ How can you sniff an image? We have provided the inspect command for you to easi
 
 {% include toc.html %}
 
-## Usage
-
-```bash
-$ singularity inspect --help
-
-USAGE: singularity [...] inspect [exec options...] <container path>
-
-This command will show you the runscript for the image.
-
-INSPECT OPTIONS:
-    -l/--labels      Show the labels associated with the image (default)
-    -d/--deffile     Show the bootstrap definition file which was used
-                     to generate this image
-    -r/--runscript   Show the runscript for this image
-    -t/--test        Show the test script for this image
-    -e/--environment Show the environment settings for this container
-    -j/--json        Print structured json instead of sections
-    -hf/--helpfile   Inspect the runscript helpfile, if exists
-
-EXAMPLES:
-    
-    $ singularity inspect ubuntu.img
-    #!/bin/sh
-
-    exec /bin/bash "$@"
-
-    $ singuarity inspect --labels ubuntu.img
-    {
-        "SINGULARITY_DEFFILE_BOOTSTRAP": "docker",
-        "SINGULARITY_DEFFILE": "Singularity",
-        "SINGULARITY_DEFFILE_FROM": "ubuntu:latest",
-        "SINGULARITY_BOOTSTRAP_VERSION": "2.2.99"
-    }
-
-
-For additional help, please visit our public documentation pages which are
-found at:
-
-    http://singularity.lbl.gov/
-
-```
-
-This inspect is essential for making containers understandable by other tools and applications.
-
+This command is essential for making containers understandable by other tools and applications.
 
 ## JSON Api Standard
 For any inspect command, by adding `--json` you can be assured to get a <a href="http://jsonapi.org/" target="_blank">JSON API</a> standardized response, for example:

@@ -1,16 +1,16 @@
 ---
-title: Changing Existing Containers
+title: Environment and Metadata
 sidebar: user_docs
 permalink: docs-environment-metadata
 folder: docs
+toc: false
 ---
 
-## Container Metadata
+Singularity containers support environment variables and labels that can be added by user during the bootstrap process.
 
-Singularity containers have two level of metadata - environment variables, and labels from the user and bootstrap process.
+{% include toc.html %}
 
-
-### Environment
+## Environment
 
 If you are importing a Docker container, the environment will be imported as well. If you want to define custom environment variables in your bootstrap recipe file `Singularity` you can do that like this
 
@@ -19,7 +19,8 @@ Bootstrap:docker
 From: ubuntu:latest
 
 %environment
-VARIABLE_NAME=VARIABLE_VALUE
+    VARIABLE_NAME=VARIABLE_VALUE
+    export VARIABLE_NAME
 ```
 
 Forget something, or need a variable defined at runtime? You can set any variable you want inside the container by prefixing it with "SINGULARITYENV_". It will be transposed automatically and the prefix will be stripped. For example, let's say we want to set the variable `HELLO` to have value `WORLD`. We can do that as follows:
@@ -58,7 +59,7 @@ singularity exec centos7.img cat /.singularity.d/env/10-docker.sh
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
-### Labels
+## Labels
 Your container stores metadata about it's build, along with Docker labels, and your custom labels that you define in a bootstrap `%labels` section. For containers that are generated with Singularity version 2.4 and later, labels are represented using the <a href="http://label-schema.org/rc1/">rc1 Label Schema</a>. For example:
 
 ```

@@ -213,7 +213,10 @@ See the Singularity on HPC page for more details.
 
 ### Does Singularity support containers that require GPUs?
 
-Yes, Singularity has been tested to run some test and diagnostic code from within a container without modification. There are however potential issues that can come into play when using GPUs, for instance there are version API compatibilities between kernel and user land which will have to be considered.
+Yes. Many users run GPU dependant code within Singularity containers.  The
+experimental `--nv` option allows you to leverage host GPUs without installing 
+system level drivers into your container. See the [`exec`](/docs-exec#a-gpu-example) command for
+an example.
 
 ## Container portability
 
