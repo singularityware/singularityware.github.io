@@ -3,12 +3,14 @@ title: Contributing to Documentation
 sidebar: main_sidebar
 permalink: contributing-docs
 folder: releases
+toc: false
 ---
 
 We (like almost all open source software providers) have a documentation dillemma... We tend to focus on the code features and functionality before working on documentation. And there is very good reason for this, we want to share the love so nobody feels left out!
 
 The following documentation page assumes one is running on OS X, but if you are not, you should be able to easily transpose the necessary commands to your operating system of choice.
 
+{% include toc.html %}
 
 ## Setting Up Your Development Environment
 
@@ -113,8 +115,16 @@ asciinema rec -w 1 demo-asciicast.js
 # To play
 asciinema play demo-asciicast.js
 ```
+Make sure to resize your terminal to 25 rows x 115 columns or less before you 
+begin your recording.  Otherwise it will not display properly on the webpage. To get the size of your current terminal (in lines and columns) you can use `tput`:
 
-Once you've generated an asciicast, you should drop the file (e.g., some `demo-asciicast.js`) into the `assets/asciicast` folder, and then include the following in the page or post:
+```
+echo -e "lines\ncols"|tput -S
+34
+80
+```
+
+Once you've generated an asciicast, you should drop the file (e.g., `demo-asciicast.js`) into the `assets/asciicast` folder. Since we will have many asciicasts here, please name it meaningfully. Then include the following in the page or post:
 
 ```bash
 {{ "{% include asciicast.html source='demo-asciicast.js' title='How to make demos' author='email@domain.com'" }}%}

@@ -8,6 +8,7 @@ toc: false
 
 Singularity `pull` is the command that you would want to use to communicate with a container registry. The command does exactly as it says - there exists an image external to my host, and I want to pull it here. We currently support pull for both <a href="https://hub.docker.com/" target="_blank">Docker</a> and <a href="https://singularity-hub.org" target="_blank">Singularity Hub</a> images, and will review usage for both.
 
+{% include toc.html %}
 
 ## Singularity Hub
 Singularity differs from Docker in that we serve entire images, as opposed to layers. This means that pulling a Singularity Hub means downloading the entire (compressed) container file, and then having it extract on your local machine. The basic command is the following:

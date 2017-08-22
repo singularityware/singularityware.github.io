@@ -6,18 +6,22 @@ folder: docs
 toc: false
 ---
 
-## Usage
-It's common to want your container to "do a thing." Singularity `run` allows you to define a custom action to be taken when a container is either `run` or executed directly by file name. Specifically, you might want it to execute a command, or run an executable that gives access to many different functions for the user. First, how do we run a container? We can do that in one of two ways - the commands below are identical:
+It's common to want your container to "do a thing." Singularity `run` allows you to define a custom action to be taken when a container is either `run` or executed directly by file name. Specifically, you might want it to execute a command, or run an executable that gives access to many different functions for the user. 
+
+{% include toc.html %}
+
+## Overview
+First, how do we run a container? We can do that in one of two ways - the commands below are identical:
 
 ```bash
-singularity run centos7.img
-./centos7.img
+$ singularity run centos7.img
+$ ./centos7.img
 ```
 
-In both cases, we are executing the container's "runscript," which is the executable `/singularity` at the root of the image, which is either an actual file (version 2.2 and earlier) or a link to one (2.3 and later). For example, looking at a 2.3 image, I can see the runscript via the path to the link:
+In both cases, we are executing the container's "runscript"  (the executable `/singularity` at the root of the image) that is either an actual file (version 2.2 and earlier) or a link to one (2.3 and later). For example, looking at a 2.3 image, I can see the runscript via the path to the link:
 
-```bash
-singularity exec centos7.img cat /singularity
+```
+$ singularity exec centos7.img cat /singularity
 #!/bin/sh
 
 exec /bin/bash "$@"
@@ -25,29 +29,29 @@ exec /bin/bash "$@"
 
 or to the actual file in the container's metadata folder, `/.singularity.d`
 
-```bash
-singularity exec centos7.img cat /.singularity.d/runscript
+```
+$ singularity exec centos7.img cat /.singularity.d/runscript
 #!/bin/sh
 
 exec /bin/bash "$@"
 ```
 
-The usage is as follows:
-
-```bash
-$ singularity run
-USAGE: singularity (options) run [container image] (options)
-
 Notice how the runscript has bash followed by `$@`? This is good practice to include in a runscript, as any arguments passed by the user will be given to the container. Thus, I could send a command to the container for bash to run:
 
-```bash
-echo "echo motorobot" >> /home/vanessa/Desktop/runme.sh
-singularity run centos7.img runme.sh
+## Examples
+In this example the container has a very simple runscript defined.
+```
+$ singularity exec centos7.img cat /singularity
+#!/bin/sh
+
+echo motorbot
+
+$ singularity run centos7.img
 motorbot
 ```
 
 ### Defining the Runscript
-When using the "run" command, the order of operations for runscripts works as follows:
+When you first create a container, the runscript is defined using the following order of operations:
 
  1. A user defined runscript in the `%runscript` section of a bootstrap takes preference over all
  2. If the user has not defined a runscript and is importing a Docker container, the Docker `ENTRYPOINT` is used.
@@ -62,10 +66,10 @@ Bootstrap: docker
 From: ubuntu:latest
 
 %runscript
-exec /usr/bin/python "$@"`
+exec /usr/bin/python "$@"
 ```
 
-and of course python should be installed as /usr/bin/python. The addition of `$@` ensures that arguments are passed along from the user. If you want your container to run absolutely any command given to it, and you want to use run instead of exec, you could also just do:
+and of course python should be installed as /usr/bin/python. The addition of `"$@"` ensures that arguments are passed along from the user. If you want your container to run absolutely any command given to it, and you want to use run instead of exec, you could also just do:
 
 ```bash
 Bootstrap: docker

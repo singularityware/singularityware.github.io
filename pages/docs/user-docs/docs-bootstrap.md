@@ -6,9 +6,9 @@ toc: false
 folder: docs
 ---
 
-{% include toc.html %}
-
 The process of *bootstrapping* a Singularity container is equivalent to describing a recipe for the container creation. There are several recipe formats that Singularity supports, but only the primary format of version 2.3 will be documented here. If you want a general overview with examples, see <a href="/bootstrap-image">Bootstrapping an Image</a>. The detailed options for each of the header and sections are provided here.
+
+{% include toc.html %}
 
 ## The header fields:
 
@@ -48,7 +48,7 @@ The Docker bootstrap module will create a core operating system image based on a
 Once the `Bootstrap` module has completed, the sections are identified and utilized if present. The following sections are supported in the bootstrap definition, and integrated during the bootstrap process:
 
 
-#### %setup
+### %setup
 This section blob is a Bourne shell scriptlet which will be executed on the host outside the container during bootstrap. The path to the container is accessible from within the running scriptlet environment via the variable `$SINGULARITY_ROOTFS`. For example, consider the following scriptlet:
 
 ```
@@ -65,8 +65,7 @@ As we investigate this example scriptlet, you will first see this is the outside
 
 *note: Any uncaught command errors that occur within the scriptlet will cause the entire build process to halt!*
 
-
-#### %post
+### %post
 Similar to the `%setup` section, this section will be executed once during bootstrapping, but this scriptlet will be run from inside the container. This is where you should put additional installation commands, downloads, and configuration into your containers. Here is an example to consider:
 
 ```
@@ -94,8 +93,15 @@ The above example runs inside the container, so in this case we will first insta
 
 *another note: This is not a good example of a reproducible definition because it is pulling Open MPI from a moving target. A better example, would be to pull a static released version, but this serves as a good example of building a `%post` scriptlet.*
 
+### %environment 
+Beginning with Singularity v2.3 you can set up your environment using the `%environment` section of the definition file.  For example, if you wanted to add a directory to your search path, you could do so like this.
 
-#### %runscript
+```
+%environment
+    export PATH=/opt/good/stuff:$PATH
+```
+
+### %runscript
 The `%runscript` is another scriptlet, but it does not get executed during bootstrapping. Instead it gets persisted within the container to a file called `/singularity` which is the execution driver when the container image is ***run*** (either via the `singularity run` command or via executing the container directly).
 
 When the `%runscript` is executed, all options are passed along to the executing script at runtime, this means that you can (and should) manage argument processing from within your runscript. Here is an example of how to do that:
@@ -108,7 +114,7 @@ When the `%runscript` is executed, all options are passed along to the executing
 
 In this particular runscript, the arguments are printed as a single string (`$*`) and then they are passed to `/usr/bin/python` via a quoted array (`$@`) which ensures that all of the arguments are properly parsed by the executed command. The `exec` command causes the given command to replace the current entry in the process table with the one that is to be called. This makes it so the runscript shell process ceases to exist, and the only process running inside this container is the called Python command.
 
-#### %test
+### %test
 You may choose to add a `%test` section to your definition file. This section will be run at the very end of the boostrapping process and will give you a chance to validate the container during the bootstrap process. If you are building on Singularity Hub, [it is a good practice](https://github.com/singularityhub/singularityhub.github.io/wiki/Generate-Images#add-tests) to have this test section so you can be sure that your container works as expected. A non-zero status code indicates that one or more of your tests did not pass. You can also execute this scriptlet through the container itself, such that you can always test the validity of the container itself as you transport it to different hosts. Extending on the above Open MPI `%post`, consider this example:
 
 ```

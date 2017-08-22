@@ -4,6 +4,11 @@ category: recipes
 permalink: tutorial-gpu-drivers-open-mpi-mtls
 ---
 
+**Note: _Much of the GPU portion of this tutorial is deprecated by the `--nv`
+option that automatically binds host system driver libraries into your 
+container at runtime.  See the [`exec`](/docs-exec#a-gpu-example) command for 
+an example_**
+
 Singularity does a fantastic job  of isolating you from the host so you don't
 have to muck about with `LD_LIBRARY_PATH`, you just get exactly the library
 versions you want. However, in some situations you need to use library
