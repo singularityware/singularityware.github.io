@@ -10,12 +10,12 @@ The process of *bootstrapping* a Singularity container is equivalent to describi
 
 {% include toc.html %}
 
-## The header fields:
+## The header:
 
 ### Bootstrap:
-The `Bootstrap: ` keyword identifies the Singularity module that will be used for building the core components of the operating system. There are several supported modules at the time of this writing:
+The `Bootstrap: ` keyword identifies the Singularity module that will be used for building the core components of the operating system. The module that you choose using `Bootstrap: ` defines the other keywords and values are needed/make sense in the header.  There are several supported modules at the time of this writing:
 
-##### **yum**
+#### **yum**
 
 The YUM bootstrap module uses YUM on the host system to bootstrap the core operating system that exists within the container. This module is applicable for bootstrapping distributions like Red Hat, Centos, and Scientific Linux. When using the `yum` bootstrap module, several other keywords may also be necessary to define:
 
@@ -25,17 +25,17 @@ The YUM bootstrap module uses YUM on the host system to bootstrap the core opera
 
 Warning, there is a major limitation with using YUM to bootstrap a container and that is the RPM database that exists within the container will be created using the RPM library and Berkeley DB implementation that exists on the host system. If the RPM implementation inside the container is not compatible with the RPM database that was used to create the container, once the container has been created RPM and YUM commands inside the container may fail. This issue can be easily demonstrated by bootstrapping an older RHEL compatible image by a newer one (e.g. bootstrap a Centos 5 or 6 container from a Centos 7 host).
 
-##### **debootstrap**
+#### **debootstrap**
 The Debian bootstrap module is a tool which is used specifically for bootstrapping distributions which utilize the `.deb` package format and `apt-get` repositories. This module will bootstrap any of the Debian and Ubuntu based distributions. When using the `debootstrap` module, the following keywords must also be defined:
 
  - **MirrorURL**: This is the location where the packages will be downloaded from. When bootstrapping different Debian based distributions of Linux, this will define which varient will be used (e.g. specifying a different URL can be the difference between Debian or Ubuntu).
  - **OSVersion**: This keyword must be defined as the alpha-character string associated with the version of the distribution you wish to use. For example, `trusty` or `stable`. 
  - **Include**: As with the `yum` module, the `Include` keyword will install additional packages into the core operating system and the best practice is to supply only the bare essentials such that the `%inside` scriptlet has what it needs to properly completely the bootstrap.
 
-##### **arch**
+#### **arch**
 The Arch Linux bootstrap module does not name any additional keywords at this time. By defining the `arch` module, you have essentially given all of the information necessary for that particular bootstrap module to build a core operating system.
 
-##### **docker**
+#### **docker**
 The Docker bootstrap module will create a core operating system image based on an image hosted on a particular Docker Registry server. By default it will use the primary Docker Library, but that can be overridden. When using the `docker` module, several other keywords may also be defined:
 
  - **From**: This keyword defines the string of the registry name used for this image in the format [name]:[version]. Several examples are: `ubuntu:latest`, `centos:6`, `alpine:latest`, or `debian` (if the version tag is ommitted, `:latest` is automatically used).
@@ -43,6 +43,14 @@ The Docker bootstrap module will create a core operating system image based on a
  - **Registry**: If the registry you wish to download the image from is not from the main Docker Library, you can define it here.
  - **Token**: Sometimes the Docker API (depending on version?) requires an authorization token which is generated on the fly. Toggle this with a `yes` or `no` here.
 
+#### **localimage**
+This module allows you to bootstrap a container from an existing Singularity image on your host system.  You can use an existing container image as your "base" and then customize it with a new `%post` `%environment`, `%runscript`, etc.  
+
+This module allows you to bootstrap a container from an existing Singularity image on your host system.  You can use an existing container image as your "base," and then add customization. For example, you may have a different base image for several common operating systems, or for different versions of python, or for several different compilers. Instead of building these from scratch each time, you could start with the appropriate local base image and then customize the new image in `%post`, `%environment`, `%runscript`, etc.
+
+When bootstrapping from a local image, all previous definition files that led to the creation of the current image will be stored in a directory within the container called `/.singularity.d/bootstrap_history`.  Singularity will also alert you if environment variables have been changed between the base image and the new image during bootstrap.  
+
+- **From**:  This keyword defines the path of the base image to bootstrap from.  We recommend that you use absolute paths to point to your base image.  In particular, substituting `~` for `/home/user` will likely fail or bootstrap from the wrong image because the bootstrap occurs as root.   
 
 ## Bootstrap sections:
 Once the `Bootstrap` module has completed, the sections are identified and utilized if present. The following sections are supported in the bootstrap definition, and integrated during the bootstrap process:
