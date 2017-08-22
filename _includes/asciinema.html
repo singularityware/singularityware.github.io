@@ -5,8 +5,8 @@
 <script>
 $( document ).ready(function() {
     $(".asciinema-button").click(function(){
-        var asciinemaVideo = "#asciinema-" + $(this).attr('id');
-
+        console.log('rawwwr!')
+        var asciinemaVideo = "#" + $(this).attr('data-id');
         if ($(asciinemaVideo).hasClass('hidden')){
             $(asciinemaVideo).removeClass('hidden');
             $(this).text('Hide Tutorial')
