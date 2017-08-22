@@ -125,7 +125,7 @@ The main content of the bootstrap file is broken into sections.
 #### %setup
 Setup is where you might perform actions on the host before we move into the container. For versions earlier than 2.3, or if you need files during `%post`, you should copy files from your host to `$SINGULARITY_ROOTFS` to move them into the container. For 2.3 and cases when you don't need the files until after `%post`, we recommend you use `%files`. We can see the difference between `%setup` and `%post` in the following asciicast:
 
-{% include asciicast.html source='docs-bootstrap-setup-vs-post.json' title='How does the container see setup vs post?' author='vsochat@stanford.edu'%}
+{% include asciicast.html source='docs-bootstrap-setup-vs-post.json' title='How the container sees setup vs post' author='vsochat@stanford.edu'%}
 
 In the above, we see that copying something to `$SINGULARITY_ROOTFS` during `%setup` was successful to move the file into the container, but copying during `%post` was not.
 
