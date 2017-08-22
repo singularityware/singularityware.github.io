@@ -23,6 +23,15 @@ From: ubuntu:latest
     export VARIABLE_NAME
 ```
 
+If you need to add an environment variable to your container during the `%post` section, you can do so using the `$SINGULARITY_ENVIRONMENT` variable with the following syntax:
+
+```
+%post
+    echo 'export VARIABLE_NAME=VARIABLE_VALUE' >>$SINGULARITY_ENVIRONMENT
+```
+
+Text in the `%environment` section will be appended to the file `/.singularity.d/env/90-environment.sh` while text redirected to `$SINGULARITY_ENVIRONMENT` will end up in the file `/.singularity.d/env/91-environment.sh`.  Because files in `/.singularity.d/env` are sourced in alpha-numerical order, this means that variables added using `$SINGULARITY_ENVIRONMENT` take precedence over those added via the `%environment` section.
+
 Forget something, or need a variable defined at runtime? You can set any variable you want inside the container by prefixing it with "SINGULARITYENV_". It will be transposed automatically and the prefix will be stripped. For example, let's say we want to set the variable `HELLO` to have value `WORLD`. We can do that as follows:
 
 ```bash
@@ -78,7 +87,7 @@ singularity inspect dino.img
 }
 ```
 
-You will notice that the one label doesn't belong to the label schema, `MAINTAINER`. This was a user provided label during bootstrap. For versions earlier than 2.4, containers did not use the label schema:
+You will notice that the one label doesn't belong to the label schema, `MAINTAINER`. This was a user provided label during bootstrap. Finally, for Singularity greater than version 2.4, the image build size is added as a label, `org.label-schema.build-size`, and the label schema is used, period. For versions earlier than 2.4, containers did not use the label schema, and looked like this:
 
 
 ```bash
