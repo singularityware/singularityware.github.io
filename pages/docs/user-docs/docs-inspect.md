@@ -10,7 +10,7 @@ How can you sniff an image? We have provided the inspect command for you to easi
 
 {% include toc.html %}
 
-This inspect is essential for making containers understandable by other tools and applications.
+This command is essential for making containers understandable by other tools and applications.
 
 ## JSON Api Standard
 For any inspect command, by adding `--json` you can be assured to get a <a href="http://jsonapi.org/" target="_blank">JSON API</a> standardized response, for example:

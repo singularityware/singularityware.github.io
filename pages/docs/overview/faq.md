@@ -215,7 +215,7 @@ See the Singularity on HPC page for more details.
 
 Yes. Many users run GPU dependant code within Singularity containers.  The
 experimental `--nv` option allows you to leverage host GPUs without installing 
-system level drivers into your container. See [the `exec` command](/docs-exec#a-gpu-example) for
+system level drivers into your container. See the [`exec`](/docs-exec#a-gpu-example) command for
 an example.
 
 ## Container portability

@@ -93,7 +93,7 @@ Hello World: The Python version is 3.5.2
 ```
 
 ### A GPU example
-If you're host system has an NVIDIA GPU card and a driver installed you can
+If your host system has an NVIDIA GPU card and a driver installed you can
 leverage the card with the `--nv` option.  (This example requires a fairly 
 recent version of the NVIDIA driver on the host system to run the latest 
 version of TensorFlow.

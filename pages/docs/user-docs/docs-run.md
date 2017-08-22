@@ -18,7 +18,7 @@ $ singularity run centos7.img
 $ ./centos7.img
 ```
 
-In both cases, we are executing the container's "runscript," which is the executable `/singularity` at the root of the image, which is either an actual file (version 2.2 and earlier) or a link to one (2.3 and later). For example, looking at a 2.3 image, I can see the runscript via the path to the link:
+In both cases, we are executing the container's "runscript"  (the executable `/singularity` at the root of the image) that is either an actual file (version 2.2 and earlier) or a link to one (2.3 and later). For example, looking at a 2.3 image, I can see the runscript via the path to the link:
 
 ```
 $ singularity exec centos7.img cat /singularity
@@ -51,7 +51,7 @@ motorbot
 ```
 
 ### Defining the Runscript
-When you first create a contianer, the runscript is defined using the followinge order of operations:
+When you first create a container, the runscript is defined using the following order of operations:
 
  1. A user defined runscript in the `%runscript` section of a bootstrap takes preference over all
  2. If the user has not defined a runscript and is importing a Docker container, the Docker `ENTRYPOINT` is used.
