@@ -39,7 +39,7 @@ sudo make install
 
 note: The 'make install' is required to be run as root to get a properly installed Singularity implementation. If you do not run it as root, you will only be able to launch Singularity as root due to permission limitations.
 
-{% include asciicast.html source='install-singularity.js' title='Install Singularity' author='vsochat@stanford.edu' %}
+{% include asciicast.html source='install-singularity.js' uid='install-singularity' title='Install Singularity' author='vsochat@stanford.edu' %}
 
 
 ### Updating

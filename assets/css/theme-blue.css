@@ -101,3 +101,8 @@ li.sidebarTitle {
     margin-left: 5px;
 
 }
+
+.shiny a:hover {
+    background-color: white !important;
+    color: #f5f5f5;
+}

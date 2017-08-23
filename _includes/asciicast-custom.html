@@ -1,5 +1,5 @@
 <button style='color:white;margin-top:5px' class="btn btn-primary btn-lg asciinema-button" id="{{ include.title | replace:' ','-' }}">Show Video Tutorial</button>
-<div class="hidden" id="asciinema-{{ include.title | replace:' ','-' }}">
+<div class="hidden" id="asciinema-{{ include.uid }}">
     <asciinema-player 
         src="assets/asciicast/{{include.source}}" 
         poster="data:text/plain,{{include.title}}" 

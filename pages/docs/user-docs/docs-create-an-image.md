@@ -75,7 +75,7 @@ $ ls -lh container*.img
 -rwxr-xr-x 1 user group 769M Apr 15 11:11 container.img
 ```
 
-{% include asciicast.html source='docs-create-create.js' title='How to create images' author='davidgodlove@gmail.com'%}
+{% include asciicast.html source='docs-create-create.js' uid='how-to-create-images' title='How to create images' author='davidgodlove@gmail.com'%}
 
 ## Increasing the size of an existing image
 You can increase the size of an image after it has been instantiated by using the `expand` Singularity sub-command as follows:
@@ -110,7 +110,7 @@ $ ls -lh container.img
 
 Similar to the create sub-command, you can override the default size increase (which is 768MiB) by using the `--size` option.
 
-{% include asciicast.html source='docs-create-expand.js' title='How to expand images' author='davidgodlove@gmail.com'%}
+{% include asciicast.html source='docs-create-expand.js' uid='how-to-expand-images' title='How to expand images' author='davidgodlove@gmail.com'%}
 
 ## Mounting an image
 Once an image has been created and an OS has been added with the [`import`](/docs-import) or [`bootstrap`](/docs-bootstrap) commands, you can use the [`shell`](/docs-shell) command to start an interactive shell within the container. But this is not possible when an image does not yet contain a functional OS or shell. For debugging, development, or simply inspecting an image that lacks a functional shell you can use the `mount` command like so:
@@ -133,7 +133,7 @@ Singularity: \w> ls -a
 .  ..  lost+found
 ```
 
-{% include asciicast.html source='docs-create-mount.js' title='How to mount an image' author='davidgodlove@gmail.com'%}
+{% include asciicast.html source='docs-create-mount.js' uid='how-to-mount-an-image' title='How to mount an image' author='davidgodlove@gmail.com'%}
 
 At this point the image just contains a bare file system because we haven't used something like the [`bootstrap`](docs-bootstrap) or [`import`](docs-import) commands to install an OS. 
  
@@ -147,7 +147,7 @@ $ sudo -i
 # singularity mount --writable /home/user/container.img /tmp/container
 ```
 
-{% include asciicast.html source='docs-create-rootmount.js' title='How to mount an image and copy files to it' author='davidgodlove@gmail.com'%}
+{% include asciicast.html source='docs-create-rootmount.js' uid='how-to-mount-and-copy' title='How to mount an image and copy files to it' author='davidgodlove@gmail.com'%}
 
 ## Copying, sharing, branching, and distributing your image
 A primary goal of Singularity is mobility. The single file image format makes mobility easy.
