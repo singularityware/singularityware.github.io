@@ -328,4 +328,19 @@ To add /usr/local/bin to the default sudo search path, run the program visudo wh
 ```bash
 Defaults    secure_path = /sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
 ```
+
+### How to resolve "Too many levels of symbolic links" error
+Running singularity failed with "Too many levels of symbolic links" error
+
+```bash
+$ singularity run -B /apps container.img
+ERROR : There was an error binding the path /apps: Too many levels of symbolic links
+ABORT : Retval = 255
+```
+
+You got this error because /apps directory is an autofs mount point. You can fix it by editing singularity.conf and adding the following directive with corresponding path:
+```bash
+autofs bug path = /apps
+```
+
 {% include links.html %}

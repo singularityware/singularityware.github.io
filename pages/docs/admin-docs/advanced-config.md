@@ -48,6 +48,8 @@ In addition to the system bind points as specified within this configuration fil
 
 Singularity will automatically disable this feature if the host does not support the prctl option `PR_SET_NO_NEW_PRIVS`. In addition, `enable overlay` must be set to `yes` and the host system must support overlayFS (generally kernel versions 3.18 and later) for users to bind host directories to bind points that do not already exist in the container. 
 
+### AUTOFS BUG PATH (string)
+With some autofs version, Singularity fails to run with "Too many levels of symbolic links" error when specified bind path (via configuration file or command line argument -B) are located in an autofs mount point. With this directive you can specify any number of autofs mount points generating errors.
 
 ## Logging
 In order to facilitate monitoring and auditing, Singularity will syslog() every action and error that takes place to the `LOCAL0` syslog facility. You can define what to do with those logs in your syslog configuration.
