@@ -113,7 +113,7 @@ To motivate the first need, let’s imagine a scenario where a researcher is dev
 The next need is driven by a larger goal of encouraging reproducible practices. At first glance, containers are a leap in the right direction. Given that all dependencies are packaged nicely, a container is very reproducible. Given this level of representation, a container gives the user absolutely everything - a complete operating system with data, libraries, and software. But this also means that we are producing heavy containers to serve a small amount of software. In terms of reproducibility, we have lost modularity because best practices implement a module on the level of an operating system, and not on the level of the software installed. There are several problems with this practice:
 
 - Containers are not consistent to allow for comparison. Two containers with the same software installed in different locations do not obviously do the same thing, despite this being a possibility.
-- Containers are not transparent. If i discover a container and do not have any prior knowledge or metadata, a known function may be completely concealed.
+- Containers are not transparent. If I discover a container and do not have any prior knowledge or metadata, a known function may be completely concealed.
 - Container contents are not easily parseable, or programmatically understandable. I should be able to run a function over a container, and know exactly the functions available to me, ask for help for a function, or how and where to interact with inputs and outputs.
 - Container internal infrastructure is not modular. We would be weary to export an entire container into another because of overlapping content.
 
