@@ -13,7 +13,7 @@ Singularity enables users to have full control of their environment. Singularity
    <img style="max-width:900px" src="/assets/img/diagram/singularity-2.4-flow.png">
 </a>
 
-It's pretty simple. You can make and customize containers locally, and then run them on your shared resource. As of version 2.3, you can even import Docker image content without sudo permissions. Singularity also allows you to leverage the resources of whatever host you are on. This includes HPC interconnects, resource managers, file systems, GPUs and/or accelerators, etc. Singularity does this by enabling several key facets:
+It's pretty simple. You can make and customize containers locally, and then run them on your shared resource. As of version 2.3, you can even pull Docker image layers into a new Singularity image without sudo permissions. Singularity also allows you to leverage the resources of whatever host you are on. This includes HPC interconnects, resource managers, file systems, GPUs and/or accelerators, etc. Singularity does this by enabling several key facets:
 
 * Encapsulation of the environment
 * Containers are image based
