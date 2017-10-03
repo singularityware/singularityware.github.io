@@ -16,7 +16,7 @@ entries:
       output: web, pdf
 
     - title: Installation
-      url: /docs-quick-start-installation
+      url: /docs-installation
       output: web, pdf
 
     - title: Container Recipes
@@ -55,35 +55,6 @@ entries:
       url: /faq#troubleshooting
       output: web, pdf
 
-
-  - title: Image Commands
-    output: web, pdf
-
-    - title: image.export
-      url: /docs-export
-      output: web, pdf
-
-    - title: image.expand
-      url: /docs-expand
-      output: web, pdf
-
-    - title: image.import
-      url: /docs-import
-      output: web, pdf
-
-    - title: image.create
-      url: /docs-create
-      output: web, pdf
-
-
-  - title: Deprecated
-    output: web, pdf
-
-    - title: bootstrap
-      url: /docs-bootstrap
-      output: web, pdf
-
-
   - title: Commands
     output: web, pdf
 
@@ -114,5 +85,35 @@ entries:
 
     - title: shell
       url: /docs-shell
+      output: web, pdf
+
+
+  - title: Image Commands
+    output: web, pdf
+    folderitems:
+
+    - title: image.export
+      url: /docs-export
+      output: web, pdf
+
+    - title: image.expand
+      url: /docs-expand
+      output: web, pdf
+
+    - title: image.import
+      url: /docs-import
+      output: web, pdf
+
+    - title: image.create
+      url: /docs-create
+      output: web, pdf
+
+
+  - title: Deprecated
+    output: web, pdf
+
+    folderitems:
+    - title: bootstrap
+      url: /docs-bootstrap
       output: web, pdf
 

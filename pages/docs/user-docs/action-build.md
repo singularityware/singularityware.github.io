@@ -7,9 +7,15 @@ folder: docs
 
 Build is the process where we install an operating system and then configure it appropriately for a specified need. To do this we use a [Singularity recipe](/docs-recipes) file (a text file called `Singularity`) which is a recipe of how to specifically build the container. Here we will overview the usage, best practices, and quick examples.
 
- - For a detailed **walkhrough of getting started** with build, we will point you to the <a href="/quickstart">quickstart</a>. 
- - If you want to customize the cache, specify Docker credentials, or any custom tweaks to your build environment, see <a href="/build-environment">build environment</a>. 
- - If you want to look at how to get started to making interally **modular containers**, check out <a href="http://containers-ftw.org/apps/examples/tutorials/getting-started" target="_blank">this post</a>.
+
+**Getting Started**
+For a detailed **walkhrough of getting started** with build, we will point you to the <a href="/quickstart">quickstart</a>. 
+
+**Build Environment**
+If you want to customize the cache, specify Docker credentials, or any custom tweaks to your build environment, see <a href="/build-environment">build environment</a>. 
+
+**Modular Containers**
+If you want to look at how to get started to making interally **modular containers**, check out <a href="http://containers-ftw.org/apps/examples/tutorials/getting-started" target="_blank">this post</a>.
 
 
 {% include toc.html %}
@@ -97,7 +103,7 @@ vanessa@vanessa-ThinkPad-T460s:~/Documents/Dropbox/Code/singularity/singularityw
 ```
 
 ## Usage
-here is the usage:
+here is the usage. We will break it up into sections so we can talk about each one.
 
 ```bash
 $ singularity build
@@ -134,8 +140,17 @@ BUILD SPEC TARGET:
 
         shub://     Build from a Singularity registry (Singularity Hub default)
         docker://   This points to a Docker registry (Docker Hub default)
+```
 
+These "build spec options" refer to the [recipe bases](/docs-recipes#recipes) options that you have. 
+Generally you are going to be building into a container or folder from some base that is local (an image or directory) or
+from an external endpoint (e.g., docker). Next we can look at create options:
 
+## Development (writable) or Production (immutable)?
+When you build your container, you probably want a writable container for development, and a nice
+immutable one for your completed, production image. Here are the options under the usage (help) for build:
+
+```
 CREATE OPTIONS:
     -s|--sandbox    Build a sandbox rather then a read only compressed image
     -w|--writable   Build a writable image (warning: deprecated due to sparse
@@ -147,7 +162,33 @@ CREATE OPTIONS:
     -s|--section    Only run a given section within the bootstrap (setup,
                     post, files, environment, test, labels, none)
 
+```
 
+You can think of the different options as follows:
+
+**create writable development folder**
+```
+sudo singularity build --writable container/ Singularity
+```
+
+**create writable development ext3 image**
+```
+sudo singularity build --writable container.img Singularity
+```
+
+**create production immutable image**
+```
+sudo singularity build container.simg Singularity
+```
+
+For details about the Singularity flow and use cases, see our [quickstart](/quickstart).
+
+## Checks
+Next, we will look at checks. Checks haven't been robustly developed (yet!) but offer
+an easy way for an admin to define a security (or any other kind of check) to be run on demand
+for a Singularity image. They are defined (and run) via different tags.
+
+```
 CHECKS OPTIONS:
     -c|--checks    enable checks
     -t|--tag       specify a check tag (not default)
@@ -156,38 +197,14 @@ CHECKS OPTIONS:
     -h|--high      Perform only checks at level high
 
 See singularity check --help for available tags
-
-DEF FILE BASEOS EXAMPLES:
-    Singularity Hub:
-        Bootstrap: shub
-        From: singularityhub/centos
-
-    Docker:
-        Bootstrap: docker
-        From: tensorflow/tensorflow:latest
-        IncludeCmd: yes # Use the CMD as runscript instead of ENTRYPOINT
-
-    YUM/RHEL:
-        Bootstrap: yum
-        OSVersion: 7
-        MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
-        Include: yum
-
-    Debian/Ubuntu:
-        Bootstrap: debootstrap
-        OSVersion: trusty
-        MirrorURL: http://us.archive.ubuntu.com/ubuntu/
-
-    Self (copy the host's file system):
-        Bootstrap: self
-
-    Local Image:
-        Bootstrap: localimage
-        From: /home/dave/starter.img 
+```
 
 
-DEFFILE SECTION EXAMPLES:
+## Examples
+Let's quickly look at some definition file examples. These come straight from `singularity help build`. First, here
+is a recipe for build that serves only to describe the sections.
 
+```
     %setup
         echo "This is a scriptlet that will be executed on the host, as root, after"
         echo "the container has been bootstrapped. To install things into the container"
@@ -225,9 +242,12 @@ DEFFILE SECTION EXAMPLES:
         HAN=someguy
         export HAN VADER LUKE
 
+```
 
-DEFFILE SCI-F SECTION EXAMPLES:
+Now let's look at a recipe that defines different <a href="https://containers-ftw.github.io/apps/" target="_blank">SCI-F apps</a>
 
+
+```
     %appinstall app1
         echo "These are steps to install an app using the SCI-F format"
 
@@ -252,10 +272,12 @@ DEFFILE SCI-F SECTION EXAMPLES:
 
     %apptest app1
         echo "some test for an app" 
+```
 
+## Building
+We have a recipe, great! Now how do we build it? In many ways:
 
-EXAMPLES:
-
+```
     Build a compressed image from a Singularity recipe file:
         $ singularity build /tmp/debian0.simg /path/to/debian.def
 
@@ -266,15 +288,13 @@ EXAMPLES:
         $ singularity build --sandbox /tmp/debian docker://debian:latest
         $ singularity exec --writable /tmp/debian apt-get install python
         $ singularity build /tmp/debian2.simg /tmp/debian
-
-
-For additional help, please visit our public documentation pages which are
-found at:
-
-    http://singularity.lbl.gov/
-
-
 ```
+
+## More Details
+ - For a detailed **walkhrough of getting started** with build, we will point you to the <a href="/quickstart">quickstart</a>. 
+ - If you want to customize the cache, specify Docker credentials, or any custom tweaks to your build environment, see <a href="/build-environment">build environment</a>. 
+ - If you want to look at how to get started to making interally **modular containers**, check out <a href="http://containers-ftw.org/apps/examples/tutorials/getting-started" target="_blank">this post</a>.
+
 
 ## Support
 Have a question, or need further information? <a href="/support">Reach out to us.</a>
