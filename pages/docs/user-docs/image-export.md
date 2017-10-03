@@ -1,5 +1,5 @@
 ---
-title: Singularity Export
+title: image.export
 sidebar: user_docs
 permalink: docs-export
 toc: false
@@ -12,6 +12,12 @@ Here we export an image into a `.tar` file:
 
 ```
 singularity export container.img > container.tar
+```
+
+We can also specify the file with `--file`
+
+```
+singularity export --file container.tar container.img
 ```
 
 And here is the recommended way to compress your image:

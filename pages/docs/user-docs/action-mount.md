@@ -1,5 +1,5 @@
 ---
-title: Bind Paths / File Sharing
+title: Bind Paths
 sidebar: user_docs
 permalink: docs-mount
 toc: false
@@ -8,7 +8,10 @@ folder: docs
 
 {% include toc.html %}
 
+## Bind Paths
 Singularity 'swaps' out the currently running root operating system on the host for what is inside the container, and in doing so none of the host file systems are accessible anymore. As a workaround for this, Singularity will *bind* those paths back in via two primary methods: system defined bind points and conditional user defined bind points.
+
+{% include asciicast.html source='docs-create-rootmount.js' uid='how-to-mount-and-copy' title='How to mount an image and copy files to it' author='davidgodlove@gmail.com'%}
 
 To *mount* a bind path inside the container, a ***bind point*** must be defined within the container. The bind point is a target location entity to which the actual directory or file can be bound to. This means that if you want to bind to a point within the container such as `/global`, that directory must already exist within the container.
 

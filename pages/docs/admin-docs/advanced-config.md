@@ -7,7 +7,7 @@ folder: docs
 
 When Singularity is running via the SUID pathway, the configuration **must** be owned by the root user otherwise Singularity will error out. This ensures that the system administrators have direct say as to what functions the users can utilize when running as root. If Singularity is installed as a non-root user, the SUID components are not installed, and the configuration file can be owned by the user (but again, this will limit functionality).
 
-The Configuration file can be found at `$SYSCONFDIR/singularity/singularity.conf` and is generally self documenting but there are several things to pay special attention to:
+The Configuration file can be found at `$SYSCONFDIR/singularity/singularity.conf`. The template in the repository is located at `etc/singularity.conf`. It is generally self documenting but there are several things to pay special attention to:
 
 ## Parameters
 

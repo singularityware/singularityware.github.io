@@ -15,28 +15,16 @@ entries:
       url: /user-guide
       output: web, pdf
 
-    - title: Quick Start Installation
+    - title: Installation
       url: /docs-quick-start-installation
       output: web, pdf
 
-    - title: Create an Image
-      url: /create-image
+    - title: Container Recipes
+      url: /docs-recipes
       output: web, pdf
 
-    - title: Bootstrap an Image
-      url: /bootstrap-image
-      output: web, pdf
-
-    - title: Adding Content
-      url: /image-content
-      output: web, pdf
-
-    - title: Container Checks
-      url: /docs-user-checks
-      output: web, pdf
-
-    - title: User Control
-      url: /user-control
+    - title: Build an Image
+      url: /docs-build
       output: web, pdf
 
     - title: Bind Paths and Mounts
@@ -47,25 +35,54 @@ entries:
       url: /docs-instances
       output: web, pdf
 
+    - title: Container Checks
+      url: /docs-user-checks
+      output: web, pdf
+
     - title: Environment and Metadata
       url: /docs-environment-metadata
-      output: web, pdf
-
-    - title: Change an Existing Container
-      url: /docs-changing-containers
-      output: web, pdf
-
-    - title: Singularity and Docker
-      url: /docs-docker
       output: web, pdf
 
     - title: Reproducible SCI-F Apps
       url: /docs-scif-apps
       output: web, pdf
 
+    - title: Singularity and Docker
+      url: /docs-docker
+      output: web, pdf
+
     - title: Troubleshooting
       url: /faq#troubleshooting
       output: web, pdf
+
+
+  - title: Image Commands
+    output: web, pdf
+
+    - title: image.export
+      url: /docs-export
+      output: web, pdf
+
+    - title: image.expand
+      url: /docs-expand
+      output: web, pdf
+
+    - title: image.import
+      url: /docs-import
+      output: web, pdf
+
+    - title: image.create
+      url: /docs-create
+      output: web, pdf
+
+
+  - title: Deprecated
+    output: web, pdf
+
+    - title: bootstrap
+      url: /docs-bootstrap
+      output: web, pdf
+
 
   - title: Commands
     output: web, pdf
@@ -75,20 +92,12 @@ entries:
       url: /docs-usage
       output: web, pdf
 
-    - title: bootstrap
-      url: /docs-bootstrap
+    - title: build
+      url: /docs-build
       output: web, pdf
 
     - title: exec
       url: /docs-exec
-      output: web, pdf
-
-    - title: export
-      url: /docs-export
-      output: web, pdf
-
-    - title: import
-      url: /docs-import
       output: web, pdf
 
     - title: inspect
@@ -106,3 +115,4 @@ entries:
     - title: shell
       url: /docs-shell
       output: web, pdf
+

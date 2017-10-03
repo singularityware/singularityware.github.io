@@ -5,7 +5,7 @@ permalink: user-guide
 folder: docs
 ---
 
-This document will cover the usage of Singularity, working with containers, and all of the user facing features. There is a separate <a href="/admin-guide">Singularity Administration Guide</a> which targets system administrators, so if you are a service provider, or an interested user, it is encouraged that you read that document as well.
+This document will introduce you to Singularity, and the links in the bar to the left will give you more detail on using the software. If you want to get a quick rundown, see our <a href="/docs-quickstart">quickstart</a>. There is also a separate <a href="/admin-guide">Singularity Administration Guide</a> that targets system administrators, so if you are a service provider, or an interested user, it is encouraged that you read that document as well.
 
 ## Welcome to Singularity!
 Singularity is a container solution created by necessity for scientific and application driven workloads.
@@ -74,6 +74,13 @@ There are numerous benefits for using a single file image for the entire contain
 - Changes are implemented in real time (image grows and shrinks as needed)
 - Images can serve as stand-alone programs, and can be executed like any other program on the host
 
+
+**Copying, sharing, branching, and distributing your image**
+A primary goal of Singularity is mobility. The single file image format makes mobility easy. Because Singularity images are single files, they are easily copied and managed. You can copy the image to create a branch, share the image and distribute the image as easily as copying any other file you control! 
+
+If you want an automated solution for building and hosting your image, you can use our container registry <a href="https://singularity-hub.org" target="_blank">Singularity Hub</a>. Singulairty Hub can automatically build [Singularity recipe files](/docs-recipes) from a Github repository each time that you push. It provides a simple cloud solution for storing and sharing your image.  If you want to host your own Registry, then you should check out <a href="https://www.github.com/singularityhub/sregistry" target="_blank">Singularity Registry</a>. If you have ideas or suggestions for how Singularity can better support reproducible science, please <a href="/support">reach out!</a>.
+
+
 #### Other container formats supported
 In addition to the default Singularity container image, the following other formats are supported:
 
@@ -91,9 +98,9 @@ Singularity also supports several different mechanisms for obtaining the images 
 
 - **http://** Singularity will use Curl to download the image locally, and then run from the local image
 - **https://** same as above using encryption
-- **docker://** Singularity can pull Docker images from a Docker registry, and will run them non-persistently (e.g. changes are not persisted as they can not be saved upstream)
 - **shub://** Singularity Hub is our own registry for Singularity containers. If you want to publish a container, or give easy access to others from their command line, or enable automatic builds, you should build it on <a href="https://singularity-hub.org" target="_blank">Singularity Hub</a>.
-
+- **docker://** Singularity can pull Docker images from a Docker registry, and will run them non-persistently (e.g. changes are not persisted as they can not be saved upstream). Note that pulling a Docker image implies assembling layers at runtime, and two subsequent pulls are not guaranteed to produce an identical image.
+- **instance://** A Singularity container running as service, called an instance, can be referenced with this URI.
 
 ### Name-spaces and isolation
 When asked, "What namespaces does Singularity virtualize?", the most appropriate response from a Singularity use case is "As few as possible!". This is because the goals of Singularity are mobility, reproducibility and freedom, not full isolation (as you would expect from industry driven container technologies). Singularity only separates the needed namespaces in order to satisfy our primary goals.
@@ -149,27 +156,51 @@ All of the above steps take approximately 15-25 thousandths of a second to run, 
 ## The Singularity Usage Workflow
 The security model of Singularity (as described above, "*A user inside a Singularity container is the same user as outside the container*") defines the Singularity workflow. There are generally two classifications of actions you would implement on a container; modification (which encompasses creation, bootstrapping, installing, admin) and using the container.
 
-Modification of containers (new or existing) generally require root administrative privileges just like these actions would require on any system, container, or virtual machine. This means that a user must have a system that they have root access on. This could be a server, workstation, or even a laptop. If you are using OS X or Windows on your laptop, it is recommended to setup Vagrant, and run Singularity from there (there are recipes for this which can be found at http://singularity.lbl.gov/). Once you have Singularity installed on your endpoint of choice, this is where you will do the bulk of your container development.
+Building containers generally require root administrative privileges just like these actions would require on any system, container, or virtual machine. This means that a user must have a system that they have root access on. This could be a server, workstation, or even a laptop. If you are using OS X or Windows on your laptop, it is recommended to setup Vagrant, and run Singularity from there (there are recipes for this which can be found at http://singularity.lbl.gov/). Once you have Singularity installed on your endpoint of choice, this is where you will do the bulk of your container development.
 
 This workflow can be described visually as follows:
 
-![Singularity Workflow](/images/docs/overview/workflow-overview.png)
+<a href="/assets/img/diagram/singularity-2.4-flow.png" target="_blank" class="no-after">
+   <img style="max-width:900px" src="/assets/img/diagram/singularity-2.4-flow.png">
+</a>
 
-On the left side, you have your laptop, workstation, or a server that you control. Here you will create your containers and  modify/update them as you need. Once you have the container with the necessary applications, libraries and data inside it can be easily shared to other hosts and executed without requiring root access. But if you need to make changes again to your container, you must go back to an endpoint or system that you have root on, make the necessary changes, and then re-upload the container to the computation resource you wish to execute it on.
+
+On the left side, you have your build environment: a laptop, workstation, or a server that you control. Here you will (optionally):
+
+ 1. develop and test containers using `--sandbox` (build into a folder with writable) or `--writable` (build into an ext3 image with writable)
+ 2. build your production containers with a squashfs filesystem. 
+
+Once you have the container with the necessary applications, libraries and data inside it can be easily shared to other hosts and executed without requiring root access. As a production container is an immutable object, if you need to make changes to your container, you must go back to an endpoint or system that you have root on, rebuild the container with the necessary changes, and then re-upload the container to the computation resource you wish to execute it on.
 
 
-### Examples
-How do the commands work? We recommend you look at examples for each:
+### Singularity Commands
+How do the commands work? Here is where to look for more information:
 
-- [bootstrap](/docs-bootstrap): Bootstrap a Singularity build specification to build an image
+- [build](/docs-build): Build a container on your user endpoint or build environment
 - [exec](/docs-exec): Execute a command to your container
 - [inspect](/docs-inspect): See labels, run and test scripts, and environment variables
-- [import](/docs-import): import layers or other file content to your image
 - [pull](/docs-pull): pull an image from Docker or Singularity Hub
 - [run](/docs-run): Run your image as an executable
 - [shell](/docs-shell): Shell into your image
-- [user control](/docs-control): The environment commands you can set to control the workflow 
 
+**Image Commands**
+
+- [image.import](/docs-import): import layers or other file content to your image
+- [image.export](/docs-export): export the contents of the image to tar or stream
+- [image.create](/docs-create): create a new image, using the old ext3 filesystem
+- [image.expand](/docs-create): increase the size of your image (old ext3)
+
+**Instance Commands**
+
+Instances were added in 2.4. This list is brief, and likely to expand with further development.
+
+- [instances](/docs-instances): Start, stop, and list container instances
+
+
+**Deprecated Commands**
+The following commands are deprecated in 2.4 and will be removed in future releases.
+
+- [bootstrap](/docs-bootstrap): Bootstrap a container recipe
 
 
 ## Support

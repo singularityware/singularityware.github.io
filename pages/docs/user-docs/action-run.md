@@ -59,7 +59,7 @@ When you first create a container, the runscript is defined using the following 
  4. If the user has not defined a runscript and the Docker container doesn't have an `ENTRYPOINT`, we look for `CMD`, even if the user hasn't asked for it.
  5. If the user has not deifned a runscript, and there is no `ENTRYPOINT` or `CMD` (or we aren't importing Docker at all) then we default to `/bin/bash`
 
-Here is how you would define the runscript section when you [bootstrap](/bootstrap-image) an image:
+Here is how you would define the runscript section when you [build](/docs-build) an image:
 
 ```bash
 Bootstrap: docker
@@ -79,4 +79,31 @@ From: ubuntu:latest
 exec "$@"`
 ```
 
-Generally, it is advised to provide a runscript that tells your user how to use the container, and gives access to the important executables. A user should be able to find your container, and execute it without an arguments, and get the equivalent of `--help`. Depending on your language of choice, you can do this in multiple ways.
+If you want different entrypoints for your image, we recommend using the `%apprun` syntax (see [apps](/docs-apps)). Here we have two entrypoints for foo and bar:
+
+```
+%runscript
+exec echo "Try running with --app dog/cat"
+
+%apprun dog
+exec echo Hello "$@", this is Dog
+
+%apprun cat
+exec echo Meow "$@", this is Cat
+```
+
+and then running (after build of a complete recipe) would look like:
+
+```
+sudo singularity build catdog.simg Singularity 
+
+$ singularity run catdog.simg 
+Try running with --app dog/cat
+
+$ singularity run --app cat catdog.simg
+ Meow , this is Cat
+$ singularity run --app dog catdog.simg  
+Hello , this is Dog
+```
+
+Generally, it is advised to provide help for your container with `%help` or `%apphelp`. If you find it easier, you can also provide help by way of a runscript that tells your user how to use the container, and gives access to the important executables. Regardless of your strategy. a reproducible container is one that tells the user how to interact with it.
