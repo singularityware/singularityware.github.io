@@ -25,7 +25,11 @@ Singularity centos7.img:~> echo $SHELL
 /bin/bash
 ```
 
-Additionally any arguments passed to the Singularity command (after the container name) will be passed to the called shell within the container.
+Additionally any arguments passed to the Singularity command (after the container name) will be passed to the called shell within the container, and shell can be used across image types. Here is a quick example of shelling into a container assembled from Docker layers.
+
+{% include asciicast.html source='shell_from_docker.js' uid='how-to-shell-from-docker' title='How to shell into container from Docker' author='davidgodlove@gmail.com'%}
+
+
 
 ## Change your shell
 The `shell` sub-command allows you to set or change the default shell using the `--shell` argument. As of Singularity version 2.2, you can also use the environment variable `SINGULARITY_SHELL` which will use that as your shell entry point into the container.

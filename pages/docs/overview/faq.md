@@ -24,48 +24,27 @@ To achieve this behavior, you will find that several Linux namespaces are separa
 
 
 ### Can't you do this with Docker?
+Singularity has taken off within the scientific computing world because Docker, while fantastic for enterprise services and local use, is a no starter on traditional HPC resources. There are no HPC centers utilizing Docker on their traditional HPC resources because it is inheritiatnly incompatible with HPC.
 
-No, not even close. If that was true, there would be no use for Singularity. But in fact, Singularity has taken off within the scientific computing world! Furthermore, if Docker can be used on traditional HPC resources, it would be; but it is not! There are no HPC centers utilizing Docker on their traditional HPC resources because it is inheritiatnly incompatible with HPC.
-
-Singularity has a very different usage model then Docker in that Singularity utilizes complete image files while Docker containers are made up of layers of tar files. With Singularity, you can prefetch an entire container, cache it on shared optimized storage, and run it from there.   Singularity also limits user privileges and access from within the container, making it safe for
-user's to bring their own containers. It doesn't open up security risks of users being able to control a root owned daemon, and it integrates seemlessly into existing process and resource manager workflows, supports GPU, MPI, architecture independent, among lots of other aspects that Docker does not.
+Singularity has a very different usage model then Docker in that Singularity utilizes complete image files while Docker containers are made up of layers of tar files. With Singularity, you can prefetch an entire container, cache it on shared optimized storage, and run it from there.   Singularity also limits user privileges and access from within the container, making it safe for user's to bring their own containers. It doesn't open up security risks of users being able to control a root owned daemon, and it integrates seemlessly into existing process and resource manager workflows, supports GPU, MPI, architecture independent, among lots of other aspects that Docker does not.
 
 In the end, Docker is designed for micro-service network virtulization and emulation of the full isolation requirements in the legacy of full machine level virtualization platforms (e.g. VMWare, Xen, KVM, etc.). Singularity is designed specifically for the scentific, application and environment virtulization. The right tool for the right job. :)
 
-If you already have a Docker container you can import/shell/run it directly into Singularity!
+If you already have a Docker container you can port it directly into a Singularity image!
 
 ```bash
-# Create and import
-singularity create hello-world.img
-singularity import hello-world.img docker://hello-world
+singularity pull docker://godlovedc/lolcow
+singularity build lolcow.simg docker://godlovedc/lolcow
 
 # Shell right in
-singularity shell docker://hello-world
+singularity shell docker://godlovedc/lolcow
 
 # Or just run
-singularity run docker://hello-world
+singularity run docker://godlovedc/lolcow
 ```
 
-## How is Singularity different from chroot?
 
-While Singularity can in fact operate on a chroot directory (thus giving users the ability to securely run within these directories) the feature set of Singularity goes leaps and bounds beyond! For example, chroot can not operate on directories, utilize kernel namespaces, or be used by users (without SUID even when the user namespace is supported). chroot does not support blurring the line between container and host with bind mounts, devices, and does not limit security access for users, or integrate with traditional HPC resources and services. 
-
-
-### How does Singularity relate/differ from Shifter?
-
-NERSC (like most HPC centers) are feeling the pressure from users asking for support for containers, specifically Docker. Due to the architecture of Docker it is very difficult (if not impossible) to properly and securely implement in a multi-tenant HPC environment. Shifter is NERSC's implementation to provide a Docker compatible front-end interface to their extreme scale HPC resources. It is system/resource specific in that you must import an existing container (from Docker, Singularity, or other), to the host/Shifter implementation.
-
-Singularity on the other hand does not leverage the Docker work-flow and targets a different premise - Mobility of Compute. This makes the integration of Singularity non-HPC specific (even though it works very well with HPC) and allows the image to become the primary unit of mobility (you can share and operate directly on Singularity images).
-
-Singularity is more of a general purpose mobility of compute solution that is very capable at HPC, Shifter's primary focus is targeting extreme scale HPC and integration with Cray and the resource manager.
-
-### How does Singularity relate/differ from Flatpak
-
-Flatpak is a packaging subsystem that uses some container technologies to create distribution neutral packages and it is more similar to the initial proof of concept of Singularity. But the use-cases of Singularity dictated that we should support full operating system containers that contain the entire user's environment.
-
-### How does Singularity relate/differ from other container systems like OpenVz, LXC/LXD, etc.?
-
- 
+### How does Singularity relate/differ from other container technology? 
 Singularity differs from other container systems in several major ways that impact usability on shared systems. For example, most container systems emulate standard systems in that there is the ability and necessity to escalate to root, run on separate IP/network address, run services, and in some cases even virtually boot the container system.
 
 Singularity on the other hand focuses on the ability to virtualized only what is necessary to achieve run-time application container and portable environments. For instance, you can not obtain root from within a Singularity container.
@@ -73,21 +52,17 @@ Singularity on the other hand focuses on the ability to virtualized only what is
 There are some additional performance and design enhancements which make Singularity also more appropriate in a scheduled HPC environment. The back-end image type is one such feature that negates the need for temporary caching of container images and optimizes meta-data IO (especially on parallel file systems). Another feature is how Singularity interacts with the host operating system to facilitate application work-flows like X11 and MPI.
 
 ### How does Singularity relate/differ from statically compiled binaries?
-
 Statically compiled binaries are a good comparison to what Singularity can do for a single program because it will package up all of the dynamic libraries and package them into a single executable (interpreted) format.
 
 But because Singularity is actually wrapping operating system files in to a container, you can do much more with it... Such as include other files, scripts, work-flows, pipe lines, data, and multi program processes and package them into a single portable executable format.
 
 ### What Linux distributions are you trying to get on-board?
-
 All of them! Help us out by letting them know you want Singularity to be included!
 
 
 ## Basic Singularity usage
 
-
 ### Do you need administrator privileges to use Singularity?
-
 You generally do not need admin/sudo to use Singularity containers. As of version 2.3, you can create, import, run, export, and shell without it. You do however need admin/root access to install Singularity and to bootstrap a container (build it from a specification file called `Singularity`). This means that, given that your cluster has Singularity installed, you are empowered to generate your own portable environments.
 
 This then defines the work-flow to some extent. If you have a container (whether Singularity or Docker) ready to go, you can run/shell/import without root access. If you want to build and bootstrap, then your Singularity container image must be built and configured on a host where you have root access (this can be a physical system or on a VM or Docker image). And of course once the container image has been configured it can be used on a system where you do not have root access as long as Singularity has been installed there.
@@ -98,29 +73,19 @@ This then defines the work-flow to some extent. If you have a container (whether
 If you don't want to build your own images, <a href="https://singularity-hub.org" target="_blank">Singularity Hub</a> will connect to your Github repos with build specification files, and build the containers automatically for you. You can then interact with them easily where Singularity is installed (e.g., on your cluster):
 
 ```bash
-singularity shell shub://vanessa/singularity-hello-world
-singularity run shub://vanessa/singularity-hello-world
-singularity create hello-world.img 
-singularity import hello-world.img shub://vanessa/singularity-hello-world
+singularity shell shub://vsoch/hello-world
+singularity run shub://vsoch/hello-world
+singularity pull shub://vsoch/hello-world
+singularity build hello-world.simg shub://vsoch/hello-world # redundant, you would already get an image
 ```
 
 ### Can you edit/modify a Singularity container once it has been instantiated?
-
-Yes, if you call it with the `-w/--writable` flag. (e.g. 'singularity shell --writable Container.img'). However, we recommend to not do this as a regular practice, as it induces changes that are not recorded properly. If you need to rebuild the container, you would need to remember those commands.
-
+We strongly advocate for reproducibility, so if you build a squashfs container, it is immutable. However, if you build with `--sandbox` or `--writable` you can produce a writable sandbox folder or ext3 image, respectively. From a sandbox you can develop, test, and make changes, and then build into a full squashfs image. We recommend to our users to use the compressed, immutable format for production containers.
 
 ### Can multiple applications be packaged into one Singularity Container?
-
-Yes! You can even create entire pipe lines and work flows using many applications, binaries, scripts, etc.. The `%runscript` bootstrap section is where you can define what happens when a Singularity container is run. This definition takes priority over all "other places" that might define a container's execution. Specifically:
-
- - The `%runscript` section of the bootstrap file takes priority over all
- - If you bootstrap a docker image, the `ENTRYPOINT` is used if there is no `%runscript`
- - If you add `Includecmd: yes` to your definition file header, the `CMD` is used instead
- - No `%runscript`, `ENTRYPOINT` OR `CMD` means the container's default execution is `/bin/bash`
-
+Yes! You can even create entire pipe lines and work flows using many applications, binaries, scripts, etc.. The `%runscript` bootstrap section is where you can define what happens when a Singularity container is run, and with the introduction of [modular apps](/docs-apps) you can now even define `%apprun` sections for different entrypoints to your container.
 
 ### How are external file systems and paths handled in a Singularity Container?
-
 Because Singularity is based on container principals, when an application is run from within a Singularity container its default view of the file system is different from how it is on the host system. This is what allows the environment to be portable. This means that root ('/') inside the container is different from the host!
 
 Singularity automatically tries to resolve directory mounts such that things will just work and be portable with whatever environment you are running on. This means that `/tmp` and `/var/tmp` are automatically shared into the container as is `/home`. Additionally, if you are in a current directory that is not a system directory, Singularity will also try to bind that to your container.
@@ -133,33 +98,7 @@ singularity run --bind /home/vanessa/Desktop:/data container.img
 
 
 ### How does Singularity handle networking?
-
-Singularity does no network isolation because it is designed to run like any other application on the system. It has all of the same networking privileges as any program running as that user. Thus, if you run a process in the container directed to localhost, it will show up on your host machine browser as localhost. Take a look at some of our <a href="https://github.com/vsoch/singularity-web" target="_blank">web examples</a> to get a sense for this.
-
-
-### Can I import an image from Docker?
-
-Yes, you can do this with our import, even without sudo. With import, the Docker layers (the dump of files) plus the environment, and labels are added to the container.
-
-```bash
-$ singularity import container.img docker://ubuntu:latest
-```
-
-You can also do this by way of bootstrapping Docker images, and to do this you would create a definition file, an image, and then bootstrap. First, here is most simplest definition file, "Singularity":
-
-```bash
-Bootstrap: docker
-From: ubuntu:latest
-```
-
-Now let's create an image and bootstrap using the Singularity file:
-
-```bash
-$ singularity create ubuntu.img
-$ singularity bootstrap ubuntu.img Singularity
-```
-
-Make sure you are running Singularity > 2.2 to make full use of this feature.
+As of 2.4, Singularity now has the ability to support instances, each with their own Network namespace, and the starting behavior defined by the `%startscript`. Without running as an instance, Singularity does no network isolation and runs like any other application on the system. It has all of the same networking privileges as any program running as that user. This means that if you run a process in the container directed to localhost, it will show up on your host machine browser as localhost. Take a look at some of our <a href="https://github.com/vsoch/singularity-web" target="_blank">web examples</a> to get a sense for this.
 
 
 ### Can a Singularity container be multi-threaded?
