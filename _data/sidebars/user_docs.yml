@@ -19,6 +19,14 @@ entries:
       url: /docs-installation
       output: web, pdf
 
+    - title: Quick Start
+      url: /quickstart
+      output: web, pdf
+
+    - title: Singularity Flow
+      url: /docs-flow
+      output: web, pdf
+
     - title: Container Recipes
       url: /docs-recipes
       output: web, pdf

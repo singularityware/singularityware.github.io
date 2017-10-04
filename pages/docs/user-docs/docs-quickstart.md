@@ -1,13 +1,15 @@
 ---
 title: Quick Start
-sidebar: main_sidebar
+sidebar: user_docs
 permalink: quickstart
 folder: docs
 toc: true
 ---
 
+This guide is intended for running Singularity on a computer where you have root (administrative) privileges.  But if you are learning about Singularity on a system where you lack root privileges you can still complete the steps that do not require the `sudo` command.
+
 ## Installation Quick Start
-Note that this quickstart is intended for using Singularity on your personal workstation, where you have installed Singularity and have sudo. If you only have access to Singularity on a shared cluster resource, you will be able to go through all parts of this tutorial that do not require writing to an image. First, if you are on your local machine, let's install Singularity.
+There are many ways to [install Singularity](docs-installation) but this quick start guide will only cover one.  
 
 ```bash
 git clone {{ site.repo }}.git
@@ -18,13 +20,12 @@ make
 sudo make install
 ```
 
-Installing Singularity as a user, or without sudo, will not produce software that works properly. If you want Singularity on your shared cluster resource, you should ask an administrator to install it for you!
-
+Singularity must be installed as root to function properly.  
 
 ## Overview of the Singularity Interface
-Singularity is a command line interface that is designed to interact with containerized applications as transparently as possible. This means you can run programs inside a container as if they were running on your host system. You can easily redirect IO, use pipes, pass arguments, and access files, sockets, and ports on the host system from within a container. 
+Singularity's [command line interface](docs-usage) allows you to build and interact with containers transparently. You can run programs inside a container as if they were running on your host system. You can easily redirect IO, use pipes, pass arguments, and access files, sockets, and ports on the host system from within a container. 
 
-Once you have Singularity installed, you should inspect the output of the `--help` option as follows:
+The `--help` option gives an overview of Singularity options and subcommands as follows:
 
 ```
 $ singularity --help
@@ -69,403 +70,223 @@ CONTAINER USAGE OPTIONS:
 For any additional help or support visit the Singularity
 website: http://singularity.lbl.gov/
 ```
+Singularity uses positional syntax.  Global options follow the `singularity` invocation  and affect the way that Singularity runs any command.  Then commands are passed followed by their options.  
 
-Notice the first line marked `USAGE:` and the placement of the options. Option placement is very important in Singularity.  It ensures that the right options are being parsed at the right time. The important "global" commands tend to relate to debugging, and this will be useful for you to know:
-
-```
-$ singularity --quiet run shub://vsoch/hello-world
-$ singularity --debug shell docker://ubuntu
-```
-
-Notice the positioning *before* the actions to `run` or `shell`. This is different from a command intended for the action.
+For example, to pass the `--debug` option to the main `singularity` command and  run Singularity with debugging messages on:
 
 ```
-$ singularity run --bind /local/path:/container/path docker://ubuntu
+$ singularity --debug run shub://GodloveD/lolcow
 ```
-
-Notice the argument `--bind` is located after the action `run`. 
-
-The take home message here is that option placement is exceedingly important. You can get additional help on any of the Singularity subcommands by using any one of the following command syntaxes:
+And to pass the `--containall` option to the `run` command and run a Singularity image in an isolated manner:
 
 ```
-$ singularity help <subcommand>
-$ singularity --help <subcommand>
-$ singularity -h <subcommand>
-$ singularity <subcommand> --help
-$ singularity <subcommand> -h
+$ singularity run --containall shub://GodloveD/lolcow
+```
+To learn more about a specific Singularity command, type one of the following:
+
+```
+$ singularity help <command>
+$ singularity --help <command>
+$ singularity -h <command>
+$ singularity <command> --help
+$ singularity <command> -h
 ```
 
-You can also ask for the help section written by the creator, or specific to an internal module called an <a href="/apps">app</a>.
+Users can also [write help docs specific to a container](/docs-recipes#help) or for an internal module called an [app](/docs-scif-apps).  If those help docs exist for a particular container, you can view them like so.   
 
 ```
 $ singularity help container.img            # See the container's help, if provided
 $ singularity help --app foo container.img  # See the help for foo, if provided
 ```
 
-## Container Guts
-Where do we keep metadata and things? The metadata folder is located within the image under the root directory at `/.singularity.d`
+## Download pre-built images
+You can use the [`pull`](docs-pull) and [`build`](docs-build) commands to download pre-built images from an external resource like [Singularity Hub](https://singularity-hub.org/) or [Docker Hub](https://hub.docker.com/).  When called on a native Singularity images like those provided on Singularity Hub, `pull` simply downloads the image file to your system.   
+
 
 ```
-singularity shell roar.simg
-$ ls /.singularity.d/
-actions  env  libs  runscript  startscript  labels.json
+$ singularity pull shub://vsoch/hello-world   # pull with default name, vsoch-hello-world-master.img
+$ singularity pull --name hello.img shub://vsoch/hello-world   # pull with custom name
 ```
 
-The `runscript` is linked to the file `/singularity`. Within `env` we have different files that were sourced by the container to generate the `/environment` file at the root of the image, in the order specified.
+Singularity images can also be pulled and named by an associated Github commit or content hash.
+
+You can also use `pull` with the `docker://` uri to reference Docker images served from a registry.  In this case `pull` does not just download an image file.  Docker images are stored in layers, so `pull` must also combine those layers into a usable Singularity file.  
+
 
 ```
- ls /.singularity.d/env
-01-base.sh  10-docker.sh  90-environment.sh  95-apps.sh  99-base.sh
+$ singularity pull docker://godlovedc/lolcow  # with default name
+$ singularity pull --name funny.img docker://godlovedc/lolcow # with custom name
 ```
 
-`labels.json` is metadata about the container, both from the bootstrap or creation, and from Docker (if relevant). These files should not be edited manually.  Instead, add variables to your `%environment` or `%appenv` sections of your [Singularity recipe](/docs-recipes) file that will automatically generate these files.
+Pulling Docker images reduces reproducibility.  If you were to pull a Docker image today and then wait six months and pull again, you are not guaranteed to get the same image.  If any of the source layers has changed the image will be altered. If reproducibility is a priority for you, try building your images from Singularity Hub.
 
-{% include asciicast.html source='container_guts.js' title='Viewing container meta-data' uid='viewing-container-metadata' author='davidgodlove@gmail.com'%}
-
-
-## Command Quick Start
-This first section of commands can be done on a shared resource, or your personal computer. You don't need sudo to create, import, or shell into containers.
-First we are going to discuss the three basic ways to get a container:
-
-
- - [pull](#pulling-images): pull an image from a registry
- - [build](#building-images): build an image from a base of your choice
- - [interact](#interacting-with-images): Interact with your image, including shell, exec, run, and basic binds.
- - [recipes](#recipes): Once you are comfortable with interacting with images, you probably want to build from a custom recipe
-
-
-### Pulling Images
-The simplest command is likely a pull, and it translates to pulling an image from an external resource, such as Singularity Hub. For example:
+You can also use the `build` command to download pre-built images from an external resource.  When using `build` you must specify a name for your container like so:
 
 ```
-singularity pull shub://vsoch/hello-world   # pull with default name, vsoch-hello-world-master.img
-singularity pull --name hello.img shub://vsoch/hello-world   # pull with custom name
+$ singularity build hello-world.img shub://vsoch/hello-world
+$ singularity build lolcow.img docker://godlovedc/lolcow
 ```
 
-To run an image that you've pulled, which means running the script that the creator has defined as the entrypoint to the image (the "runscript") you can do either of the following:
+Unlike `pull`, `build` will convert your image to the latest Singularity image format after downloading it.  
+
+`build` is like a "Swiss Army knife" for container creation.  In addition to downloading images, you can use `build` to create images from other images or from scratch using a [recipe file](/docs-recipes).  You can also use `build` to convert an image between the 3 major container formats supported by Singularity.  We discuss those image formats below in the [Build images from scratch](/quickstart#build-images-from-scratch) section.  
+
+## Interact with Images
+Once you have an image, you can interact with it in several ways. For these examples we will use a `hello-world.img` image that can be downloaded from Singularity Hub like so.
 
 ```
-singularity run hello.img
-./hello.img
-
-RaawwWWWWWRRRR!! Avocado!
-```
-
-The same actions would be done on the back end (to temporary files) if you were to try and `run`, `exec`, or `shell` to the same image:
+$ singularity pull --name hello-world.img shub://vsoch/hello-world
 
 ```
-singularity shell shub://vsoch/hello-world
-singularity run shub://vsoch/hello-world
-singularity exec shub://vsoch/hello-world cat /.singularity.d/labels.json
-```
 
-You can pull with the `docker://` uri to reference Docker images served from a registry, but be weary - pulling a Docker image does not mean pulling one, immutable file. Docker images are provided via layers, and so if you were to pull `docker://ubuntu` today and in six months, you are not guaranteed to produce the same image. Pull is great because knowing the command minimally gives you ability to use any Docker or Singularity image already provided in a registry. Singularity images can also be pulled and named by an associated Github commit or content hash, see our <a href="/docs-pull">pull</a> docs for more details.
-
-
-## Building Images
-For this example, we will talk about building images from a Docker base, which does not require a <a href="/docs-recipes">Singularity recipe</a>. However, if you want to build and customize your image, you can create a <a href="/docs-recipes">Singularity recipe</a> text file, which is a simple text file that describes how the container should be made. First, let's take a look at where you can build, and the options that you have.
-
-### The Singularity Flow
-The diagram below is a visual depiction of how you can use Singularity to build images. The high level idea is that we have two environments:
-
- - a development environment (where you have sudo privileges) to test and build your container
- - a production environment where you run your container
-
-<a href="/assets/img/diagram/singularity-2.4-flow.png" target="_blank" class="no-after">
-   <img style="max-width:900px" src="/assets/img/diagram/singularity-2.4-flow.png">
-</a>
-
-Singularity production images are immutable. This is a feature added as of Singularity 2.4, and it ensures a higher level of reproducibility and verification of images. To read more about the details, check out the  <a href="/build">bulid</a>docs. However, immutability is not so great when you are testing, debugging, or otherwise want to quickly change your image. We will proceed by describing a typical workflow of developing first, building a final image, and using in production. 
-
-### 1. Development Commands
-If you want a writable image or folder for developing, you have two options:
-
- 1. build into a folder that has writable permissions with sudo
- 2. build into an ext3 image file, also that has writable permissions with sudo and the `--writable` flag 
-
-#### Sandbox Folder
-To build into a folder (we call this a "sandbox") just ask for it:
+### Shell 
+The [`shell`](docs-shell) command allows you to spawn a new shell within your container and interact with it as though it were a small virtual machine.  
 
 ```
-sudo singularity build --sandbox ubuntu/ docker://ubuntu
-Docker image path: index.docker.io/library/ubuntu:latest
-Cache folder set to /root/.singularity/docker
-Importing: base Singularity environment
-Importing: /root/.singularity/docker/sha256:9fb6c798fa41e509b58bccc5c29654c3ff4648b608f5daa67c1aab6a7d02c118.tar.gz
-Importing: /root/.singularity/docker/sha256:3b61febd4aefe982e0cb9c696d415137384d1a01052b50a85aae46439e15e49a.tar.gz
-Importing: /root/.singularity/docker/sha256:9d99b9777eb02b8943c0e72d7a7baec5c782f8fd976825c9d3fb48b3101aacc2.tar.gz
-Importing: /root/.singularity/docker/sha256:d010c8cf75d7eb5d2504d5ffa0d19696e8d745a457dd8d28ec6dd41d3763617e.tar.gz
-Importing: /root/.singularity/docker/sha256:7fac07fb303e0589b9c23e6f49d5dc1ff9d6f3c8c88cabe768b430bdb47f03a9.tar.gz
-Importing: /root/.singularity/metadata/sha256:22e289880847a9a2f32c62c237d2f7e3f4eae7259bf1d5c7ec7ffa19c1a483c8.tar.gz
-Building image from sandbox: ubuntu/
-Singularity container built: ubuntu/
-```
-
-We now have a folder with the entire ubuntu OS, plus some Singularity metadata, plopped in our present working directory.
-
-```
- tree -L 1 ubuntu
-ubuntu
-├── bin
-├── boot
-├── dev
-├── environment -> .singularity.d/env/90-environment.sh
-├── etc
-├── home
-├── lib
-├── lib64
-├── media
-├── mnt
-├── opt
-├── proc
-├── root
-├── run
-├── sbin
-├── singularity -> .singularity.d/runscript
-├── srv
-├── sys
-├── tmp
-├── usr
-└── var
-```
-
-And you can shell into it just like a normal container. Without sudo, you don't have write permission:
-
-```
-singularity shell ubuntu
-Singularity: Invoking an interactive shell within container...
-
-Singularity ubuntu:~/Desktop> touch /hello.txt
-touch: cannot touch '/hello.txt': Permission denied
-```
-
-With sudo, you do:
-
-```
-sudo singularity shell ubuntu
-Singularity: Invoking an interactive shell within container...
-
-Singularity ubuntu:/home/vanessa/Desktop> touch /hello.txt
-```
-
-#### Writable Image
-If you don't want a folder, you can perform a similar development build and specify the `--writable` command.
-This will produce an image that is writable with an ext3 file system. Unlike the sandbox, it is a single image file.
-
-```
-sudo singularity build --writable ubuntu.img docker://ubuntu
-Docker image path: index.docker.io/library/ubuntu:latest
-Cache folder set to /root/.singularity/docker
-Importing: base Singularity environment
-Importing: /root/.singularity/docker/sha256:9fb6c798fa41e509b58bccc5c29654c3ff4648b608f5daa67c1aab6a7d02c118.tar.gz
-Importing: /root/.singularity/docker/sha256:3b61febd4aefe982e0cb9c696d415137384d1a01052b50a85aae46439e15e49a.tar.gz
-Importing: /root/.singularity/docker/sha256:9d99b9777eb02b8943c0e72d7a7baec5c782f8fd976825c9d3fb48b3101aacc2.tar.gz
-Importing: /root/.singularity/docker/sha256:d010c8cf75d7eb5d2504d5ffa0d19696e8d745a457dd8d28ec6dd41d3763617e.tar.gz
-Importing: /root/.singularity/docker/sha256:7fac07fb303e0589b9c23e6f49d5dc1ff9d6f3c8c88cabe768b430bdb47f03a9.tar.gz
-Importing: /root/.singularity/metadata/sha256:22e289880847a9a2f32c62c237d2f7e3f4eae7259bf1d5c7ec7ffa19c1a483c8.tar.gz
-Building image from sandbox: /tmp/.singularity-build.VCHPpP
-Creating empty Singularity writable container 130MB
-Creating empty 162MiB image file: ubuntu.img
-Formatting image with ext3 file system
-Image is done: ubuntu.img
-Building Singularity image...
-Cleaning up...
-Singularity container built: ubuntu.img
-```
-
-The same is true as the above, you can use any commands like `shell`, `exec`, `run`, and if you want a writable image you must use sudo  and the `--writable` flag.
-
-```
-sudo singularity shell --writable ubuntu.img
-```
-
->> Development Tip! When building containers, it often is the case that you will have a lot of
-testing of installation commands, and if building a production image, one error will stop the entire build. If you
-interactively write the build recipe with one of these writable containers, you can debug as you go, and then
-build the production (squashfs) container without worrying that it will error and need to be started again.
-
-### 2. Production Commands
-Let's set the scene - we just finished buliding our perfect hello world container. It does a fantastic hello-world analysis, and we have written a paper on it! We now want to build an immutable container - meaning that if someone obtained our container and tried to change it, they could not. They *could* easily use the same recipe that you used (it is provided as metadata inside the container), so your work can still be extended.
-
-#### Recommended Production Build
-What we want for production is a build into a <a href="https://en.wikipedia.org/wiki/SquashFS" target="_blank">squashfs image</a>. Squashfs is a read only, and compressed filesystem, and well suited for confident archive and re-use of your hello-world. To build a production image, just remove the extra options:
-
-```
-sudo singularity build ubuntu.simg docker://ubuntu
-Docker image path: index.docker.io/library/ubuntu:latest
-Cache folder set to /root/.singularity/docker
-Importing: base Singularity environment
-Importing: /root/.singularity/docker/sha256:9fb6c798fa41e509b58bccc5c29654c3ff4648b608f5daa67c1aab6a7d02c118.tar.gz
-Importing: /root/.singularity/docker/sha256:3b61febd4aefe982e0cb9c696d415137384d1a01052b50a85aae46439e15e49a.tar.gz
-Importing: /root/.singularity/docker/sha256:9d99b9777eb02b8943c0e72d7a7baec5c782f8fd976825c9d3fb48b3101aacc2.tar.gz
-Importing: /root/.singularity/docker/sha256:d010c8cf75d7eb5d2504d5ffa0d19696e8d745a457dd8d28ec6dd41d3763617e.tar.gz
-Importing: /root/.singularity/docker/sha256:7fac07fb303e0589b9c23e6f49d5dc1ff9d6f3c8c88cabe768b430bdb47f03a9.tar.gz
-Importing: /root/.singularity/metadata/sha256:22e289880847a9a2f32c62c237d2f7e3f4eae7259bf1d5c7ec7ffa19c1a483c8.tar.gz
-Building Singularity image...
-Cleaning up...
-Singularity container built: ubuntu.simg
-```
-You will also notice the extension `.simg`. This is the correct extension to designate a Singularity 2.4, production (squashfs) file.
-
-#### Production Build from Sandbox
-We understand that it might be wanted to build a Singularity (squashfs) from a previous development image. While we advocate for the first approach, we support this use case. To do this, given our folder called "ubuntu/" we made above:
-
-```
-sudo singularity build ubuntu.simg ubuntu/
-```
-It could be the case that a cluster maintains a "working" base of container folders (with writable) and then builds and provides production containers to its users.
-
-
-### Interacting with Images
-Once you have your image, you can interact with it in several ways! We will go over the basics.
-
-#### Shell
-Now let's go back to the `hello.img` we created, and shell inside.
-
-```bash
-singularity shell hello.img
+$ singularity shell hello-world.img
 Singularity: Invoking an interactive shell within container...
 
 # I am the same user inside as outside!
-Singularity centos7.img:~/Desktop> whoam
+Singularity hello-world.img:~/Desktop> whoami
 vanessa
 
-Singularity centos7.img:~/Desktop> id
+Singularity hello-world.img:~/Desktop> id
 uid=1000(vanessa) gid=1000(vanessa) groups=1000(vanessa),4(adm),24,27,30(tape),46,113,128,999(input)
 ```
 
-and as we pointed out earlier, this would work also with a `shub://` or `docker://` URI, to specify a Singularity or Docker Registry served image:
+`shell` also works with the `shub://` and `docker://` URIs.  This creates an ephemeral container that disappears when the shell is exited.
 
 ```
-singularity shell docker://ubuntu
-singularity shell shub://vsoch/hello-world
+$ singularity shell shub://vsoch/hello-world
 ```
 
-Shell is good for quick inspection, if you don't intend or need to keep the image. Want to keep the container's environment contained, meaning no sharing of host environment?
+### Executing Commands
+The [`exec`](docs-exec) command allows you to execute a custom command within a container by specifying the image file.  For instance, to list the root (`/`) of our `hello-world.img` image, we could do the following:
 
 ```
-singularity shell --contain hello.img
-```
-
-#### Executing Commands
-Singularity `exec` will send a custom command for the container to run, anything that you like! Unlike docker exec, a container doesn't have to be actively running. Exec works as it would to execute a script. It runs, and then exists upon completion. So, to list the root of the image (`/`), we could do the following:
-
-```bash
-singularity exec vsoch-hello-world-master.img ls /
+$ singularity exec hello-world.img ls /
 anaconda-post.log  etc	 lib64	     mnt   root  singularity  tmp
 bin		   home  lost+found  opt   run	 srv	      usr
 dev		   lib	 media	     proc  sbin  sys	      var
 ```
 
-#### Working with Files
+`exec` also works with the `shub://` and `docker://` URIs.  This creates an ephemeral container that executes a command and disappears.
 
-Files on the host can be reachable from within the container
+```
+$ singularity exec shub://singularityhub/ubuntu cat /etc/os-release
+```
 
-```bash
-echo "Hello World" > $HOME/hello-kitty.txt
-singularity exec singularity exec vsoch-hello-world-master.img cat $HOME/hello-kitty.txt
+### Running a container
+Singularity containers contain "[runscripts](docs-recipes#runscript)".  These are user defined scripts that define the actions a container should perform when someone runs it.  The runscript can be triggered with the [`run`](docs-run) command, or simply by calling the container as though it were an executable.   
+
+```
+$ singularity run hello-world.img
+$ ./hello-world.img
+```
+
+`run` also works with `shub://` and `docker://` URIs.  This creates an ephemeral container that runs and then disappears.  
+
+```
+$ singularity run shub://GodloveD/lolcow
+```
+
+### Working with Files
+
+Files on the host are reachable from within the container.
+
+```
+$ echo "Hello World" > $HOME/hello-kitty.txt
+$ singularity exec vsoch-hello-world-master.img cat $HOME/hello-kitty.txt
 Hello World
 ```
-If you want to add files to the container, you would build from a <a href="/docs-recipes">recipe</a> instead.
 
-#### Mounting
-By default, most configurations will mount `/tmp` and the home directories by default. On a research cluster, you probably want to access locations with big datasets, and then write results too. For this, you will want to bind a folder to the container. Here, we are binding my Desktop to `/opt` in the image, and listing the contents to show it worked. We use the command `-B` or `--bind` to do this.
+This example works because `hello-kitty.txt` exists in the user's home directory.  By default singularity bind mounts `/home/$USER`, `/tmp`, and `$PWD` into your container at runtime.  
 
-```bash
-$ singularity exec --bind /home/vanessa/Desktop:/opt hello.img ls /opt
-hello.img	     researchapps-matlab-sherlock-master.img
-hello-kitty.txt      singularity-recipe-demo.mp4
-party_dinosaur.gif
-````
+You can specify additional directories to bind mount into your container with the [`--bind`](docs-mount) option. In this example, the `/data` directory on the host system is bind mounted to the `/mnt` directory inside the container.  
+
+```
+$ echo "I am your father" >/data/vader.sez
+$ ~/sing-dev/bin/singularity exec --bind /data:/mnt hello-world.img cat /mnt/vader.sez
+I am your father
+```
+
+## Build images from scratch
+
+The diagram below shows how you can use Singularity to build images and run images. The high level idea is that we have two environments:
+
+ - a build environment (where you have root privileges) to test and build your container
+ - a production environment where you run your container (where you may or may not have root privileges)
+
+<a href="/assets/img/diagram/singularity-2.4-flow.png" target="_blank" class="no-after">
+   <img style="max-width:900px" src="/assets/img/diagram/singularity-2.4-flow.png">
+</a>
+
+In practice, your build system may or may not differ from your production system. If you want more details about the different build options, read about the [singularity flow](/docs-flow).
+
+As of Singularity v2.4 by default `build` produces immutable images in the squashfs file format. This ensures reproducible and verifiable images. 
+
+However, during testing and debugging you may want an image format that is writable.  This way you can `shell` into the image and install software and dependencies until you are satisfied that your container will fulfill your needs.  For these scenarios, Singularity supports two other image formats: a `sandbox` format (which is really just a chroot directory), and a `writable` format (the ext3 file system that was used in Singularity versions less than 2.4).  
+
+### Sandbox Directory
+To build into a `sandbox` (container in a directory) use the `build --sandbox` command and option:
+
+```
+$ sudo singularity build --sandbox ubuntu/ docker://ubuntu
+```
+
+This command creates a directory called `ubuntu/` with an entire Ubuntu Operating System and some Singularity metadata in your current working directory.
+
+You can use commands like `shell`, `exec`, and `run` with this directory just as you would with a Singularity image.  You can also write files to this directory from within a Singularity session (provided you have the permissions to do so).  These files will be ephemeral and will disappear when the container is finished executing. However if you use the `--writable` option the changes will be saved into your directory so that you can use them the next time you use your container.   
+
+### Writable Image
+If you prefer to have a writable image file, you can `build` a container with the `--writable` option.
+
+```
+$ sudo singularity build --writable ubuntu.img docker://ubuntu
+```
+This produces an image that is writable with an ext3 file system. Unlike the sandbox, it is a single image file.
+
+When you want to alter your image, you can use commands like `shell`, `exec`, `run`, with the `--writable` option. Because of permission issues it may be necessary to execute the container as root to modify it.  
+
+```
+$ sudo singularity shell --writable ubuntu.img
+```
+
+>> Development Tip! When building containers, it often is the case that you will have a lot of
+testing of installation commands, and if building a production image, one error will stop the entire build. If you
+interactively write the build recipe with one of these writable formats, you can debug as you go, and then
+build the production (squashfs) container without worrying that it will error and need to be started again.
+
+
+### Converting images from one format to another 
+The `build` command allows you to build a container from an existing container.  This means that you can use it to convert a container from one format to another.  For instance, if you have already created a sandbox (directory) and want to convert it to the default immutable image format (squashfs) you can do so:
+
+```
+$ singularity build new-squashfs sandbox
+```
+
+Doing so may break reproducibility if you have altered your sandbox outside of the context of a recipe file, so you are advised to exercise care.  
+
+You can use `build` to convert containers to and from `writable`, `sandbox`, and default (squashfs) file formats via any of the six possible combinations. 
 
 
 ### Singularity Recipes
-For a reproducible container, the recommended practice is to build by way of a Singularity recipe file. This also makes it easy to add files, environment variables, and install custom software, and still start from your base of choice (e.g., Docker). The absolute minimum required for a recipe is a base, and here are your options:
+For a reproducible, production-quality container, we recommend that you build a container with the default (squashfs) file format using a Singularity recipe file. This also makes it easy to add files, environment variables, and install custom software, and still start from your base of choice (e.g., Singylarity Hub). 
 
-**Singularity Hub**
+A recipe file has a header and a body.  The header determines what kind of base container to begin with, and the body is further divided into sections (called scriptlets) that do things like install software, setup the environment, and copy files into the container from the host system.  
+
+Here is an example of a recipe file:
+
 ```
 Bootstrap: shub
-From: vsoch/hello-world
-```
-
-**Docker**
-
-```
-Bootstrap: docker
-From: tensorflow/tensorflow:latest
-IncludeCmd: yes # Use the CMD as runscript instead of ENTRYPOINT
-```
-
-**YUM/RHEL**
-```
-Bootstrap: yum
-OSVersion: 7
-MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
-Include: yum
-```
-
-**Debian/Ubuntu**
-
-```
-Bootstrap: debootstrap
-OSVersion: trusty
-MirrorURL: http://us.archive.ubuntu.com/ubuntu/
-```
-
-**Self**
-
-```
-Bootstrap: self
-```
-
-**Local Image**
-
-```
-Bootstrap: localimage
-From: /home/dave/starter.img 
-```
-
-So many choices! Note that for the debootstrap and bases that require a mirror, you might run into issues of needing additional software on the host (e.g., debootstrap). If you have trouble, you can always fall back to using a Docker base.
-
-Thus, based on the above, the minimum requirement for a Boostrap file is this header section, in a file named `Singularity`:
-
-
-```bash
-Bootstrap: docker
-From: ubuntu:latest
-```
-
-and then you build the container from it:
-
-```
-sudo singularity build ubuntu.simg Singularity
-```
-
-#### Singularity Recipe File
-
-If you intend to use Singularity Hub (version 2.0 to be released after Singularity 2.4) then you might want to know the convention of specifying a tag for a container recipe in the format `Singularity.<tagname>`:
-
- - Singularity.dev
- - Singularity  (implies "latest")
- - Singularity.v10
-
-These files located anywhere in a repo connected to Singularity Hub will build images with these respective tags. If two identical tags are found, the newer file takes preference.
-
-#### Singularity Recipe Example
-Now let's create a simple recipe. We want to add some custom installation steps (`%post`), along with environment and labels.
-
-```bash
-Bootstrap: docker
-From: ubuntu:latest
+From: singularityhub/ubuntu
 
 %runscript
     exec echo "The runscript is the containers default runtime command!"
 
-
 %files
    /home/vanessa/Desktop/hello-kitty.txt        # copied to root of container
    /home/vanessa/Desktop/party_dinosaur.gif     /opt/the-party-dino.gif #
-
 
 %environment
     VARIABLE=MEATBALLVALUE
@@ -479,13 +300,16 @@ From: ubuntu:latest
     mkdir /data
     echo "The post section is where you can install, and configure your container."
 ```
+To build a container from this definition file (assuming it is a file named Singularity), you would call build like so:
 
-The above recipe can then be built as we specified before:
-
-```bash
-sudo singularity build ubuntu.simg Singularity
+```
+$ sudo singularity build ubuntu.simg Singularity
 ```
 
-If you want to go through this entire process without having singularity installed locally, or without leaving your cluster, you can build images using <a href="https://github.com/singularityhub/singularityhub.github.io/wiki" target="_blank">singularity hub.</a>
+In this example, the header tells singularity to use a base Ubuntu image from Singularity Hub.  The `%runscript` section defines actions for the container to take when it is executed (in this case a simple message).  The `%files` section copies some files into the container from the host system at build time.  The `%environment` section defines some environment variables that will be available to the container at runtime.  The `%labels` section allows for custom metadata to be added to the container. And finally the `%post` section executes within the container at build time after the base OS has been installed.  The `%post` section is therefore the place to perform installations of custom apps.  
+
+This is a very small example of the things that you can do with a [recipe file](/docs-recipes).  In addition to building a container from Singularity Hub, you can start with base images from Docker Hub, use images directly from official repositories such as Ubuntu, Debian, Centos, Arch, and BusyBox, use an existing container on your host system as a base, or even take a snapshot of the host system itself and use that as a base image.  
+
+If you want to build Singularity images without having singularity installed in a build environment, you can build images using <a href="https://github.com/singularityhub/singularityhub.github.io/wiki" target="_blank">Singularity Hub</a> instead.  If you want a more detailed rundown and examples for different build options, see our [singularity flow](/docs-flow) page
 
 {% include links.html %}

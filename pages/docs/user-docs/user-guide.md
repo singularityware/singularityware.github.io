@@ -5,7 +5,7 @@ permalink: user-guide
 folder: docs
 ---
 
-This document will introduce you to Singularity, and the links in the bar to the left will give you more detail on using the software. If you want to get a quick rundown, see our <a href="/docs-quickstart">quickstart</a>. There is also a separate <a href="/admin-guide">Singularity Administration Guide</a> that targets system administrators, so if you are a service provider, or an interested user, it is encouraged that you read that document as well.
+This document will introduce you to Singularity, and the links in the bar to the left will give you more detail on using the software. If you want to get a quick rundown, see our <a href="/docs-quickstart">quickstart</a>. If you want to understand which commands are best fit for your usecase, see our <a href="/docs-flow">build flow</a> page. There is also a separate <a href="/admin-guide">Singularity Administration Guide</a> that targets system administrators, so if you are a service provider, or an interested user, it is encouraged that you read that document as well.
 
 ## Welcome to Singularity!
 Singularity is a container solution created by necessity for scientific and application driven workloads.
