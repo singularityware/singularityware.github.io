@@ -35,70 +35,61 @@ The core of a Docker image is basically a compressed set of files, a set of `.ta
 
 
 ## Quick Start: The Docker Registry
-The Docker engine communicates with the Docker Hub via the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api/" target="_blank">Docker Remote API</a>, and guess what, we can too! The easiest thing to do is create an image, and then pipe a Docker image directly into it from the Docker Registry. You don't need Docker installed on your machine, but you will need a working internet connection. Let's create an ubuntu operating system, from Docker:
+The Docker engine communicates with the Docker Hub via the <a href="https://docs.docker.com/engine/reference/api/docker_remote_api/" target="_blank">Docker Remote API</a>, and guess what, we can too! The easiest thing to do is create an image, and then pipe a Docker image directly into it from the Docker Registry. You don't need Docker installed on your machine, but you will need a working internet connection. Let's create an ubuntu operating system, from Docker. We will pull, then build:
+
 
 ```bash
-singularity create ubuntu.img
-Initializing Singularity image subsystem
-Opening image file: ubuntu.img
-Creating 768MiB image
-Binding image to loop
-Creating file system within image
-Image is done: ubuntu.img
-```
-
-Note that the default size is 768MB, you can modify this by adding the `--size` or `-s` argument like:
-
-```bash
-singularity create --size 2000 ubuntu.img
-```
-
-If you aren't sure about the size? Try <a href="https://asciinema.org/a/103492?speed=3" target="_blank">building into a folder first</a>.
-
-```bash
-mkdir fatty
-singularity import fatty docker://ubuntu:latest
-du -sh fatty/
-```
-
-Next, let's import a Docker image into it! 
-
-```bash
-singularity import ubuntu.img docker://ubuntu
+singularity pull docker://ubuntu
+WARNING: pull for Docker Hub is not guaranteed to produce the
+WARNING: same image on repeated pull. Use Singularity Registry
+WARNING: (shub://) to pull exactly equivalent images.
+Docker image path: index.docker.io/library/ubuntu:latest
 Cache folder set to /home/vanessa/.singularity/docker
+[5/5] |===================================| 100.0% 
 Importing: base Singularity environment
-Importing: /home/vanessa/.singularity/docker/sha256:6d9ef359eaaa311860550b478790123c4b22a2eaede8f8f46691b0b4433c08cf.tar.gz
-Importing: /home/vanessa/.singularity/docker/sha256:9654c40e9079e3d5b271ec71f6d83f8ce80cfa6f09d9737fc6bfd4d2456fed3f.tar.gz
-Importing: /home/vanessa/.singularity/docker/sha256:e8db7bf7c39fab6fec91b1b61e3914f21e60233c9823dd57c60bc360191aaf0d.tar.gz
-Importing: /home/vanessa/.singularity/docker/sha256:f8b845f45a87dc7c095b15f3d9661e640ebc86f42cd8e8ab36674846472027f7.tar.gz
-Importing: /home/vanessa/.singularity/docker/sha256:d54efb8db41d4ac23d29469940ec92da94c9a6c2d9e26ec060bebad1d1b0e48d.tar.gz
-Importing: /home/vanessa/.singularity/docker/sha256:fe44851d529f465f9aa107b32351c8a0a722fc0619a2a7c22b058084fac068a4.tar.gz
-singularity shell ubuntu.img 
-Singularity: Invoking an interactive shell within container...
-
-Singularity ubuntu.img>
+Importing: /home/vanessa/.singularity/docker/sha256:9fb6c798fa41e509b58bccc5c29654c3ff4648b608f5daa67c1aab6a7d02c118.tar.gz
+Importing: /home/vanessa/.singularity/docker/sha256:3b61febd4aefe982e0cb9c696d415137384d1a01052b50a85aae46439e15e49a.tar.gz
+Importing: /home/vanessa/.singularity/docker/sha256:9d99b9777eb02b8943c0e72d7a7baec5c782f8fd976825c9d3fb48b3101aacc2.tar.gz
+Importing: /home/vanessa/.singularity/docker/sha256:d010c8cf75d7eb5d2504d5ffa0d19696e8d745a457dd8d28ec6dd41d3763617e.tar.gz
+Importing: /home/vanessa/.singularity/docker/sha256:7fac07fb303e0589b9c23e6f49d5dc1ff9d6f3c8c88cabe768b430bdb47f03a9.tar.gz
+Importing: /home/vanessa/.singularity/metadata/sha256:77cece4ce6ef220f66747bb02205a00d9ca5ad0c0a6eea1760d34c744ef7b231.tar.gz
+WARNING: Building container as an unprivileged user. If you run this container as root
+WARNING: it may be missing some functionality.
+Building Singularity image...
+Cleaning up...
+Singularity container built: ./ubuntu.img
 ```
+
+The warnings mean well - it is to tell you that you are creating the image on the fly from layers, and if one of those layers changes, you won't produce the same image next time.
 
 ## The Build Specification file, Singularity
-Just like Docker has the Dockerfile, Singularity has a file called Singularity that (currently) applications like Singularity Hub know to sniff for. For reproducibility of your containers, our strong recommendation is that you build from these files. Any command that you issue to change a container with `--writable` is by default not recorded, and your container loses its reproducibility. So let's talk about how to make these files! First, let's look at the absolute minimum requirement:
+Just like Docker has the Dockerfile, Singularity has a file called Singularity that (currently) applications like Singularity Hub know to sniff for. For reproducibility of your containers, our strong recommendation is that you build from these files. Any command that you issue to change a container sandbox (building with `--sandbox`) or to a build with `--writable` is by default not recorded, and your container loses its reproducibility. So let's talk about how to make these files! First, let's look at the absolute minimum requirement:
 
 ```bash
 Bootstrap: docker
-From: tensorflow/tensorflow:latest
+From: ubuntu
 ```
 
 We would save this content to a file called `Singularity` and then issue the following commands to bootstrap the image from the file
 
 ```bash
-singularity create --size 4000 tensorflow.img
-sudo singularity bootstrap tensorflow.img Singularity
+sudo singularity build ubuntu.img Singularity
 ```
 
-but just those two lines and doing bootstrap is silly, because we would achieve the same thing by doing:
+Do you want to specify a particular tag? or version? You can just add that to the docker uri:
 
-```bash
-singularity create --size 4000 tensorflow.img
-singularity import tensorflow.img docker://tensorflow/tensorflow:latest
+```
+Bootstrap: docker
+From: ubuntu:latest
+```
+
+Note that the default is `latest`. If you want to customize the Registry or Namespace, just add those to the header:
+
+```
+Bootstrap: docker
+From: ubuntu
+Registry: pancakes.registry.index.io
+Namespace: blue/berry/cream
 ```
 
 The power of bootstrap comes with the other stuff that you can do! This means running specific install commands, specifying your containers runscript (what it does when you execute it), adding files, labels, and customizing the environment. Here is a full Singularity file:
@@ -194,9 +185,15 @@ docker://index.docker.io/library/ubuntu@sha256:1235...
 
 You can have one or the other, both are considered a "digest" in Docker speak.
 
-If you want to change any of those fields, then just specify what you want in the URI.
+If you want to change any of those fields and are having trouble with the uri, you can also just state them explicitly:
 
 
+```
+Bootstrap: docker
+From: ubuntu
+Registry: index.docker.io
+Namespace: library
+```
 
 ## Custom Authentication
 For both import and bootstrap using a build spec file, by default we use the Docker Registry `index.docker.io`. Singularity first tries the call without a token, and then asks for one with pull permissions if the request is defined. However, it may be the case that you want to provide a custom token for a private registry. You have two options. You can either provide a `Username` and `Password` in the build specification file (if stored locally and there is no need to share), or (in the case of doing an import or needing to secure the credentials) you can export these variables to environmental variables. We provide instructions for each of these cases:
