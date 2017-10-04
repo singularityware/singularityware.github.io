@@ -1,10 +1,14 @@
 ---
-title: Quick Start
+title: Installation
 sidebar: user_docs
 permalink: docs-installation
 folder: docs
+toc: false
 ---
 
+This document will guide you through the process of installing Singularity from source with the version and location of your choice.  
+
+{% include toc.html %}
 
 ## Before you begin
 If you have an earlier version of Singularity installed, you should [remove it](#remove-an-old-version) before executing the installation commands.
@@ -63,7 +67,7 @@ $ sudo make install
 
 
 ## Install the development branch
-If you want to test a development branch feature the routine above should be tweaked slightly:
+If you want to test a development branch the routine above should be tweaked slightly:
 
 
 ```

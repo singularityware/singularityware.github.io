@@ -3,8 +3,12 @@ title: Singularity Flow
 sidebar: user_docs
 permalink: docs-flow
 folder: docs
-toc: true
+toc: false
 ---
+
+This document describes a suggested "best-practices" workflow for building, running, and managing your containers.
+
+{% include toc.html %}
 
 There are generally two ways to get images. You either want to pull an image file as is, or (more likely) build your own custom image. We will start with talking about build, and the many different use cases it affords.
 
@@ -15,26 +19,28 @@ If you read the [quick start](/quickstart), you probably remember that building 
 ### The Singularity Flow
 The diagram below is a visual depiction of how you can use Singularity to build images. The high level idea is that we have two environments:
 
- - a development environment (where you have sudo privileges) to test and build your container
- - a production environment where you run your container
+ - a **build** environment (where you have sudo privileges) to test and build your container
+ - a **production** environment where you run your container
 
 <a href="/assets/img/diagram/singularity-2.4-flow.png" target="_blank" class="no-after">
    <img style="max-width:900px" src="/assets/img/diagram/singularity-2.4-flow.png">
 </a>
 
-Singularity production images are immutable. This is a feature added as of Singularity 2.4, and it ensures a higher level of reproducibility and verification of images. To read more about the details, check out the  <a href="/build">bulid</a>docs. However, immutability is not so great when you are testing, debugging, or otherwise want to quickly change your image. We will proceed by describing a typical workflow of developing first, building a final image, and using in production. 
+Singularity production images are immutable. This is a feature added as of Singularity 2.4, and it ensures a higher level of reproducibility and verification of images. To read more about the details, check out the  [build](docs-build) docs. However, immutability is not so great when you are testing, debugging, or otherwise want to quickly change your image. We will proceed by describing a typical workflow of developing first, building a final image, and using in production. 
 
 ### 1. Development Commands
 If you want a writable image or folder for developing, you have two options:
 
- 1. build into a folder that has writable permissions with sudo
- 2. build into an ext3 image file, also that has writable permissions with sudo and the `--writable` flag 
+ 1. build into a directory that has writable permissions using the `--sandbox` option
+ 2. build into an ext3 image file, that has writable permissions with the `--writable` option
+ 
+In both cases you will need to execute your container with the `--writable` option at runtime for your changes to be persistant.
 
 #### Sandbox Folder
 To build into a folder (we call this a "sandbox") just ask for it:
 
 ```
-sudo singularity build --sandbox ubuntu/ docker://ubuntu
+$ sudo singularity build --sandbox ubuntu/ docker://ubuntu
 Docker image path: index.docker.io/library/ubuntu:latest
 Cache folder set to /root/.singularity/docker
 Importing: base Singularity environment
@@ -51,7 +57,7 @@ Singularity container built: ubuntu/
 We now have a folder with the entire ubuntu OS, plus some Singularity metadata, plopped in our present working directory.
 
 ```
- tree -L 1 ubuntu
+$ tree -L 1 ubuntu
 ubuntu
 ├── bin
 ├── boot
@@ -76,31 +82,30 @@ ubuntu
 └── var
 ```
 
-And you can shell into it just like a normal container. Without sudo, you don't have write permission:
+And you can shell into it just like a normal container.
 
 ```
-singularity shell ubuntu
+$ singularity shell ubuntu
 Singularity: Invoking an interactive shell within container...
 
 Singularity ubuntu:~/Desktop> touch /hello.txt
 touch: cannot touch '/hello.txt': Permission denied
 ```
-
-With sudo, you do:
+You can make changes to the container (assuming you have the proper permissions to do so) but those changes will disappear as soon as you exit.  To make your changes persistent across sessions, use the `--writable` option.  It's also a good practice to shell into your container as root to ensure you have permissions to write where you like.  
 
 ```
-sudo singularity shell ubuntu
+$ sudo singularity shell ubuntu
 Singularity: Invoking an interactive shell within container...
 
 Singularity ubuntu:/home/vanessa/Desktop> touch /hello.txt
 ```
 
 #### Writable Image
-If you don't want a folder, you can perform a similar development build and specify the `--writable` command.
+If you prefer to work with a writable image file rather than a directory, you can perform a similar development build and specify the `--writable` option.
 This will produce an image that is writable with an ext3 file system. Unlike the sandbox, it is a single image file.
 
 ```
-sudo singularity build --writable ubuntu.img docker://ubuntu
+$ sudo singularity build --writable ubuntu.img docker://ubuntu
 Docker image path: index.docker.io/library/ubuntu:latest
 Cache folder set to /root/.singularity/docker
 Importing: base Singularity environment
@@ -120,10 +125,10 @@ Cleaning up...
 Singularity container built: ubuntu.img
 ```
 
-The same is true as the above, you can use any commands like `shell`, `exec`, `run`, and if you want a writable image you must use sudo  and the `--writable` flag.
+You can use this image with commands like `shell`, `exec`, `run`, and if you want to change the image you must use the `--writable` flag.  As before, it's a good idea to issue these commands as root to ensure you have the proper permissions to write. 
 
 ```
-sudo singularity shell --writable ubuntu.img
+$ sudo singularity shell --writable ubuntu.img
 ```
 
 >> Development Tip! When building containers, it often is the case that you will have a lot of
@@ -132,7 +137,7 @@ interactively write the build recipe with one of these writable containers, you 
 build the production (squashfs) container without worrying that it will error and need to be started again.
 
 ### 2. Production Commands
-Let's set the scene - we just finished buliding our perfect hello world container. It does a fantastic hello-world analysis, and we have written a paper on it! We now want to build an immutable container - meaning that if someone obtained our container and tried to change it, they could not. They *could* easily use the same recipe that you used (it is provided as metadata inside the container), so your work can still be extended.
+Let's set the scene - we just finished buliding our perfect hello world container. It does a fantastic hello-world analysis, and we have written a paper on it! We now want to build an immutable container - meaning that if someone obtained our container and tried to change it, they could not. They *could* easily use the same recipe that you used (it is provided as metadata inside the container), or convert your container to one of the writable formats above using `build`.  So your work can still be extended.
 
 #### Recommended Production Build
 What we want for production is a build into a <a href="https://en.wikipedia.org/wiki/SquashFS" target="_blank">squashfs image</a>. Squashfs is a read only, and compressed filesystem, and well suited for confident archive and re-use of your hello-world. To build a production image, just remove the extra options:
@@ -152,8 +157,6 @@ Building Singularity image...
 Cleaning up...
 Singularity container built: ubuntu.simg
 ```
-You will also notice the extension `.simg`. This is the correct extension to designate a Singularity 2.4, production (squashfs) file.
-
 #### Production Build from Sandbox
 We understand that it might be wanted to build a Singularity (squashfs) from a previous development image. While we advocate for the first approach, we support this use case. To do this, given our folder called "ubuntu/" we made above:
 
@@ -162,8 +165,6 @@ sudo singularity build ubuntu.simg ubuntu/
 ```
 It could be the case that a cluster maintains a "working" base of container folders (with writable) and then builds and provides production containers to its users.
 
-
-That's it! You probably want to check out [interacting with images](/quickstart#interacting-with-images) to now use your container, sandbox, or new friend.
 
 If you want to go through this entire process without having singularity installed locally, or without leaving your cluster, you can build images using <a href="https://github.com/singularityhub/singularityhub.github.io/wiki" target="_blank">singularity hub.</a>
 

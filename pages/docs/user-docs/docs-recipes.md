@@ -2,60 +2,67 @@
 title: The Singularity Recipe
 sidebar: user_docs
 permalink: docs-recipes
-toc: true
+toc: false
 folder: docs
 ---
 
 A Singularity Recipe is the driver of a custom build, and the starting point for designing any custom container. It includes specifics about installation software, environment variables, files to add, and container metadata. You can even write a help section, or define modular components in the container called <a href="/apps"></a> based on the <a href="https://containers-ftw.github.io/SCI-F/" target="_blank">Standard Container Integration Format (SCI-F)</a>.
 
+{% include toc.html %}
 
-## Quick Start
+## Overview
 
-Let's start with describing the file, globally. There are two kinds of components:
+A Singularity Recipe file is divided into several parts:
 
 1. **Header**: The Header describes the core operating system to build within the container. Here you will configure the base operating system features that you need within your container. Examples of this include, what distribution of Linux, what version, what packages must be part of a core install.
-2. **Sections**: The rest of the definition is comprised of sections, or blobs of data. Each section is defined by a `%` character followed by the name of the particular section. All sections are optional.
+2. **Sections**: The rest of the definition is comprised of sections, sometimes called scriptlets or blobs of data. Each section is defined by a `%` character followed by the name of the particular section. All sections are optional.
 
+Please see the [examples](https://github.com/singularityware/singularity/tree/master/examples) directory in the [Singularity source code](https://github.com/singularityware/singularity) for some ideas on how to get started. 
 
 ### Header
-The header is at the top of the file, and tells Singularity the base to use, and which one. Specifically:
+The header is at the top of the file, and tells Singularity the base Operating System that it should use to build the container.  It is composed of several keywords. Specifically:
 
- - **Bootstrap**: references the kind of base you want to use (e.g., docker, debootstrap, shub). For example, a shub bootstrap will pull containers for shub as bases. A Docker bootstrap will pull docker layers to start your image. For a full list see <a href="/build">build</a>
- - **From**: is the named container (shub) or reference to layers (Docker) that you want to use (e.g., vsoch/hello-world)
+ - `Bootstrap:` references the kind of base you want to use (e.g., docker, debootstrap, shub). For example, a shub bootstrap will pull containers for shub as bases. A Docker bootstrap will pull docker layers to start your image. For a full list see <a href="/build">build</a>
+ - `From:` is the named container (shub) or reference to layers (Docker) that you want to use (e.g., vsoch/hello-world)
 
+Depending on the value assigned to `Bootstrap:`, other keywords may also be valid in the header.
 
-For example, a very minimal Docker build might look like this:
+For example, a very minimal Singularity Hub build might look like this:
 
-```bash
-Bootstrap: docker
-From: ubuntu:latest
+```
+Bootstrap: shub
+From: singularityhub:ubuntu
 ```
 
-a build that uses a mirror to install Centos-7 might look like this:
+A build that uses a mirror to install Centos-7 might look like this:
 
-
-```bash
-BootStrap: yum
+```
+Bootstrap: yum
 OSVersion: 7
 MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
 Include: yum
 ```
 
-Each different kind of build base comes with particular details during build time, and you can read about them at the following links:
+Each build base requires particular details during build time.  You can read about them and see examples at the following links:
 
- - [yum base](/build-yum)
- - [debootstrap base](/build-debootstrap)
- - [arch linux base](/build-arch)
- - [yum base](/build-docker)
- - [local image base](/build-localimage)
+ - [shub](/build-docker) (images hosted on Singularity Hub)
+ - [docker](/build-docker) (images hosted on Docker Hub)
+ - [localimage](/build-localimage) (images saved on your machine)
+ - [self](/build-self) (a snapshot of your build system)
+ - [yum](/build-yum) (yum based systems such as CentOS and Scientific Linux)
+ - [debootstrap](/build-debootstrap) (apt based systems such as Debian and Ubuntu)
+ - [arch](/build-arch) (Arch Linux)
+ - [busybox](/build-busybox) (BusyBox)
+ - [zypper](/build-zypper) (zypper based systems such as Suse and OpenSuse)
 
-Additionally, you can specify a bootstrap `self` to use your local machine as a base.
 
 ### Sections
-The main content of the bootstrap file is broken into sections. Let's add each section to our container to see how it works. For each section, we will build the container from the recipe (a file called Singularity) as follows:
+The main content of the bootstrap file is broken into sections. Different sections add different content or execute commands at different times during the build process.  Note that if any command fails, the build process will halt.
+
+Let's add each section to our container to see how it works. For each section, we will build the container from the recipe (a file called Singularity) as follows:
 
 ```
-sudo singularity build roar.simg Singularity
+$ sudo singularity build roar.simg Singularity
 ```
 
 #### %help
@@ -69,18 +76,16 @@ From: ubuntu
 Help me. I'm in the container.
 ```
 
-and it will work when the user asks the container for help.
-
+And it will work when the user asks the container for help.
 
 ```
 $ singularity help roar.simg 
-
 
 Help me. I'm in the container.
 ```
 
 #### %setup
-Setup is where you might perform actions on the host before we move into the container. For versions earlier than 2.3, or if you need files during `%post`, you should copy files from your host to `$SINGULARITY_ROOTFS` to move them into the container. For 2.3 and cases when you don't need the files until after `%post`, we recommend you use `%files`. We can see the difference between `%setup` and `%post` in the following asciicast:
+Commands in the `%setup` section are executed on the host system outside of the container after the base OS has been installed.  For versions earlier than 2.3, or if you need files during `%post`, you should copy files from your host to `$SINGULARITY_ROOTFS` to move them into the container. For >2.3 and cases when you don't need the files until after `%post`, we recommend you use `%files` section. We can see the difference between `%setup` and `%post` in the following asciicast:
 
 {% include asciicast.html source='docs-bootstrap-setup-vs-post.json' uid='container-setup-vs-post' title='How does the container see setup vs post?' author='vsochat@stanford.edu'%}
 
@@ -101,7 +106,7 @@ Help me. I'm in the container.
 Importantly, notice that the avocados file isn't relative to `$SINGULARITY_ROOTFS`, so we would expect it not to be in the image. Is tacos there?
 
 ```
-singularity exec roar.simg ls /
+$ singularity exec roar.simg ls /
 bin   environment  lib	  mnt	root  scif	   sys	      usr
 boot  etc	   lib64  opt	run   singularity  **tacos.txt**  var
 dev   home	   media  proc	sbin  srv	   tmp
@@ -114,11 +119,13 @@ $ ls
 avocados.txt   roar.simg   Singularity
 ```
 
-*note: Any uncaught command errors that occur within a scriptlet will cause the entire build process to halt!*
-
 
 #### %files
-But what if we want to add files from the present working directory into the image? That seems like a useful thing to do. If you want to copy content into the container, you should do so using the `%files` section, where each is a pair of `<source>` and `<destination>`, where the file or expression to be copied is a path on your host, and the destination is a path in the container. Here we are using the traditional `cp` command, so the <a href="https://linux.die.net/man/1/cp" target="_blank">same conventions apply</a>. The files are copied **before** any post or installation procedures, so if you need directories to exist (that do not) you must do this via `%setup`. Let's add the avocado.txt into the container, to join tacos.txt.
+If you want to copy files from your host system into the container, you should do so using the `%files` section.  Each line is a pair of `<source>` and `<destination>`, where the source is a path on your host system, and the destination is a path in the container. 
+
+The `%files` section uses the traditional `cp` command, so the <a href="https://linux.die.net/man/1/cp" target="_blank">same conventions apply</a>. 
+
+Files are copied **after** any `%post` or installation procedures, so if you need the copied files or directories to exist during `%post` you must do this via `%setup`. Let's add the avocado.txt into the container, to join tacos.txt.
 
 ```
 Bootstrap: docker
@@ -152,7 +159,7 @@ $ singularity exec roar.simg ls /opt
 We have avocados!
 
 #### %labels
-To store metadata with your container, you can add them to the `%labels` section. They will be stored in a file `/.singularity.d/labels.json` as metadata with your container. The general format is a `LABELNAME` followed by a `LABELVALUE`. Labels from Docker bootstraps will be carried forward here. Let's add to our example:
+To store metadata with your container, you can add them to the `%labels` section. They will be stored in the file `/.singularity.d/labels.json` as metadata within your container. The general format is a `LABELNAME` followed by a `LABELVALUE`. Labels from Docker bootstraps will be carried forward here. Let's add to our example:
 
 ```
 Bootstrap: docker
@@ -176,7 +183,7 @@ Version v1.0
 The easiest way to see labels is to inspect the image:
 
 ```
-singularity inspect roar.simg
+$ singularity inspect roar.simg
 {
     "org.label-schema.usage.singularity.deffile.bootstrap": "docker",
     "MAINTAINER": "Vanessasaurus",
@@ -227,7 +234,7 @@ Version v1.0
 You can easily see environment variables also with inspect:
 
 ```
-singularity inspect -e roar.simg # Custom environment shell code should follow
+$ singularity inspect -e roar.simg # Custom environment shell code should follow
 
     VADER=badguy
     LUKE=goodguy
@@ -256,9 +263,9 @@ See <a href="/docs-environment-metadata">Environment and Metadata</a> for more i
 
 
 #### %post
-Post is where the guts of your setup will live, including making directories, and installing software and libraries. We will jump from our simple use case to show a more realistic scientific container. Here we are installing yum, openMPI, and other dependencies for a Centos7 bootstrap:
+Commands in the `%post` section are executed within the container after the base OS has been installed at build time. This is where the meat of your setup will live, including making directories, and installing software and libraries. We will jump from our simple use case to show a more realistic scientific container. Here we are installing yum, openMPI, and other dependencies for a Centos7 bootstrap:
 
-```bash
+```
 %post
     echo "Installing Development Tools YUM group"
     yum -y groupinstall "Development Tools"
@@ -285,7 +292,7 @@ The `%runscript` is another scriptlet, but it does not get executed during boots
 
 When the `%runscript` is executed, all options are passed along to the executing script at runtime, this means that you can (and should) manage argument processing from within your runscript. Here is an example of how to do that, adding to our work in progress:
 
-```bash
+```
 Bootstrap: docker
 From: ubuntu
 
@@ -320,7 +327,7 @@ Version v1.0
     exec echo "$@"
 ```
 
-In this particular runscript, the arguments are printed as a single string (`$*`) and then they are passed to `echo` via a quoted array (`$@`) which ensures that all of the arguments are properly parsed by the executed command. Using the `exec` command is like handing off the calling process to the one in the container. The final command (the echo) replaces the current entry in the process table (which originally was the call to Singularity). This makes it so the runscript shell process ceases to exist, and the only process running inside this container is the called echo command. This could easily be another program like python, or an analysis script. Running it, it works as expected:
+In this particular runscript, the arguments are printed as a single string (`$*`) and then they are passed to `echo` via a quoted array (`"$@"`) which ensures that all of the arguments are properly parsed by the executed command. Using the `exec` command is like handing off the calling process to the one in the container. The final command (the echo) replaces the current entry in the process table (which originally was the call to Singularity). This makes it so the runscript shell process ceases to exist, and the only process running inside this container is the called echo command. This could easily be another program like python, or an analysis script. Running it, it works as expected:
 
 ```
 $ singularity run roar.simg 
@@ -336,7 +343,7 @@ one two
 #### %test
 You may choose to add a `%test` section to your definition file. This section will be run at the very end of the build process and will give you a chance to validate the container during the bootstrap process. You can also execute this scriptlet through the container itself, such that you can always test the validity of the container itself as you transport it to different hosts. Extending on the above Open MPI `%post`, consider this real world example:
 
-```bash
+```
 %test
     /usr/local/bin/mpirun --allow-run-as-root /usr/bin/mpi_test
 ```
@@ -345,15 +352,17 @@ This is a simple Open MPI test to ensure that the MPI is build properly and comm
 
 If you want to build without running tests (for example, if the test needs to be done in a different environment), you can do so with the `--notest` argument:
 
-```bash
+```
 $ sudo singularity build --notest mpirun.simg Singularity
 ```
 
-This argument might be useful in cases where you might need hardware that is available during runtime, but is not available on the host that is building the image.
+This argument is useful in cases where you need hardware that is available during runtime, but is not available on the host that is building the image.
 
 
 ## Apps
-Finally, you are probably wondering "what if I want to have two different entrypoints? Or custom environments? It would be redundant and wasteful to build two entire containers with almost equivalent dependencies. For this reason, we have provided all of the above commands, but relevant to internal modules called <a href="/docs-apps">apps</a> based on the <a href="http://containers-ftw.org/SCI-F/" target="_blank">Standard Container Integration Format</a>. For details on apps, see the <a href="/docs-apps">apps</a> documentation. For a quick rundown of adding an app to your container, here is an example runscript:
+What if you want to build a single contianer with two or three different apps that each have thier own runscripts and custom environments? In some circumstances, it may be redundant to build different containers for each app with almost equivalent dependencies. 
+
+Starting in Singularity 2.4 all of the above commands can also be used in the context of internal modules called <a href="/docs-apps">apps</a> based on the <a href="http://containers-ftw.org/SCI-F/" target="_blank">Standard Container Integration Format</a>. For details on apps, see the <a href="/docs-apps">apps</a> documentation. For a quick rundown of adding an app to your container, here is an example runscript:
 
 ```
 Bootstrap: docker
