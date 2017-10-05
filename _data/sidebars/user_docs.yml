@@ -31,11 +31,6 @@ entries:
       url: /docs-recipes
       output: web, pdf
 
-
-    - title: Singularity Flow
-      url: /docs-flow
-      output: web, pdf
-
     - title: Singularity Flow
       url: /docs-flow
       output: web, pdf

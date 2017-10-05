@@ -6,8 +6,6 @@ folder: docs
 toc: false
 ---
 
-The `build` command lets you obtain a container. 
-
 `build` is the "Swiss army knife" of container creation.  You can use it to download and assemble pre-built containers from external resources like [Singularity Hub](https://singularity-hub.org/) and [Docker Hub](https://hub.docker.com/).  You can use it to convert containers between the various formats supported by Singularity.  And you can use it in conjunction with a [Singularity Recipe](/docs-recipes) file to create a container from scratch and customized it to fit your needs. 
 
 {% include toc.html %}
