@@ -204,7 +204,6 @@ VERBOSE [U=1000,P=1]       singularity_registry_set()                Adding valu
 (snipped to end)
 
 ```
-
 DEBUG   [U=1000,P=1]       envar_set()                               Unsetting environment variable: SINGULARITY_APPNAME
 DEBUG   [U=1000,P=1]       singularity_registry_get()                Returning value from registry: 'COMMAND' = 'shell'
 LOG     [U=1000,P=1]       main()                                    USER=gmk, IMAGE='ubuntu', COMMAND='shell'
@@ -220,7 +219,7 @@ Not only do I see all of the configuration options that I (probably forgot about
 The above snippet was using the default SetUID program flow with a container image file named "ubuntu". For comparison, if we also use the `--userns` flag, and snip in the same places, you can see how the effective UID is never escalated, but we have the same outcome using a sandbox directory (*chroot*) style container.
 
 
-```bash
+```
 $ singularity -d shell --pid --userns ubuntu.dir/
 Enabling debugging
 Ending argument loop
@@ -230,7 +229,7 @@ Evaluating args: '--pid --userns ubuntu.dir/'
 ```
 (snipped to PID namespace implementation, same place as above)
 
-```bash
+```
 DEBUG   [U=1000,P=32081]   singularity_runtime_ns_pid()              Using PID namespace: CLONE_NEWPID
 DEBUG   [U=1000,P=32081]   singularity_runtime_ns_pid()              Virtualizing PID namespace
 DEBUG   [U=1000,P=32081]   singularity_registry_get()                Returning NULL on 'DAEMON_START'
@@ -253,7 +252,7 @@ VERBOSE [U=1000,P=1]       singularity_registry_set()                Adding valu
 ```
 (snipped to end)
 
-```bash
+```
 DEBUG   [U=1000,P=1]       envar_set()                               Unsetting environment variable: SINGULARITY_APPNAME
 DEBUG   [U=1000,P=1]       singularity_registry_get()                Returning value from registry: 'COMMAND' = 'shell'
 LOG     [U=1000,P=1]       main()                                    USER=gmk, IMAGE='ubuntu.dir', COMMAND='shell'
