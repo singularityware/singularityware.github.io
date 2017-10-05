@@ -298,3 +298,10 @@ We have a recipe, great! Now how do we build it? In many ways:
 
 ## Support
 Have a question, or need further information? <a href="/support">Reach out to us.</a>
+
+<script>
+// Without this, pagination links to exec under repeated build section
+$(document).ready(function() {
+    $(".next-button").closest('a').attr('href', '/docs-recipes')
+})
+</script>
