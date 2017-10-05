@@ -6,14 +6,18 @@ folder: docs
 toc: false
 ---
 
-New to Singularity 2.4 is the ability to, on demand, run container "checks," which can be anything from a filter for sensitive information, to an analysis of content on the filesystem. Checks are installed with Singularity and [managed by the administration](/docs-admin-checks), however as a user they are accessible to you for use during bootstrap or on demand:
+New to Singularity 2.4 is the ability to run container "checks" on demand. Checks can be anything from a filter for sensitive information, to an analysis installed binaries. A few defualt checks are installed with Singularity and others can be [added by the administrater](/docs-admin-checks).  Users can perform checks at build time or on demand:
 
+{% include toc.html %}
+
+Perform all default checks, these are the same
 ```
-# Perform all default checks, these are the same
 $ singularity check ubuntu.img
 $ singularity check --tag default ubuntu.img
+```
 
-# Perform checks with tag "clean"
+Perform checks with tag "clean"
+```
 $ singularity check --tag clean ubuntu.img
 ```
 
@@ -29,7 +33,7 @@ USAGE
 
 EXAMPLE
 
-singularity check --tag docker ubuntu.img
+$ singularity check --tag docker ubuntu.img
 ```
 
 If you want to run checks associated with a different security level, you can specify with `--low`, `--med`, or `-high`:
