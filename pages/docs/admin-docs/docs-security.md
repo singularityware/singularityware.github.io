@@ -260,6 +260,8 @@ LOG     [U=1000,P=1]       main()                                    USER=gmk, I
 INFO    [U=1000,P=1]       action_shell()                            Singularity: Invoking an interactive shell within container...
 
 DEBUG   [U=1000,P=1]       action_shell()                            Exec'ing /.singularity.d/actions/shell
+Singularity ubuntu.dir:~> whoami
+gmk
 Singularity ubuntu.dir:~> 
 ```
 
