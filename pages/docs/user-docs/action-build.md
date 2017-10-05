@@ -181,4 +181,9 @@ When you add the `--checks` option along with applicable tags to the `build` com
  - If you want to make internally **modular containers**, check out <a href="http://containers-ftw.org/apps/examples/tutorials/getting-started" target="_blank">this post</a>.
  - If you want to **build your containers** on Singularity Hub, (because you don't have root access on a Linux machine or want to host your container on the cloud) check out [this guide](https://github.com/singularityhub/singularityhub.github.io/wiki).
 
-
+<script>
+// Without this, pagination links to exec under repeated build section
+$(document).ready(function() {
+    $(".next-button").closest('a').attr('href', '/docs-recipes')
+})
+</script>

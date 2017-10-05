@@ -23,12 +23,17 @@ entries:
       url: /quickstart
       output: web, pdf
 
+    - title: Build a Container
+      url: /docs-build
+      output: web, pdf
+
     - title: Container Recipes
       url: /docs-recipes
       output: web, pdf
 
-    - title: Build a Container
-      url: /docs-build
+
+    - title: Singularity Flow
+      url: /docs-flow
       output: web, pdf
 
     - title: Singularity Flow
