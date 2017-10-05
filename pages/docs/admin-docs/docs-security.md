@@ -105,7 +105,6 @@ allow container extfs = yes
 allow container dir = yes
 ```
 
-
 ### limiting usage to specific container file owners
 One benefit of using container images is that they exist on the filesystem as any other file would. This means that POSIX permissions are mandatory. Here you can configure Singularity to only "trust" containers that are owned by a particular set of users.
  
@@ -118,6 +117,8 @@ One benefit of using container images is that they exist on the filesystem as an
 # SUID mode and the user is non-root.
 #limit container owners = gmk, singularity, nobody
 ```
+
+*note: If you are in a high risk security environment, you may want to enable this feature. Trusting container images to users could allow a malicious user to modify an image either before or while being used and cause unexpected behavior from the kernel (e.g. a [DOS attack](https://en.wikipedia.org/wiki/Denial-of-service_attack)). For more information, please see: [https://lwn.net/Articles/652468/](https://lwn.net/Articles/652468/)*
 
 ### limiting usage to specific paths
 The configuration file also gives you the ability to limit containers to specific paths. This is very useful to ensure that only trusted or blessed container's are being used (it is also beneficial to ensure that containers are only being used on performant file systems). 
