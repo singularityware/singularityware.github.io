@@ -30,7 +30,7 @@ Singularity has two primary roles:
 
 The Singularity containers themselves are purpose built and can include a simple application and library stack or a complicated work flow that can interface with the hosts resources directly or run isolated from the host and other containers. You can even launch a contained work flow by executing the image file directly! For example, assuming that `~/bin` is in the user's path as it is normally by default:
 
-```bash
+```
 $ mkdir ~/bin
 $ singularity build ~/bin/python-latest docker://python:latest
 Docker image path: index.docker.io/library/python:latest
