@@ -14,13 +14,13 @@ While there are many container solutions being used commonly in this day and age
 4. **Security model:** Unlike many other container systems designed to support trusted users running trusted containers we must support the opposite model of untrusted users running untrusted containers. This changes the security paradigm considerably and increases the breadth of use cases we can support.
 
 ## Background
-A Unix operating system is broken into two primary components, the kernel space, and the user space. The Kernel, supports the user space by interfacing with the hardware, providing core system features and creating the software compatibility layers for the user space. The user space on the other hand is the environment that most people are most familiar with interfacing with. It is where applications, libraries and system services run.
+A Unix operating system is broken into two primary components, the kernel space, and the user space. The Kernel supports the user space by interfacing with the hardware, providing core system features and creating the software compatibility layers for the user space. The user space on the other hand is the environment that most people are most familiar with interfacing with. It is where applications, libraries and system services run.
 
-Containers are shifting the emphasis away from the runtime environment by commoditizing the user space into swappable units. This means that the entire user space portion of a Linux operating system, including programs, custom configurations, and environment can be interchanged at runtime. Singularity emphasis and simplifies the distribution vector of containers to be that of a single, verifiable file.
+Containers are shifting the emphasis away from the runtime environment by commoditizing the user space into swappable components. This means that the entire user space portion of a Linux operating system, including programs, custom configurations, and environment can be interchanged at runtime. Singularity emphasis and simplifies the distribution vector of containers to be that of a single, verifiable file.
 
 Software developers can now build their stack onto whatever operating system base fits their needs best, and create distributable runtime encapsulated environments and the users never have to worry about dependencies, requirements, or anything else from the user space.
 
-It provides the functionality of a virtual machine, without the heavyweight implementation and performance costs of emulation and redundancy!
+Singularity provides the functionality of a virtual machine, without the heavyweight implementation and performance costs of emulation and redundancy!
 
 ### The Singularity Solution
 Singularity has two primary roles:
@@ -32,6 +32,7 @@ The Singularity containers themselves are purpose built and can include a simple
 
 ```
 $ mkdir ~/bin
+
 $ singularity build ~/bin/python-latest docker://python:latest
 Docker image path: index.docker.io/library/python:latest
 Cache folder set to /home/gmk/.singularity/docker
@@ -50,19 +51,23 @@ WARNING: it may be missing some functionality.
 Building Singularity image...
 Cleaning up...
 Singularity container built: /home/gmk/bin/python-latest
+
 $ which python-latest
 /home/gmk/bin/python-latest
+
 $ python-latest --version
 Python 3.6.3
+
 $ singularity exec ~/bin/python-latest cat /etc/debian_version
 8.9
+
 $ singularity shell ~/bin/python-latest 
 Singularity: Invoking an interactive shell within container...
 
 Singularity python-latest:~> 
 ```
 
-<font color='red' size='+2'>Ascineimsasasessssss!</font>
+<font color='red' size='+1'>Ascineimsasasessssss!</font>
 
 Additionally, Singularity blocks privilege escalation within the container and you are always yourself within a container! If you want to be root inside the container, you first must be root outside the container. This simple usage paradigm mitigates many of the security concerns that exists with containers on multi-user shared resources. You can directly call programs inside the container from outside the container fully incorporating pipes, standard IO, file system access, X11, and MPI. Singularity images can be seamlessly incorporated into your environment.
 
