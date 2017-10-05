@@ -100,21 +100,34 @@ The `inspect` command is useful for viewing labels and other container meta-data
 
 ## Container Metadata
 
-If you want to look at the environment inside a container, you can look inside the metadata env folder as follows:
+Inside of the container, metadata is stored in the `/.singularity.d` directory.  Here is an example of the contents:
 
 ```
-singularity exec centos7.img ls /.singularity.d/env
-01-base.sh  10-docker.sh  99-environment.sh
+/.singularity.d/
+├── actions
+│   ├── exec
+│   ├── run
+│   ├── shell
+│   ├── start
+│   └── test
+├── env
+│   ├── 01-base.sh
+│   ├── 90-environment.sh
+│   ├── 95-apps.sh
+│   └── 99-base.sh
+├── labels.json
+├── libs
+├── runscript
+├── Singularity
+└── startscript
 ```
 
-The variables in `01-base.sh` are a set of defaults set upon container creation, and the `10-docker.sh` come from a Docker import.
-
-```
-singularity exec centos7.img cat /.singularity.d/env/10-docker.sh
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-```
-
-
-
+- **actions**: This directory contains helper scripts to allow the container to carry out the action commands.
+- **env**:  All *.sh files in this directory are sourced in alpha-numeric order when the container is initiated. For legacy purposes there is a symbolic link called `/environment` that points to `/.singularity.d/env/90-environment.sh`.
+- **labels.json**: The json file that stores a containers labels described above.
+- **libs**: At runtime the user may request some host-system libraries to be mapped into the container (with the `--nv` option for example). If so, this is their destination.  
+- **runscript**: The commands in this file will be executed when the container is invoked with the `run` command or called as an executable. For legacy purposes there is a symbolic link called `/singularity` that points to this file
+- **Singularity**: This is the Recipe file that was used to generate the container. If more than 1 Recipe file was used to generate the conainer additional Singularity files will appear in numeric order in a sub-directory called `bootstrap_history`
+- **startscript**: The commands in this file will be executed when the container is invoked with the `instance.start` command.  
 
 {% include links.html %}
