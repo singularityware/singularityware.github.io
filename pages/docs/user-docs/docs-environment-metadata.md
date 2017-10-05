@@ -53,8 +53,6 @@ SINGULARITY_CONTAINER=test.img
 
 Notice the `--cleanenv` in the example above? That argument specifies that we want to remove the host environment from the container. If we remove the `--cleanenv`, we will still pass forward `HELLO=WORLD`, and the list shown above, but we will also pass forward all the other environment variables from the host. 
 
-Here is a command to directly echo the variable we define:
-
 ## Labels
 Your container stores metadata about it's build, along with Docker labels, and custom labels that you define during build in a `%labels` section. For containers that are generated with Singularity version 2.4 and later, labels are represented using the <a href="http://label-schema.org/rc1/">rc1 Label Schema</a>. For example:
 
@@ -100,7 +98,7 @@ The `inspect` command is useful for viewing labels and other container meta-data
 
 ## Container Metadata
 
-Inside of the container, metadata is stored in the `/.singularity.d` directory.  Here is an example of the contents:
+Inside of the container, metadata is stored in the `/.singularity.d` directory. You probably shouldn't edit any of these files directly but it may be helpful to know where they are and what they do:
 
 ```
 /.singularity.d/
