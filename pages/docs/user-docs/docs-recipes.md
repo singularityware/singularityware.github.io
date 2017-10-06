@@ -22,7 +22,7 @@ Please see the [examples](https://github.com/singularityware/singularity/tree/ma
 ### Header
 The header is at the top of the file, and tells Singularity the base Operating System that it should use to build the container.  It is composed of several keywords. Specifically:
 
- - `Bootstrap:` references the kind of base you want to use (e.g., docker, debootstrap, shub). For example, a shub bootstrap will pull containers for shub as bases. A Docker bootstrap will pull docker layers to start your image. For a full list see <a href="/build">build</a>
+ - `Bootstrap:` references the kind of base you want to use (e.g., docker, debootstrap, shub). For example, a shub bootstrap will pull containers for shub as bases. A Docker bootstrap will pull docker layers to start your image. For a full list see [build](docs-build)
  - `From:` is the named container (shub) or reference to layers (Docker) that you want to use (e.g., vsoch/hello-world)
 
 Depending on the value assigned to `Bootstrap:`, other keywords may also be valid in the header.
@@ -45,7 +45,7 @@ Include: yum
 
 Each build base requires particular details during build time.  You can read about them and see examples at the following links:
 
- - [shub](/build-docker) (images hosted on Singularity Hub)
+ - [shub](/build-shub) (images hosted on Singularity Hub)
  - [docker](/build-docker) (images hosted on Docker Hub)
  - [localimage](/build-localimage) (images saved on your machine)
  - [self](/build-self) (a snapshot of your build system)

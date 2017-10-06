@@ -12,7 +12,7 @@ Singularity containers support environment variables and labels that you can add
 
 ## Environment
 
-If you build a container from Singularity Hub or Docker Hub, the environment will be imported into the container at build time. You can also define custom environment variables in your Recipe file like so:
+If you build a container from Singularity Hub or Docker Hub, the environment will be included with the container at build time. You can also define custom environment variables in your Recipe file like so:
 
 ```
 Bootstrap: shub
@@ -23,7 +23,7 @@ From: singularityhub/ubuntu
     export VARIABLE_NAME
 ```
 
-You may need to add environment variables to your container during the `$post` section.  For instance, maybe you will not know the appropriate value of a variable until you have installed some software.  
+You may need to add environment variables to your container during the `%post` section.  For instance, maybe you will not know the appropriate value of a variable until you have installed some software.  
 
 To add variables to the environment during `%post` you can use the `$SINGULARITY_ENVIRONMENT` variable with the following syntax:
 

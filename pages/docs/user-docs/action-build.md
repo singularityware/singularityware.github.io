@@ -6,7 +6,7 @@ folder: docs
 toc: false
 ---
 
-`build` is the "Swiss army knife" of container creation.  You can use it to download and assemble pre-built containers from external resources like [Singularity Hub](https://singularity-hub.org/) and [Docker Hub](https://hub.docker.com/).  You can use it to convert containers between the various formats supported by Singularity.  And you can use it in conjunction with a [Singularity Recipe](/docs-recipes) file to create a container from scratch and customized it to fit your needs. 
+`build` is the "Swiss army knife" of container creation.  You can use it to download and assemble existing containers from external resources like [Singularity Hub](https://singularity-hub.org/) and [Docker Hub](https://hub.docker.com/).  You can use it to convert containers between the various formats supported by Singularity.  And you can use it in conjunction with a [Singularity Recipe](/docs-recipes) file to create a container from scratch and customized it to fit your needs. 
 
 {% include toc.html %}
 
@@ -32,7 +32,7 @@ Because `build` can accept an existing container as a target and create a contai
 
 Some things need root...
 
-## Downloading a pre-built container from Singularity Hub
+## Downloading a existing container from Singularity Hub
 You can use the `build` command to download a container from Singularity Hub. 
 
 ```
@@ -43,7 +43,7 @@ The first argument (`lolcow.simg`) specifies a path and name for your container.
 
 But default the container will be converted to a compressed, read-only squashfs file.  If you want your container in a different format use the `--writable` or `--sandbox` options.
 
-## Downloading a pre-built container from Docker Hub
+## Downloading a existing container from Docker Hub
 You can use `build` to download layers from Docker Hub and assemble them into Singularity containers. 
 
 ```
