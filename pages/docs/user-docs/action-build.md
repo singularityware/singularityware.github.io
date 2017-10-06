@@ -61,10 +61,12 @@ The same information applies to containers built from Docker Hub and containers 
 ## Creating `--writable` images and `--sandbox` directories
 
 ### `--writable`
-If you wanted to create a writable ext3 image similar to those used by Singularity version < 2.4, you could do so with the `--writable` option.  Extending the Singularity Hub example from above:
+If you wanted to create a writable ext3 image similar to those used by Singularity version < 2.4, you could do so with the `--writable` option.  You must create writable containers as root.
+
+Extending the Singularity Hub example from above:
 
 ```
-$ singularity build --writable lolcow.img shub://GodloveD/lolcow
+$ sudo singularity build --writable lolcow.img shub://GodloveD/lolcow
 
 ```
 
@@ -77,10 +79,10 @@ $ sudo singularity shell --writable lolcow.img
 ```
 
 ### `--sandbox`
-If you wanted to create a container within a writable directory (called a _sandbox_) you could do so with the `--sandbox` option:
+If you wanted to create a container within a writable directory (called a _sandbox_) you could do so with the `--sandbox` option.  It's possible to create a sandbox without root privileges, but to ensure proper file permissions it is recommended to do so as root.
 
 ```
-$ singularity build --sandbox lolcow/ shub://GodloveD/lolcow
+$ sudo singularity build --sandbox lolcow/ shub://GodloveD/lolcow
 ```
 
 The resulting directory operates just like a container in an image file.  You are permitted to make changes and write files within the directory, but those changes will not persist when you are finished using the container.  To make your changes persistent, use the `--writable` flag when you invoke your container.  
@@ -95,7 +97,7 @@ $ sudo singularity shell --writable lolcow/
 If you already have a container saved locally, you can use it as a target to build a new container. This allows you convert containers from one format to another.  For example if you had a squashfs container called `production.simg` and wanted to convert it to a writeable ext3 container called `development.img` you could:
 
 ```
-$ singularity build --writable development.img production.simg
+$ sudo singularity build --writable development.img production.simg
 ```
 
 Similarly, to convert it to a writable directory (a sandbox):
@@ -107,7 +109,7 @@ $ singularity build --sandbox development/ production.simg
 If you omit any options you can also convert your sandbox back to a read-only compressed squashfs image suitable for use in a production environment:
 
 ```
-$ singularty build production2 development/
+$ singularity build production2 development/
 ```
 You can convert the three supported container formats using any combination.
 
