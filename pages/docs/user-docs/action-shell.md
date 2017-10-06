@@ -6,7 +6,7 @@ folder: docs
 toc: false
 ---
 
-The `shell` Singularity sub-command will automatically spawn a shell within a container. As of v2.3 the default shell that is spawned via the `shell` command is `/bin/bash`.
+The `shell` Singularity sub-command will automatically spawn an interactive shell within a container. As of v2.3 the default shell that is spawned via the `shell` command is Bash if it exists otherwise `/bin/sh` is called.
 
 {% include toc.html %}
 
@@ -15,7 +15,7 @@ $ singularity shell
 USAGE: singularity (options) shell [container image] (options)
 ```
 
-Here we can see the default shell:
+Here we can see the default shell in action:
 
 ```
 $ singularity shell centos7.img

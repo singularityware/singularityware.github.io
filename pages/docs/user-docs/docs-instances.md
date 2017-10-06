@@ -18,13 +18,13 @@ service nginx start
 
 With older versions of Singularity, if you were to do something like this, from inside the container you would happily see the service start, and the web server running! But then if you were to log out of the container what would happen?
 
->> ghost process!!
+Ghost process within unreachable namespaces! It's like the walking dead!
 
-You would lose control of the process. It would still be running, but you couldn't kill it. This is a called a ghost process, and it means that for running (enduring) services, Singularity was a no starter.
+You would lose control of the process. It would still be running, but you couldn't easily kill or interface with it. This is a called a ghost process, and it means that for running persistent services, Singularity was a non-starter.
 
 
 ## Cloning containers
-With version 2.4, you can do this in a more realistic way. First, let's put the commands of how to start our service into a script. Let's call it a `startscript`. And we can imagine this fitting into a bootstrap recipe file like this:
+With version 2.4, you can do this in a preferable way. First, let's put the commands of how to start our service into a script. Let's call it a `startscript`. And we can imagine this fitting into a bootstrap recipe file like this:
 
 ```
 %startscript
@@ -44,7 +44,7 @@ service nginx stop
 You might even have some special (longer set) of commands in your startscript, if warranted:
 
 ```
-#!/bin/sh
+%startscript
 
 if [ -z "$OMGTACOSGUNICORN" ]; then
     /bin/bash /code/helpers/ctrl/gunicorn.screen
