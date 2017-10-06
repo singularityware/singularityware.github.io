@@ -8,6 +8,8 @@ toc: false
 
 Singularity 2.4 introduces the ability to run "container instances", allowing you to run services (*e.g. Nginx, MySQL, etc...*) using Singularity. A container instance, simply put, is a persistant and isolated version of the container image that runs in the background. 
 
+{% include toc.html %}
+
 ## Why container instances?
 Let's say I want to run a web server. With nginx, that is pretty simple, I install nginx and start the service:
 
@@ -64,7 +66,7 @@ web2             791      /home/mibauer/nginx.img
 web3             792      /home/mibauer/nginx.img
 ```
 
-Once an instance is started, the environment inside of that instance will never change. If the service you want to run in your instance requires a bind mount, then you must pass the `-B` option when calling `instance.start`. For example, if you wish to capture the output of the `web1` container instance which is placed at `/output/` inside the container you could do:
+If the service you want to run in your instance requires a bind mount, then you must pass the `-B` option when calling `instance.start`. For example, if you wish to capture the output of the `web1` container instance which is placed at `/output/` inside the container you could do:
 
 ```
 $ singularity instance.start -B output/dir/outside/:/output/ nginx.img  web1
@@ -141,7 +143,7 @@ Also, the `url-to-pdf-api` server requires some environment variables be set, wh
     export NODE_ENV PORT ALLOW_HTTP URL
 ```
 
-Now we can build the definition file into an image! Simply run build and the image will be ready to go:
+Now we can build the definition file into an image! Simply run `build` and the image will be ready to go:
 
 ```
 $ sudo singularity build url-to-pdf-api.img Singularity
@@ -187,7 +189,7 @@ Singularity pdf_server.img:~/bauerm97/instance-example> exit
 
 ### Making it Pretty
 
-Now that we have comfirmation that the server is working, let's make it a little cleaner. It's difficult to remember the exact curl comand and URL syntax each time you want to request a PDF, so let's automate that. To do that, we're going to be using Standard Container Integration Format (SCIF) apps, which are integrated directly into singularity. If you haven't already, check out the [Singularity app documentation](link-to-app-docs-or-scif) to come up to speed. 
+Now that we have comfirmation that the server is working, let's make it a little cleaner. It's difficult to remember the exact curl comand and URL syntax each time you want to request a PDF, so let's automate that. To do that, we're going to be using Standard Container Integration Format (SCIF) apps, which are integrated directly into singularity. If you haven't already, check out the [Singularity app documentation](docs-scif-apps) to come up to speed. 
 
 First off, we're going to move the installation of the `url-to-pdf-api` into an app, so that there is a designated spot to place output files. To do that, we want to add a section to our definition file to build the server:
 
