@@ -233,6 +233,3 @@ google.pdf
 ## Important Notes
 
 - The instances are linked with your user. So if you start an instance with sudo, that is going to go under root, and you will need to call `sudo singularity instance.list` in order to see it.
-
-
-This stuff is completely under development and likely to change! <a href="https://github.com/singularityware/singularity/issues" target="_blank"> Join the conversation!</a>.
