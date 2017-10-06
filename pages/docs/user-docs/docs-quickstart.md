@@ -3,12 +3,14 @@ title: Quick Start
 sidebar: user_docs
 permalink: quickstart
 folder: docs
-toc: true
+toc: false
 ---
 
 This guide is intended for running Singularity on a computer where you have root (administrative) privileges.  But if you are learning about Singularity on a system where you lack root privileges you can still complete the steps that do not require the `sudo` command.
 
-## Installation Quick Start
+{% include toc.html %}
+
+## Installation
 There are many ways to [install Singularity](docs-installation) but this quick start guide will only cover one.  
 
 ```bash
@@ -211,21 +213,11 @@ I am your father
 ```
 
 ## Build images from scratch
-
-The diagram below shows how you can use Singularity to build images and run images. The high level idea is that we have two environments:
-
- - a build environment (where you have root privileges) to test and build your container
- - a production environment where you run your container (where you may or may not have root privileges)
-
-<a href="/assets/img/diagram/singularity-2.4-flow.png" target="_blank" class="no-after">
-   <img style="max-width:900px" src="/assets/img/diagram/singularity-2.4-flow.png">
-</a>
-
-In practice, your build system may or may not differ from your production system. If you want more details about the different build options, read about the [singularity flow](/docs-flow).
-
 As of Singularity v2.4 by default `build` produces immutable images in the squashfs file format. This ensures reproducible and verifiable images. 
 
 However, during testing and debugging you may want an image format that is writable.  This way you can `shell` into the image and install software and dependencies until you are satisfied that your container will fulfill your needs.  For these scenarios, Singularity supports two other image formats: a `sandbox` format (which is really just a chroot directory), and a `writable` format (the ext3 file system that was used in Singularity versions less than 2.4).  
+
+For more details about the different build options and best practices, read about the [singularity flow](/docs-flow).
 
 ### Sandbox Directory
 To build into a `sandbox` (container in a directory) use the `build --sandbox` command and option:
@@ -251,12 +243,6 @@ When you want to alter your image, you can use commands like `shell`, `exec`, `r
 ```
 $ sudo singularity shell --writable ubuntu.img
 ```
-
->> Development Tip! When building containers, it often is the case that you will have a lot of
-testing of installation commands, and if building a production image, one error will stop the entire build. If you
-interactively write the build recipe with one of these writable formats, you can debug as you go, and then
-build the production (squashfs) container without worrying that it will error and need to be started again.
-
 
 ### Converting images from one format to another 
 The `build` command allows you to build a container from an existing container.  This means that you can use it to convert a container from one format to another.  For instance, if you have already created a sandbox (directory) and want to convert it to the default immutable image format (squashfs) you can do so:

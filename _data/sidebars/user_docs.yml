@@ -23,7 +23,7 @@ entries:
       url: /quickstart
       output: web, pdf
 
-    - title: Build an Image
+    - title: Build a Container
       url: /docs-build
       output: web, pdf
 

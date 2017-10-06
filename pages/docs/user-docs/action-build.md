@@ -1,192 +1,172 @@
 ---
-title: Build an Image
+title: Build a Container
 sidebar: user_docs
 permalink: docs-build
 folder: docs
+toc: false
 ---
 
-Build is the process where we install an operating system and then configure it appropriately for a specified need. To do this we use a [Singularity recipe](/docs-recipes) file (a text file called `Singularity`) which is a recipe of how to specifically build the container. Here we will overview the usage, best practices, and quick examples.
-
-
-**Getting Started**
-For a detailed **walkhrough of getting started** with build, we will point you to the <a href="/quickstart">quickstart</a>. 
-
-**Build Environment**
-If you want to customize the cache, specify Docker credentials, or any custom tweaks to your build environment, see <a href="/build-environment">build environment</a>. 
-
-**Modular Containers**
-If you want to look at how to get started to making interally **modular containers**, check out <a href="http://containers-ftw.org/apps/examples/tutorials/getting-started" target="_blank">this post</a>.
-
+`build` is the "Swiss army knife" of container creation.  You can use it to download and assemble existing containers from external resources like [Singularity Hub](https://singularity-hub.org/) and [Docker Hub](https://hub.docker.com/).  You can use it to convert containers between the various formats supported by Singularity.  And you can use it in conjunction with a [Singularity recipe](/docs-recipes) file to create a container from scratch and customized it to fit your needs. 
 
 {% include toc.html %}
 
-## Bases
-You have many options for the base of your build. See the linked page for each for more details, or read the [Usage](#usage) section below for a summary.
+## Overview
+The `build` command accepts a target as input and produces a container as output.  
 
-### Singularity Recipes
-For a reproducible container, the recommended practice is to build by way of a Singularity recipe file. This also makes it easy to add files, environment variables, and install custom software, and still start from your base of choice (e.g., Docker). The absolute minimum required for a recipe is a base, and here are your options:
+The target defines the method that `build` uses to create the container. It can be one of the following:
 
+- URI beginning with **shub://** to build from Singularity Hub
+- URI beginning with **docker://** to build from Docker Hub
+- path to a **existing container** on your local machine
+- path to a **directory** to build from a sandbox
+- path to an **archive** in .tar or compressed .tar.gz format
+- path to a **[Singularity recipe file](docs-recipes)**
 
-**Singularity Hub**
-```
-Bootstrap: shub
-From: vsoch/hello-world
-```
+In addition `build` can produce containers in three different formats.  Formats types can be specified by passing the following options to build.  
 
-[**Docker**](/docs-docker)
-```
-Bootstrap: docker
-From: tensorflow/tensorflow:latest
-IncludeCmd: yes # Use the CMD as runscript instead of ENTRYPOINT
-```
+- compressed read-only **squashfs** file system suitable for production (default)
+- writable **ext3** file system suitable for interactive development (`--writable` option)
+- writable **(ch)root directory** called a sandbox for interactive development (`--sandbox` option)
 
-[**YUM/RHEL**](/build-yum)
-```
-Bootstrap: yum
-OSVersion: 7
-MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/
-Include: yum
-```
+Because `build` can accept an existing container as a target and create a container in any of these three formats you can convert existing containers from one format to another.
 
-[**Debian/Ubuntu**](/build-debootstrap)
-```
-Bootstrap: debootstrap
-OSVersion: trusty
-MirrorURL: http://us.archive.ubuntu.com/ubuntu/
-```
+The following diagram illustrates the targets that can be supplied to `build` as inputs and the containers `build` can produce as outputs.  Green arrows represent operations that can be carried out without root privileges (though the container may not perform properly when run as root).  Red arrows represent operations that must be carried out with root privileges.  
 
-[**Self**](/build-self)
-```
-Bootstrap: self
-```
+<div style="text-align: center">
+<a href="/assets/img/diagram/build_input_output.svg" target="_blank" class="no-after">
+   <img style="max-width:500px" src="/assets/img/diagram/build_input_output.svg">
+</a>
+</div>
 
-[**Local Image**](/build-localimage)
-```
-Bootstrap: localimage
-From: /home/dave/starter.img 
-```
-
-
-## Quick Start
-Too long... didn't read! If you want the quickest way to run build, here is the way to 
-produce a squashfs image from a Docker base, without a hitch:
-
+## Downloading a existing container from Singularity Hub
+You can use the `build` command to download a container from Singularity Hub. 
 
 ```
-sudo singularity build lolcow.simg docker://godlovedc/lolcow
-
-Docker image path: index.docker.io/godlovedc/lolcow:latest
-Cache folder set to /root/.singularity/docker
-Importing: base Singularity environment
-Importing: /root/.singularity/docker/sha256:9fb6c798fa41e509b58bccc5c29654c3ff4648b608f5daa67c1aab6a7d02c118.tar.gz
-Importing: /root/.singularity/docker/sha256:3b61febd4aefe982e0cb9c696d415137384d1a01052b50a85aae46439e15e49a.tar.gz
-Importing: /root/.singularity/docker/sha256:9d99b9777eb02b8943c0e72d7a7baec5c782f8fd976825c9d3fb48b3101aacc2.tar.gz
-Importing: /root/.singularity/docker/sha256:d010c8cf75d7eb5d2504d5ffa0d19696e8d745a457dd8d28ec6dd41d3763617e.tar.gz
-Importing: /root/.singularity/docker/sha256:7fac07fb303e0589b9c23e6f49d5dc1ff9d6f3c8c88cabe768b430bdb47f03a9.tar.gz
-Importing: /root/.singularity/docker/sha256:8e860504ff1ee5dc7953672d128ce1e4aa4d8e3716eb39fe710b849c64b20945.tar.gz
-Importing: /root/.singularity/metadata/sha256:f913a03e7b5437ef6028ebb22a9a2b04362dd4919f6a19564a8669ce15bc9db5.tar.gz
-Building image from sandbox: /tmp/.singularity-build.V3IfNw
-Building Singularity image...
-Cleaning up...
-Singularity container built: lolcow.simg
-vanessa@vanessa-ThinkPad-T460s:~/Documents/Dropbox/Code/singularity/singularityware.github.io/pages/docs/user-docs$ ./lolcow.simg 
- ______________________________________
-/ Your motives for doing whatever good \
-| deed you may have in mind will be    |
-\ misinterpreted by somebody.          /
- --------------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+$ singularity build lolcow.simg shub://GodloveD/lolcow
 ```
 
-## Usage
-here is the usage. We will break it up into sections so we can talk about each one.
+The first argument (`lolcow.simg`) specifies a path and name for your container.  The second argument (`shub://GodloveD/lolcow`) gives the Singularity Hub URI from which to download.
 
-```bash
-$ singularity build
+But default the container will be converted to a compressed, read-only squashfs file.  If you want your container in a different format use the `--writable` or `--sandbox` options.
 
-USAGE: singularity [...] build <container path> <BUILD SPEC TARGET>
-The build command compiles a container per a recipe (definition file) or based
-on a URI, location, or archive.
-
-CONTAINER PATH:
-    When Singularity builds the container, the output format can be one of
-    multiple formats:
-
-        default:    The compressed Singularity read only image format (default)
-        sandbox:    This is a read-write container within a directory structure
-        writable:   Legacy writable image format
-    
-    note: A common workflow is to use the "sandbox" mode for development of the
-    container, and then build it as a default Singularity image  when done. 
-    This format can not be modified.
-
-BUILD SPEC TARGET:
-    The build spec target is a definition, local image, archive, or URI that
-    can be used to create a Singularity container. Several different
-    local target formats exist:
-
-        def file  : This is a recipe for building a container (examples below)
-        directory:  A directory structure containing a (ch)root file system
-        image:      A local image on your machine (will convert to squashfs if
-                    it is legacy or writable format)
-        tar/tar.gz: An archive file which contains the above directory format
-                    (must have .tar in the filename!)
-
-    Targets can also be remote and defined by a URI of the following formats:
-
-        shub://     Build from a Singularity registry (Singularity Hub default)
-        docker://   This points to a Docker registry (Docker Hub default)
-```
-
-These "build spec options" refer to the [recipe bases](/docs-recipes#recipes) options that you have. 
-Generally you are going to be building into a container or folder from some base that is local (an image or directory) or
-from an external endpoint (e.g., docker). Next we can look at create options:
-
-## Development (writable) or Production (immutable)?
-When you build your container, you probably want a writable container for development, and a nice
-immutable one for your completed, production image. Here are the options under the usage (help) for build:
+## Downloading a existing container from Docker Hub
+You can use `build` to download layers from Docker Hub and assemble them into Singularity containers. 
 
 ```
-CREATE OPTIONS:
-    -s|--sandbox    Build a sandbox rather then a read only compressed image
-    -w|--writable   Build a writable image (warning: deprecated due to sparse
-                    file image corruption issues)
-    -f|-F|--force   Force a rebootstrap of a base OS (note: this does not 
-                    delete what is currently in the image, just causes the core 
-                    to be reinstalled)
-    -T|--notest     Bootstrap without running tests in %test section
-    -s|--section    Only run a given section within the bootstrap (setup,
-                    post, files, environment, test, labels, none)
+$ singularity build lolcow.simg docker://godlovedc/lolcow
+```
+
+The same information applies to containers built from Docker Hub and containers built from Singularity Hub. 
+
+## Creating `--writable` images and `--sandbox` directories
+
+### `--writable`
+If you wanted to create a writable ext3 image similar to those used by Singularity version < 2.4, you could do so with the `--writable` option.  Extending the Singularity Hub example from above:
+
+```
+$ singularity build --writable lolcow.img shub://GodloveD/lolcow
 
 ```
 
-You can think of the different options as follows:
+The resulting container is writable, but is still mounted as read-only when executed with commands such as `run`, `exec`, and `shell`.  To mount the container as read-write when using these commands add the `--writable` option to them as well.  
 
-**create writable development folder**
-```
-sudo singularity build --writable container/ Singularity
-```
+To ensure that you have the proper permissions to write to the container as you like, it is also a good idea to make changes as root.  For example:
 
-**create writable development ext3 image**
 ```
-sudo singularity build --writable container.img Singularity
+$ sudo singularity shell --writable lolcow.img
 ```
 
-**create production immutable image**
+### `--sandbox`
+If you wanted to create a container within a writable directory (called a _sandbox_) you could do so with the `--sandbox` option:
+
 ```
-sudo singularity build container.simg Singularity
+$ singularity build --sandbox lolcow/ shub://GodloveD/lolcow
 ```
 
-For details about the Singularity flow and use cases, see our [quickstart](/quickstart).
+The resulting directory operates just like a container in an image file.  You are permitted to make changes and write files within the directory, but those changes will not persist when you are finished using the container.  To make your changes persistent, use the `--writable` flag when you invoke your container.  
 
-## Checks
-Next, we will look at checks. Checks haven't been robustly developed (yet!) but offer
-an easy way for an admin to define a security (or any other kind of check) to be run on demand
-for a Singularity image. They are defined (and run) via different tags.
+Once again, it's a good idea to do this as root to ensure you have permission to access the files and directories that you want to change.
+
+```
+$ sudo singularity shell --writable lolcow/
+```
+
+## Converting containers from one format to another
+If you already have a container saved locally, you can use it as a target to build a new container. This allows you convert containers from one format to another.  For example if you had a squashfs container called `production.simg` and wanted to convert it to a writeable ext3 container called `development.img` you could:
+
+```
+$ singularity build --writable development.img production.simg
+```
+
+Similarly, to convert it to a writable directory (a sandbox):
+
+```
+$ singularity build --sandbox development/ production.simg
+```
+
+If you omit any options you can also convert your sandbox back to a read-only compressed squashfs image suitable for use in a production environment:
+
+```
+$ singularty build production2 development/
+```
+You can convert the three supported container formats using any combination.
+
+Use care when converting writable ext3 images or sandbox directories to the default squashfs file format.  If changes were made to the writable container before conversion, there is no record of those changes in the Singularity recipe file rendering your container non-reproducible.  It is a best practice to build your immutable production containers directly from a Singularity recipe file instead.
+
+## Building containers from Singularity recipe files
+Of course, Singularity recipe files can be used as the target when building a container.  For detailed information on writing Singularity recipe files, please see [the Container Recipes docs](docs-recipes).
+
+Let's say you already have the following container recipe file called `Singularity`, and you want to use it to build a container. 
+
+```
+BootStrap: docker
+From: ubuntu:16.04
+
+%post
+    apt-get -y update
+    apt-get -y install fortune cowsay lolcat
+
+%environment
+    export LC_ALL=C
+    export PATH=/usr/games:$PATH
+
+%runscript
+    fortune | cowsay | lolcat
+```
+
+You can do so with the following command.  
+
+```
+$ sudo singularity build lolcow.simg Singularity 
+```
+
+The command requires `sudo` just as installing software on your local machine requires root privileges. 
+
+### `--force`
+You can build into the same container multiple times (though the results may be unpredictable and it is generally better to delete your container and start from scratch).  
+
+By default if you build into an existing container, the `build` command will skip the steps involved in adding a new base.  You can override this default with the `--force` option requiring that a new base OS is bootstrapped into the existing container.  This behavior does not delete the existing OS, it just adds the new OS on top of the existing one.  
+
+Use care with this option: you may get results that you did not expect. 
+
+### `--section`
+If you only want to build a single section of your Singularity recipe file use the `--section` option.  For instance, if you have edited the `%environment` section of a long Singularity recipe and don't want to completely re-build the container, you could re-build only the `%environment` section like so: 
+
+```
+$ sudo singularity build --section environment image.simg Singularity
+```
+
+Under normal build conditions, the Singularity recipe file is saved into a container's meta-data so that there is a record showing how the container was built.  Using the `--section` option may render this meta-data useless, so use care if you value reproducibility.  
+
+### `--notest`
+If you don't want to run the `%test` section during the container build, you can skip it with the `--notest` option. For instance, maybe you are building a container intended to run in a production environment with GPUs.  But perhaps your local build resource does not have GPUs.  You want to include a `%test` section that runs a short validation but you don't want your build to exit with an error because it cannot find a GPU on your system.
+
+```
+$ sudo singularity build GPU.simg --notest Singularity
+```
+
+### `--checks`
+Checks are a new feature (in 2.4) that offer an easy way for an admin to define a security (or any other kind of check) to be run on demand for a Singularity image. They are defined (and run) via different tags.
 
 ```
 CHECKS OPTIONS:
@@ -195,109 +175,15 @@ CHECKS OPTIONS:
     -l|--low       Specify low threshold (all checks, default) 
     -m|--med       Perform medium and high checks
     -h|--high      Perform only checks at level high
-
-See singularity check --help for available tags
 ```
 
-
-## Examples
-Let's quickly look at some definition file examples. These come straight from `singularity help build`. First, here
-is a recipe for build that serves only to describe the sections.
-
-```
-    %setup
-        echo "This is a scriptlet that will be executed on the host, as root, after"
-        echo "the container has been bootstrapped. To install things into the container"
-        echo "reference the file system location with $SINGULARITY_BUILDROOT"
-
-    %post
-        echo "This scriptlet section will be executed from within the container after"
-        echo "the bootstrap/base has been created and setup"
-
-    %test
-        echo "Define any test commands that should be executed after container has been"
-        echo "built. This scriptlet will be executed from within the running container"
-        echo "as the root user. Pay attention to the exit/return value of this scriptlet"
-        echo "as any non-zero exit code will be assumed as failure"
-        exit 0
-
-    %runscript
-        echo "Define actions for the container to be executed with the run command or"
-        echo "when container is executed."
-
-    %startscript
-        echo "Define actions for container to perform when started as an instance."
-
-    %labels
-        HELLO MOTO
-        KEY VALUE
-
-    %files
-        /path/on/host/file.txt /path/on/container/file.txt 
-        relative_file.txt /path/on/container/relative_file.txt
-
-    %environment 
-        LUKE=goodguy
-        VADER=badguy
-        HAN=someguy
-        export HAN VADER LUKE
-
-```
-
-Now let's look at a recipe that defines different <a href="https://containers-ftw.github.io/apps/" target="_blank">SCI-F apps</a>
+When you add the `--checks` option along with applicable tags to the `build` command Singularity will run the desired checks on your container at build time.  See `singularity check --help` for available tags.  
 
 
-```
-    %appinstall app1
-        echo "These are steps to install an app using the SCI-F format"
-
-    %appenv app1
-        APP1VAR=app1value
-        export APP1VAR
-
-    %apphelp app1
-        This is a help doc for running app1
-
-    %apprun app1
-        echo "this is a runscript for app1"
-
-    %applabels app1
-        AUTHOR tolkien
-
-    %appfiles app1
-        /file/on/host/foo.txt /file/in/contianer/foo.txt
-
-    %appsetup app1
-        echo "a %setup section (see above) for apps"
-
-    %apptest app1
-        echo "some test for an app" 
-```
-
-## Building
-We have a recipe, great! Now how do we build it? In many ways:
-
-```
-    Build a compressed image from a Singularity recipe file:
-        $ singularity build /tmp/debian0.simg /path/to/debian.def
-
-    Build a base compressed image from Docker Hub:
-        $ singularity build /tmp/debian1.simg docker://debian:latest
-
-    Build a base sandbox from DockerHub, make changes to it, then build image
-        $ singularity build --sandbox /tmp/debian docker://debian:latest
-        $ singularity exec --writable /tmp/debian apt-get install python
-        $ singularity build /tmp/debian2.simg /tmp/debian
-```
-
-## More Details
- - For a detailed **walkhrough of getting started** with build, we will point you to the <a href="/quickstart">quickstart</a>. 
- - If you want to customize the cache, specify Docker credentials, or any custom tweaks to your build environment, see <a href="/build-environment">build environment</a>. 
- - If you want to look at how to get started to making interally **modular containers**, check out <a href="http://containers-ftw.org/apps/examples/tutorials/getting-started" target="_blank">this post</a>.
-
-
-## Support
-Have a question, or need further information? <a href="/support">Reach out to us.</a>
+## More Build topics 
+ - If you want to **customize the cache location** (where Docker layers are downloaded on your system), specify Docker credentials, or any custom tweaks to your build environment, see <a href="/build-environment">build environment</a>. 
+ - If you want to make internally **modular containers**, check out <a href="http://containers-ftw.org/apps/examples/tutorials/getting-started" target="_blank">this post</a>.
+ - If you want to **build your containers** on Singularity Hub, (because you don't have root access on a Linux machine or want to host your container on the cloud) check out [this guide](https://github.com/singularityhub/singularityhub.github.io/wiki).
 
 <script>
 // Without this, pagination links to exec under repeated build section
