@@ -126,7 +126,7 @@ And now we need to define what happens when we start an instance of the containe
 
 ```
 %startscript
-    cd /scif/apps/pdf_server/pdf_server
+    cd /pdf_server
     # Use nohup and /dev/null to completely detach server process from terminal
     nohup npm start > /dev/null 2>&1 < /dev/null &
 ```
@@ -135,10 +135,11 @@ Also, the `url-to-pdf-api` server requires some environment variables be set, wh
 
 ```
 %environment
-    export NODE_ENV=development
-    export PORT=8000
-    export ALLOW_HTTP=true
-    export URL=localhost
+    NODE_ENV=development
+    PORT=8000
+    ALLOW_HTTP=true
+    URL=localhost
+    export NODE_ENV PORT ALLOW_HTTP URL
 ```
 
 Now we can build the definition file into an image! Simply run build and the image will be ready to go:
@@ -199,6 +200,15 @@ First off, we're going to move the installation of the `url-to-pdf-api` into an 
     chmod -R 0755 .
 ```
 
+And update our `startscript` to point to the app location:
+
+```
+%startscript
+    cd "${APPROOT_pdf_server}/pdf_server"
+    # Use nohup and /dev/null to completely detach server process from terminal
+    nohup npm start > /dev/null 2>&1 < /dev/null &
+```
+
 Now we want to define the pdf_client app, which we will run to send the requests to the server:
 
 ```
@@ -207,7 +217,7 @@ Now we want to define the pdf_client app, which we will run to send the requests
         echo "Usage: singularity run --app pdf <instance://name> <URL> [output file]"
         exit 1
     fi
-    curl -o "/scif/data/pdf_client/output/${2:-output.pdf}" "${URL}:${PORT}/api/render?url=${1}"
+    curl -o "${SINGULARITY_APPDATA}/output/${2:-output.pdf}" "${URL}:${PORT}/api/render?url=${1}"
 ```
 
 As you can see, the `pdf_client` app checks to make sure that the user provides at least one argument. Now that we have an output directory in the container, we need to expose it to the host using a bind mount. Once we've rebuilt the container, make a new directory callout `out` for the generated PDF's to go. Now we simply start the instance like so:
