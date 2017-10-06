@@ -113,7 +113,7 @@ You can convert the three supported container formats using any combination.
 
 Use care when converting writable ext3 images or sandbox directories to the default squashfs file format.  If changes were made to the writable container before conversion, there is no record of those changes in the Singularity recipe file rendering your container non-reproducible.  It is a best practice to build your immutable production containers directly from a Singularity recipe file instead.
 
-## Building containers from Singularit recipe files
+## Building containers from Singularity recipe files
 Of course, Singularity recipe files can be used as the target when building a container.  For detailed information on writing Singularity recipe files, please see [the Container Recipes docs](docs-recipes).
 
 Let's say you already have the following container recipe file called `Singularity`, and you want to use it to build a container. 
