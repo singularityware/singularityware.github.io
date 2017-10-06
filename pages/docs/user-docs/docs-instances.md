@@ -92,7 +92,7 @@ When using `run` with an instance URI, the `runscript` will be executed inside o
 
 ## Putting it all together
 
-In this section, we will demonstrate an example of packaging a service into a container and running it. The service we will be packaging is an API server that converts a web page into a PDF, and can be found [here](https://github.com/alvarcarto/url-to-pdf-api). The final example can be found [here on GitHub](https://github.com/bauerm97/instance-example), and [here on SingularityHub](link-to-shub). If you wish to just download the final image directly from Singularity Hub, simply run `singularity pull shub://bauerm97/instance-example`.
+In this section, we will demonstrate an example of packaging a service into a container and running it. The service we will be packaging is an API server that converts a web page into a PDF, and can be found [here](https://github.com/alvarcarto/url-to-pdf-api). The final example can be found [here on GitHub](https://github.com/bauerm97/instance-example), and [here on SingularityHub](https://singularity-hub.org/collections/bauerm97/instance-example/). If you wish to just download the final image directly from Singularity Hub, simply run `singularity pull shub://bauerm97/instance-example`.
 
 ### Building the Image
 
