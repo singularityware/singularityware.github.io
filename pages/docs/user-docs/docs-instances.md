@@ -68,8 +68,26 @@ web3             792      /home/mibauer/nginx.img
 Once an instance is started, the environment inside of that instance will never change. If the service you want to run in your instance requires a bind mount, then you must pass the `-B` option when calling `instance.start`. For example, if you wish to capture the output of the `web1` container instance which is placed at `/output/` inside the container you could do:
 
 ```
-singularity instance.start -B output/dir/outside/:/output/ nginx.img  web1
+$ singularity instance.start -B output/dir/outside/:/output/ nginx.img  web1
 ```
+
+If you want to poke around inside of your instance, you can do a normal `singularity shell` command, but give it the instance URI:
+
+```
+$ singularity shell instance://web1
+Singularity: Invoking an interactive shell within container...
+
+Singularity pdf_server.img:~/> 
+```
+
+Similarly, you can use the `singularity run/exec` commands on instances:
+
+```
+$ singularity run instance://web1
+$ singularity exec instance://web1 ps -ef
+```
+
+When using `run` with an instance URI, the `runscript` will be executed inside of the instance. Similarly with `exec`, it will execute the given command in the instance.
 
 ## Putting it all together
 
