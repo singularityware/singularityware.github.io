@@ -30,7 +30,13 @@ In addition `build` can produce containers in three different formats.  Formats 
 
 Because `build` can accept an existing container as a target and create a container in any of these three formats you can convert existing containers from one format to another.
 
-Some things need root...
+The following diagram illustrates the targets that can be supplied to `build` as inputs and the containers `build` can produce as outputs.  Green arrows represent operations that can be carried out without root privileges (though the container may not perform properly when run as root).  Red arrows represent operations that must be carried out with root privileges.  
+
+<div style="text-align: center">
+<a href="/assets/img/diagram/build_input_output.svg" target="_blank" class="no-after">
+   <img style="max-width:500px" src="/assets/img/diagram/build_input_output.svg">
+</a>
+</div>
 
 ## Downloading a existing container from Singularity Hub
 You can use the `build` command to download a container from Singularity Hub. 
