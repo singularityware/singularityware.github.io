@@ -187,7 +187,7 @@ Singularity pdf_server.img:~/bauerm97/instance-example> exit
 
 ### Making it Pretty
 
-Now that we have comfirmation that the server is working, let's make it a little cleaner. It's reallying annoying to have to remember the exact curl comand and URL syntax each time you want to request a PDF, so let's automate that. To do that, we're going to be using apps. If you haven't already, check out the [Singularity app documentation](link-to-app-docs-or-scif) to come up to speed. 
+Now that we have comfirmation that the server is working, let's make it a little cleaner. It's difficult to remember the exact curl comand and URL syntax each time you want to request a PDF, so let's automate that. To do that, we're going to be using Standard Container Integration Format (SCIF) apps, which are integrated directly into singularity. If you haven't already, check out the [Singularity app documentation](link-to-app-docs-or-scif) to come up to speed. 
 
 First off, we're going to move the installation of the `url-to-pdf-api` into an app, so that there is a designated spot to place output files. To do that, we want to add a section to our definition file to build the server:
 
@@ -207,7 +207,7 @@ Now we want to define the pdf_client app, which we will run to send the requests
         echo "Usage: singularity run --app pdf <instance://name> <URL> [output file]"
         exit 1
     fi
-    curl -o "/scif/data/pdf/output/${2:-output.pdf}" "${URL}:${PORT}/api/render?url=${1}"
+    curl -o "/scif/data/pdf_client/output/${2:-output.pdf}" "${URL}:${PORT}/api/render?url=${1}"
 ```
 
 As you can see, the `pdf_client` app checks to make sure that the user provides at least one argument. Now that we have an output directory in the container, we need to expose it to the host using a bind mount. Once we've rebuilt the container, make a new directory callout `out` for the generated PDF's to go. Now we simply start the instance like so:
@@ -222,7 +222,7 @@ And to request a pdf simply do:
 $ singularity run --app pdf_client instance://pdf http://google.com google.pdf
 ```
 
-And to confirm that it works:
+And to confirm that it worked:
 
 ```
 $ ls out/
