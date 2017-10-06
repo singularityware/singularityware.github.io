@@ -31,7 +31,7 @@ For example, a very minimal Singularity Hub build might look like this:
 
 ```
 Bootstrap: shub
-From: singularityhub:ubuntu
+From: vsoch/hello-world
 ```
 
 A build that uses a mirror to install Centos-7 might look like this:

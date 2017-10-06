@@ -16,7 +16,7 @@ If you build a container from Singularity Hub or Docker Hub, the environment wil
 
 ```
 Bootstrap: shub
-From: singularityhub/ubuntu
+From: vsoch/hello-world
 
 %environment
     VARIABLE_NAME=VARIABLE_VALUE

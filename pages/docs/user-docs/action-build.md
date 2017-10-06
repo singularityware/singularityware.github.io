@@ -6,7 +6,7 @@ folder: docs
 toc: false
 ---
 
-`build` is the "Swiss army knife" of container creation.  You can use it to download and assemble existing containers from external resources like [Singularity Hub](https://singularity-hub.org/) and [Docker Hub](https://hub.docker.com/).  You can use it to convert containers between the various formats supported by Singularity.  And you can use it in conjunction with a [Singularity Recipe](/docs-recipes) file to create a container from scratch and customized it to fit your needs. 
+`build` is the "Swiss army knife" of container creation.  You can use it to download and assemble existing containers from external resources like [Singularity Hub](https://singularity-hub.org/) and [Docker Hub](https://hub.docker.com/).  You can use it to convert containers between the various formats supported by Singularity.  And you can use it in conjunction with a [Singularity recipe](/docs-recipes) file to create a container from scratch and customized it to fit your needs. 
 
 {% include toc.html %}
 
@@ -20,7 +20,7 @@ The target defines the method that `build` uses to create the container. It can 
 - path to a **existing container** on your local machine
 - path to a **directory** to build from a sandbox
 - path to an **archive** in .tar or compressed .tar.gz format
-- path to a **[Recipe file](docs-recipes)**
+- path to a **[Singularity recipe file](docs-recipes)**
 
 In addition `build` can produce containers in three different formats.  Formats types can be specified by passing the following options to build.  
 
@@ -111,12 +111,12 @@ $ singularty build production2 development/
 ```
 You can convert the three supported container formats using any combination.
 
-Use care when converting writable ext3 images or sandbox directories to the default squashfs file format.  If changes were made to the writable container before conversion, there is no record of those changes in the Recipe file rendering your container non-reproducible.  It is a best practice to build your immutable production containers directly from a Recipe file instead.
+Use care when converting writable ext3 images or sandbox directories to the default squashfs file format.  If changes were made to the writable container before conversion, there is no record of those changes in the Singularity recipe file rendering your container non-reproducible.  It is a best practice to build your immutable production containers directly from a Singularity recipe file instead.
 
-## Building containers from Recipe files
-Of course, Recipe files can be used as the target when building a container.  For detailed information on writing Recipe files, please see [the Container Recipes docs](docs-recipes).
+## Building containers from Singularit recipe files
+Of course, Singularity recipe files can be used as the target when building a container.  For detailed information on writing Singularity recipe files, please see [the Container Recipes docs](docs-recipes).
 
-Let's say you already have the following Recipe file called `Singularity`, and you want to use it to build a container. 
+Let's say you already have the following container recipe file called `Singularity`, and you want to use it to build a container. 
 
 ```
 BootStrap: docker
@@ -150,13 +150,13 @@ By default if you build into an existing container, the `build` command will ski
 Use care with this option: you may get results that you did not expect. 
 
 ### `--section`
-If you only want to build a single section of your Recipe file use the `--section` option.  For instance, if you have edited the `%environment` section of a long Recipe and don't want to completely re-build the container, you could re-build only the `%environment` section like so: 
+If you only want to build a single section of your Singularity recipe file use the `--section` option.  For instance, if you have edited the `%environment` section of a long Singularity recipe and don't want to completely re-build the container, you could re-build only the `%environment` section like so: 
 
 ```
 $ sudo singularity build --section environment image.simg Singularity
 ```
 
-Under normal build conditions, the Recipe file is saved into a container's meta-data so that there is a record showing how the container was built.  Using the `--section` option may render this meta-data useless, so use care if you value reproducibility.  
+Under normal build conditions, the Singularity recipe file is saved into a container's meta-data so that there is a record showing how the container was built.  Using the `--section` option may render this meta-data useless, so use care if you value reproducibility.  
 
 ### `--notest`
 If you don't want to run the `%test` section during the container build, you can skip it with the `--notest` option. For instance, maybe you are building a container intended to run in a production environment with GPUs.  But perhaps your local build resource does not have GPUs.  You want to include a `%test` section that runs a short validation but you don't want your build to exit with an error because it cannot find a GPU on your system.
