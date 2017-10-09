@@ -39,6 +39,10 @@ entries:
       url: /docs-mount
       output: web, pdf
 
+    - title: Persistent Overlays
+      url: /docs-overlay
+      output: web, pdf
+
     - title: Running Services
       url: /docs-instances
       output: web, pdf
