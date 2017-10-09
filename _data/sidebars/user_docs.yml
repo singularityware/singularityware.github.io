@@ -100,7 +100,7 @@ entries:
       output: web, pdf
 
 
-  - title: Image Commands
+  - title: Image Command Group
     output: web, pdf
     folderitems:
 
@@ -120,11 +120,26 @@ entries:
       url: /docs-create
       output: web, pdf
 
+  - title: Instance Command Group 
+    output: web, pdf
+    folderitems:
+
+    - title: instance.start
+      url: /docs-instance-start
+      output: web, pdf
+
+    - title: instance.list
+      url: /docs-instance-list
+      output: web, pdf
+
+    - title: instance.stop
+      url: /docs-instance-stop
+      output: web, pdf
 
   - title: Deprecated
     output: web, pdf
-
     folderitems:
+
     - title: bootstrap
       url: /docs-bootstrap
       output: web, pdf
