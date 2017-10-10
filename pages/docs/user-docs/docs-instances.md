@@ -20,12 +20,12 @@ service nginx start
 
 With older versions of Singularity, if you were to do something like this, from inside the container you would happily see the service start, and the web server running! But then if you were to log out of the container what would happen?
 
-Ghost process within unreachable namespaces! It's like the walking dead!
+Orphan process within unreachable namespaces!
 
-You would lose control of the process. It would still be running, but you couldn't easily kill or interface with it. This is a called a ghost process, and it means that for running persistent services, Singularity was a non-starter.
+You would lose control of the process. It would still be running, but you couldn't easily kill or interface with it. This is a called a orphan process. Singularity versions less than 2.4 were not designed to handle running services properly.  
 
 ## Container Instances in Singularity
-With Singularity 2.4 and the addition of container instances, the ability to cleanly, reliably, and safely run services in a container is here. First, let's put the commands of how to start our service into a script. Let's call it a `startscript`. And we can imagine this fitting into a build definition file like this:
+With Singularity 2.4 and the addition of container instances, the ability to cleanly, reliably, and safely run services in a container is here. First, let's put some commands that we want our instance to execute into a script. Let's call it a `startscript`. This fits into a definition file like so: 
 
 ```
 %startscript
@@ -33,14 +33,14 @@ With Singularity 2.4 and the addition of container instances, the ability to cle
 service nginx start
 ```
 
-Now let's say we build a container with that startscript into an image called `nginx.img` and we want to run an nginx service. All we need to do is start the instance and the startscript will get run inside the container automatically:
+Now let's say we build a container with that startscript into an image called `nginx.img` and we want to run an nginx service. All we need to do is start the instance with the [`instance.start`](docs-instance-start) command, and the startscript will run inside the container automatically:
 
 ```
               [command]        [image]    [name of instance]
 $ singularity instance.start   nginx.img  web
 ```
 
-When we run that command, Singularity creates an isolated environment for the container instances' processes/services to live inside. We can confirm that this command started an instance by running the following command:
+When we run that command, Singularity creates an isolated environment for the container instances' processes/services to live inside. We can confirm that this command started an instance by running the [`instance.list`](docs-instance-list) command like so:
 
 ```
 $ singularity instance.list
@@ -89,6 +89,20 @@ $ singularity exec instance://web1 ps -ef
 ```
 
 When using `run` with an instance URI, the `runscript` will be executed inside of the instance. Similarly with `exec`, it will execute the given command in the instance.
+
+When you are finished with your instance you can clean it up with the [`instance.stop`](docs-instance-stop) command like so:
+
+```
+$ singularity instance.stop web1
+```
+
+If you have multiple instances running and you want to stop all of them, you can do so with a wildcard:
+
+```
+$ singularity instance.stop \*
+```
+
+Note that you must escape the wildcard with a backslash like this `\*` to pass it properly.  
 
 ## Putting it all together
 
@@ -240,6 +254,11 @@ $ ls out/
 google.pdf
 ```
 
+When you are finished, use the `instance.stop` command to close all running instances.
+
+```
+$ singularity instance.stop \*
+```
 
 ## Important Notes
 
