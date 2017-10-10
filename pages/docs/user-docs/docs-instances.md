@@ -20,12 +20,12 @@ service nginx start
 
 With older versions of Singularity, if you were to do something like this, from inside the container you would happily see the service start, and the web server running! But then if you were to log out of the container what would happen?
 
-Ghost process within unreachable namespaces! It's like the walking dead!
+Orphan process within unreachable namespaces!
 
-You would lose control of the process. It would still be running, but you couldn't easily kill or interface with it. This is a called a ghost process, and it means that for running persistent services, Singularity was a non-starter.
+You would lose control of the process. It would still be running, but you couldn't easily kill or interface with it. This is a called a orphan process. Singularity versions less than 2.4 were not designed to handle running services properly.  
 
 ## Container Instances in Singularity
-With Singularity 2.4 and the addition of container instances, the ability to cleanly, reliably, and safely run services in a container is here. First, let's put the commands of how to start our service into a script. Let's call it a `startscript`. And we can imagine this fitting into a build definition file like this:
+With Singularity 2.4 and the addition of container instances, the ability to cleanly, reliably, and safely run services in a container is here. First, let's put some commands that we want our instance to execute into a script. Let's call it a `startscript`. This fits into a definition file like so: 
 
 ```
 %startscript
