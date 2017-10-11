@@ -23,9 +23,9 @@ OSVersion: xenial
 ```
 The **OSVersion** keyword is mandatory. It specifies the OS version you would like to use.  For Ubuntu you can use code words like `trusty` (14.04), `xenial` (16.04), and `yakkety` (17.04).  For Debian you can use values like `stable`, `oldstable`, `testing`, and `unstable` or code words like `wheezy` (7), `jesse` (8), and `stretch` (9).
 ```
-From:  http://us.archive.ubuntu.com/ubuntu/
+MirrorURL:  http://us.archive.ubuntu.com/ubuntu/
 ```
-The **From** keyword is mandatory.  It specifies the local container to use as a base.
+The **MirrorURL** keyword is mandatory.  It specifies a URL to use as a mirror when downloading the OS.
 ```
 Include: somepackage
 ```
