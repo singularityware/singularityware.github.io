@@ -102,7 +102,7 @@ $ singularity help --app foo container.img  # See the help for foo, if provided
 ```
 
 ## Download pre-built images
-You can use the [`pull`](docs-pull) and [`build`](docs-build) commands to download pre-built images from an external resource like [Singularity Hub](https://singularity-hub.org/) or [Docker Hub](https://hub.docker.com/).  When called on a native Singularity images like those provided on Singularity Hub, `pull` simply downloads the image file to your system.   
+You can use the [`pull`](docs-pull) and [`build`](docs-build-container) commands to download pre-built images from an external resource like [Singularity Hub](https://singularity-hub.org/) or [Docker Hub](https://hub.docker.com/).  When called on a native Singularity images like those provided on Singularity Hub, `pull` simply downloads the image file to your system.   
 
 
 ```
