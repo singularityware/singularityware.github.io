@@ -141,11 +141,11 @@ Did you know that you can commit this Singularity file to a Github repo and it w
 ## How does the runscript work?
 Docker has two commands in the `Dockerfile` that have something to do with execution, `CMD` and `ENTRYPOINT`. The differences are subtle, but the best description I've found is the following:
 
->> A `CMD` is to provide defaults for an executing container.
+> A `CMD` is to provide defaults for an executing container.
 
 and
 
->> An `ENTRYPOINT` helps you to configure a container that you can run as an executable.
+> An `ENTRYPOINT` helps you to configure a container that you can run as an executable.
 
 Given the definition, the `ENTRYPOINT` is most appropriate for the Singularity `%runscript`, and so using the default bootstrap (whether from a `docker://` endpoint or a `Singularity` spec file) will set the `ENTRYPOINT` variable as the runscript. You can change this behavior by specifying `IncludeCmd: yes` in the Spec file (see below). If you provide any sort of `%runscript` in your Spec file, this overrides anything provided in Docker. In summary, the order of operations is as follows:
 
@@ -240,17 +240,18 @@ While most docker images can import and run without a hitch, there are some spec
 ### 1. Installation to Root
 When using Docker, you typically run as root, meaning that root's home at `/root` is where things will install given a specification of home. This is fine when you stay in Docker, or if the content at `/root` doesn't need any kind of write access, but generally can lead to a lot of bugs because it is, after all, root's home. This leads us to best practice #1.
 
- >> Don't install anything to root's home, `/root`.
+> Don't install anything to root's home, `/root`.
 
 ### 2. Library Configurations
 The command [ldconfig](https://codeyarns.com/2014/01/14/how-to-add-library-directory-to-ldconfig-cache/) is used to update the shared library cache. If you have software that requires symbolic linking of libraries and you do the installation without updating the cache, then the Singularity image (in read only) will likely give you an error that the library is not found. If you look in the image, the library will exist but the symbolic link will not. This leads us to best practice #2:
 
- >> Update the library cache at the end of your Dockerfile with a call to ldconfig.
+> Update the library cache at the end of your Dockerfile with a call to ldconfig.
+
 
 ### 3. Don't install to $HOME or $TMP
 We can assume that the most common Singularity use case has the $USER home being automatically mounted to `$HOME`, and `$TMP` also mounted. Thus, given the potential for some kind of conflict or missing files, for best practice #3 we suggest the following:
 
-  >> Don't put container valuables in `$TMP` or `$HOME`
+> Don't put container valuables in `$TMP` or `$HOME`
 
 
 Have any more best practices? Please <a href="https://www.github.com/singularityware/singularityware.github.io/issues" target="_blank">let us know</a>!

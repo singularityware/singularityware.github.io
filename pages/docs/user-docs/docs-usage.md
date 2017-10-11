@@ -18,7 +18,7 @@ If you type `singularity` without any arguments, you will see a high level help 
 
 **Container Actions**
 
-- [build](/docs-build): Build a container on your user endpoint or build environment
+- [build](/docs-build-container): Build a container on your user endpoint or build environment
 - [exec](/docs-exec): Execute a command to your container
 - [inspect](/docs-inspect): See labels, run and test scripts, and environment variables
 - [pull](/docs-pull): pull an image from Docker or Singularity Hub

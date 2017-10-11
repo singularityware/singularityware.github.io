@@ -26,7 +26,7 @@ The diagram below is a visual depiction of how you can use Singularity to build 
    <img style="max-width:900px" src="/assets/img/diagram/singularity-2.4-flow.png">
 </a>
 
-Singularity production images are immutable. This is a feature added as of Singularity 2.4, and it ensures a higher level of reproducibility and verification of images. To read more about the details, check out the  [build](docs-build) docs. However, immutability is not so great when you are testing, debugging, or otherwise want to quickly change your image. We will proceed by describing a typical workflow of developing first, building a final image, and using in production. 
+Singularity production images are immutable. This is a feature added as of Singularity 2.4, and it ensures a higher level of reproducibility and verification of images. To read more about the details, check out the  [build](docs-build-container) docs. However, immutability is not so great when you are testing, debugging, or otherwise want to quickly change your image. We will proceed by describing a typical workflow of developing first, building a final image, and using in production. 
 
 ### 1. Development Commands
 If you want a writable image or folder for developing, you have two options:
@@ -131,7 +131,7 @@ You can use this image with commands like `shell`, `exec`, `run`, and if you wan
 $ sudo singularity shell --writable ubuntu.img
 ```
 
->> Development Tip! When building containers, it often is the case that you will have a lot of
+> Development Tip! When building containers, it often is the case that you will have a lot of
 testing of installation commands, and if building a production image, one error will stop the entire build. If you
 interactively write the build recipe with one of these writable containers, you can debug as you go, and then
 build the production (squashfs) container without worrying that it will error and need to be started again.

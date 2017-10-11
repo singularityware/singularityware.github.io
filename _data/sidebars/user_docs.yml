@@ -24,7 +24,7 @@ entries:
       output: web, pdf
 
     - title: Build a Container
-      url: /docs-build
+      url: /docs-build-container
       output: web, pdf
 
     - title: Container Recipes

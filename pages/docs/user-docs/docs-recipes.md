@@ -22,7 +22,7 @@ Please see the [examples](https://github.com/singularityware/singularity/tree/ma
 ### Header
 The header is at the top of the file, and tells Singularity the base Operating System that it should use to build the container.  It is composed of several keywords. Specifically:
 
- - `Bootstrap:` references the kind of base you want to use (e.g., docker, debootstrap, shub). For example, a shub bootstrap will pull containers for shub as bases. A Docker bootstrap will pull docker layers to start your image. For a full list see [build](docs-build)
+ - `Bootstrap:` references the kind of base you want to use (e.g., docker, debootstrap, shub). For example, a shub bootstrap will pull containers for shub as bases. A Docker bootstrap will pull docker layers to start your image. For a full list see [build](docs-build-container)
  - `From:` is the named container (shub) or reference to layers (Docker) that you want to use (e.g., vsoch/hello-world)
 
 Depending on the value assigned to `Bootstrap:`, other keywords may also be valid in the header.
@@ -468,4 +468,4 @@ When crafting your recipe, it is best to consider the following:
 6. Ensure that the container's `/etc/passwd`, `/etc/group`, `/etc/shadow`, and no other sensitive files have anything but the bare essentials within them.
 7. It is encouraged to build containers from a recipe instead of a sandbox that has been manually changed. This ensures greatest possibility of reproducibility and mitigates the *black box effect*.
 
-Are you a recipe pro and now ready to build? Take a look at the [build](docs-build) documentation.
+Are you a recipe pro and now ready to build? Take a look at the [build](docs-build-container) documentation.
