@@ -6,7 +6,7 @@ folder: docs
 toc: false
 ---
 
-`build` is the "Swiss army knife" of container creation.  You can use it to download and assemble existing containers from external resources like [Singularity Hub](https://singularity-hub.org/) and [Docker Hub](https://hub.docker.com/).  You can use it to convert containers between the various formats supported by Singularity.  And you can use it in conjunction with a [Singularity recipe](/docs-recipes) file to create a container from scratch and customized it to fit your needs. 
+`build` is the "Swiss army knife" of container creation.  You can use it to download and assemble existing containers from external resources like <a href="https://www.singularity-hub.org/" target="_blank">Singularity Hub</a> and <a href="https://hub.docker.com/" target="_blank">Docker Hub</a>.  You can use it to convert containers between the various formats supported by Singularity.  And you can use it in conjunction with a [Singularity recipe](/docs-recipes) file to create a container from scratch and customized it to fit your needs. 
 
 {% include toc.html %}
 
@@ -67,7 +67,6 @@ Extending the Singularity Hub example from above:
 
 ```
 $ sudo singularity build --writable lolcow.img shub://GodloveD/lolcow
-
 ```
 
 The resulting container is writable, but is still mounted as read-only when executed with commands such as `run`, `exec`, and `shell`.  To mount the container as read-write when using these commands add the `--writable` option to them as well.  

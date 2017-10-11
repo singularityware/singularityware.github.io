@@ -131,7 +131,7 @@ You can use this image with commands like `shell`, `exec`, `run`, and if you wan
 $ sudo singularity shell --writable ubuntu.img
 ```
 
->> Development Tip! When building containers, it often is the case that you will have a lot of
+> Development Tip! When building containers, it often is the case that you will have a lot of
 testing of installation commands, and if building a production image, one error will stop the entire build. If you
 interactively write the build recipe with one of these writable containers, you can debug as you go, and then
 build the production (squashfs) container without worrying that it will error and need to be started again.
