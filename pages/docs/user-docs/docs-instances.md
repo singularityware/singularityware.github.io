@@ -96,13 +96,66 @@ When you are finished with your instance you can clean it up with the [`instance
 $ singularity instance.stop web1
 ```
 
-If you have multiple instances running and you want to stop all of them, you can do so with a wildcard:
+If you have multiple instances running and you want to stop all of them, you can do so with a wildcard or the -a flag:
 
 ```
 $ singularity instance.stop \*
+$ singularity instance.stop -a
 ```
 
-Note that you must escape the wildcard with a backslash like this `\*` to pass it properly.  
+Note that you must escape the wildcard with a backslash like this `\*` to pass it properly. 
+
+## Nginx "Hello-world" in Singularity
+
+Let's take a look at setting up a sample nginx web server using instances in Singularity. First we will just create a basic definition file:
+
+```
+Bootstrap: docker
+From: nginx
+Includecmd: no
+
+%startscript
+	nginx
+```
+
+All this does is download the official nginx Docker container, convert it to a Singularity image, and tell it to run nginx when you start the instance. Since we're running a web server, we're going to run the following commands as root.
+
+```
+# singularity build nginx.img Singularity
+# singularity instance.start nginx.img web1
+```
+
+Just like that we've downloaded, built, and ran an nginx Singularity image. And to confirm that it's correctly running:
+
+```
+$ curl localhost
+127.0.0.1 - - [06/Oct/2017:21:46:43 +0000] "GET / HTTP/1.1" 200 612 "-" "curl/7.47.0" "-"
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+```
 
 ## Putting it all together
 
