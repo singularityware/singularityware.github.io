@@ -16,7 +16,7 @@ This nomenclature represented that all files within the environment were contain
 
 ### Which namespaces are virtualized? Is that select-able?
 
-The goal of Singularity is to run an application within a contained environment such as it was not contained. Thus there is a balance between what to separate and what not to separate. At present the virtualized namespaces are process, mount points, and certain parts of the contained file system.
+The goal of Singularity is to run an application within a contained environment as if it was not contained. Thus there is a balance between what to separate and what not to separate. At present the virtualized namespaces are process, mount points, and certain parts of the contained file system.
 
 When you run your Singularity container, you may find that the process IDs start with 1 (one) and increment from there. You will also find that while the file system is contained starting with '/' (root), you can have access outside the container via your starting path. This means that relative paths will resolve outside the container, and fully qualified paths will resolve inside the container.
 
@@ -25,10 +25,10 @@ To achieve this behavior, you will find that several Linux namespaces are separa
 
 ### Can't you do this with Docker?
 
-No, not even close. If that was true, there would be no use for Singularity. But in fact, Singularity has taken off within the scientific computing world! Furthermore, if Docker can be used on traditional HPC resources, it would be; but it is not! There are no HPC centers utilizing Docker on their traditional HPC resources because it is inheritiatnly incompatible with HPC.
+No, not even close. If that was true, there would be no use for Singularity. But in fact, Singularity has taken off within the scientific computing world! Furthermore, if Docker can be used on traditional HPC resources, it would be; but it is not! There are no HPC centers utilizing Docker on their traditional HPC resources because it is inherently incompatible with HPC.
 
-Singularity has a very different usage model then Docker in that Singularity utilizes complete image files while Docker containers are made up of layers of tar files. With Singularity, you can prefetch an entire container, cache it on shared optimized storage, and run it from there.   Singularity also limits user privileges and access from within the container, making it safe for
-user's to bring their own containers. It doesn't open up security risks of users being able to control a root owned daemon, and it integrates seemlessly into existing process and resource manager workflows, supports GPU, MPI, architecture independent, among lots of other aspects that Docker does not.
+Singularity has a very different usage model than Docker in that Singularity utilizes complete image files while Docker containers are made up of layers of tar files. With Singularity, you can prefetch an entire container, cache it on shared optimized storage, and run it from there. Singularity also limits user privileges and access from within the container, making it safe for
+users to bring their own containers. It doesn't open up security risks of users being able to control a root owned daemon, and it integrates seemlessly into existing process and resource manager workflows, supports GPU, MPI, architecture independence, among lots of other aspects that Docker does not.
 
 In the end, Docker is designed for micro-service network virtulization and emulation of the full isolation requirements in the legacy of full machine level virtualization platforms (e.g. VMWare, Xen, KVM, etc.). Singularity is designed specifically for the scentific, application and environment virtulization. The right tool for the right job. :)
 
