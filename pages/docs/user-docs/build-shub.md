@@ -19,10 +19,9 @@ Bootstrap: shub
 ```
 The **Bootstrap** keyword is always mandatory. It describes the bootstrap module to use.
 ```
-From: shub://username/container:branch
-From: shub://2976
+From: shub://<registry>/<username>/<container-name>:<tag>@digest
 ```
-The **From** keyword is mandatory.  It specifies the container to use as a base.  You can either use the `username/container:branch` syntax (where `branch` is optional and defaults to `latest`) or specify the commit ID number.
+The **From** keyword is mandatory.  It specifies the container to use as a base.  `registry` is optional and defaults to `singularity-hub.org`.  `tag` and `digest` are also optional. `tag` defaults to `latest` and `digest` can be left blank if you want the latest build.
 
 ## Notes
 When bootstrapping from a Singularity Hub image, all previous definition files that led to the creation of the current image will be stored in a directory within the container called `/.singularity.d/bootstrap_history`.  Singularity will also alert you if environment variables have been changed between the base image and the new image during bootstrap.
