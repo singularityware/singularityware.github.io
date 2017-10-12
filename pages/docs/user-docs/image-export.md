@@ -11,17 +11,17 @@ Export is a way to dump the contents of your container into a .tar.gz, or a stre
 Here we export an image into a `.tar` file:
 
 ```
-singularity export container.img > container.tar
+singularity image.export container.img > container.tar
 ```
 
 We can also specify the file with `--file`
 
 ```
-singularity export --file container.tar container.img
+singularity image.export --file container.tar container.img
 ```
 
 And here is the recommended way to compress your image:
 
 ```
-singularity export container.img | gzip -9 > container.img.gz
+singularity image.export container.img | gzip -9 > container.img.gz
 ```
