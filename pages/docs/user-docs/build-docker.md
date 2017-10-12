@@ -21,7 +21,7 @@ The **Bootstrap** keyword is always mandatory. It describes the bootstrap module
 ```
 From: /username/container:tag
 ```
-The **From** keyword is mandatory.  It specifies the local container to use as a base. In the case of some official registries (ubuntu for example) the `username` is optional.  The `tag` is also optional and will default to `latest`
+The **From** keyword is mandatory.  It specifies the container to use as a base. In the case of some official registries (ubuntu for example) the `username` is optional.  The `tag` is also optional and will default to `latest`
 ```
 Registry: http://custom_registry
 ```

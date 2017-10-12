@@ -38,6 +38,6 @@ $ sudo apt-get update && sudo apt-get install debootstrap
 ```
 On CentOS you can install it from the epel repos like so:
 ```
-$ sudo yum update && sudo yum install wget epel-release && sudo yum install debootstrap.noarch
+$ sudo yum update && sudo yum install epel-release && sudo yum install debootstrap.noarch
 ```
 

@@ -22,7 +22,7 @@ The **Bootstrap** keyword is always mandatory. It describes the bootstrap module
 From: shub://username/container:branch
 From: shub://2976
 ```
-The **From** keyword is mandatory.  It specifies the local container to use as a base.  You can either use the `username/container:branch` syntax (where `branch` is optional and defaults to `latest`) or specify the commit ID number.
+The **From** keyword is mandatory.  It specifies the container to use as a base.  You can either use the `username/container:branch` syntax (where `branch` is optional and defaults to `latest`) or specify the commit ID number.
 
 ## Notes
-When bootstrapping from a local image, all previous definition files that led to the creation of the current image will be stored in a directory within the container called `/.singularity.d/bootstrap_history`.  Singularity will also alert you if environment variables have been changed between the base image and the new image during bootstrap.
+When bootstrapping from a Singularity Hub image, all previous definition files that led to the creation of the current image will be stored in a directory within the container called `/.singularity.d/bootstrap_history`.  Singularity will also alert you if environment variables have been changed between the base image and the new image during bootstrap.
