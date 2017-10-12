@@ -6,7 +6,7 @@ folder: docs
 toc: false
 ---
 
-Singularity 2.4 introduces the ability to run "container instances", allowing you to run services (*e.g. Nginx, MySQL, etc...*) using Singularity. A container instance, simply put, is a persistant and isolated version of the container image that runs in the background. 
+Singularity 2.4 introduces the ability to run "container instances", allowing you to run services (*e.g. Nginx, MySQL, etc...*) using Singularity. A container instance, simply put, is a persistent and isolated version of the container image that runs in the background. 
 
 {% include toc.html %}
 
@@ -22,7 +22,7 @@ With older versions of Singularity, if you were to do something like this, from 
 
 Orphan process within unreachable namespaces!
 
-You would lose control of the process. It would still be running, but you couldn't easily kill or interface with it. This is a called a orphan process. Singularity versions less than 2.4 were not designed to handle running services properly.  
+You would lose control of the process. It would still be running, but you couldn't easily kill or interface with it. This is a called an orphan process. Singularity versions less than 2.4 were not designed to handle running services properly.  
 
 ## Container Instances in Singularity
 With Singularity 2.4 and the addition of container instances, the ability to cleanly, reliably, and safely run services in a container is here. First, let's put some commands that we want our instance to execute into a script. Let's call it a `startscript`. This fits into a definition file like so: 

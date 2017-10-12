@@ -6,7 +6,7 @@ folder: docs
 toc: false
 ---
 
-New to Singularity 2.4 is the ability to run container "checks" on demand. Checks can be anything from a filter for sensitive information, to an analysis installed binaries. A few defualt checks are installed with Singularity and others can be [added by the administrater](/docs-admin-checks).  Users can perform checks at build time or on demand:
+New to Singularity 2.4 is the ability to run container "checks" on demand. Checks can be anything from a filter for sensitive information, to an analysis of installed binaries. A few default checks are installed with Singularity and others can be [added by the administrator](/docs-admin-checks).  Users can perform checks at build time or on demand:
 
 {% include toc.html %}
 
