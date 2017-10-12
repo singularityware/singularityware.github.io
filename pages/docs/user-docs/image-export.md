@@ -23,5 +23,5 @@ singularity image.export --file container.tar container.img
 And here is the recommended way to compress your image:
 
 ```
-singularity image.export container.img | gzip -9 > container.img.gz
+singularity image.export container.img | gzip -9 > container.img.tar.gz
 ```
