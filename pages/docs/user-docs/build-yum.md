@@ -1,16 +1,42 @@
 ---
-title: Yum Builds
+title: yum bootstrap module
 sidebar: user_docs
 permalink: build-yum
 folder: docs
 toc: false
 ---
 
+This module allows you to build a Red Hat/CentOS/Scientific Linux style container from a mirror URI. 
 
-The YUM base uses YUM on the host system to bootstrap the core operating system that exists within the container. This module is applicable for bootstrapping distributions like Red Hat, Centos, and Scientific Linux. When using the `yum` bootstrap module, several other keywords may also be necessary to define:
+{% include toc.html %}
 
- - **MirrorURL**: This is the location where the packages will be downloaded from. When bootstrapping different RHEL/YUM compatible distributions of Linux, this will define which variant will be used (e.g. the only difference in bootstrapping Centos from Scientific Linux is this line.
- - **OSVersion**: When using the `yum` bootstrap module, this keyword is conditional and required only if you have specified a %{OSVERSION} variable name in the `MirrorURL` keyword. If the `MirrorURL` definition does not have the %{OSVERSION} variable, `OSVersion` can be omitted from the header field.
- - **Include**: By default the core operating system is an extremely minimal base, which may or may not include the means to even install additional packages. The `Include` keyword should define any additional packages which should be used and installed as part of the core operating system bootstrap. The best practice is to keep this keyword usage as minimal as possible such that you can then use the `%inside` scriptlet (explained shortly) to do additional installations. One common package you may want to include here is `yum` itself.
+## Overview
+Use the `yum` module to specify a base for a CentOS-like container.  You must also specify the URI for the mirror you would like to use.  
 
-Warning, there is a major limitation with using YUM to bootstrap a container and that is the RPM database that exists within the container will be created using the RPM library and Berkeley DB implementation that exists on the host system. If the RPM implementation inside the container is not compatible with the RPM database that was used to create the container, once the container has been created RPM and YUM commands inside the container may fail. This issue can be easily demonstrated by bootstrapping an older RHEL compatible image by a newer one (e.g. bootstrap a Centos 5 or 6 container from a Centos 7 host).
+## Keywords
+```
+Bootstrap: yum
+```
+The **Bootstrap** keyword is always mandatory. It describes the bootstrap module to use.
+```
+OSVersion: 7
+```
+The **OSVersion** keyword is optional. It specifies the OS version you would like to use.  It is only required if you have specified a %{OSVERSION} variable in the `MirrorURL` keyword. 
+```
+MirrorURL: http://mirror.centos.org/centos-%{OSVERSION}/%{OSVERSION}/os/$basearch/ 
+```
+The **MirrorURL** keyword is mandatory.  It specifies the URL to use as a mirror to download the OS.  If you define the `OSVersion` keyword, than you can use it in the URL as in the example above.
+```
+Include: yum
+```
+The **Include** keyword is optional.  It allows you to install additional packages into the core operating system.  It is a best practice to supply only the bare essentials such that the `%post` section has what it needs to properly complete the build.  One common package you may want to install when using the `yum` build module is YUM itself. 
+
+## Notes
+There is a major limitation with using YUM to bootstrap a container. The RPM database that exists within the container will be created using the RPM library and Berkeley DB implementation that exists on the host system. If the RPM implementation inside the container is not compatible with the RPM database that was used to create the container, RPM and YUM commands inside the container may fail. This issue can be easily demonstrated by bootstrapping an older RHEL compatible image by a newer one (e.g. bootstrap a Centos 5 or 6 container from a Centos 7 host).
+
+In order to use the `debootstrap` build module, you must have `yum` installed on your system.  It may seem counter-intuitive to install YUM on a system that uses a different package manager, but you can do so.  For instance, on Ubuntu you can install it like so:
+```
+$ sudo apt-get update && sudo apt-get install yum
+```
+
+

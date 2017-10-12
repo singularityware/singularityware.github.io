@@ -46,9 +46,8 @@ Include: yum
 Each build base requires particular details during build time.  You can read about them and see examples at the following links:
 
  - [shub](/build-shub) (images hosted on Singularity Hub)
- - [docker](/build-docker) (images hosted on Docker Hub)
+ - [docker](/build-docker-module) (images hosted on Docker Hub)
  - [localimage](/build-localimage) (images saved on your machine)
- - [self](/build-self) (a snapshot of your build system)
  - [yum](/build-yum) (yum based systems such as CentOS and Scientific Linux)
  - [debootstrap](/build-debootstrap) (apt based systems such as Debian and Ubuntu)
  - [arch](/build-arch) (Arch Linux)
