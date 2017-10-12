@@ -127,8 +127,16 @@ echo -e "lines\ncols"|tput -S
 Once you've generated an asciicast, you should drop the file (e.g., `demo-asciicast.js`) into the `assets/asciicast` folder. Since we will have many asciicasts here, please name it meaningfully. Then include the following in the page or post:
 
 ```bash
-{{ "{% include asciicast.html source='demo-asciicast.js' title='How to make demos' author='email@domain.com'" }}%}
+{{ "{% include asciicast.html source='demo-asciicast.js' uid='how-to-make-demos' title='How to make demos' author='email@domain.com'" }}%}
 ```
+
+The fields are important! 
+
+- *source* is the name of the file. It's expected to be in the `assets/asciicast` folder, you just need to put the filename here (or the subfolder, if you created one).
+- *uid* is the name for the id of the div for the asciicast. It should generally be lowercase, no spaces, and long enough to be unique for the page. It will automatically have `asciicast-` added as a prefix, to put the ids for asciicasts in the same namespace in the DOM.
+- *title* is what the user will see before clicking it. This can be a question ("How do I bootstrap a container?") or a statement ("How to bootstrap a container").
+- *author* is your contact email.
+
 
 ## Adding a Release
 

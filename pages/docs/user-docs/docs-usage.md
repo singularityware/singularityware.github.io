@@ -14,50 +14,38 @@ The general usage form is:
 $ singularity (opts1) [subcommand] (opts2) ...
 ```
 
-If you type `singularity` without any arguments, you will see a high level help for all arguments:
+If you type `singularity` without any arguments, you will see a high level help for all arguments. The main options include:
+
+**Container Actions**
+
+- [build](/docs-build-container): Build a container on your user endpoint or build environment
+- [exec](/docs-exec): Execute a command to your container
+- [inspect](/docs-inspect): See labels, run and test scripts, and environment variables
+- [pull](/docs-pull): pull an image from Docker or Singularity Hub
+- [run](/docs-run): Run your image as an executable
+- [shell](/docs-shell): Shell into your image
+
+**Image Commands**
+
+- [image.import](/docs-import): import layers or other file content to your image
+- [image.export](/docs-export): export the contents of the image to tar or stream
+- [image.create](/docs-create): create a new image, using the old ext3 filesystem
+- [image.expand](/docs-create): increase the size of your image (old ext3)
+
+**Instance Commands**
+
+Instances were added in 2.4. This list is brief, and likely to expand with further development.
+
+- [instances](/docs-instances): Start, stop, and list container instances
 
 
-```bash
-USAGE: singularity [global options...] <command> [command options...] ...
+**Deprecated Commands**
+The following commands are deprecated in 2.4 and will be removed in future releases.
 
-GLOBAL OPTIONS:
-    -d --debug    Print debugging information
-    -h --help     Display usage summary
-    -q --quiet    Only print errors
-       --version  Show application version
-    -v --verbose  Increase verbosity +1
-    -x --sh-debug Print shell wrapper debugging information
-
-GENERAL COMMANDS:
-    help          Show additional help for a command
-    selftest      Run some self tests to make sure Singularity is
-                    installed and operating properly
-
-CONTAINER USAGE COMMANDS:
-    exec          Execute a command within container
-    run           Launch a runscript within container
-    shell         Run a Bourne shell within container
-    test          Execute any test code defined within container
-
-CONTAINER USAGE OPTIONS:
-    see singularity <command> help
-
-CONTAINER MANAGEMENT COMMANDS (requires root):
-    bootstrap     Bootstrap a new Singularity image from scratch
-    copy          Copy files from your host into the container
-    create        Create a new container image
-    expand        Grow the container image
-    export        Export the contents of a container via a tar pipe
-    import        Import/add container contents via a tar pipe
-    mount         Mount a Singularity container image
-
-CONTAINER REGISTRY COMMANDS:
-    pull          pull a Singularity Hub container to $PWD
+- [bootstrap](/docs-bootstrap): Bootstrap a container recipe
 
 
-For any additional help or support visit the Singularity
-website: http://singularity.lbl.gov/
-```
+For the full usage, see [the bottom of this page](#commands-usage)
 
 ### Options and argument processing
 Because of the nature of how Singularity cascades commands and sub-commands, argument processing is done with a mandatory order. <strong>This means that where you place arguments is important!</strong> In the above usage example, `opts1` are the global Singularity run-time options. These options are always applicable no matter what subcommand you select (e.g. `--verbose` or `--debug`). But subcommand specific options must be passed after the relevant subcommand.
@@ -85,3 +73,52 @@ found at:
 
     http://singularity.lbl.gov/
 ```
+
+## Commands Usage
+
+```
+USAGE: singularity [global options...] <command> [command options...] ...
+
+GLOBAL OPTIONS:
+    -d|--debug    Print debugging information
+    -h|--help     Display usage summary
+    -s|--silent   Only print errors
+    -q|--quiet    Suppress all normal output
+       --version  Show application version
+    -v|--verbose  Increase verbosity +1
+    -x|--sh-debug Print shell wrapper debugging information
+
+GENERAL COMMANDS:
+    help       Show additional help for a command or container                  
+    selftest   Run some self tests for singularity install                      
+
+CONTAINER USAGE COMMANDS:
+    exec       Execute a command within container                               
+    run        Launch a runscript within container                              
+    shell      Run a Bourne shell within container                              
+    test       Launch a testscript within container                             
+
+CONTAINER MANAGEMENT COMMANDS:
+    apps       List available apps within a container                           
+    bootstrap  *Deprecated* use build instead                                   
+    build      Build a new Singularity container                                
+    check      Perform container lint checks                                    
+    inspect    Display a container's metadata                                   
+    mount      Mount a Singularity container image                              
+    pull       Pull a Singularity/Docker container to $PWD                      
+
+COMMAND GROUPS:
+    image      Container image command group                                    
+    instance   Persistent instance command group                                
+
+
+CONTAINER USAGE OPTIONS:
+    see singularity help <command>
+
+For any additional help or support visit the Singularity
+website: http://singularity.lbl.gov/
+```
+
+## Support
+
+Have a question, or need further information? <a href="/support">Reach out to us.</a>

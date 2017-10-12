@@ -15,36 +15,48 @@ entries:
       url: /user-guide
       output: web, pdf
 
-    - title: Quick Start Installation
-      url: /docs-quick-start-installation
+    - title: Installation
+      url: /docs-installation
       output: web, pdf
 
-    - title: Create an Image
-      url: /create-image
+    - title: Quick Start
+      url: /quickstart
       output: web, pdf
 
-    - title: Bootstrap an Image
-      url: /bootstrap-image
+    - title: Build a Container
+      url: /docs-build-container
       output: web, pdf
 
-    - title: Adding Content
-      url: /image-content
+    - title: Container Recipes
+      url: /docs-recipes
       output: web, pdf
 
-    - title: User Control
-      url: /user-control
+    - title: Singularity Flow
+      url: /docs-flow
       output: web, pdf
 
     - title: Bind Paths and Mounts
       url: /docs-mount
       output: web, pdf
 
+    - title: Persistent Overlays
+      url: /docs-overlay
+      output: web, pdf
+
+    - title: Running Services
+      url: /docs-instances
+      output: web, pdf
+
+    - title: Container Checks
+      url: /docs-user-checks
+      output: web, pdf
+
     - title: Environment and Metadata
       url: /docs-environment-metadata
       output: web, pdf
 
-    - title: Change an Existing Container
-      url: /docs-changing-containers
+    - title: Reproducible SCI-F Apps
+      url: /docs-scif-apps
       output: web, pdf
 
     - title: Singularity and Docker
@@ -63,20 +75,12 @@ entries:
       url: /docs-usage
       output: web, pdf
 
-    - title: bootstrap
-      url: /docs-bootstrap
+    - title: build
+      url: /docs-build
       output: web, pdf
 
     - title: exec
       url: /docs-exec
-      output: web, pdf
-
-    - title: export
-      url: /docs-export
-      output: web, pdf
-
-    - title: import
-      url: /docs-import
       output: web, pdf
 
     - title: inspect
@@ -94,3 +98,49 @@ entries:
     - title: shell
       url: /docs-shell
       output: web, pdf
+
+
+  - title: Image Command Group
+    output: web, pdf
+    folderitems:
+
+    - title: image.export
+      url: /docs-export
+      output: web, pdf
+
+    - title: image.expand
+      url: /docs-expand
+      output: web, pdf
+
+    - title: image.import
+      url: /docs-import
+      output: web, pdf
+
+    - title: image.create
+      url: /docs-create
+      output: web, pdf
+
+  - title: Instance Command Group 
+    output: web, pdf
+    folderitems:
+
+    - title: instance.start
+      url: /docs-instance-start
+      output: web, pdf
+
+    - title: instance.list
+      url: /docs-instance-list
+      output: web, pdf
+
+    - title: instance.stop
+      url: /docs-instance-stop
+      output: web, pdf
+
+  - title: Deprecated
+    output: web, pdf
+    folderitems:
+
+    - title: bootstrap
+      url: /docs-bootstrap
+      output: web, pdf
+

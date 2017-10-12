@@ -47,6 +47,9 @@ entries:
       url: /install-windows
       output: web, pdf
 
+    - title: Host a Singularity Registry
+      url: /singularity-registry
+      output: web, pdf
 
   - title: Contributing
     output: web, pdf
@@ -106,4 +109,6 @@ entries:
       url: /admin-guide
       output: web, pdf
 
-
+    - title: Archive
+      url: /archive
+      output: web, pdf
