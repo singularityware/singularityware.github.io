@@ -125,6 +125,7 @@ In the end, we do not gain anything by calling 'mpirun' from within the containe
 See the Singularity on HPC page for more details.
 
 ### Does Singularity support containers that require GPUs?
+
 Yes. Many users run GPU dependant code within Singularity containers.  The
 experimental `--nv` option allows you to leverage host GPUs without installing 
 system level drivers into your container. See the [`exec`](/docs-exec#a-gpu-example) command for
@@ -164,6 +165,34 @@ You can read more about the Singularity <a href="/docs-security">security overvi
 
 ## Troubleshooting
 A little bit of help.
+
+### Segfault on Bootstrap of Centos Image
+If you are bootstrapping a centos 6 docker image from a debian host, you might hit a segfault:
+
+```
+$ singularity shell docker://centos:6 
+Docker image path: index.docker.io/library/centos:6
+Cache folder set to /home/jbdenis/.singularity/docker
+Creating container runtime...
+Singularity: Invoking an interactive shell within container...
+
+Segmentation fault
+```
+
+The fix is on your host, you need to pass the variable `vsyscall=emulate` to the kernel, meaning in the file `/etc/default/grub` (note, this file is debian specific), add the following:
+
+```
+GRUB_CMDLINE_LINUX_DEFAULT="vsyscall=emulate"
+```
+
+and then update grub and reboot:
+
+```
+update-grub && reboot
+```
+
+Please note that this change might have <a href="https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/Documentation/admin-guide/kernel-parameters.txt?h=v4.13-rc3#n4387" target="_blank">security implications</a> that you should be aware of. For more information, see the <a href="https://github.com/singularityware/singularity/issues/845" target="_blank">original issue</a>.
+
 
 ### How to use Singularity with GRSecurity enabled kernels
 To run Singularity on a GRSecurity enabled kernel, you must disable several security features:

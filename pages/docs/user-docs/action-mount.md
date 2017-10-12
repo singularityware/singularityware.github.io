@@ -15,7 +15,7 @@ When Singularity 'swaps' the host operating system for the one inside your conta
 
 To *mount* a bind path inside the container, a **bind point** must be defined within the container. The bind point is a directory within the container that Singularity can use to bind a directory on the host system.  This means that if you want to bind to a point within the container such as `/global`, that directory must already exist within the container.
 
-It is however possible that the system administrator has enabled a Singularity feature called *overlay* in the `/etc/singularity/singularity.conf` file. This will cause the bind points to be created on an as needed basis so that the underlying container is not modified. But because the *overlay* feature is not always used or unavailable in some kernels, it maybe necessary for container standards to exist to ensure portability from host to host.
+It is however possible that the system administrator has enabled a Singularity feature called *overlay* in the `/etc/singularity/singularity.conf` file. This will cause the bind points to be created on an as needed basis in an overlay file system so that the underlying container is not modified. But because the *overlay* feature is not always used or is unavailable in some kernels, it may be necessary for container standards to exist to ensure portability from host to host.
 
 If a bind path is requested, and the bind point does not exist within the container, a warning message will be displayed, and Singularity will continue trying to start the container. For example:
 

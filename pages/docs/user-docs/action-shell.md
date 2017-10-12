@@ -6,7 +6,7 @@ folder: docs
 toc: false
 ---
 
-The `shell` Singularity sub-command will automatically spawn an interactive shell within a container. As of v2.3 the default shell that is spawned via the `shell` command is Bash if it exists otherwise `/bin/sh` is called.
+The `shell` Singularity sub-command will automatically spawn an interactive shell within a container. As of v2.3 the default shell that is spawned via the `shell` command is `/bin/bash` if it exists otherwise `/bin/sh` is called.
 
 {% include toc.html %}
 

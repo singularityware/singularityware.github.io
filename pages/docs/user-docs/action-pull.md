@@ -81,6 +81,18 @@ Progress |===================================| 100.0%
 Done. Container is at: /tmp/vsoch-hello-world-master.img
 ```
 
+### Pull by commit
+You can also pull different versions of your container by using their commit id (`version`). 
+
+```
+singularity pull shub://vsoch/hello-world@42e1f04ed80217895f8c960bdde6bef4d34fab59
+Progress |===================================| 100.0%
+Done. Container is at: ./vsoch-hello-world-master.img
+```
+
+In this example, the first build of this container will be pulled.
+
+
 ## Docker
 Docker pull is similar (on the surface) to a Singularity Hub pull, and we would do the following:
 
