@@ -202,7 +202,12 @@ You'll notice some other labels that are captured automatically from the build p
 
 
 #### %environment
-As of Singularity 2.3, you can add environment variables to be sourced when the container is used in the `%environment` section. The entire section is written to a file that gets sourced, so you should generally use the same conventions that you might use in a `bashrc` or `profile`. 
+As of Singularity 2.3, you can add environment variables to your Singularity Recipe in a section called `%environment`. Keep in mind that these environment variables are sourced at runtime and *not* at build time. This means that if you need the same variables during build time, you should also define them in your `%post` section. Specifically:
+
+ - **during build**: the `%environment` section is written to a file in the container's metadata folder. This file is not sourced.
+ - **during runtime**: the file written to the container's metadata folder is sourced.
+
+Since the file is ultimately sourced, you should generally use the same conventions that you might use in a `bashrc` or `profile`. In the example below, the variables `VADER` `LUKE` and `SOLO` would not be available during build, but when the container is finished and run: 
 
 ```
 Bootstrap: docker
@@ -230,7 +235,7 @@ Version v1.0
     export VADER LUKE SOLO
 ```
 
-You can easily see environment variables also with inspect:
+For the rationale behind this approach and why we do not source the `%environment` section at build time, refer to <a href="https://github.com/singularityware/singularity/issues/1053" target="_blank">this issue</a>. When the container is finished, you can easily see environment variables also with inspect, and this is done by showing the file produced above:
 
 ```
 $ singularity inspect -e roar.simg # Custom environment shell code should follow
