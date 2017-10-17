@@ -11,16 +11,16 @@ entries:
 
     folderitems:
 
+    - title: Quick Start
+      url: /quickstart
+      output: web, pdf
+
     - title: Introduction
       url: /user-guide
       output: web, pdf
 
     - title: Installation
       url: /docs-installation
-      output: web, pdf
-
-    - title: Quick Start
-      url: /quickstart
       output: web, pdf
 
     - title: Build a Container
