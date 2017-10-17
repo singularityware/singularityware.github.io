@@ -30,7 +30,7 @@ Stopping cow1 instance of /home/ubuntu/GodloveD-lolcow-master.img (PID=20522)
 
 ### Stop all running instances
 ```
-$ singularity instance.stop \*
+$ singularity instance.stop --all
 Stopping cow2 instance of /home/ubuntu/GodloveD-lolcow-master.img (PID=20558)
 Stopping hiya instance of /home/ubuntu/vsoch-hello-world-master.img (PID=20595)
 ```

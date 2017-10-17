@@ -26,6 +26,11 @@ SUPPORT_URL="http://www.debian.org/support"
 BUG_REPORT_URL="https://bugs.debian.org/"
 $ 
 ```
+### Printing the OS release for a running instance:
+Use the `instance://<instance name>` syntax like so:
+```
+$ singularity exec instance://my-instance cat /etc/os-release
+```
 
 ### Special Characters
 And properly passing along special characters to the program within the container.

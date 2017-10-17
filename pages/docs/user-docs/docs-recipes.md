@@ -15,7 +15,7 @@ A Singularity Recipe is the driver of a custom build, and the starting point for
 A Singularity Recipe file is divided into several parts:
 
 1. **Header**: The Header describes the core operating system to build within the container. Here you will configure the base operating system features that you need within your container. Examples of this include, what distribution of Linux, what version, what packages must be part of a core install.
-2. **Sections**: The rest of the definition is comprised of sections, sometimes called scriptlets or blobs of data. Each section is defined by a `%` character followed by the name of the particular section. All sections are optional.
+2. **Sections**: The rest of the definition is comprised of sections, sometimes called scriptlets or blobs of data. Each section is defined by a `%` character followed by the name of the particular section. All sections are optional. Sections that are executed at build time are executed with the `/bin/sh` interpreter and can accept `/bin/sh` options.  Similarly, sections that produce scripts to be executed at runtime can accept options intended for `/bin/sh`
 
 Please see the [examples](https://github.com/singularityware/singularity/tree/master/examples) directory in the [Singularity source code](https://github.com/singularityware/singularity) for some ideas on how to get started. 
 
