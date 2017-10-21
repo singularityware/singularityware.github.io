@@ -1,5 +1,5 @@
 ---
-title: Request Singularity
+title: Requesting an Installation
 sidebar: main_sidebar
 permalink: install-request
 folder: docs
