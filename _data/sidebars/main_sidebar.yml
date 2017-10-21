@@ -35,6 +35,10 @@ entries:
       url: /all-releases
       output: web, pdf
 
+    - title: How to Request an Install
+      url: install-request
+      output: web, pdf
+
     - title: Install Singularity on Linux
       url: /install-linux
       output: web, pdf
