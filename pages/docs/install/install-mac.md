@@ -26,25 +26,25 @@ brew cask install vagrant-manager
 ## Option 1: Singularityware Vagrant Box
 
 We are maintaining a set of Vagrant Boxes via <a href="https://www.vagrantup.com" target="_blank">Vagrant Cloud</a>, one of <a href="https://www.hashicorp.com/#open-source-tools" target="_blank">Hashicorp</a> many tools that likely you've used and haven't known it. The current stable version of Singularity is available here:
- - [singularityware/singularity-2.3.1](https://app.vagrantup.com/singularityware/boxes/singularity-2.3.1/versions/2.3.1)
+ - [singularityware/singularity-2.4](https://app.vagrantup.com/singularityware/boxes/singularity-2.4/versions/2.4)
  
 For other versions of Singularity see [our Vagrant Cloud repository](https://app.vagrantup.com/singularityware)
 
 ```bash
 mkdir singularity-vm
 cd singularity-vm
-vagrant init singularityware/singularity-2.3.1
+vagrant init singularityware/singularity-2.4
 vagrant up
 vagrant ssh
 ```
 
-You are then ready to go with Singularity 2.3.1!
+You are then ready to go with Singularity 2.4!
 
 ```
 vagrant@vagrant:~$ which singularity
 /usr/local/bin/singularity
 vagrant@vagrant:~$ singularity --version
-2.3.1-dist
+2.4-dist
 vagrant@vagrant:~$ singularity create test.img
 Initializing Singularity image subsystem
 Opening image file: test.img
@@ -67,8 +67,8 @@ although this isn't entirely necessary if you only have it configured for virtua
 If you want to use a different version of Singularity, or want to get more familiar with how Vagrant and VirtualBox work, you can build your own Vagrant Box from scratch.  In this case, we will use the Vagrantfile for `bento/ubuntu-16.04`, however you could also try any of the <a href="https://atlas.hashicorp.com/bento" target="_blank">other bento boxes</a> that are equally delicious. As before, you should first make a separate directory for your Vagrantfile, and then init a base image.
 
 ```bash
-mkdir singularity-vm
-cd singularity-vm
+mkdir singularity-2.4
+cd singularity-2.4
 vagrant init bento/ubuntu-16.04
 ```
 
