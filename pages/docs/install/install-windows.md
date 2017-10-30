@@ -28,6 +28,18 @@ Run GitBash. The default home directory will be C:\Users\your_username
 ```bash
 mkdir singularity-2.4
 cd singularity-2.4
+```
+
+Note that if you had installed a previous version of the vm (and are using the same folder), you must destroy it first. In our example we create a new folder.  To destroy a previous vm:
+
+```
+vagrant destroy
+```
+
+Then issue the following commands to bring up the Virtual Machine:
+
+
+```
 vagrant init singularityware/singularity-2.4
 vagrant up
 vagrant ssh

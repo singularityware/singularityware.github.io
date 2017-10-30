@@ -28,11 +28,22 @@ brew cask install vagrant-manager
 We are maintaining a set of Vagrant Boxes via <a href="https://www.vagrantup.com" target="_blank">Vagrant Cloud</a>, one of <a href="https://www.hashicorp.com/#open-source-tools" target="_blank">Hashicorp</a> many tools that likely you've used and haven't known it. The current stable version of Singularity is available here:
  - [singularityware/singularity-2.4](https://app.vagrantup.com/singularityware/boxes/singularity-2.4/versions/2.4)
  
-For other versions of Singularity see [our Vagrant Cloud repository](https://app.vagrantup.com/singularityware)
+For other versions of Singularity see [our Vagrant Cloud repository](https://app.vagrantup.com/singularityware). 
 
 ```bash
 mkdir singularity-vm
 cd singularity-vm
+```
+
+Note that if you have installed a previous version of the vm, you can either destroy it first, or create a new directory.
+
+```
+vagrant destroy
+```
+
+Then issue the following commands to bring up the Virtual Machine:
+
+```
 vagrant init singularityware/singularity-2.4
 vagrant up
 vagrant ssh
