@@ -97,8 +97,8 @@ $ singularity <command> -h
 Users can also [write help docs specific to a container](/docs-recipes#help) or for an internal module called an [app](/docs-scif-apps).  If those help docs exist for a particular container, you can view them like so.   
 
 ```
-$ singularity help container.img            # See the container's help, if provided
-$ singularity help --app foo container.img  # See the help for foo, if provided
+$ singularity help container.simg            # See the container's help, if provided
+$ singularity help --app foo container.simg  # See the help for foo, if provided
 ```
 
 ## Download pre-built images
@@ -106,8 +106,8 @@ You can use the [`pull`](docs-pull) and [`build`](docs-build-container) commands
 
 
 ```
-$ singularity pull shub://vsoch/hello-world   # pull with default name, vsoch-hello-world-master.img
-$ singularity pull --name hello.img shub://vsoch/hello-world   # pull with custom name
+$ singularity pull shub://vsoch/hello-world   # pull with default name, vsoch-hello-world-master.simg
+$ singularity pull --name hello.simg shub://vsoch/hello-world   # pull with custom name
 ```
 
 Singularity images can also be pulled and named by an associated Github commit or content hash.
@@ -117,7 +117,7 @@ You can also use `pull` with the `docker://` uri to reference Docker images serv
 
 ```
 $ singularity pull docker://godlovedc/lolcow  # with default name
-$ singularity pull --name funny.img docker://godlovedc/lolcow # with custom name
+$ singularity pull --name funny.simg docker://godlovedc/lolcow # with custom name
 ```
 
 Pulling Docker images reduces reproducibility.  If you were to pull a Docker image today and then wait six months and pull again, you are not guaranteed to get the same image.  If any of the source layers has changed the image will be altered. If reproducibility is a priority for you, try building your images from Singularity Hub.
@@ -125,8 +125,8 @@ Pulling Docker images reduces reproducibility.  If you were to pull a Docker ima
 You can also use the `build` command to download pre-built images from an external resource.  When using `build` you must specify a name for your container like so:
 
 ```
-$ singularity build hello-world.img shub://vsoch/hello-world
-$ singularity build lolcow.img docker://godlovedc/lolcow
+$ singularity build hello-world.simg shub://vsoch/hello-world
+$ singularity build lolcow.simg docker://godlovedc/lolcow
 ```
 
 Unlike `pull`, `build` will convert your image to the latest Singularity image format after downloading it.  
@@ -134,10 +134,10 @@ Unlike `pull`, `build` will convert your image to the latest Singularity image f
 `build` is like a "Swiss Army knife" for container creation.  In addition to downloading images, you can use `build` to create images from other images or from scratch using a [recipe file](/docs-recipes).  You can also use `build` to convert an image between the 3 major container formats supported by Singularity.  We discuss those image formats below in the [Build images from scratch](/quickstart#build-images-from-scratch) section.  
 
 ## Interact with Images
-Once you have an image, you can interact with it in several ways. For these examples we will use a `hello-world.img` image that can be downloaded from Singularity Hub like so.
+Once you have an image, you can interact with it in several ways. For these examples we will use a `hello-world.simg` image that can be downloaded from Singularity Hub like so.
 
 ```
-$ singularity pull --name hello-world.img shub://vsoch/hello-world
+$ singularity pull --name hello-world.simg shub://vsoch/hello-world
 
 ```
 
@@ -145,14 +145,14 @@ $ singularity pull --name hello-world.img shub://vsoch/hello-world
 The [`shell`](docs-shell) command allows you to spawn a new shell within your container and interact with it as though it were a small virtual machine.  
 
 ```
-$ singularity shell hello-world.img
+$ singularity shell hello-world.simg
 Singularity: Invoking an interactive shell within container...
 
 # I am the same user inside as outside!
-Singularity hello-world.img:~/Desktop> whoami
+Singularity hello-world.simg:~/Desktop> whoami
 vanessa
 
-Singularity hello-world.img:~/Desktop> id
+Singularity hello-world.simg:~/Desktop> id
 uid=1000(vanessa) gid=1000(vanessa) groups=1000(vanessa),4(adm),24,27,30(tape),46,113,128,999(input)
 ```
 
@@ -163,10 +163,10 @@ $ singularity shell shub://vsoch/hello-world
 ```
 
 ### Executing Commands
-The [`exec`](docs-exec) command allows you to execute a custom command within a container by specifying the image file.  For instance, to list the root (`/`) of our `hello-world.img` image, we could do the following:
+The [`exec`](docs-exec) command allows you to execute a custom command within a container by specifying the image file.  For instance, to list the root (`/`) of our `hello-world.simg` image, we could do the following:
 
 ```
-$ singularity exec hello-world.img ls /
+$ singularity exec hello-world.simg ls /
 anaconda-post.log  etc	 lib64	     mnt   root  singularity  tmp
 bin		   home  lost+found  opt   run	 srv	      usr
 dev		   lib	 media	     proc  sbin  sys	      var
@@ -182,8 +182,8 @@ $ singularity exec shub://singularityhub/ubuntu cat /etc/os-release
 Singularity containers contain "[runscripts](docs-recipes#runscript)".  These are user defined scripts that define the actions a container should perform when someone runs it.  The runscript can be triggered with the [`run`](docs-run) command, or simply by calling the container as though it were an executable.   
 
 ```
-$ singularity run hello-world.img
-$ ./hello-world.img
+$ singularity run hello-world.simg
+$ ./hello-world.simg
 ```
 
 `run` also works with `shub://` and `docker://` URIs.  This creates an ephemeral container that runs and then disappears.  
@@ -198,7 +198,7 @@ Files on the host are reachable from within the container.
 
 ```
 $ echo "Hello World" > $HOME/hello-kitty.txt
-$ singularity exec vsoch-hello-world-master.img cat $HOME/hello-kitty.txt
+$ singularity exec vsoch-hello-world-master.simg cat $HOME/hello-kitty.txt
 Hello World
 ```
 
@@ -208,7 +208,7 @@ You can specify additional directories to bind mount into your container with th
 
 ```
 $ echo "I am your father" >/data/vader.sez
-$ ~/sing-dev/bin/singularity exec --bind /data:/mnt hello-world.img cat /mnt/vader.sez
+$ ~/sing-dev/bin/singularity exec --bind /data:/mnt hello-world.simg cat /mnt/vader.sez
 I am your father
 ```
 
@@ -236,7 +236,7 @@ If you prefer to have a writable image file, you can `build` a container with th
 ```
 $ sudo singularity build --writable ubuntu.img docker://ubuntu
 ```
-This produces an image that is writable with an ext3 file system. Unlike the sandbox, it is a single image file.
+This produces an image that is writable with an ext3 file system. Unlike the sandbox, it is a single image file. Also by convention this file name has an ".img" extension instead of ".simg" .
 
 When you want to alter your image, you can use commands like `shell`, `exec`, `run`, with the `--writable` option. Because of permission issues it may be necessary to execute the container as root to modify it.  
 
