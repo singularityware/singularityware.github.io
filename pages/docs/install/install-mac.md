@@ -45,13 +45,17 @@ vagrant@vagrant:~$ which singularity
 /usr/local/bin/singularity
 vagrant@vagrant:~$ singularity --version
 2.4-dist
-vagrant@vagrant:~$ singularity create test.img
-Initializing Singularity image subsystem
-Opening image file: test.img
-Creating 768MiB image
-Binding image to loop
-Creating file system within image
-Image is done: test.img
+
+vagrant@vagrant:~$ sudo singularity build growl-llo-world.simg shub://vsoch/hello-world
+Cache folder set to /root/.singularity/shub
+Progress |===================================| 100.0% 
+Building from local image: /root/.singularity/shub/vsoch-hello-world-master.simg
+Building Singularity image...
+Singularity container built: growl-llo-world.simg
+Cleaning up...
+vagrant@vagrant:~$ ./growl-llo-world.simg
+RaawwWWWWWRRRR!!
+
 ```
 
 Note that when you do `vagrant up` you can also select the provider, if you use vagrant for multiple providers. For example:
@@ -62,9 +66,9 @@ vagrant up --provider virtualbox
 
 although this isn't entirely necessary if you only have it configured for virtualbox.
 
-## Option 2: Vagrant Box from Scratch
+## Option 2: Vagrant Box from Scratch (more advanced alternative)
 
-If you want to use a different version of Singularity, or want to get more familiar with how Vagrant and VirtualBox work, you can build your own Vagrant Box from scratch.  In this case, we will use the Vagrantfile for `bento/ubuntu-16.04`, however you could also try any of the <a href="https://atlas.hashicorp.com/bento" target="_blank">other bento boxes</a> that are equally delicious. As before, you should first make a separate directory for your Vagrantfile, and then init a base image.
+If you want to get more familiar with how Vagrant and VirtualBox work, you can instead build your own Vagrant Box from scratch.  In this case, we will use the Vagrantfile for `bento/ubuntu-16.04`, however you could also try any of the <a href="https://atlas.hashicorp.com/bento" target="_blank">other bento boxes</a> that are equally delicious. As before, you should first make a separate directory for your Vagrantfile, and then init a base image.
 
 ```bash
 mkdir singularity-2.4

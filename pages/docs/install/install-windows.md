@@ -40,13 +40,16 @@ vagrant@vagrant:~$ which singularity
 /usr/local/bin/singularity
 vagrant@vagrant:~$ singularity --version
 2.4-dist
-vagrant@vagrant:~$ singularity create test.img
-Initializing Singularity image subsystem
-Opening image file: test.img
-Creating 768MiB image
-Binding image to loop
-Creating file system within image
-Image is done: test.img
+
+vagrant@vagrant:~$ sudo singularity build growl-llo-world.simg shub://vsoch/hello-world
+Cache folder set to /root/.singularity/shub
+Progress |===================================| 100.0% 
+Building from local image: /root/.singularity/shub/vsoch-hello-world-master.simg
+Building Singularity image...
+Singularity container built: growl-llo-world.simg
+Cleaning up...
+vagrant@vagrant:~$ ./growl-llo-world.simg
+RaawwWWWWWRRRR!!
 ```
 
 Note that when you do `vagrant up` you can also select the provider, if you use vagrant for multiple providers. For example:
