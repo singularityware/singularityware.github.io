@@ -52,7 +52,7 @@ Building from local image: /root/.singularity/shub/vsoch-hello-world-master.simg
 Building Singularity image...
 Singularity container built: growl-llo-world.simg
 Cleaning up...
-./growl-llo-world.simg
+vagrant@vagrant:~$ ./growl-llo-world.simg
 RaawwWWWWWRRRR!!
 ```
 
