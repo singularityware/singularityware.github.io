@@ -33,6 +33,10 @@ Registry: http://custom_registry
 ```
 The **Registry** keyword is optional.  It will default to `index.docker.io`.
 ```
+Namespace: namespace
+```
+The **Namespace** keyword is optional.  It will default to `library`. 
+```
 IncludeCmd: yes
 ```
 The **IncludeCmd** keyword is optional.  If included, and if a `%runscript` is not specified, a Docker `CMD` will take precedence over `ENTRYPOINT` and will be used as a runscript.  Note that the `IncludeCmd` keyword is considered valid if it is _not empty_!  This means that `IncludeCmd: yes` and `IncludeCmd: no` are identical.  In both cases the `IncludeCmd` keyword is not empty, so the Docker `CMD` will take precedence over an `ENTRYPOINT`.  

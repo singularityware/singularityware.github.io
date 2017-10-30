@@ -40,6 +40,7 @@ vagrant@vagrant:~$ which singularity
 /usr/local/bin/singularity
 vagrant@vagrant:~$ singularity --version
 2.4-dist
+
 vagrant@vagrant:~$ sudo singularity build growl-llo-world.simg shub://vsoch/hello-world
 Cache folder set to /root/.singularity/shub
 Progress |===================================| 100.0% 

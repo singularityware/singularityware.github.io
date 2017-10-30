@@ -30,7 +30,7 @@ The easiest thing to do is to install Singularity on your local workstation:
     sudo make install
 ```
 
-If you have the unfortunate situation of using a Mac, or just need a virtual machine, then you will want to follow the instructions <a href="http://singularity.lbl.gov/install-mac" target="_blank">here</a>. Basically, you need to install vagrant, virtual box, and then do this:
+If you are using a Mac, or just need a virtual machine, then you will want to follow the instructions <a href="http://singularity.lbl.gov/install-mac" target="_blank">here</a>. Basically, you need to install vagrant, virtual box, and then do this:
 
 ```bash
 vagrant init ubuntu/trusty64

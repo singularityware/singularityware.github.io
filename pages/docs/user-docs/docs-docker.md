@@ -92,7 +92,7 @@ Registry: pancakes.registry.index.io
 Namespace: blue/berry/cream
 ```
 
-The power of bootstrap comes with the other stuff that you can do! This means running specific install commands, specifying your containers runscript (what it does when you execute it), adding files, labels, and customizing the environment. Here is a full Singularity file:
+The power of build comes with the other stuff that you can do! This means running specific install commands, specifying your containers runscript (what it does when you execute it), adding files, labels, and customizing the environment. Here is a full Singularity file:
 
 
 ```bash
@@ -196,7 +196,7 @@ Namespace: library
 ```
 
 ## Custom Authentication
-For both import and bootstrap using a build spec file, by default we use the Docker Registry `index.docker.io`. Singularity first tries the call without a token, and then asks for one with pull permissions if the request is defined. However, it may be the case that you want to provide a custom token for a private registry. You have two options. You can either provide a `Username` and `Password` in the build specification file (if stored locally and there is no need to share), or (in the case of doing an import or needing to secure the credentials) you can export these variables to environmental variables. We provide instructions for each of these cases:
+For both import and build using a build spec file, by default we use the Docker Registry `index.docker.io`. Singularity first tries the call without a token, and then asks for one with pull permissions if the request is defined. However, it may be the case that you want to provide a custom token for a private registry. You have two options. You can either provide a `Username` and `Password` in the build specification file (if stored locally and there is no need to share), or (in the case of doing an import or needing to secure the credentials) you can export these variables to environmental variables. We provide instructions for each of these cases:
 
 
 ### Authentication in the Singularity Build File
@@ -258,8 +258,6 @@ Have any more best practices? Please <a href="https://www.github.com/singularity
 
 
 ## Troubleshooting
-Why won't my image bootstrap work? If you can't find an answer on this site, please <a href="https://www.github.com/singularityware/singularity/issues" target="_blank">ping us an issue</a>.
+Why won't my image build work? If you can't find an answer on this site, please <a href="https://www.github.com/singularityware/singularity/issues" target="_blank">ping us an issue</a>.
 If you've found an answer and you'd like to see it on the site for others to benefit from, then post to us <a href="https://www.github.com/singularityware/singularityware.github.io/issues" target="_blank">here</a>.
 
-## Future
-This entire process will hopefully change in two ways. First, we hope to collapse the image creation and bootstrapping, so you have the option to do them both in one full swing. Second, we hope to eventually figure out some kind of solution to import Docker containers without needing sudo.
