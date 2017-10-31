@@ -10,7 +10,7 @@ folder: docs
 ### Why the name "Singularity"?
 A "Singularity" is an astrophysics phenomenon in which a single point becomes infinitely dense. This type of a singularity can thus contain massive quantities of universe within it and thus encapsulating an infinite amount of data within it.
 
-Additionally, the name "Singularity" for me (Greg) also stems back from my past experience working at a company called <a href="https://en.wikipedia.org/wiki/Linuxcare" target="_blank">Linuxcare</a> where the Linux Boot-able Business Card (LNX-BBC) was developed. The BBC, was a Linux rescue disk which paved the way for all live CD bootable distributions using a compressed single image file system called the "singularity".
+Additionally, the name "Singularity" for me (Greg) also stems back from my past experience working at a company called <a href="https://en.wikipedia.org/wiki/Linuxcare" target="_blank">Linuxcare</a> where the Linux Bootable Business Card (LNX-BBC) was developed. The BBC, was a Linux rescue disk which paved the way for all live CD bootable distributions using a compressed single image file system called the "singularity".
 
 The name has **NOTHING** to do with Kurzweil's (among others) prediction that artificial intelligence will abruptly have the ability to reprogram itself, surpass that of human intelligence and take control of the planet. If you are interested in this may I suggest the movie **Terminator 2: Judgement Day**.
 
@@ -79,7 +79,7 @@ As of 2.4, Singularity can support the network namespace to a limited degree. At
 ### Can Singularity support daemon processes?
 Singularity has container "instance" support which allows one to start a container process, within its own namespaces, and use that instance like it was a stand alone, isolated system.
 
-At the moment (as above describes), the network (and UTS) namespace is not well supported, so if you spin up a process daemon, it will exist on your host's network. This means you can run a web server, or any other daemon, from within a container like and access it directly from your host.
+At the moment (as above describes), the network (and UTS) namespace is not well supported, so if you spin up a process daemon, it will exist on your host's network. This means you can run a web server, or any other daemon, from within a container and access it directly from your host.
 
 ### Can a Singularity container be multi-threaded?
 Yes. Singularity imposes no limitations on forks, threads or processes in general.
@@ -120,20 +120,20 @@ $ mpirun -np 20 singularity exec container.img /path/to/contained_mpi_prog
 
 By calling 'mpirun' outside the container, we solve several very complicated work-flow aspects. For example, if 'mpirun' is called from within the container it must have a method for spawning processes on remote nodes. Historically ssh is used for this which means that there must be an sshd running within the container on the remote nodes, and this sshd process must not conflict with the sshd running on that host! It is also possible for the resource manager to launch the job and (in Open MPI's case) the Orted processes on the remote system, but that then requires resource manager modification and container awareness.
 
-In the end, we do not gain anything by calling 'mpirun' from within the container except for increasing the complexity levels and possibly loosing out on some added performance benefits (e.g. if a container wasn't built with the proper OFED as the host).
+In the end, we do not gain anything by calling 'mpirun' from within the container except for increasing the complexity levels and possibly losing out on some added performance benefits (e.g. if a container wasn't built with the proper OFED as the host).
 
 See the Singularity on HPC page for more details.
 
 ### Does Singularity support containers that require GPUs?
 
-Yes. Many users run GPU dependant code within Singularity containers.  The
+Yes. Many users run GPU-dependent code within Singularity containers.  The
 experimental `--nv` option allows you to leverage host GPUs without installing 
 system level drivers into your container. See the [`exec`](/docs-exec#a-gpu-example) command for
 an example.
 
 ## Container portability
 
-### Are Singularity containers kernel dependent?
+### Are Singularity containers kernel-dependent?
 No, never. But sometimes yes.
 
 Singularity is using standard container principals and methods so if you are leveraging any kernel version specific or external patches/module functionality (e.g. OFED), then yes there maybe kernel dependencies you will need to consider.
@@ -142,7 +142,7 @@ Luckily most people that would hit this are people that are using Singularity to
 
 There is also some level of glibc forward compatibility that must be taken into consideration for any container system. For example, I can take a Centos-5 container and run it on Centos-7, but I can not take a Centos-7 container and run it on Centos-5.
 
-note: If you require kernel dependent features, a container platform is probably not the right solution for you.
+note: If you require kernel-dependent features, a container platform is probably not the right solution for you.
 
 ### Can a Singularity container resolve GLIBC version mismatches?
 Yes. Singularity containers contain their own library stack (including the Glibc version that they require to run).
