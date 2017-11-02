@@ -10,12 +10,16 @@ entries:
     output: web, pdf
     folderitems:
 
-    - title: News
-      url: /blog
+    - title: About
+      url: /about
       output: web, pdf
 
-    - title: About Singularity
-      url: /about
+    - title: People
+      url: /people
+      output: web, pdf
+
+    - title: News
+      url: /blog
       output: web, pdf
 
     - title: Presentations
