@@ -6,7 +6,7 @@ folder: docs
 toc: false
 ---
 
-This guide is intended for running Singularity on a computer where you have root (administrative) privileges.  But if you are learning about Singularity on a system where you lack root privileges you can still complete the steps that do not require the `sudo` command.
+This guide is intended for running Singularity on a computer where you have root (administrative) privileges. If you are learning about Singularity on a system where you lack root privileges, you can still complete the steps that do not require the `sudo` command. If you need to request an installation on your shared resource, check out our [requesting an installation](/install-request) help page for information to send to your system administrator.
 
 {% include toc.html %}
 
