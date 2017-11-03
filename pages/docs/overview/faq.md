@@ -34,6 +34,9 @@ Namespaces are selected via command line usage and system administration configu
 All of them! Help us out by letting them know you want Singularity to be included!
 
 
+### How do I request an installation on my resource?
+It's important that your administrator have all of the resources available to him or her to make a decision to install Singularity. We've prepared a [helpful guide](/install-request) that you can send to him or her to start a conversation. If there are any unanswered questions, we recommend that you [reach out](/support).
+
 ## Basic Singularity usage
 
 ### Do you need administrator privileges to use Singularity?
