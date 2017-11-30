@@ -26,7 +26,7 @@ singularity help instance.start
 ```
 
 ## Examples
-These examples use a container from Singularity Hub, but you can use local containers or containers from Docker Hub as well.  For a more detailed look at `instance` usage see [Running Instances](docs-instances).
+These examples use a container from Singularity Hub, but you can use local containers or containers from Docker Hub as well.  For a more detailed look at `instance` usage see [Running Instances](docs-instances.md).
 
 ### Start an instance called cow1 from a container on Singularity Hub
 ```
