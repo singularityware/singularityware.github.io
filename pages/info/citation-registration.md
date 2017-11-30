@@ -18,6 +18,22 @@ PLoS ONE 12(5): e0177459. https://doi.org/10.1371/journal.pone.0177459
 
 And we have a Zenodo DOI for the most recent release: <a target="_blank" href="http://dx.doi.org/10.5281/zenodo.60736"><img src="https://zenodo.org/badge/doi/10.5281/zenodo.60736.svg" alt="10.5281/zenodo.60736"></a><br>
 
+If you are using Singularity Hub, please reference <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0188511" target="_blank">this publication</a>:
+
+```
+Sochat V, Prybol CJ, Kurtzer GM (2017) 
+Enhancing reproducibility in scientific computing: Metrics and registry for Singularity containers. 
+PLoS ONE 12(11): e0188511. https://doi.org/10.1371/journal.pone.0188511
+```
+
+and finally, for a Singularity Registry, please reference <a href="http://joss.theoj.org/papers/050362b7e7691d2a5d0ebed8251bc01e" target="_blank">this work</a>:
+
+```
+Sochat, (2017). 
+Singularity Registry: Open Source Registry for Singularity Images. 
+Journal of Open Source Software, 2(18), 426, doi:10.21105/joss.00426
+```
+
 Please <a href="https://goo.gl/forms/tGBKnKwplNyRZRSm2" target="_blank">Register your Publication</a> so we can tell the world about your work! 
 
 
