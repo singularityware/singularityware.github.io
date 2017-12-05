@@ -63,7 +63,7 @@ If you mount your container without the `--overlay` option, your changes will be
 
 ```
 $ sudo singularity shell ubuntu.simg
-Singularity ubuntu.simg:~> ls foo
+Singularity ubuntu.simg:~> ls /foo
 ls: cannot access 'foo': No such file or directory
 Singularity ubuntu.simg:~> which vim
 Singularity ubuntu.simg:~> exit
