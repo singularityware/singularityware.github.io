@@ -464,7 +464,7 @@ For more examples, for real world scientific recipes we recommend you look at ot
 ## Best Practices for Build Recipes
 When crafting your recipe, it is best to consider the following:
 
-1. To make your container internally modular, use <a href="/docs-apps">SCI-F apps</a>. Shared dependencies (between app modules) can go under `%post`.
+1. To make your container internally modular, use <a href="/docs-scif-apps">SCI-F apps</a>. Shared dependencies (between app modules) can go under `%post`.
 2. For global installs to `%post`, install packages, programs, data, and files into operating system locations (e.g. not `/home`, `/tmp`, or any other directories that might get commonly binded on).
 3. Make your container speak for itself. If your runscript doesn't spit out help, write a `%help` or `%apphelp` section. A good container tells the user how to interact with it.
 4. If you require any special environment variables to be defined, add them the `%environment` and `%appenv` sections of the build recipe.
