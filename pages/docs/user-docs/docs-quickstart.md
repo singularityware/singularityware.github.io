@@ -257,7 +257,7 @@ You can use `build` to convert containers to and from `writable`, `sandbox`, and
 
 
 ### Singularity Recipes
-For a reproducible, production-quality container, we recommend that you build a container with the default (squashfs) file format using a Singularity recipe file. This also makes it easy to add files, environment variables, and install custom software, and still start from your base of choice (e.g., Singylarity Hub). 
+For a reproducible, production-quality container, we recommend that you build a container with the default (squashfs) file format using a Singularity recipe file. This also makes it easy to add files, environment variables, and install custom software, and still start from your base of choice (e.g., Singularity Hub). 
 
 A recipe file has a header and a body.  The header determines what kind of base container to begin with, and the body is further divided into sections (called scriptlets) that do things like install software, setup the environment, and copy files into the container from the host system.  
 
