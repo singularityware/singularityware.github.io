@@ -20,7 +20,12 @@ $HOME/.singularity/shub
 $HOME/.singularity/metadata
 ```
 
-Fear not, you have control to customize this behavior! If you don't want the cache to be created (and a temporary directory will be used), set `SINGULARITY_DISABLE_CACHE` to True/yes, or if you want to move it elsewhere, set `SINGULARITY_CACHEDIR` to the full path where you want to cache. Remember that when you run commands as sudo this will use root's home at `/root` and not your user's home. 
+Fear not, you have control to customize this behavior! If you don't want the cache to be created (and a temporary directory will be used), set `SINGULARITY_DISABLE_CACHE` to True/yes, or if you want to move it elsewhere, set `SINGULARITY_CACHEDIR` to the full path where you want to cache. Remember that when you run commands as sudo this will use root's home at `/root` and not your user's home.
+
+
+## Temporary Folders
+Singularity also uses some temporary directories to build the squashfs filesystem, so this temp space needs to be large enough to hold the entire resulting Singularity image.  By default this happens in /tmp but can be overridden by setting `SINGULARITY_TEMPDIR` to the full path where you want the squashfs temp files to be stored.  Since images are typically built as root, be sure to set this variable in root's environment.
+
 
 ## Pull Folder
 For details about customizing the output location of <a href="/docs-pull">pull</a>, see the<a href="/docs-pull">pull docs.</a> You have the similar ability to set it to be something different, or to customize the name of the pulled image.
@@ -47,11 +52,14 @@ The location and usage of the cache is also determined by environment variables.
 **SINGULARITY_DISABLE_CACHE**
 If you want to disable the cache, this means is that the layers are written to a temporary directory. Thus, if you want to disable cache and write to a temporary folder, simply set `SINGULARITY_DISABLE_CACHE` to any true/yes value. By default, the cache is not disabled.
 
-**SINGULARITY_CACHE**
-Is the base folder for caching layers and singularity hub images. If not defined, it uses default of `$HOME/.singularity`. If defined, the defined location is used instead. If `SINGULARITY_DISABLE_CACHE` is set to True, this value is ignored in favor of a temporary directory. For specific subtypes of things to cache, subdirectories are created (by python), including `$SINGULARITY_CACHE/docker` for docker layers and `$SINGULARITY_CACHE/shub` for Singularity Hub images. If the cache is not created, the Python script creates it.
+**SINGULARITY_CACHEDIR**
+Is the base folder for caching layers and singularity hub images. If not defined, it uses default of `$HOME/.singularity`. If defined, the defined location is used instead. If `SINGULARITY_DISABLE_CACHE` is set to True, this value is ignored in favor of a temporary directory. For specific subtypes of things to cache, subdirectories are created (by python), including `$SINGULARITY_CACHEDIR/docker` for docker layers and `$SINGULARITY_CACHEDIR/shub` for Singularity Hub images. If the cache is not created, the Python script creates it.
 
 **SINGULARITY_PULLFOLDER**
 While this isn't relevant for build, since build is close to pull, we will include it here. By default, images are pulled to the present working directory. The user can change this variable to change that.
+
+**SINGULARITY_TEMPDIR**
+Is the base folder for squashfs image temporary building. If not defined, it uses default of `$TEMPDIR`.  If defined, the defined location is used instead.  
 
 
 ### Defaults
