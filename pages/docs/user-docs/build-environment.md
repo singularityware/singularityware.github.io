@@ -23,7 +23,7 @@ $HOME/.singularity/metadata
 Fear not, you have control to customize this behavior! If you don't want the cache to be created (and a temporary directory will be used), set `SINGULARITY_DISABLE_CACHE` to True/yes, or if you want to move it elsewhere, set `SINGULARITY_CACHEDIR` to the full path where you want to cache. Remember that when you run commands as sudo this will use root's home at `/root` and not your user's home.
 
 
-## Temp Folders
+## Temporary Folders
 Singularity also uses some temporary directories to build the squashfs filesystem, so this temp space needs to be large enough to hold the entire resulting Singularity image.  By default this happens in /tmp but can be overridden by setting `SINGULARITY_TEMPDIR` to the full path where you want the squashfs temp files to be stored.  Since images are typically built as root, be sure to set this variable in root's environment.
 
 
