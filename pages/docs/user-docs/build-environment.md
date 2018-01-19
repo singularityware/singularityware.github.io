@@ -24,7 +24,7 @@ Fear not, you have control to customize this behavior! If you don't want the cac
 
 
 ## Temporary Folders
-Singularity also uses some temporary directories to build the squashfs filesystem, so this temp space needs to be large enough to hold the entire resulting Singularity image.  By default this happens in /tmp but can be overridden by setting `SINGULARITY_TEMPDIR` to the full path where you want the squashfs temp files to be stored.  Since images are typically built as root, be sure to set this variable in root's environment.
+Singularity also uses some temporary directories to build the squashfs filesystem, so this temp space needs to be large enough to hold the entire resulting Singularity image.  By default this happens in /tmp but can be overridden by setting `SINGULARITY_TMPDIR` to the full path where you want the squashfs temp files to be stored.  Since images are typically built as root, be sure to set this variable in root's environment.
 
 
 ## Pull Folder
@@ -58,7 +58,7 @@ Is the base folder for caching layers and singularity hub images. If not defined
 **SINGULARITY_PULLFOLDER**
 While this isn't relevant for build, since build is close to pull, we will include it here. By default, images are pulled to the present working directory. The user can change this variable to change that.
 
-**SINGULARITY_TEMPDIR**
+**SINGULARITY_TMPDIR**
 Is the base folder for squashfs image temporary building. If not defined, it uses default of `$TEMPDIR`.  If defined, the defined location is used instead.  
 
 
