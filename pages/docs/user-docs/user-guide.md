@@ -41,7 +41,7 @@ Replicating a virtual machine cloud like environment within an existing HPC reso
 
 Singularity supports existing and traditional HPC resources as easily as installing a single package onto the host operating system. Custom configurations may be achieved via a single configuration file, and the defaults are tuned to be generally applicable for shared environments.
 
-Singularity can run on host Linux distributions from RHEL6 (RHEL5 for versions lower then 2.2) and similar vintages, and the contained images have been tested as far back as Linux 2.2 (approximately 14 years old). Singularity natively supports InfiniBand, Lustre, and works seamlessly with all resource managers (e.g. SLURM, Torque, SGE, etc.) because it works like running any other command on the system. It also has built-in support for MPI and for containers that need to leverage GPU resources.  
+Singularity can run on host Linux distributions from RHEL6 (RHEL5 for versions lower than 2.2) and similar vintages, and the contained images have been tested as far back as Linux 2.2 (approximately 14 years old). Singularity natively supports InfiniBand, Lustre, and works seamlessly with all resource managers (e.g. SLURM, Torque, SGE, etc.) because it works like running any other command on the system. It also has built-in support for MPI and for containers that need to leverage GPU resources.
 
 
 ## A High Level View of Singularity
@@ -77,7 +77,7 @@ There are numerous benefits for using a single file image for the entire contain
 #### Copying, sharing, branching, and distributing your image
 A primary goal of Singularity is mobility. The single file image format makes mobility easy. Because Singularity images are single files, they are easily copied and managed. You can copy the image to create a branch, share the image and distribute the image as easily as copying any other file you control! 
 
-If you want an automated solution for building and hosting your image, you can use our container registry <a href="https://singularity-hub.org" target="_blank">Singularity Hub</a>. Singulairty Hub can automatically build [Singularity recipe files](/docs-recipes) from a Github repository each time that you push. It provides a simple cloud solution for storing and sharing your image.  If you want to host your own Registry, then you should check out <a href="https://www.github.com/singularityhub/sregistry" target="_blank">Singularity Registry</a>. If you have ideas or suggestions for how Singularity can better support reproducible science, please <a href="/support">reach out!</a>.
+If you want an automated solution for building and hosting your image, you can use our container registry <a href="https://singularity-hub.org" target="_blank">Singularity Hub</a>. Singularity Hub can automatically build [Singularity recipe files](/docs-recipes) from a Github repository each time that you push. It provides a simple cloud solution for storing and sharing your image.  If you want to host your own Registry, then you should check out <a href="https://www.github.com/singularityhub/sregistry" target="_blank">Singularity Registry</a>. If you have ideas or suggestions for how Singularity can better support reproducible science, please <a href="/support">reach out!</a>.
 
 
 #### Supported container formats

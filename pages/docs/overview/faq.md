@@ -26,13 +26,16 @@ While Singularity is a container solution (like many others), Singularity differ
 ### Which namespaces are virtualized? Is that select-able?
 That is up to you!
 
-While some namespaces, like newns (mount) and fs (file system) must be virtualized, all of the others are conditional depending on what you want to do. For example, if you have a workflow that relies on communication between containers (e.g. MPI), it is best to not isolate any more then absolutely necessary to avoid performance regressions. While other tasks are better suited for isolation (e.g. web and data base services).
+While some namespaces, like newns (mount) and fs (file system) must be virtualized, all of the others are conditional depending on what you want to do. For example, if you have a workflow that relies on communication between containers (e.g. MPI), it is best to not isolate any more than absolutely necessary to avoid performance regressions. While other tasks are better suited for isolation (e.g. web and data base services).
 
 Namespaces are selected via command line usage and system administration configuration.
 
 ### What Linux distributions are you trying to get on-board?
 All of them! Help us out by letting them know you want Singularity to be included!
 
+
+### How do I request an installation on my resource?
+It's important that your administrator have all of the resources available to him or her to make a decision to install Singularity. We've prepared a [helpful guide](/install-request) that you can send to him or her to start a conversation. If there are any unanswered questions, we recommend that you [reach out](/support).
 
 ## Basic Singularity usage
 
@@ -111,7 +114,7 @@ While we know for a fact that Singularity can support multiple MPI implementatio
 
 note: We have seen no major performance impact from running a job in a Singularity container.
 
-### Why do we call 'mpirun' from outside the container (rather then inside)?
+### Why do we call 'mpirun' from outside the container (rather than inside)?
 With Singularity, the MPI usage model is to call 'mpirun' from outside the container, and reference the container from your 'mpirun' command. Usage would look like this:
 
 ```bash

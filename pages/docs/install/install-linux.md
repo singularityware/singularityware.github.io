@@ -196,4 +196,7 @@ $ echo "echo SKIPPING TESTS THEYRE BROKEN" > ./test.sh
 $ fakeroot dpkg-buildpackage -nc -b -us -uc # this will continue the previous build without an initial 'make clean'
 ```
 
+## Install on your Cluster Resource
+In the case that you want Singularity installed on a shared resource, you will need to talk to the administrator of the resource. Toward this goal, we've prepared a [helpful guide](/install-request) that you can send to him or her. If you have unanswered questions, please [reach out](/support).
+
 {% include links.html %}

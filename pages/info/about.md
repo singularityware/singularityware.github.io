@@ -102,10 +102,10 @@ When Singularity is executed, the calling user is maintained within the containe
 
 Singularity also limits a user's ability to escalate privileges within the container. Even if the user works in their own environment where they configured 'sudo' or even removed root's password, they will not be able to 'sudo' or 'su' to root. If you want to be root inside the container, you must first be root outside the container.
 
-Because of this model, it becomes possible to blur the line of access between what is contained and what is on the host as Singularity does not grant the user any more access then they already have. It also enables the implementation on shared/multi-tenant resources.
+Because of this model, it becomes possible to blur the line of access between what is contained and what is on the host as Singularity does not grant the user any more access than they already have. It also enables the implementation on shared/multi-tenant resources.
 
 ### No root owned daemon processes
-Singularity does not utilize a daemon process to manage the containers. While daemon processes do facilitate certain types of workflows and privilege escalation, it breaks all resource controlled environments. This is because a user's job becomes a subprocess of the daemon (rather then the user's shell) and the daemon process is outside of the reach of a resource manager or batch scheduler.
+Singularity does not utilize a daemon process to manage the containers. While daemon processes do facilitate certain types of workflows and privilege escalation, it breaks all resource controlled environments. This is because a user's job becomes a subprocess of the daemon (rather than the user's shell) and the daemon process is outside of the reach of a resource manager or batch scheduler.
 
 Additionally, securing a root owned daemon process which is designed to manipulate the host's environment becomes tricky. In currently implemented models, it is possible to grant permissions to users to control the daemon, or not. There is no sense of ACL's or access of what users can and can not do.
 
