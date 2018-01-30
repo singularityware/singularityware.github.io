@@ -24,7 +24,23 @@ Fear not, you have control to customize this behavior! If you don't want the cac
 
 
 ## Temporary Folders
-Singularity also uses some temporary directories to build the squashfs filesystem, so this temp space needs to be large enough to hold the entire resulting Singularity image.  By default this happens in /tmp but can be overridden by setting `SINGULARITY_TMPDIR` to the full path where you want the squashfs temp files to be stored.  Since images are typically built as root, be sure to set this variable in root's environment.
+Singularity also uses some temporary directories to build the squashfs filesystem, so this temp space needs to be large enough to hold the entire resulting Singularity image.  By default this happens in `/tmp` but can be overridden by setting `SINGULARITY_TMPDIR` to the full path where you want the squashfs temp files to be stored.  Since images are typically built as root, be sure to set this variable in root's environment.
+
+If you are building an image on the fly, for example"
+
+```
+singularity exec docker://busybox /bin/sh
+```
+
+by default a temporary runtime directory is created that looks like `/tmp/.singularity-runtime.xxxxxxxx`. This can be problematic for some `/tmp` directories that are hosted at Jetstream/OpenStack, Azure, and possibly EC2, which are very small. If you need to change the location of this runtime, then **export** the variable `$SINGULARITY_LOCALCACHEDIR`.
+
+```
+SINGULARITY_LOCALCADHEDIR=/tmp/pancakes
+export SINGULARITY_LOCALCADHEDIR
+singularity exec docker://busybox /bin/sh
+```
+
+The above runtime folder would be created under `/tmp/pancakes/.singularity-runtime.xxxxxxxx`
 
 
 ## Pull Folder
@@ -61,6 +77,14 @@ While this isn't relevant for build, since build is close to pull, we will inclu
 **SINGULARITY_TMPDIR**
 Is the base folder for squashfs image temporary building. If not defined, it uses default of `$TEMPDIR`.  If defined, the defined location is used instead.  
 
+**SINGULARITY_LOCALCACHEDIR**
+Is the temporary folder (default `/tmp`) to generate runtime folders (containers "on the fly") typically a `run`, `exec`, or `shell` or a `docker://` image. This is different from where downloaded layers are cached (`$SINGULARITY_CACHEDIR`) or pulled (`$SINGULARITY_PULLFOLDER`) or where a (non on-the-fly build) happens (`$SINGULARITY_TMPDIR`). See [temporary folders](#temporary-folders) above for an example. You can generally determine the value of this setting by running a command with `--debug`, and seeing the last line "Removing directory:"
+
+```
+singularity --debug run docker://busybox echo "pizza!"
+...
+DEBUG   [U=1000,P=960]     s_rmdir()                                 Removing directory: /tmp/.singularity-runtime.oArO0k
+```
 
 ### Defaults
 The following variables have defaults that can be customized by you via environment variables at runtime. 
