@@ -27,6 +27,10 @@ entries:
       url: /docs-build-container
       output: web, pdf
 
+    - title: Build Environment
+      url: /build-environment
+      output: web, pdf
+
     - title: Container Recipes
       url: /docs-recipes
       output: web, pdf
