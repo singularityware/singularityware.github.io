@@ -43,6 +43,15 @@ $ sudo make install
 
 ***NOTE: The `make install` above must be run as root to have Singularity properly installed. Failure to install as root will cause Singularity to not function properly or have limited functionality when run by a non-root user.***
 
+Also note that when you configure, `squashfs-tools` is **not** required, however it is required for full functionality. You will see this message after the configuration:
+
+```
+mksquashfs from squash-tools is required for full functionality
+```
+
+If you choose not to install `squashfs-tools`, you will hit an error when your users try a pull from Docker Hub, for example.
+
+
 ### Building an RPM directly from the source
 Singularity includes all of the necessary bits to properly create an RPM package directly from the source tree, and you can create an RPM by doing the following:
 
