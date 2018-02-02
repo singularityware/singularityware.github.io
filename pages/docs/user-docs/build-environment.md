@@ -34,8 +34,8 @@ singularity exec docker://busybox /bin/sh
 by default a temporary runtime directory is created that looks like `/tmp/.singularity-runtime.xxxxxxxx`. This can be problematic for some `/tmp` directories that are hosted at Jetstream/OpenStack, Azure, and possibly EC2, which are very small. If you need to change the location of this runtime, then **export** the variable `$SINGULARITY_LOCALCACHEDIR`.
 
 ```
-SINGULARITY_LOCALCADHEDIR=/tmp/pancakes
-export SINGULARITY_LOCALCADHEDIR
+SINGULARITY_LOCALCACHEDIR=/tmp/pancakes
+export SINGULARITY_LOCALCACHEDIR
 singularity exec docker://busybox /bin/sh
 ```
 
