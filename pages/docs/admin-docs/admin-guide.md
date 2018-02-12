@@ -43,6 +43,14 @@ $ sudo make install
 
 ***NOTE: The `make install` above must be run as root to have Singularity properly installed. Failure to install as root will cause Singularity to not function properly or have limited functionality when run by a non-root user.***
 
+Also note that when you configure, `squashfs-tools` is **not** required, however it is required for full functionality. You will see this message after the configuration:
+
+```
+mksquashfs from squash-tools is required for full functionality
+```
+
+If you choose not to install `squashfs-tools`, you will hit an error when your users try a pull from Docker Hub, for example.
+
 ### Prefix in special places (--localstatedir)
 
 As with most autotools-based build scripts, you are able to supply the `--prefix` argument to the configure script to change where Singularity will be installed. Care must be taken when this path is not a local filesystem or has atypical permissions. The local state directories used by Singularity at runtime will also be placed under the supplied `--prefix` and this will cause malfunction if the tree is read-only. You may also experience issues if this directory is shared between several hosts/nodes that might run Singularity simultaneously.

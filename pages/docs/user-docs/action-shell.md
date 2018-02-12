@@ -25,7 +25,7 @@ Singularity centos7.img:~> echo $SHELL
 /bin/bash
 ```
 
-Additionally any arguments passed to the Singularity command (after the container name) will be passed to the called shell within the container, and shell can be used across image types. Here is a quick example of shelling into a container assembled from Docker layers.
+Additionally any arguments passed to the Singularity command (after the container name) will be passed to the called shell within the container, and shell can be used across image types. Here is a quick example of shelling into a container assembled from Docker layers. We highly recommend that you look at the `singularity shell help` and our documentation on [flags](/action-flags) to better customize this command.
 
 {% include asciicast.html source='shell_from_docker.js' uid='how-to-shell-from-docker' title='How to shell into container from Docker' author='davidgodlove@gmail.com'%}
 

@@ -32,6 +32,9 @@ Use the `instance://<instance name>` syntax like so:
 $ singularity exec instance://my-instance cat /etc/os-release
 ```
 
+### Runtime Flags
+If you are interested in containing an environment or filesystem locations, we highly recommend that you look at the `singularity run help` and our documentation on [flags](/action-flags) to better customize this command.
+
 ### Special Characters
 And properly passing along special characters to the program within the container.
 

@@ -6,7 +6,7 @@ folder: docs
 toc: false
 ---
 
-Singularity containers support environment variables and labels that you can add to your container during the build process.
+Singularity containers support environment variables and labels that you can add to your container during the build process. This page details general information about defining environments and labels. If you are looking for specific environment variables for build time, see [build environment](/build-environment).
 
 {% include toc.html %}
 

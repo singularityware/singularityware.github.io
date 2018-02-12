@@ -36,7 +36,10 @@ $ singularity exec centos7.img cat /.singularity.d/runscript
 exec /bin/bash "$@"
 ```
 
-Notice how the runscript has bash followed by `$@`? This is good practice to include in a runscript, as any arguments passed by the user will be given to the container. Thus, I could send a command to the container for bash to run:
+Notice how the runscript has bash followed by `$@`? This is good practice to include in a runscript, as any arguments passed by the user will be given to the container.
+
+## Runtime Flags
+If you are interested in containing an environment or filesystem locations, we highly recommend that you look at the `singularity run help` and our documentation on [flags](/action-flags) to better customize this command.
 
 ## Examples
 In this example the container has a very simple runscript defined.
