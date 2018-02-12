@@ -44,20 +44,7 @@ note: The 'make install' is required to be run as root to get a properly install
 
 ### Prefix in special places
 
-As with most autotools-based build scripts, you are able to supply the `--prefix` argument to the configure script to change where Singularity will be installed. Care must be taken when this path is not a local filesystem or has atypical permissions. The local state directories used by Singularity at runtime will also be placed under the supplied `--prefix` and this will cause malfunction if the tree is read-only. You may also experience issues if this directory is shared between several hosts/nodes that might run Singularity simultaniously.
-
-In such cases, you should specify the `--localstatedir` variable in addition to `--prefix`. This will override the prefix, instead placing the local state directories within the path explicitly provided. Ideally this should be within the local filesystem, specific to only a single host or node.
-
-For example, the Makefile contains this variable by default:
-```bash
-CONTAINER_OVERLAY = ${prefix}/var/singularity/mnt/overlay
-```
-
-By supplying the configure argument `--localstatedir=/some/other/place` Singularity will instead be built with the following. Note that `${prefix}/var` that has been replaced by the supplied value:
-```bash
-CONTAINER_OVERLAY = /some/other/place/singularity/mnt/overlay
-```
-
+If you build Singularity with a non-standard `--prefix` argument, please be sure to review the <a href="../admin-docs/admin-guide">admin guide</a> for details regarding the `--localstatedir` variable. This is especially important in environments utilizing shared filesystems.
 
 ### Updating
 
@@ -204,7 +191,7 @@ To build a deb package for Debian/Ubuntu/LinuxMint invoke the following commands
 $ fakeroot dpkg-buildpackage -b -us -uc # sudo will ask for a password to run the tests
 $ sudo dpkg -i ../singularity-container_2.3_amd64.deb
 ```
- 
+
 Note that the tests will fail if singularity is not already installed on your system. This is the case when you run this procedure for the first time.
 In that case run the following sequence:
 
