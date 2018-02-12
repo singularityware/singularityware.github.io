@@ -51,6 +51,10 @@ note: The 'make install' is required to be run as root to get a properly install
 {% include asciicast.html source='install-singularity.js' uid='install-singularity' title='Install Singularity' author='vsochat@stanford.edu' %}
 
 
+### Prefix in special places
+
+If you build Singularity with a non-standard `--prefix` argument, please be sure to review the <a href="/admin-guide">admin guide</a> for details regarding the `--localstatedir` variable. This is especially important in environments utilizing shared filesystems.
+
 ### Updating
 
 To update your Singularity version, you might want to first delete the executables for the old version:
@@ -196,7 +200,7 @@ To build a deb package for Debian/Ubuntu/LinuxMint invoke the following commands
 $ fakeroot dpkg-buildpackage -b -us -uc # sudo will ask for a password to run the tests
 $ sudo dpkg -i ../singularity-container_2.3_amd64.deb
 ```
- 
+
 Note that the tests will fail if singularity is not already installed on your system. This is the case when you run this procedure for the first time.
 In that case run the following sequence:
 

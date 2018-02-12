@@ -51,6 +51,33 @@ mksquashfs from squash-tools is required for full functionality
 
 If you choose not to install `squashfs-tools`, you will hit an error when your users try a pull from Docker Hub, for example.
 
+### Prefix in special places (--localstatedir)
+
+As with most autotools-based build scripts, you are able to supply the `--prefix` argument to the configure script to change where Singularity will be installed. Care must be taken when this path is not a local filesystem or has atypical permissions. The local state directories used by Singularity at runtime will also be placed under the supplied `--prefix` and this will cause malfunction if the tree is read-only. You may also experience issues if this directory is shared between several hosts/nodes that might run Singularity simultaneously.
+
+In such cases, you should specify the `--localstatedir` variable in addition to `--prefix`. This will override the prefix, instead placing the local state directories within the path explicitly provided. Ideally this should be within the local filesystem, specific to only a single host or node.
+
+For example, the Makefile contains this variable by default:
+```bash
+CONTAINER_OVERLAY = ${prefix}/var/singularity/mnt/overlay
+```
+
+By supplying the configure argument `--localstatedir=/some/other/place` Singularity will instead be built with the following. Note that `${prefix}/var` that has been replaced by the supplied value:
+```bash
+CONTAINER_OVERLAY = /some/other/place/singularity/mnt/overlay
+```
+
+In the case of cluster nodes, you will need to ensure the following directories are created on all nodes, with `root:root` ownership and `0755` permissions:
+
+```bash
+${localstatedir}/singularity/mnt
+${localstatedir}/singularity/mnt/container
+${localstatedir}/singularity/mnt/final
+${localstatedir}/singularity/mnt/overlay
+${localstatedir}/singularity/mnt/session
+```
+
+Singularity will fail to execute without these directories. They are normally created by the install make target; when using a local directory for `--localstatedir` these will only be created on the node `make` is run on.
 
 ### Building an RPM directly from the source
 Singularity includes all of the necessary bits to properly create an RPM package directly from the source tree, and you can create an RPM by doing the following:
@@ -86,4 +113,3 @@ $ rpmbuild -ta --define="_prefix $PREFIX" --define "_sysconfdir $PREFIX/etc" --d
 ```
 
 We recommend you look at our <a href="/docs-security">security admin guide</a> to get further information about container priviledges and mounting.
-
