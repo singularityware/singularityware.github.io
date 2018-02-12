@@ -53,7 +53,7 @@ note: The 'make install' is required to be run as root to get a properly install
 
 ### Prefix in special places
 
-If you build Singularity with a non-standard `--prefix` argument, please be sure to review the <a href="../admin-docs/admin-guide">admin guide</a> for details regarding the `--localstatedir` variable. This is especially important in environments utilizing shared filesystems.
+If you build Singularity with a non-standard `--prefix` argument, please be sure to review the <a href="/admin-guide">admin guide</a> for details regarding the `--localstatedir` variable. This is especially important in environments utilizing shared filesystems.
 
 ### Updating
 
