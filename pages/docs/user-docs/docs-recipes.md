@@ -84,7 +84,7 @@ Help me. I'm in the container.
 ```
 
 #### %setup
-Commands in the `%setup` section are executed on the host system outside of the container after the base OS has been installed.  For versions earlier than 2.3, or if you need files during `%post`, you should copy files from your host to `$SINGULARITY_ROOTFS` to move them into the container. For >2.3 and cases when you don't need the files until after `%post`, we recommend you use `%files` section. We can see the difference between `%setup` and `%post` in the following asciicast:
+Commands in the `%setup` section are executed on the host system outside of the container after the base OS has been installed.  For versions earlier than 2.3 if you need files during `%post`, you should copy files from your host to `$SINGULARITY_ROOTFS` to move them into the container. For >2.3 you can add files to the container (added before `%post`) using the `%files` section. We can see the difference between `%setup` and `%post` in the following asciicast:
 
 {% include asciicast.html source='docs-bootstrap-setup-vs-post.json' uid='container-setup-vs-post' title='How does the container see setup vs post?' author='vsochat@stanford.edu'%}
 
@@ -124,7 +124,7 @@ If you want to copy files from your host system into the container, you should d
 
 The `%files` section uses the traditional `cp` command, so the <a href="https://linux.die.net/man/1/cp" target="_blank">same conventions apply</a>. 
 
-Files are copied **after** any `%post` or installation procedures, so if you need the copied files or directories to exist during `%post` you must do this via `%setup`. Let's add the avocado.txt into the container, to join tacos.txt.
+Files are copied **before** any `%post` or installation procedures for Singularity versions > 2.3. If you are using a legacy version, files are copied after `%post` so you must do this via `%setup`. Let's add the avocado.txt into the container, to join tacos.txt.
 
 ```
 Bootstrap: docker
@@ -133,13 +133,16 @@ From: ubuntu
 %help
 Help me. I'm in the container.
 
+# Both of the below are copied before %post
+# 1. This is how to copy files for legacy < 2.3
 %setup
     touch ${SINGULARITY_ROOTFS}/tacos.txt
     touch avocados.txt
 
+# 2. This is how to copy files for >= 2.3
 %files
-avocados.txt
-avocados.txt /opt
+    avocados.txt
+    avocados.txt /opt
 ```
 Notice that I'm adding the same file to two different places. For the first, I'm adding the single file to the root of the image. For the second, I'm adding it to opt. Does it work?
 
@@ -172,12 +175,12 @@ Help me. I'm in the container.
     touch avocados.txt
 
 %files
-avocados.txt
-avocados.txt /opt    
+    avocados.txt
+    avocados.txt /opt    
 
 %labels
-Maintainer Vanessasaurus
-Version v1.0
+    Maintainer Vanessasaurus
+    Version v1.0
 ```
 The easiest way to see labels is to inspect the image:
 
@@ -221,12 +224,12 @@ Help me. I'm in the container.
     touch avocados.txt
 
 %files
-avocados.txt
-avocados.txt /opt    
+    avocados.txt
+    avocados.txt /opt    
 
 %labels
-Maintainer Vanessasaurus
-Version v1.0
+    Maintainer Vanessasaurus
+    Version v1.0
 
 %environment
     VADER=badguy
@@ -308,12 +311,12 @@ Help me. I'm in the container.
     touch avocados.txt
 
 %files
-avocados.txt
-avocados.txt /opt    
+    avocados.txt
+    avocados.txt /opt    
 
 %labels
-Maintainer Vanessasaurus
-Version v1.0
+    Maintainer Vanessasaurus
+    Version v1.0
 
 %environment
     VADER=badguy
