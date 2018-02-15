@@ -367,7 +367,7 @@ This argument is useful in cases where you need hardware that is available durin
 
 
 ## Apps
-What if you want to build a single container with two or three different apps that each have thier own runscripts and custom environments? In some circumstances, it may be redundant to build different containers for each app with almost equivalent dependencies. 
+What if you want to build a single container with two or three different apps that each have their own runscripts and custom environments? In some circumstances, it may be redundant to build different containers for each app with almost equivalent dependencies. 
 
 Starting in Singularity 2.4 all of the above commands can also be used in the context of internal modules called <a href="/docs-apps">apps</a> based on the <a href="http://containers-ftw.org/SCI-F/" target="_blank">Standard Container Integration Format</a>. For details on apps, see the <a href="/docs-apps">apps</a> documentation. For a quick rundown of adding an app to your container, here is an example runscript:
 
@@ -461,7 +461,7 @@ SOFTWARE=bar
 ```
 
 ## Examples
-For more examples, for real world scientific recipes we recommend you look at other containers on <a href="https://singularity-hub.org" target="_blank">Singularity Hub</a>. For examples of different bases, look at the <a href="{{ site.repo}}/tree/master/examples" target="_blank">examples</a> folder for the most up-to-date examples. For apps, including snippets and tutorial with more walk throughts, see <a href="http://containers-ftw.org/apps/" target="_blank">SCI-F Apps Home</a>.
+For more examples, for real world scientific recipes we recommend you look at other containers on <a href="https://singularity-hub.org" target="_blank">Singularity Hub</a>. For examples of different bases, look at the <a href="{{ site.repo}}/tree/master/examples" target="_blank">examples</a> folder for the most up-to-date examples. For apps, including snippets and tutorial with more walk throughts, see <a href="https://sci-f.github.io" target="_blank">SCI-F Apps Home</a>.
 
 
 ## Best Practices for Build Recipes
