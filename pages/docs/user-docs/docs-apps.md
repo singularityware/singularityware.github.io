@@ -62,7 +62,7 @@ You obviously can't have them at separate times. You'd have to source some custo
  - All software must share the same metadata, environment, and labels. 
 
 
-Under these conditions, containers are at best block boxes with unclear delineation between software provided, and only one context of running anything. The container creator shouldn't need to spend inordinate amounts of time writing custom runscripts to support multiple functions and inputs. Each of `foo` and `bar` should be easy to define, and have it's own runscript, environment, labels, tests, and help section.
+Under these conditions, containers are at best block boxes with unclear delineation between software provided, and only one context of running anything. The container creator shouldn't need to spend inordinate amounts of time writing custom runscripts to support multiple functions and inputs. Each of `foo` and `bar` should be easy to define, and have its own runscript, environment, labels, tests and help section.
 
 
 ### Container Transparency
