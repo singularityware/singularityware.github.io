@@ -6,7 +6,7 @@ toc: false
 folder: docs
 ---
 
-A Singularity Recipe is the driver of a custom build, and the starting point for designing any custom container. It includes specifics about installation software, environment variables, files to add, and container metadata. You can even write a help section, or define modular components in the container called <a href="/apps"></a> based on the <a href="https://containers-ftw.github.io/SCI-F/" target="_blank">Standard Container Integration Format (SCI-F)</a>.
+A Singularity Recipe is the driver of a custom build, and the starting point for designing any custom container. It includes specifics about installation software, environment variables, files to add, and container metadata. You can even write a help section, or define modular components in the container called <a href="/apps"></a> based on the <a href="https://sci-f.github.io/" target="_blank">Scientific Filesystem</a>.
 
 {% include toc.html %}
 
@@ -369,7 +369,7 @@ This argument is useful in cases where you need hardware that is available durin
 ## Apps
 What if you want to build a single container with two or three different apps that each have their own runscripts and custom environments? In some circumstances, it may be redundant to build different containers for each app with almost equivalent dependencies. 
 
-Starting in Singularity 2.4 all of the above commands can also be used in the context of internal modules called <a href="/docs-apps">apps</a> based on the <a href="http://containers-ftw.org/SCI-F/" target="_blank">Standard Container Integration Format</a>. For details on apps, see the <a href="/docs-apps">apps</a> documentation. For a quick rundown of adding an app to your container, here is an example runscript:
+Starting in Singularity 2.4 all of the above commands can also be used in the context of internal modules called <a href="/docs-apps">apps</a> based on the <a href="https://sci-f.github.io" target="_blank">Standard Container Integration Format</a>. For details on apps, see the <a href="/docs-apps">apps</a> documentation. For a quick rundown of adding an app to your container, here is an example runscript:
 
 ```
 Bootstrap: docker

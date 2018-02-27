@@ -183,7 +183,7 @@ When you add the `--checks` option along with applicable tags to the `build` com
 
 ## More Build topics 
  - If you want to **customize the cache location** (where Docker layers are downloaded on your system), specify Docker credentials, or any custom tweaks to your build environment, see <a href="/build-environment">build environment</a>. 
- - If you want to make internally **modular containers**, check out <a href="http://containers-ftw.org/apps/examples/tutorials/getting-started" target="_blank">this post</a>.
+ - If you want to make internally **modular containers**, check out the getting started guide <a href="http://sci-f.github.io/tutorials" target="_blank">here</a>.
  - If you want to **build your containers** on Singularity Hub, (because you don't have root access on a Linux machine or want to host your container on the cloud) check out [this guide](https://github.com/singularityhub/singularityhub.github.io/wiki).
 
 <script>
