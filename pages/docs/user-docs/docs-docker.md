@@ -13,7 +13,7 @@ Singularity is good friends with Docker. The reason is because the developers us
 - You can shell into a Singularity-ized Docker image
 - You can run a Docker image instantly as a Singularity image
 - You can pull a Docker image (without sudo) 
-- You can build images with bases from assembed Docker layers that include environment, guts, and labels
+- You can build images with bases from assembled Docker layers that include environment, guts, and labels
 
 
 # TLDR (Too Long Didn't Read)
@@ -135,7 +135,7 @@ IncludeCmd: yes
     echo "Post install stuffs!"
 ```
 
-Did you know that you can commit this Singularity file to a Github repo and it will automatically build for you when you push to <a href="https://singularity-hub.org" target="_blank">Singularity Hub?</a>. This will ensure maximum reproducibility of your work.
+Did you know that you can commit this Singularity file to a GitHub repo and it will automatically build for you when you push to <a href="https://singularity-hub.org" target="_blank">Singularity Hub?</a>. This will ensure maximum reproducibility of your work.
 
 
 ## How does the runscript work?
@@ -158,7 +158,7 @@ Given the definition, the `ENTRYPOINT` is most appropriate for the Singularity `
 
 ## How do I specify my Docker image?
 
-In the example above, you probably saw that we referened the docker image first with the uri `docker://` and that is important to tell Singularity that it will be pulling Docker layers. To ask for ubuntu, we asked for `docker://ubuntu`. This uri that we give to Singularity is going to be very important to choose the following Docker metadata items:
+In the example above, you probably saw that we referenced the docker image first with the uri `docker://` and that is important to tell Singularity that it will be pulling Docker layers. To ask for ubuntu, we asked for `docker://ubuntu`. This uri that we give to Singularity is going to be very important to choose the following Docker metadata items:
 
 - registry   (e.g., "index.docker.io")
 - namespace  (e.g., "library")

@@ -72,7 +72,7 @@ $ singularity inspect dino.img
 }
 ```
 
-You will notice that the one label doesn't belong to the label schema, `MAINTAINER`. This was a user provided label during bootstrap. Finally, for Singularity versions >= 2.4, the image build size is added as a label, `org.label-schema.build-size`, and the label schema is used througout. For versions earlier than 2.4, containers did not use the label schema, and looked like this:
+You will notice that the one label doesn't belong to the label schema, `MAINTAINER`. This was a user provided label during bootstrap. Finally, for Singularity versions >= 2.4, the image build size is added as a label, `org.label-schema.build-size`, and the label schema is used throughout. For versions earlier than 2.4, containers did not use the label schema, and looked like this:
 
 ```
 singularity exec centos7.img cat /.singularity.d/labels.json
@@ -125,7 +125,7 @@ Inside of the container, metadata is stored in the `/.singularity.d` directory. 
 - **labels.json**: The json file that stores a containers labels described above.
 - **libs**: At runtime the user may request some host-system libraries to be mapped into the container (with the `--nv` option for example). If so, this is their destination.  
 - **runscript**: The commands in this file will be executed when the container is invoked with the `run` command or called as an executable. For legacy purposes there is a symbolic link called `/singularity` that points to this file
-- **Singularity**: This is the Recipe file that was used to generate the container. If more than 1 Recipe file was used to generate the conainer additional Singularity files will appear in numeric order in a sub-directory called `bootstrap_history`
+- **Singularity**: This is the Recipe file that was used to generate the container. If more than 1 Recipe file was used to generate the container additional Singularity files will appear in numeric order in a sub-directory called `bootstrap_history`
 - **startscript**: The commands in this file will be executed when the container is invoked with the `instance.start` command.  
 
 {% include links.html %}

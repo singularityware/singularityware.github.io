@@ -7,7 +7,7 @@ folder: releases
 toc: false
 ---
 
-<p>For all releases, please go to Singularity's <a href="https://github.com/singularityware/singularity/releases" target="_blank">Github page</a>.</p>
+<p>For all releases, please go to Singularity's <a href="https://github.com/singularityware/singularity/releases" target="_blank">GitHub page</a>.</p>
 
 ### Downloads
 

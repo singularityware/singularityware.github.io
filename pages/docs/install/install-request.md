@@ -22,7 +22,7 @@ Installation of a new software is no small feat for a shared cluster resource. W
 
 #### Security
 
- - [Administrator Control](https://github.com/singularityware/singularity/blob/master/etc/singularity.conf.in): The configuratoin file template is the best source to learn about the configuration options that are under the administrator's control.
+ - [Administrator Control](https://github.com/singularityware/singularity/blob/master/etc/singularity.conf.in): The configuration file template is the best source to learn about the configuration options that are under the administrator's control.
  - [Security Overview](http://singularity.lbl.gov/docs-security) discusses common security concerns
 
 #### Presentations
@@ -41,7 +41,7 @@ We are interested in having an installation of the Singularity software (https:/
    - Security: A discussion of security concerns is discussed at http://singularity.lbl.gov/docs-security
    - Installation: http://singularity.lbl.gov/admin-guide
 
-If you have questions about any of the above, you can email the list (singularity@lbl.gov) or join the slack channel (singularity-container.slack.com) to get a human response. I can do my best to faciliate this interaction if help is needed. Thank you kindly for considering this request!
+If you have questions about any of the above, you can email the list (singularity@lbl.gov) or join the slack channel (singularity-container.slack.com) to get a human response. I can do my best to facilitate this interaction if help is needed. Thank you kindly for considering this request!
 
 Best,
 

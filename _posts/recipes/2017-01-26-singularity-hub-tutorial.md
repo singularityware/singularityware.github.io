@@ -54,13 +54,13 @@ Once you are in your Virtual Machine, or have Singularity up and running? Well, 
 
 
 ### A little about Singularity Hub
-<a href="https://singularity-hub.org" target="_blank">Singularity Hub</a> is an online registry for images. This means that you can connect a Github repo containing a build specification file to this website, and the image is going to build for you automatically, and be available programatically! We can talk more about how that happens later. If you want some quick details, you should check out the <a href="https://www.singularity-hub.org/faq" target="_blank">Usage Docs</a> on Singularity Hub.
+<a href="https://singularity-hub.org" target="_blank">Singularity Hub</a> is an online registry for images. This means that you can connect a GitHub repo containing a build specification file to this website, and the image is going to build for you automatically, and be available programmatically! We can talk more about how that happens later. If you want some quick details, you should check out the <a href="https://www.singularity-hub.org/faq" target="_blank">Usage Docs</a> on Singularity Hub.
 
 
 ## Make and run containers
 
 ### Run an image
-For this little preview, we are going to be first running an image, directly from Singularity Hub. This image is called <a href="https://singularity-hub.org/collections/24/" target="_blank">vsoch/singularity-images</a> and it's associated with <a href="https://www.github.com/vsoch/singularity-images" target="_blank">the equivalent Github repository.</a>
+For this little preview, we are going to be first running an image, directly from Singularity Hub. This image is called <a href="https://singularity-hub.org/collections/24/" target="_blank">vsoch/singularity-images</a> and it's associated with <a href="https://www.github.com/vsoch/singularity-images" target="_blank">the equivalent GitHub repository.</a>
 
 ```bash
 singularity run shub://vsoch/singularity-images
@@ -117,4 +117,4 @@ The important things to note. The header section says that we want to `Bootstrap
 
 {% include asciicast-custom.html rows='41' cols='100' source='singularity-bootstrap.json' title='Bootstrapping an image' author='vsochat@stanford.edu' %}
 
-Once you have your bootstrap file, and you know how to use Github, you are really good to go. You can add the file to repository, connect it to Singularity Hub, and it will build automatically and be available via the `shub://` endpoint. That's it!
+Once you have your bootstrap file, and you know how to use GitHub, you are really good to go. You can add the file to repository, connect it to Singularity Hub, and it will build automatically and be available via the `shub://` endpoint. That's it!

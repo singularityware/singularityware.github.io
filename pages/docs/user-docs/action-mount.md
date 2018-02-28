@@ -21,7 +21,7 @@ If a bind path is requested, and the bind point does not exist within the contai
 
 ```bash
 $ singularity shell --bind /global /tmp/Centos7-ompi.img 
-WARNING: Non existant bind point (directory) in container: '/global'
+WARNING: Non existent bind point (directory) in container: '/global'
 Singularity: Invoking an interactive shell within container...
 
 Singularity.Centos7-ompi.img> 

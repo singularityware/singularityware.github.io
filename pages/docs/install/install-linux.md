@@ -11,7 +11,7 @@ toc: true
 You can try the following two options:
 
 ### Option 1: Download latest stable release
-You can always download the latest tarball release from <a href="{{ site.repo }}/releases" target="_blank">Github</a>
+You can always download the latest tarball release from <a href="{{ site.repo }}/releases" target="_blank">GitHub</a>
 
 For example, here is how to download version `{{ site.singularity_version }}` and install:
 

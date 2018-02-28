@@ -52,7 +52,7 @@ To achieve proper container'ized Open MPI support, you should use Open MPI versi
 
 ```bash
 $ # Include the appropriate development tools into the container (notice we are calling
-$ # singularity as root and the container is writeable)
+$ # singularity as root and the container is writable)
 $ sudo singularity exec -w /tmp/Centos-7.img yum groupinstall "Development Tools"
 $
 $ # Obtain the development version of Open MPI
@@ -63,7 +63,7 @@ $
 $ singularity exec /tmp/Centos-7.img ./configure --prefix=/usr/local
 $ singularity exec /tmp/Centos-7.img make
 $
-$ # Install OpenMPI into the container (notice now running as root and container is writeable)
+$ # Install OpenMPI into the container (notice now running as root and container is writable)
 $ sudo singularity exec -w -B /home /tmp/Centos-7.img make install
 $
 $ # Build the OpenMPI ring example and place the binary in this directory
@@ -83,7 +83,7 @@ The previous example (using the Open MPI 2.1.0 stable release) should work fine 
 
 ```bash
 $ # Include the appropriate development tools into the container (notice we are calling
-$ # singularity as root and the container is writeable)
+$ # singularity as root and the container is writable)
 $ sudo singularity exec -w /tmp/Centos-7.img yum groupinstall "Development Tools"
 $
 $ # Clone the OpenMPI GitHub master branch in current directory (on host)
@@ -95,7 +95,7 @@ $ singularity exec /tmp/Centos-7.img ./autogen.pl
 $ singularity exec /tmp/Centos-7.img ./configure --prefix=/usr/local
 $ singularity exec /tmp/Centos-7.img make
 $
-$ # Install OpenMPI into the container (notice now running as root and container is writeable)
+$ # Install OpenMPI into the container (notice now running as root and container is writable)
 $ sudo singularity exec -w -B /home /tmp/Centos-7.img make install
 $
 $ # Build the OpenMPI ring example and place the binary in this directory

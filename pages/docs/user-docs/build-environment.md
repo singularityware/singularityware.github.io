@@ -52,7 +52,7 @@ All environmental variables are parsed by Singularity python helper functions, a
   1. First preference goes to environment variable set at runtime
   2. Second preference goes to default defined in this file
   3. Then, if neither is found, null is returned except in the case that `required=True`. A `required=True` variable not found will system exit with an error.
-  4. Variables that should not be dispayed in debug logger are set with `silent=True`, and are only reported to be defined.
+  4. Variables that should not be displayed in debug logger are set with `silent=True`, and are only reported to be defined.
 
 
 For boolean variables, the following are acceptable for True, with any kind of capitalization or not:
@@ -68,7 +68,7 @@ The location and usage of the cache is also determined by environment variables.
 If you want to disable the cache, this means is that the layers are written to a temporary directory. Thus, if you want to disable cache and write to a temporary folder, simply set `SINGULARITY_DISABLE_CACHE` to any true/yes value. By default, the cache is not disabled.
 
 **SINGULARITY_CACHEDIR**
-Is the base folder for caching layers and singularity hub images. If not defined, it uses default of `$HOME/.singularity`. If defined, the defined location is used instead. If `SINGULARITY_DISABLE_CACHE` is set to True, this value is ignored in favor of a temporary directory. For specific subtypes of things to cache, subdirectories are created (by python), including `$SINGULARITY_CACHEDIR/docker` for docker layers and `$SINGULARITY_CACHEDIR/shub` for Singularity Hub images. If the cache is not created, the Python script creates it.
+Is the base folder for caching layers and singularity hub images. If not defined, it uses default of `$HOME/.singularity`. If defined, the defined location is used instead. If `SINGULARITY_DISABLE_CACHE` is set to True, this value is ignored in favor of a temporary directory. For specific sub-types of things to cache, subdirectories are created (by python), including `$SINGULARITY_CACHEDIR/docker` for docker layers and `$SINGULARITY_CACHEDIR/shub` for Singularity Hub images. If the cache is not created, the Python script creates it.
 
 **SINGULARITY_PULLFOLDER**
 While this isn't relevant for build, since build is close to pull, we will include it here. By default, images are pulled to the present working directory. The user can change this variable to change that.

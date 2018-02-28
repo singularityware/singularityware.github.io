@@ -93,7 +93,7 @@ $ sudo singularity shell --writable lolcow/
 ```
 
 ## Converting containers from one format to another
-If you already have a container saved locally, you can use it as a target to build a new container. This allows you convert containers from one format to another.  For example if you had a squashfs container called `production.simg` and wanted to convert it to a writeable ext3 container called `development.img` you could:
+If you already have a container saved locally, you can use it as a target to build a new container. This allows you convert containers from one format to another.  For example if you had a squashfs container called `production.simg` and wanted to convert it to a writable ext3 container called `development.img` you could:
 
 ```
 $ sudo singularity build --writable development.img production.simg
@@ -120,7 +120,7 @@ Of course, Singularity recipe files can be used as the target when building a co
 Let's say you already have the following container recipe file called `Singularity`, and you want to use it to build a container. 
 
 ```
-BootStrap: docker
+Bootstrap: docker
 From: ubuntu:16.04
 
 %post

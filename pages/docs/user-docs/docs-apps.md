@@ -7,7 +7,7 @@ toc: false
 ---
 
 ## Why do we need SCI-F?
-The Scientific Filesystem (SCIF) provides internal modularity of containers, and it makes it easy for the creator to give the container implied metadata about software. For example, installing a set of libraries, defining environment variables, or adding lables that belong to app `foo` makes a strong assertion that those dependencies belong to `foo`. When I run `foo`, I can be confident that the container is running in this context, meaning with `foo's` custom environment, and with `foo`'s libraries and executables on the path. This is drastically different from serving many executables in a single container, because there is no way to know which are associated with which of the container's intended functions.  This documentation will walk through some rationale, background, and examples of the SCIF integration for Singularity containers. For other examples (and a client that works across container technologies) see the <a href="https://sci-f.github.io" target="_blank"> the scientific fileysystem</a>. This page will primarily cover the native Singularity SCIF integration.
+The Scientific Filesystem (SCIF) provides internal modularity of containers, and it makes it easy for the creator to give the container implied metadata about software. For example, installing a set of libraries, defining environment variables, or adding labels that belong to app `foo` makes a strong assertion that those dependencies belong to `foo`. When I run `foo`, I can be confident that the container is running in this context, meaning with `foo's` custom environment, and with `foo`'s libraries and executables on the path. This is drastically different from serving many executables in a single container, because there is no way to know which are associated with which of the container's intended functions.  This documentation will walk through some rationale, background, and examples of the SCIF integration for Singularity containers. For other examples (and a client that works across container technologies) see the <a href="https://sci-f.github.io" target="_blank"> the scientific filesystem</a>. This page will primarily cover the native Singularity SCIF integration.
 
 {% include toc.html %}
 
@@ -23,7 +23,7 @@ To start, let's take a look at this series of steps to install dependencies for 
 # install software D (bar)
 ```
 
-The creator may know that A and C were installed for `foo` and B and D for `bar`, but down the road, when someone discovers the container, if they can find the software at all, the intention of the container creator would be lost. As many are now, containers without any form of internal organization and predictibility are black boxes. We don't know if some software installed to `/opt`, or to `/usr/local/bin`, or to their custom favorite folder `/code`. We could assume that the creator added important software to the path and look in these locations, but that approach is still akin to fishing in a swamp. We might only hope that the container's main function, the Singularity runscript, is enough to make the container perform as intended. 
+The creator may know that A and C were installed for `foo` and B and D for `bar`, but down the road, when someone discovers the container, if they can find the software at all, the intention of the container creator would be lost. As many are now, containers without any form of internal organization and predictability are black boxes. We don't know if some software installed to `/opt`, or to `/usr/local/bin`, or to their custom favorite folder `/code`. We could assume that the creator added important software to the path and look in these locations, but that approach is still akin to fishing in a swamp. We might only hope that the container's main function, the Singularity runscript, is enough to make the container perform as intended. 
 
 ### Mixed up Modules
 If your container truly runs one script, the traditional model of a runscript fits well. Even in the case of having two functions like `foo` and `bar` you probably have something like this.
@@ -390,7 +390,7 @@ singularity run --app fortune moo.simg | singularity run --app cowsay moo.simg
 ```
 
 and the final shabang - do the same, but make it colored. Let's even get lazy and use
-an evironment variable for the command:
+an environment variable for the command:
 
 
 ```
