@@ -1,5 +1,5 @@
 ---
-title:  "HPC Admin Features Singuarity"
+title:  "HPC Admin Features Singularity"
 category: news
 permalink: 2016-hpc-admin-features-singularity
 ---

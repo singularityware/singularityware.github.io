@@ -60,7 +60,7 @@ When you first create a container, the runscript is defined using the following 
  2. If the user has not defined a runscript and is importing a Docker container, the Docker `ENTRYPOINT` is used.
  3. If a user has not defined a runscript and adds `IncludeCmd: yes` to the bootstrap file, the `CMD` is used over the `ENTRYPOINT`
  4. If the user has not defined a runscript and the Docker container doesn't have an `ENTRYPOINT`, we look for `CMD`, even if the user hasn't asked for it.
- 5. If the user has not deifned a runscript, and there is no `ENTRYPOINT` or `CMD` (or we aren't importing Docker at all) then we default to `/bin/bash`
+ 5. If the user has not defined a runscript, and there is no `ENTRYPOINT` or `CMD` (or we aren't importing Docker at all) then we default to `/bin/bash`
 
 Here is how you would define the runscript section when you [build](/docs-build-container) an image:
 

@@ -26,7 +26,7 @@ $ sudo yum install debootstrap
 ```
 
 ### Creating the Definition File
-You will need to create a definition file to describe how to build your Ubuntu image. Definition files are plaintext files that contain Singularity keywords. By using certain Singularity keywords, you can specify how you want your image to be built. The extension '.def' is recommended for user clarity. Below is a definition file for a minimal Ubuntu image:
+You will need to create a definition file to describe how to build your Ubuntu image. Definition files are plain text files that contain Singularity keywords. By using certain Singularity keywords, you can specify how you want your image to be built. The extension '.def' is recommended for user clarity. Below is a definition file for a minimal Ubuntu image:
 
 
       DistType "debian"

@@ -12,7 +12,7 @@ A "Singularity" is an astrophysics phenomenon in which a single point becomes in
 
 Additionally, the name "Singularity" for me (Greg) also stems back from my past experience working at a company called <a href="https://en.wikipedia.org/wiki/Linuxcare" target="_blank">Linuxcare</a> where the Linux Bootable Business Card (LNX-BBC) was developed. The BBC, was a Linux rescue disk which paved the way for all live CD bootable distributions using a compressed single image file system called the "singularity".
 
-The name has **NOTHING** to do with Kurzweil's (among others) prediction that artificial intelligence will abruptly have the ability to reprogram itself, surpass that of human intelligence and take control of the planet. If you are interested in this may I suggest the movie **Terminator 2: Judgement Day**.
+The name has **NOTHING** to do with Kurzweil's (among others) prediction that artificial intelligence will abruptly have the ability to reprogram itself, surpass that of human intelligence and take control of the planet. If you are interested in this may I suggest the movie **Terminator 2: Judgment Day**.
 
 ### What is so special about Singularity?
 While Singularity is a container solution (like many others), Singularity differs in it's primary design goals and architecture:
@@ -46,7 +46,7 @@ This then defines the work-flow to some extent. If you have a container (whether
 
 
 ### What if I don't want to install Singularity on my computer?
-If you don't want to build your own images, <a href="https://singularity-hub.org" target="_blank">Singularity Hub</a> will connect to your Github repos with build specification files, and build the containers automatically for you. You can then interact with them easily where Singularity is installed (e.g., on your cluster):
+If you don't want to build your own images, <a href="https://singularity-hub.org" target="_blank">Singularity Hub</a> will connect to your GitHub repos with build specification files, and build the containers automatically for you. You can then interact with them easily where Singularity is installed (e.g., on your cluster):
 
 ```bash
 singularity shell shub://vsoch/hello-world
@@ -179,7 +179,7 @@ IOError: [Errno 28] No space left on device
 ABORT: Aborting with RETVAL=255
 ```
 
-The issue here is that during build of a squasfs image, Singularity is using the `$TMPDIR`. If your `$TMPDIR` is overflowing (or the mount is very small!) then you would see this error.  As a test, you can try building a sandbox. If this is the issue, then the sandbox should work.
+The issue here is that during build of a squashfs image, Singularity is using the `$TMPDIR`. If your `$TMPDIR` is overflowing (or the mount is very small!) then you would see this error.  As a test, you can try building a sandbox. If this is the issue, then the sandbox should work.
 
 
 ```

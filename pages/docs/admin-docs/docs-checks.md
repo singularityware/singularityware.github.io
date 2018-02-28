@@ -10,7 +10,7 @@ New to Singularity 2.4 is the ability to, on demand, run container "checks," whi
 
 
 ## What is a check?
-Broadly, a check is a script that is run over a mounted filesystem, primary with the purpose of checking for some security issue. This process is tighly controlled, meaning that the script names in the [checks](https://github.com/singularityware/singularity/tree/development/libexec/helpers/checks) folder are hard coded into the script [check.sh](https://github.com/singularityware/singularity/blob/development/libexec/helpers/check.sh). The flow of checks is the following:
+Broadly, a check is a script that is run over a mounted filesystem, primary with the purpose of checking for some security issue. This process is tightly controlled, meaning that the script names in the [checks](https://github.com/singularityware/singularity/tree/development/libexec/helpers/checks) folder are hard coded into the script [check.sh](https://github.com/singularityware/singularity/blob/development/libexec/helpers/check.sh). The flow of checks is the following:
 
  - the user calls `singularity check container.img` to invoke [check.exec](https://github.com/singularityware/singularity/blob/development/libexec/cli/check.exec)
  - specification of `--low` (3), `--med` (2), or `--high` (1) sets the level to perform. The level is a filter, meaning that a level of 3 will include 3,2,1, and a level of 1 (high) will only call checks of high priority.

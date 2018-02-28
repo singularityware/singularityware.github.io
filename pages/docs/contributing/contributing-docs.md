@@ -6,7 +6,7 @@ folder: releases
 toc: false
 ---
 
-We (like almost all open source software providers) have a documentation dillemma... We tend to focus on the code features and functionality before working on documentation. And there is very good reason for this, we want to share the love so nobody feels left out!
+We (like almost all open source software providers) have a documentation dilemma... We tend to focus on the code features and functionality before working on documentation. And there is very good reason for this, we want to share the love so nobody feels left out!
 
 The following documentation page assumes one is running on OS X, but if you are not, you should be able to easily transpose the necessary commands to your operating system of choice.
 
@@ -30,7 +30,7 @@ apt-get update && apt-get install -y git
 
 
 ### Fork the repo
-To contribute to the web based documentation, you should obtain a GitHub account and *fork* the <a href="https://github.com/singularityware/singularityware.github.io/" target="_blank">Singularity GitHub Pages</a> repository by clicking the *fork* button on the top right of the page. Once forked, you will want to clone the fork of the repo to your computer. Let's say my Github username is *user99*:
+To contribute to the web based documentation, you should obtain a GitHub account and *fork* the <a href="https://github.com/singularityware/singularityware.github.io/" target="_blank">Singularity GitHub Pages</a> repository by clicking the *fork* button on the top right of the page. Once forked, you will want to clone the fork of the repo to your computer. Let's say my GitHub username is *user99*:
 
 ```bash
 git clone https://github.com/user99/singularityware.github.io.git
@@ -79,7 +79,7 @@ All of the pages are in the <a href="https://github.com/singularityware/singular
 
 
 ### Adding gists
-You can embed a <a href="https://gist.github.com">Github Gist</a> directly in the page, and we encourage you to keep it under your username to maintain credit for the work. To reduce the additional gem dependencies, instead of using the official `gist include` we have our own wrapper for it that will turn this:
+You can embed a <a href="https://gist.github.com">GitHub Gist</a> directly in the page, and we encourage you to keep it under your username to maintain credit for the work. To reduce the additional gem dependencies, instead of using the official `gist include` we have our own wrapper for it that will turn this:
  
 ```bash
 {{ "{% include gist.html username='l1ll1' id='89b3f067d5b790ace6e6767be5ea2851' file='hostlibs.def'" }}%}

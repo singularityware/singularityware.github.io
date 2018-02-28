@@ -110,7 +110,7 @@ $ singularity pull shub://vsoch/hello-world   # pull with default name, vsoch-he
 $ singularity pull --name hello.simg shub://vsoch/hello-world   # pull with custom name
 ```
 
-Singularity images can also be pulled and named by an associated Github commit or content hash.
+Singularity images can also be pulled and named by an associated GitHub commit or content hash.
 
 You can also use `pull` with the `docker://` uri to reference Docker images served from a registry.  In this case `pull` does not just download an image file.  Docker images are stored in layers, so `pull` must also combine those layers into a usable Singularity file.  
 

@@ -11,7 +11,7 @@ This document will cover installation and administration points of Singularity f
 {% include toc.html %}
 
 ## Installation
-There are two common ways to install Singularity, from source code and via binary packages. This document will explain the process of installation from source, and it will depend on your build host to have the appropriate development tools and packages installed. For Red Hat and derivitives, you should install the following `yum` group to ensure you have an appropriately setup build server:
+There are two common ways to install Singularity, from source code and via binary packages. This document will explain the process of installation from source, and it will depend on your build host to have the appropriate development tools and packages installed. For Red Hat and derivatives, you should install the following `yum` group to ensure you have an appropriately setup build server:
 
 ```bash
 $ sudo yum groupinstall "Development Tools"
@@ -112,4 +112,4 @@ $ PREFIX=/opt/singularity
 $ rpmbuild -ta --define="_prefix $PREFIX" --define "_sysconfdir $PREFIX/etc" --define "_defaultdocdir $PREFIX/share" singularity-*.tar.gz
 ```
 
-We recommend you look at our <a href="/docs-security">security admin guide</a> to get further information about container priviledges and mounting.
+We recommend you look at our <a href="/docs-security">security admin guide</a> to get further information about container privileges and mounting.

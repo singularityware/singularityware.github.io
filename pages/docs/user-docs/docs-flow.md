@@ -34,7 +34,7 @@ If you want a writable image or folder for developing, you have two options:
  1. build into a directory that has writable permissions using the `--sandbox` option
  2. build into an ext3 image file, that has writable permissions with the `--writable` option
  
-In both cases you will need to execute your container with the `--writable` option at runtime for your changes to be persistant.
+In both cases you will need to execute your container with the `--writable` option at runtime for your changes to be persistent.
 
 #### Sandbox Folder
 To build into a folder (we call this a "sandbox") just ask for it:
@@ -137,7 +137,7 @@ interactively write the build recipe with one of these writable containers, you 
 build the production (squashfs) container without worrying that it will error and need to be started again.
 
 ### 2. Production Commands
-Let's set the scene - we just finished buliding our perfect hello world container. It does a fantastic hello-world analysis, and we have written a paper on it! We now want to build an immutable container - meaning that if someone obtained our container and tried to change it, they could not. They *could* easily use the same recipe that you used (it is provided as metadata inside the container), or convert your container to one of the writable formats above using `build`.  So your work can still be extended.
+Let's set the scene - we just finished building our perfect hello world container. It does a fantastic hello-world analysis, and we have written a paper on it! We now want to build an immutable container - meaning that if someone obtained our container and tried to change it, they could not. They *could* easily use the same recipe that you used (it is provided as metadata inside the container), or convert your container to one of the writable formats above using `build`.  So your work can still be extended.
 
 #### Recommended Production Build
 What we want for production is a build into a <a href="https://en.wikipedia.org/wiki/SquashFS" target="_blank">squashfs image</a>. Squashfs is a read only, and compressed filesystem, and well suited for confident archive and re-use of your hello-world. To build a production image, just remove the extra options:

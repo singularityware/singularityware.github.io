@@ -12,7 +12,7 @@ This recipe describes how to build a CentOS image using Singularity, with specia
 **NOTE: this tutorial is intended for [Singularity release 2.2](http://singularity.lbl.gov/release-2-2), and reflects standards for that version.**
 
 ## The Problem
-In theory, an Ubuntu host can create/bootstrap a CentOS image by installing the `yum` package, which is a front-end controller for [RPM](https://en.wikipedia.org/wiki/RPM_Package_Manager).  In order for this to work on Ubuntu, a software called [Berkeley DB](https://en.wikipedia.org/wiki/Berkeley_DB) must be identical in version to the version expected by `yum`. Unfortunately, these two verisons tend to be different, and this situation poses a difficult challenge for Singularity to deal with. A perfectly working `centos.def` file that can bootstrap a CentOS image from a RHEL-compatible host will not work when executed on Ubuntu, yielding the following error:
+In theory, an Ubuntu host can create/bootstrap a CentOS image by installing the `yum` package, which is a front-end controller for [RPM](https://en.wikipedia.org/wiki/RPM_Package_Manager).  In order for this to work on Ubuntu, a software called [Berkeley DB](https://en.wikipedia.org/wiki/Berkeley_DB) must be identical in version to the version expected by `yum`. Unfortunately, these two versions tend to be different, and this situation poses a difficult challenge for Singularity to deal with. A perfectly working `centos.def` file that can bootstrap a CentOS image from a RHEL-compatible host will not work when executed on Ubuntu, yielding the following error:
 
 
 ```bash
@@ -31,7 +31,7 @@ This problem is not exclusive to Ubuntu.  Other flavors of Linux likely have the
 There are a number of solutions:
 
 1.  Obtain `db*_load` that match the Berkeley DB version for the version of CentOS being imaged, and add a conversion step during the Singularity bootstrap process.
-2.  Perform a double bootstrap process: First build a base container containg CentOS (e.g. import from docker) and then 2) use this image to build the final desired CentOS image. You can run a container from within another container with Singularity as long as you are root when you do it.  
+2.  Perform a double bootstrap process: First build a base container containing CentOS (e.g. import from docker) and then 2) use this image to build the final desired CentOS image. You can run a container from within another container with Singularity as long as you are root when you do it.  
 3.  Go to a CentOS machine and create a basic singularity image, and copy this image to the Ubuntu machine.  Since such an image already has working `/bin/sh`, `rpm`, `yum` commands, and an RPM database with the correct version of Berkeley DB, a subsequent `singularity bootstrap` on this image can successfully run `yum` to update and add additional software to this image.
 4.  Leverage `singularity import centos.img docker://centos:6` to seed the CentOS image. 
 5.  Import the container from Singularity Hub, when this feature becomes available.
@@ -40,7 +40,7 @@ There are a number of solutions:
 ### Create an image on CentOS (Option 3)
 
 1. Identify a CentOS machine with the same major version of CentOS you want to build.  Don't use a CentOS-7 machine to build a CentOS-6 machine, because it won't work.  (Building a CentOS-7 image on a CentOS-6 host works, but the RPM DB would actually be using an older version of Berkeley DB)
-2. Install Singularity on this host.  Locate the [centos.def](https://github.com/singularityware/singularity/blob/2.x/examples/centos.def) file from the `example/` directory.  Edit to your heart's desire (eg change OSVersion).
+2. Install Singularity on this host.  Locate the [centos.def](https://github.com/singularityware/singularity/blob/2.x/examples/centos.def) file from the `example/` directory.  Edit to your heart's desire (e.g. change OSVersion).
 3. Create the image, bootstrap, and run:
 
 ```bash

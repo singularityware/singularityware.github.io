@@ -4,7 +4,7 @@ category: recipes
 permalink: building-singularity-debian
 ---
 
-This tutorial is generated courtsey of <a href="https://twitter.com/californiakarl" target="_blank">Karl Kornel</a> from Stanford Research Computing. The ascii art is amazing, if you don't care to build Singularity on Debian please scroll down to appreciate it in it's entirety. Thank you Karl!
+This tutorial is generated courtesy of <a href="https://twitter.com/californiakarl" target="_blank">Karl Kornel</a> from Stanford Research Computing. The ascii art is amazing, if you don't care to build Singularity on Debian please scroll down to appreciate it in it's entirety. Thank you Karl!
 
 **NOTE: that an official debian initiative [is underway](http://neuro.debian.net/pkgs/singularity-container.html?highlight=singularity), and this tutorial is for those interested in digging into the build.**
 
@@ -174,9 +174,9 @@ The following sections describe each of those four overall steps.
 
 ## Creating the Repository
 
-Singuarity has their repository in Github, so cloning the repository is just a matter of forking it. However, if you want your repository to live somewhere other than Github, you can do this process:
+Singularity has their repository in GitHub, so cloning the repository is just a matter of forking it. However, if you want your repository to live somewhere other than GitHub, you can do this process:
 
-First, create a blank repository, add the upstream Github as a source, and fetch:
+First, create a blank repository, add the upstream GitHub as a source, and fetch:
 
       git init .
       git remote add lbl git@github.com:singularityware/singularity.git
@@ -280,7 +280,7 @@ Next, you need to update the changelog. This is what sets the release, and also 
 
 (See the "Version Numbering" section for help on deciding what version number to use.)
 
-Finally, make a new tag repesenting your version.
+Finally, make a new tag representing your version.
 
       git tag -s stanford/2.1.2-1_sbp16.04.1+1
 
@@ -328,7 +328,7 @@ Given all of the above, here are recommended version numbers to use:
 
 - Backports (no code changes) for Debian should use the form `VERSION-1~sbp8+1`, where the `8` is the version number of the Debian release (Debian jessie is version 8).
 - Backports (no code changes) for Ubuntu should use the form `VERSION-1~sbp16.04+1`. Similarly, `16.04` is the Ubuntu version.
-- If we are making actual code changes, we should use a form like `VERSION-1stanford1`. We shoud then try to get those code changes applied upstream.
+- If we are making actual code changes, we should use a form like `VERSION-1stanford1`. We should then try to get those code changes applied upstream.
 
 We use a different form for code changes because we want that to remain newer than anything that comes in through Debian/Ubuntu upstream (lest we lose our changes in an upgrade). Since backports don't have code changes, they are lower-priority.
 
@@ -401,7 +401,7 @@ The `pdebuild` process takes care of several different things:
 
 
 - Instructing `cowbuilder` to spawn a new COW (copy-on-write) environment, based on the release you specify, and start a root session within the environment.
-- Identifying any missing build dependencies, and installing them inside the build environent.
+- Identifying any missing build dependencies, and installing them inside the build environment.
 - Running dpkg-buildpackage, making sure that build products get put in the right place, and owned by you (not by `root`).
 
 

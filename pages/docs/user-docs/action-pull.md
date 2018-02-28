@@ -41,7 +41,7 @@ As you can see, since we didn't specify anything special, the default naming con
 ```
 PULL OPTIONS:
     -n/--name   Specify a custom container name (first priority)
-    -C/--commit Name container based on Github commit (second priority)
+    -C/--commit Name container based on GitHub commit (second priority)
     -H/--hash   Name container based on file hash (second priority)
 ```    
 
@@ -54,7 +54,7 @@ Done. Container is at: ./meatballs.img
 ```
 
 ### Name by commit
-Each container build on Singularity Hub is associated with the Github commit of the repo that was used to build it. You can specify to name your container based on the commit with the `--commit` flag, if, for example, you want to match containers to their build files:
+Each container build on Singularity Hub is associated with the GitHub commit of the repo that was used to build it. You can specify to name your container based on the commit with the `--commit` flag, if, for example, you want to match containers to their build files:
 
 ```
 singularity pull --commit shub://vsoch/hello-world

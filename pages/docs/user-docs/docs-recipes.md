@@ -461,7 +461,7 @@ SOFTWARE=bar
 ```
 
 ## Examples
-For more examples, for real world scientific recipes we recommend you look at other containers on <a href="https://singularity-hub.org" target="_blank">Singularity Hub</a>. For examples of different bases, look at the <a href="{{ site.repo}}/tree/master/examples" target="_blank">examples</a> folder for the most up-to-date examples. For apps, including snippets and tutorial with more walk throughts, see <a href="https://sci-f.github.io" target="_blank">SCI-F Apps Home</a>.
+For more examples, for real world scientific recipes we recommend you look at other containers on <a href="https://singularity-hub.org" target="_blank">Singularity Hub</a>. For examples of different bases, look at the <a href="{{ site.repo}}/tree/master/examples" target="_blank">examples</a> folder for the most up-to-date examples. For apps, including snippets and tutorial with more walk throughs, see <a href="https://sci-f.github.io" target="_blank">SCI-F Apps Home</a>.
 
 
 ## Best Practices for Build Recipes

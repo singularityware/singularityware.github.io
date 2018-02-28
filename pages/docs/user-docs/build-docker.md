@@ -13,7 +13,7 @@ Singularity is good friends with Docker. The reason is because the developers us
 - You can shell into a Singularity-ized Docker image
 - You can run a Docker image instantly as a Singularity image
 - You can pull a Docker image (without sudo) 
-- You can build images with bases from assembed Docker layers that include environment, guts, and labels
+- You can build images with bases from assembled Docker layers that include environment, guts, and labels
 
 
 # TLDR (Too Long Didn't Read)
@@ -78,7 +78,7 @@ The warning message is pointing to the fact that a Docker image isn't actually a
 ## Build Recipe Details
 If you haven't learned about build recipes yet, you should [do that first](/docs-recipes). The Docker build base will create a core operating system image based on assembling a set of Docker layers associated with an image hosted at a particular Docker Registry. By default it will use the primary Docker Library, but that can be overridden. When using the `docker` module, several other keywords may also be defined:
 
- - **From**: This keyword defines the string of the registry name used for this image in the format [name]:[version]. Several examples are: `ubuntu:latest`, `centos:6`, `alpine:latest`, or `debian` (if the version tag is ommitted, `:latest` is automatically used).
+ - **From**: This keyword defines the string of the registry name used for this image in the format [name]:[version]. Several examples are: `ubuntu:latest`, `centos:6`, `alpine:latest`, or `debian` (if the version tag is omitted, `:latest` is automatically used).
  - **IncludeCmd**: This keyword tells Singularity to utilize the Docker defined `Cmd` as the `%runscript` (defined below), if the `Cmd` is defined.
  - **Registry**: If the registry you wish to download the image from is not from the main Docker Library, you can define it here.
  - **Token**: Sometimes the Docker API (depending on version?) requires an authorization token which is generated on the fly. Toggle this with a `yes` or `no` here.
@@ -112,7 +112,7 @@ IncludeCmd: yes
 
 ## How do I specify my Docker image?
 
-In the example above, you probably saw that we referened the docker image first with the uri `docker://` and that is important to tell Singularity that it will be pulling Docker layers. To ask for ubuntu, we asked for `docker://ubuntu`. This uri that we give to Singularity is going to be very important to choose the following Docker metadata items:
+In the example above, you probably saw that we referenced the docker image first with the uri `docker://` and that is important to tell Singularity that it will be pulling Docker layers. To ask for ubuntu, we asked for `docker://ubuntu`. This uri that we give to Singularity is going to be very important to choose the following Docker metadata items:
 
 - registry   (e.g., "index.docker.io")
 - namespace  (e.g., "library")

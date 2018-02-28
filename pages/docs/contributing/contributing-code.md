@@ -15,11 +15,11 @@ To contribute to the development of Singularity, you must:
 - Have a GitHub account (this just makes it easier on me)
 
 
-We use the traditional <a href="https://guides.github.com/introduction/flow/" target="_blank">Github Flow</a> to develop. This means that you fork the repo and checkout a branch to make changes, you submit a pull request (PR) to the development branch with your changes, and the development branch gets merged with master for official releases. We also have an official <a href="https://github.com/singularityware/singularity/blob/master/CONTRIBUTING.md" target="_blank">CONTRIBUTING</a> document, which also includes a <a href="https://github.com/singularityware/singularity/blob/master/CONTRIBUTING.md#code-of-conduct" target="_blank">code of conduct</a>.
+We use the traditional <a href="https://guides.github.com/introduction/flow/" target="_blank">GitHub Flow</a> to develop. This means that you fork the repo and checkout a branch to make changes, you submit a pull request (PR) to the development branch with your changes, and the development branch gets merged with master for official releases. We also have an official <a href="https://github.com/singularityware/singularity/blob/master/CONTRIBUTING.md" target="_blank">CONTRIBUTING</a> document, which also includes a <a href="https://github.com/singularityware/singularity/blob/master/CONTRIBUTING.md#code-of-conduct" target="_blank">code of conduct</a>.
 
 
 ### Step 1. Fork the repo
-To contribute to the web based documentation, you should obtain a GitHub account and fork the <a href="{{site.repo}}" target="_blank">Singularity</a> repository. Once forked, you will want to clone the fork of the repo to your computer. Let's say my Github username is vsoch, and I am using ssh:
+To contribute to the web based documentation, you should obtain a GitHub account and fork the <a href="{{site.repo}}" target="_blank">Singularity</a> repository. Once forked, you will want to clone the fork of the repo to your computer. Let's say my GitHub username is vsoch, and I am using ssh:
 
 ```bash
 git clone git@github.com:vsoch/singularity.git
@@ -27,7 +27,7 @@ cd singularity/
 ```
 
 ### Step 2. Set up your config
-The github config file, located at `.git/config`, is the best way to keep track of many different forks of a repository. I usually open it up right after cloning my fork to add the repository that I forked as a <a href="https://help.github.com/articles/adding-a-remote/" target="_blank">remote</a>, so I can easily get updated from it. Let's say my .git/config first looks like this, after I clone my own branch:
+The GitHub config file, located at `.git/config`, is the best way to keep track of many different forks of a repository. I usually open it up right after cloning my fork to add the repository that I forked as a <a href="https://help.github.com/articles/adding-a-remote/" target="_blank">remote</a>, so I can easily get updated from it. Let's say my .git/config first looks like this, after I clone my own branch:
 
 
 ```bash
@@ -90,7 +90,7 @@ I can also add some of my colleagues, if I want to pull from their branches:
 
 ```
 
-In the Github flow, the master branch is the frozen, current version of the software. Your master branch is always in sync with the upstream (our singularityware master), and the singularityware master is always the latest release of 
+In the GitHub flow, the master branch is the frozen, current version of the software. Your master branch is always in sync with the upstream (our singularityware master), and the singularityware master is always the latest release of 
 
 This would mean that I can update my master branch as follows:
 
@@ -125,7 +125,7 @@ The addition of the `-b` argument tells git that we want to make a new branch. I
 git checkout master
 ```
 
-Note that you should commit changes to the branch you are working on before changing branches, otherwise they would be lost. Github will give you a warning and prevent you from changing branches if this is the case, so don't worry too much about it.
+Note that you should commit changes to the branch you are working on before changing branches, otherwise they would be lost. GitHub will give you a warning and prevent you from changing branches if this is the case, so don't worry too much about it.
 
 
 ### Step 4. Make your changes
@@ -166,4 +166,4 @@ Once you have pushed your branch, then you can go to either fork and (in the GUI
 
 
 ## Support, helping and spreading the word!
-This is a huge endavor, and it is greatly appreciated! If you have been using Singularity and having good luck with it, join our <a href="https://groups.google.com/a/lbl.gov/forum/#!forum/singularity" target="_blank">Google Group</a> and help out other users! Post to online communities about Singularity, and request that your distribution vendor, service provider, and system administrators include Singularity for you!
+This is a huge endeavor, and it is greatly appreciated! If you have been using Singularity and having good luck with it, join our <a href="https://groups.google.com/a/lbl.gov/forum/#!forum/singularity" target="_blank">Google Group</a> and help out other users! Post to online communities about Singularity, and request that your distribution vendor, service provider, and system administrators include Singularity for you!

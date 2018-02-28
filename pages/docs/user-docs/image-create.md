@@ -5,7 +5,7 @@ permalink: /docs-create
 folder: docs
 ---
 
-A Singularity image, which can be referred to as a "container," is a single file that contains a virtual file system. As of Singularity 2.4, we strongly recommend that you build (create and install) an image using <a href="/docs-build-container">build</a>. If you have reason to create an empty image, or use creat for any other reason, the original `create` command is replaced with a more specific `image.create`. After creating an image you can install an operating system, applications, and save meta-data with it.
+A Singularity image, which can be referred to as a "container," is a single file that contains a virtual file system. As of Singularity 2.4, we strongly recommend that you build (create and install) an image using <a href="/docs-build-container">build</a>. If you have reason to create an empty image, or use create for any other reason, the original `create` command is replaced with a more specific `image.create`. After creating an image you can install an operating system, applications, and save meta-data with it.
 
 Whereas Docker assembles images from layers that are stored on your computer (viewed with the `docker history` command), a Singularity image is just one file that can sit on your Desktop, in a folder on your cluster, or anywhere. Having Singularity containers housed within a single image file greatly simplifies management tasks such as sharing, copying, and branching your containers. It also means that standard Linux file system concepts like permissions, ownership, and ACLs apply to the container (e.g. I can give read only access to a colleague, or block access completely with a simple `chmod` command).
 
