@@ -13,10 +13,10 @@ You can try the following two options:
 ### Option 1: Download latest stable release
 You can always download the latest tarball release from <a href="{{ site.repo }}/releases" target="_blank">Github</a>
 
-For example, here is how to download version `2.3.1` and install:
+For example, here is how to download version `{{ site.singularity_version }}` and install:
 
 ```bash
-VERSION=2.3.1
+VERSION={{ site.singularity_version }}
 wget https://github.com/singularityware/singularity/releases/download/$VERSION/singularity-$VERSION.tar.gz
 tar xvf singularity-$VERSION.tar.gz
 cd singularity-$VERSION
@@ -24,6 +24,15 @@ cd singularity-$VERSION
 make
 sudo make install
 ```
+
+Note that when you configure, `squashfs-tools` is **not** required, however it is required for full functionality. You will see this message after the configuration:
+
+```
+mksquashfs from squash-tools is required for full functionality
+```
+
+If you choose not to install `squashfs-tools`, you will hit an error when you try a pull from Docker Hub, for example.
+
 
 ### Option 2: Download the latest development code
 To download the most recent development code, you should use Git and do the following:
@@ -41,6 +50,10 @@ note: The 'make install' is required to be run as root to get a properly install
 
 {% include asciicast.html source='install-singularity.js' uid='install-singularity' title='Install Singularity' author='vsochat@stanford.edu' %}
 
+
+### Prefix in special places
+
+If you build Singularity with a non-standard `--prefix` argument, please be sure to review the <a href="/admin-guide">admin guide</a> for details regarding the `--localstatedir` variable. This is especially important in environments utilizing shared filesystems.
 
 ### Updating
 
@@ -132,7 +145,7 @@ After this install, you should confirm that `2.3-dist` is the version installed:
 
 ```bash
 $ singularity --version
-  2.3-dist
+  2.4-dist
 ```
 
 Note that if you don't add the NeuroDebian lists, the version provided will be old (e.g., 2.2.1). If you need a backport build of the recent release of Singularity on those or older releases of Debian and Ubuntu, you can <a href="http://neuro.debian.net/pkgs/singularity-container.html" target="_blank">see all the various builds and other information here</a>.
@@ -187,7 +200,7 @@ To build a deb package for Debian/Ubuntu/LinuxMint invoke the following commands
 $ fakeroot dpkg-buildpackage -b -us -uc # sudo will ask for a password to run the tests
 $ sudo dpkg -i ../singularity-container_2.3_amd64.deb
 ```
- 
+
 Note that the tests will fail if singularity is not already installed on your system. This is the case when you run this procedure for the first time.
 In that case run the following sequence:
 
