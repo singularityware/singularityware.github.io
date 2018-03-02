@@ -13,7 +13,8 @@ Whereas Docker assembles images from layers that are stored on your computer (vi
 Singularity will create a default container image of 768MiB using the following command:
 
 ```
-singularity image.create container.imgCreating empty 768MiB image file: container.img
+singularity image.create container.img
+Creating empty 768MiB image file: container.img
 Formatting image with ext3 file system
 Image is done: container.img
 ```
