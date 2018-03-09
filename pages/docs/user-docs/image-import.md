@@ -11,5 +11,5 @@ Singularity import is essentially taking a dump of files and folders and adding 
 As an example, here is a common use case: wanting to import a Docker image:
 
 ```
-singularity import container.img docker://ubuntu:latest
+singularity image.import container.img docker://ubuntu:latest
 ```
