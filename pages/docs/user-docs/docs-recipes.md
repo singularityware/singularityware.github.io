@@ -6,7 +6,7 @@ toc: false
 folder: docs
 ---
 
-A Singularity Recipe is the driver of a custom build, and the starting point for designing any custom container. It includes specifics about installation software, environment variables, files to add, and container metadata. You can even write a help section, or define modular components in the container called <a href="/apps"></a> based on the <a href="https://sci-f.github.io/" target="_blank">Scientific Filesystem</a>.
+A Singularity Recipe is the driver of a custom build, and the starting point for designing any custom container. It includes specifics about installation software, environment variables, files to add, and container metadata. You can even write a help section, or define modular components in the container called <a href="/docs-scif-apps"></a> based on the <a href="https://sci-f.github.io/" target="_blank">Scientific Filesystem</a>.
 
 {% include toc.html %}
 
