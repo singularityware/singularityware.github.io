@@ -21,7 +21,7 @@ google_analytics: "UA-84672381-1" # Google Analytics code
 twitter_username:     SingularityApp
 github_username:      singularityware
 repo: "https://github.com/singularityware/singularity" # The main repo, should not end with slash
-singularity_version: "2.4.2"
+singularity_version: "2.4.5"
 
 # Exclude
 # these are the files and directories that jekyll will exclude from the build
