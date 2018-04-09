@@ -1,73 +1,45 @@
 ---
-title: Running Singularity with Vagrant (Windows)
+title: Running Singularity with Vagrant (Windows/Linux/Mac etc)
 sidebar: main_sidebar
-permalink: install-windows
+permalink: install-crossplatform
 folder: docs
 ---
 
 
-This recipe demonstrates how to run Singularity on your Windows/Linux/Mac  computer via Vagrant. Mac is not tried due to lack of Mac computer.However Vagrant and Virtualbox supports Microsoft Linux and Mac platforms.
+This recipe demonstrates how to run Singularity on your Windows/Linux/Mac etc environment via Vagrant. Mac is not tried due to lack of Mac computer.The idea is to run Singularity on all platforms which Vagrant supports.Provisioning is chosen "ansible_local".Cross-platform method is applicable to Docker container as well. 
 
-## Setup
+## Environment
 
 First, install the following software:
-- install [Git for Windows](https://git-for-windows.github.io/)
-- install [VirtualBox for Windows](https://www.virtualbox.org/wiki/Downloads)
-- install [Vagrant for Windows](https://www.vagrantup.com/downloads.html)
-- install [Vagrant Manager for Windows](http://vagrantmanager.com/downloads/)
+- install [VirtualBox](https://www.virtualbox.org)
+- install [Vagrant for Windows](https://www.vagrantup.com/downloads.html) or Vagrant for Linux,Mac etc.
+- choose any linux flavor on vagrant cloud or custom vagrant box as base.
+- Vagrantfile configuration
 
-## Singularityware Vagrant Box
+"config.vm.provision "ansible_local" do |ansible|"
 
-We are maintaining a set of Vagrant Boxes via <a href="https://www.vagrantup.com" target="_blank">Vagrant Cloud</a>, one of <a href="https://www.hashicorp.com/#open-source-tools" target="_blank">Hashicorp</a> many tools that likely you've used and haven't known it. The current stable version of Singularity is available here:
- - [singularityware/singularity-2.4](https://app.vagrantup.com/singularityware/boxes/singularity-2.4/versions/2.4)
- 
-For other versions of Singularity see [our Vagrant Cloud repository](https://app.vagrantup.com/singularityware)
 
-Run GitBash. The default home directory will be C:\Users\your_username
 
-```bash
-mkdir singularity-2.4
-cd singularity-2.4
-```
 
-Note that if you had installed a previous version of the vm (and are using the same folder), you must destroy it first. In our example we create a new folder.  To destroy a previous vm:
-
-```
-vagrant destroy
-```
-
-Then issue the following commands to bring up the Virtual Machine:
+Bring up vagrant vmguest
 
 
 ```
-vagrant init singularityware/singularity-2.4
 vagrant up
 vagrant ssh
 ```
+On Vagrant vmguest install ubuntu singularity package.
 
-You are then ready to go with Singularity 2.4!
+```bash
+$ sudo apt-get singularity-container
+```
+
+Verify  singularity installation
 
 ```
 vagrant@vagrant:~$ which singularity
-/usr/local/bin/singularity
+/usr/bin/singularity
 vagrant@vagrant:~$ singularity --version
-2.4-dist
-
-vagrant@vagrant:~$ sudo singularity build growl-llo-world.simg shub://vsoch/hello-world
-Cache folder set to /root/.singularity/shub
-Progress |===================================| 100.0% 
-Building from local image: /root/.singularity/shub/vsoch-hello-world-master.simg
-Building Singularity image...
-Singularity container built: growl-llo-world.simg
-Cleaning up...
-vagrant@vagrant:~$ ./growl-llo-world.simg
-RaawwWWWWWRRRR!!
+2.4.5-dist
 ```
 
-Note that when you do `vagrant up` you can also select the provider, if you use vagrant for multiple providers. For example:
-
-```
-vagrant up --provider virtualbox
-```
-
-although this isn't entirely necessary if you only have it configured for virtualbox.
