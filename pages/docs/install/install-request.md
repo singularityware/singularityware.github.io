@@ -23,7 +23,7 @@ Installation of a new software is no small feat for a shared cluster resource. W
 #### Security
 
  - [Administrator Control](https://github.com/singularityware/singularity/blob/master/etc/singularity.conf.in): The configuration file template is the best source to learn about the configuration options that are under the administrator's control.
- - [Security Overview](http://singularity.lbl.gov/docs-security) discusses common security concerns
+ - [Security Overview](http://singularityware.github.io/docs-security) discusses common security concerns
 
 #### Presentations
 
@@ -36,12 +36,12 @@ Putting all of the above together, a request might look like the following:
 ```
 Dear Research Computing,
 
-We are interested in having an installation of the Singularity software (https://singularityware.github.io) installed on our cluster. Singularity containers will allow us to build encapsulated environments, meaning that our work is reproducible and we are empowered to choose all dependencies including libraries, operating system, and custom software. Singularity is already installed on over 50 centers internationally (http://singularity.lbl.gov/citation-registration) including TACC, NIH, and several National Labs, Universities, Hospitals. Importantly, it has a vibrant team of developers, scientists, and HPC administrators that invest heavily in the security and development of the software, and are quick to respond to the needs of the community. To help learn more about Singularity, I thought these items might be of interest:
+We are interested in having an installation of the Singularity software (https://singularityware.github.io) installed on our cluster. Singularity containers will allow us to build encapsulated environments, meaning that our work is reproducible and we are empowered to choose all dependencies including libraries, operating system, and custom software. Singularity is already installed on over 50 centers internationally (http://singularityware.github.io/citation-registration) including TACC, NIH, and several National Labs, Universities, Hospitals. Importantly, it has a vibrant team of developers, scientists, and HPC administrators that invest heavily in the security and development of the software, and are quick to respond to the needs of the community. To help learn more about Singularity, I thought these items might be of interest:
 
-   - Security: A discussion of security concerns is discussed at http://singularity.lbl.gov/docs-security
-   - Installation: http://singularity.lbl.gov/admin-guide
+   - Security: A discussion of security concerns is discussed at http://singularityware.github.io/docs-security
+   - Installation: http://singularityware.github.io/admin-guide
 
-If you have questions about any of the above, you can email the list (singularity@lbl.gov) or join the slack channel (singularity-container.slack.com) to get a human response. I can do my best to facilitate this interaction if help is needed. Thank you kindly for considering this request!
+If you have questions about any of the above, you can email the list (singularityware.github.io) or join the slack channel (singularity-container.slack.com) to get a human response. I can do my best to facilitate this interaction if help is needed. Thank you kindly for considering this request!
 
 Best,
 

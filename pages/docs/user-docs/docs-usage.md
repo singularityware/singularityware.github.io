@@ -71,7 +71,7 @@ EXAMPLES:
 For additional help, please visit our public documentation pages which are
 found at:
 
-    http://singularity.lbl.gov/
+    http://singularityware.github.io/
 ```
 
 ## Commands Usage
@@ -116,7 +116,7 @@ CONTAINER USAGE OPTIONS:
     see singularity help <command>
 
 For any additional help or support visit the Singularity
-website: http://singularity.lbl.gov/
+website: http://singularityware.github.io/
 ```
 
 ## Support

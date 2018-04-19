@@ -8766,7 +8766,7 @@
     ],
     [
       2.6e-05,
-      "via a tar pipe\r\n    import        Import/add container contents via a tar pipe\r\n    mount         Mount a Singularity container image\r\n\r\nCONTAINER REGISTRY COMMANDS:\r\n    pull          pull a Singularity Hub container\r\n\r\n\r\nFor any additional help or support visit the Singularity\r\nwebsite: http://singularity.lbl.gov/\r\n\r\n"
+      "via a tar pipe\r\n    import        Import/add container contents via a tar pipe\r\n    mount         Mount a Singularity container image\r\n\r\nCONTAINER REGISTRY COMMANDS:\r\n    pull          pull a Singularity Hub container\r\n\r\n\r\nFor any additional help or support visit the Singularity\r\nwebsite: http://singularityware.github.io/\r\n\r\n"
     ],
     [
       0.000859,

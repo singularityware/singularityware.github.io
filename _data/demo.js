@@ -15603,7 +15603,7 @@
     ],
     [
       3e-05,
-      "website: http://singularity.lbl.gov/"
+      "website: http://singularityware.github.io/"
     ],
     [
       4.8e-05,
@@ -15827,7 +15827,7 @@
     ],
     [
       2.7e-05,
-      "    http://singularity.lbl.gov/"
+      "    http://singularityware.github.io/"
     ],
     [
       2.7e-05,
@@ -16255,7 +16255,7 @@
     ],
     [
       3.7e-05,
-      "    http://singularity.lbl.gov/"
+      "    http://singularityware.github.io/"
     ],
     [
       3.8e-05,

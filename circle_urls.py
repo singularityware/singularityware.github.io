@@ -19,6 +19,6 @@ for html_file in files:
         content = filey.read()
     for search_name in search_names:
         content = content.replace('%s"' %(search_name),'%s.html"' %(search_name))
-    content = content.replace('/images/logo/logo.svg','http://singularity.lbl.gov/images/logo/logo.svg')
+    content = content.replace('/images/logo/logo.svg','http://singularityware.github.io/images/logo/logo.svg')
     with open(html_file,'w') as filey:
         filey.write(content)

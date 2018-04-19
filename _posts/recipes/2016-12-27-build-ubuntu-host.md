@@ -9,7 +9,7 @@ This recipe describes how to build a CentOS image using Singularity, with specia
 {% include toc.html %}
 
 
-**NOTE: this tutorial is intended for [Singularity release 2.2](http://singularity.lbl.gov/release-2-2), and reflects standards for that version.**
+**NOTE: this tutorial is intended for [Singularity release 2.2](http://singularityware.github.io/release-2-2), and reflects standards for that version.**
 
 ## The Problem
 In theory, an Ubuntu host can create/bootstrap a CentOS image by installing the `yum` package, which is a front-end controller for [RPM](https://en.wikipedia.org/wiki/RPM_Package_Manager).  In order for this to work on Ubuntu, a software called [Berkeley DB](https://en.wikipedia.org/wiki/Berkeley_DB) must be identical in version to the version expected by `yum`. Unfortunately, these two versions tend to be different, and this situation poses a difficult challenge for Singularity to deal with. A perfectly working `centos.def` file that can bootstrap a CentOS image from a RHEL-compatible host will not work when executed on Ubuntu, yielding the following error:

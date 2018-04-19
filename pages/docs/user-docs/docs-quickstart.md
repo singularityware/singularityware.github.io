@@ -70,7 +70,7 @@ CONTAINER USAGE OPTIONS:
     see singularity help <command>
 
 For any additional help or support visit the Singularity
-website: http://singularity.lbl.gov/
+website: http://singularityware.github.io/
 ```
 Singularity uses positional syntax.  Global options follow the `singularity` invocation  and affect the way that Singularity runs any command.  Then commands are passed followed by their options.  
 
