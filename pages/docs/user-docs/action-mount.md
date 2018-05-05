@@ -20,7 +20,7 @@ Some of the bind paths are automatically derived (e.g. a user's home directory) 
 In the default configuration, the directories `$HOME`, `/tmp`, `/proc`, `/sys`, and `/dev` are among the system-defined bind points.
 
 ### User-defined bind points
-If the system administrator has [enabled user control of binds]((/docs-config#user-bind-control-boolean-defaultyes), you will be able to request your own bind points within your container.
+If the system administrator has [enabled user control of binds](/docs-config#user-bind-control-boolean-defaultyes), you will be able to request your own bind points within your container.
 
 To *mount* a bind path inside the container, a **bind point** must be defined within the container. The bind point is a directory within the container that Singularity can use to bind a directory on the host system.  This means that if you want to bind to a point within the container such as `/global`, that directory must already exist within the container.
 
