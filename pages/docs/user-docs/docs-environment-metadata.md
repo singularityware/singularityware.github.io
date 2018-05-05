@@ -53,6 +53,12 @@ SINGULARITY_CONTAINER=test.img
 
 Notice the `--cleanenv` in the example above? That argument specifies that we want to remove the host environment from the container. If we remove the `--cleanenv`, we will still pass forward `HELLO=WORLD`, and the list shown above, but we will also pass forward all the other environment variables from the host. 
 
+If you need to change the `$PATH` of your container at runtime there are a few environmental variables you can use:
+
+  * `SINGULARITYENV_PREPEND_PATH=/good/stuff/at/beginning` to prepend directories to the beginning of the `$PATH`
+  * `SINGULARITYENV_APPEND_PATH=/good/stuff/at/end` to append directories to the end of the `$PATH`
+  * `SINGULARITYENV_PATH=/a/new/path` to override the `$PATH` within the contianer
+
 ## Labels
 Your container stores metadata about it's build, along with Docker labels, and custom labels that you define during build in a `%labels` section. For containers that are generated with Singularity version 2.4 and later, labels are represented using the <a href="http://label-schema.org/rc1/">rc1 Label Schema</a>. For example:
 
