@@ -22,14 +22,16 @@ $ sudo apt-get update && \
     sudo apt-get install \
     python \
     dh-autoreconf \
-    build-essential
+    build-essential \
+    libarchive-dev
 ```
 
 **Centos**
 
 ```
 $ sudo yum update && \
-    sudo yum groupinstall 'Development Tools'
+    sudo yum groupinstall 'Development Tools' && \
+    sudo yum install libarchive-devel
 ```
 {% include asciicast.html source='install_dependencies.js' uid='how-to-install-dependencies' title='How to install dependencies' author='davidgodlove@gmail.com'%}
 
@@ -57,6 +59,7 @@ The following commands will install a specific release from [GitHub releases pag
  
 ```
 $ VER=2.2.1
+$ VER={{ site.singularity_version }}
 $ wget https://github.com/singularityware/singularity/releases/download/$VER/singularity-$VER.tar.gz
 $ tar xvf singularity-$VER.tar.gz
 $ cd singularity-$VER
