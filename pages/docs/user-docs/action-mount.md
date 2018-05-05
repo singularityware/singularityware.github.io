@@ -59,7 +59,7 @@ $ export SINGULARITY_BINDPATH="/opt,/data:/mnt"
 $ singularity shell /tmp/Centos7-ompi.img
 ```
 
-Using the environment variable, you can bind directories even when you are running your container as an executable file with a runscript.
+Using the environment variable `$SINGULARITY_BINDPATH`, you can bind directories even when you are running your container as an executable file with a runscript.
 If you bind many directories into your Singularity containers and they don't change, you could even benefit by setting this variable in your `.bashrc` file.
 
 #### Binding with Overlay
