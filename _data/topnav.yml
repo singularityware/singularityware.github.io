@@ -19,7 +19,7 @@ topnav_dropdowns:
         - title: Google Group
           external_url: https://groups.google.com/a/lbl.gov/forum/#!forum/singularity
         - title: Singularity on Stack Overflow
-          external_url: http://stackoverflow.com/questions/tagged/singularity
+          external_url: https://stackoverflow.com/questions/tagged/singularity-container
         - title: Singularity Hub
           external_url: https://singularity-hub.org/faq
         - title: Slack
