@@ -40,7 +40,14 @@ It's important that your administrator have all of the resources available to hi
 ## Basic Singularity usage
 
 ### Do you need administrator privileges to use Singularity?
-You generally do not need admin/sudo to use Singularity containers but you do however need admin/root access to install Singularity and for some container build functions (for example, building from a recipe, or a writable image).
+You generally do not need admin/sudo to use Singularity containers but you do however need admin/root access to install Singularity and for some container build functions (for example, building from a recipe — which typically 
+requires root privileges for running package managers like `apt` and `yum` — or creating a writable image).
+
+<p align="center">
+  <img src="http://singularity.lbl.gov/assets/img/diagram/build_input_output.svg" width="400">
+</p>
+
+*Red means root is required*
 
 This then defines the work-flow to some extent. If you have a container (whether Singularity or Docker) ready to go, you can run/shell/import without root access. If you want to build a new Singularity container image from scratch it must be built and configured on a host where you have root access (this can be a physical system or on a VM). And of course once the container image has been configured it can be used on a system where you do not have root access as long as Singularity has been installed there.
 
