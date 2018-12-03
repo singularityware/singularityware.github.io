@@ -1,5 +1,35 @@
 <!DOCTYPE html>
 <head>
+<style type="text/css" media="screen">
+     * {
+       margin: 0; 
+       padding: 0;
+     }
+
+     div#banner { 
+       position: relative; 
+       top: 0; 
+       left: 0; 
+       font-color: #ffffff;
+       background-color: #ff8080; 
+       text-align: center;
+       width: 100%; 
+       font-size: large;
+       font-weight: bold;
+     }
+     #banner a:link {
+       color: #248EC2;
+     }
+     #banner a:visited {
+       color: #248EC2;
+     }
+
+     div#banner-content { 
+       margin: 0 auto; 
+       padding: 10px; 
+       border: 1px solid #000;
+     }
+    </style>
     {% include head.html %}
     <script>
         $(document).ready(function() {
@@ -55,6 +85,7 @@
 
 </head>
 <body>
+
 {% include asciinema.html %}
 {% include topnav.html %}
 <!-- Page Content -->

@@ -67,8 +67,6 @@ Singularity: Invoking an interactive shell within container...
 Singularity python-latest:~> 
 ```
 
-<font color='red' size='+1'>Ascineimsasasessssss!</font>
-
 Additionally, Singularity blocks privilege escalation within the container and you are always yourself within a container! If you want to be root inside the container, you first must be root outside the container. This simple usage paradigm mitigates many of the security concerns that exists with containers on multi-user shared resources. You can directly call programs inside the container from outside the container fully incorporating pipes, standard IO, file system access, X11, and MPI. Singularity images can be seamlessly incorporated into your environment.
 
 ### Portability and Reproducibility

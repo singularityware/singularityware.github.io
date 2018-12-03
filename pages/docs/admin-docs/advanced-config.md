@@ -40,7 +40,7 @@ This feature will parse the host's mounted file systems and attempt to replicate
 ### BIND PATH (string)
 With this configuration directive, you can specify any number of bind points that you want to extend from the host system into the container. Bind points on the host file system must be either real files or directories (no special files supported at this time). If the overlayFS is not supported on your host, or if `enable overlay = no` in this configuration file, a bind point must exist for the file or directory within the container.
 
-The syntax for this consists of a bind path source and an optional bind path destination separated by a colon. If not bind path destination is specified the bind path source is used also as the destination.
+The syntax for this consists of a bind path source and an optional bind path destination separated by a colon. If no bind path destination is specified, the bind path source is used also as the destination.
 
 
 ### USER BIND CONTROL (boolean, default='yes')
