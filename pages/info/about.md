@@ -107,7 +107,7 @@ Singularity does not utilize a daemon process to manage the containers. While da
 
 Additionally, securing a root owned daemon process which is designed to manipulate the host's environment becomes tricky. In currently implemented models, it is possible to grant permissions to users to control the daemon, or not. There is no sense of ACL's or access of what users can and can not do.
 
-While there are some other container implementations that do not leverage a daemon, they lack other features necessary to be considered as reasonable user facing solution without having root access. For example, there has been a standing unimplemented patch to RunC (already daemon-less) which allows for root-less usage (no root). But, user contexts are not maintained, and it will only work with chroot directories (instead of an image) where files must be owned and manipulated by the root user!
+It should be noted that there are some container implementations that do not leverage a daemon and also do not require root privileges (either explicitly or with setuid binaries). One example of this is the runc project, which has support for ["rootless containers"](https://rootlesscontaine.rs/). Combined with other projects such as [umoci](https://github.com/openSUSE/umoci) this can be quite compelling for enterprise usecases. Unfortunately, due to the level at which runc and other such runtimes operate, as well as the feature set they provide, they are not usable directly for HPC workloads. In addition, they do not by default maintain the user context inside the container, which can cause some applications (including HPC applications) to misbehave.
 
 ## Use Cases
 
