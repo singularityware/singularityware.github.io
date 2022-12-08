@@ -150,7 +150,7 @@ path nonsense? Don't worry, you don't. You can just use environment variables in
 singularity exec --app foo foobar.simg env | grep foo
 ```
 
-Let's talk about the output of the above in sections, you will notice some interesting things! First, notice that the app's `bin` has been added to the path, and it's `lib` added to the `LD_LIBRARY_PATH`. This means that anything you drop in either will automatically be added. You don't need to make these folders either, they are created for you.
+Let's talk about the output of the above in sections, you will notice some interesting things! First, notice that the app's `bin` has been added to the path, and its `lib` added to the `LD_LIBRARY_PATH`. This means that anything you drop in either will be automatically added. You don't have to create those folders neither, they'll be created for you.
 
 ```
 LD_LIBRARY_PATH=/scif/apps/foo/lib::/.singularity.d/libs
